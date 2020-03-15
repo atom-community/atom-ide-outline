@@ -1,12 +1,15 @@
 {
-  "name": "atom-ide-PACKAGE_NAME",
+  "name": "atom-ide-outline",
   "main": "./lib/main",
   "version": "0.0.0",
-  "description": "",
-  "repository": "https://github.com/atom-ide-community/atom-ide-PACKAGE_NAME",
+  "description": "Outline UI",
+  "repository": "https://github.com/atom-ide-community/atom-ide-outline",
   "keywords": [
     "atom-package",
-    "atom-ide"
+    "atom-ide",
+    "atom-outline",
+    "ide-outline",
+    "outline"
   ],
   "license": "MIT",
   "engines": {
@@ -42,5 +45,17 @@
     "**/*.{js}": [
       "prettier --write"
     ]
+  },
+  "consumedServices": {
+    "outline-view": {
+      "versions": {
+        "0.1.0": "consumeOutlineProvider"
+      }
+    },
+    "busy-signal": {
+      "versions": {
+        "1.0.0": "consumeSignal"
+      }
+    }
   }
 }
