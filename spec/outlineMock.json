@@ -1,0 +1,51 @@
+{
+  "outlineTrees": [
+    {
+      "children": [],
+      "endPosition": {
+        "column": 35,
+        "row": 4
+      },
+      "icon": "type-function",
+      "representativeName": "primaryFunction",
+      "startPosition": {
+        "column": 16,
+        "row": 4
+      },
+      "tokenizedText": [
+        {
+          "kind": "method",
+          "value": "primaryFunction"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "endPosition": { "row": 22, "column": 14 },
+          "icon": "type-constant",
+          "representativeName": "someVar",
+          "startPosition": { "row": 22, "column": 8 },
+          "tokenizedText": [{ "kind": "plain", "value": "someVar" }]
+        }
+      ],
+      "endPosition": {
+        "column": 32,
+        "row": 21
+      },
+      "icon": "type-function",
+      "representativeName": "scondaryFunction",
+      "startPosition": {
+        "column": 16,
+        "row": 21
+      },
+      "tokenizedText": [
+        {
+          "kind": "method",
+          "value": "scondaryFunction"
+        }
+      ]
+    }
+  ]
+}
