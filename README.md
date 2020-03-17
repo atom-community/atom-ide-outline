@@ -1,5 +1,9 @@
 # atom-ide-outline
 
+Outline UI compatible with IDE packages. Presents symbols of an active text editor in a tree view, with "jump to symbol" navigation (on click).
+
+![An open outline panel](./preview.png)
+
 ## Getting started
 
 1. Install `atom-ide-outline` in Atom
