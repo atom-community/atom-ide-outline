@@ -17,7 +17,6 @@ describe("Outline view", () => {
     workspaceElement = atom.views.getView(atom.workspace);
     jasmine.attachToDOM(workspaceElement);
 
-    waitsForPromise(() => atom.workspace.open());
     waitsForPromise(() => atom.packages.activatePackage("atom-ide-outline"));
 
     OutlinePackage.outlineProviderRegistry = {
