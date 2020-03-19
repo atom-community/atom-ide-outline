@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.1.0...v1.1.1) (2020-03-19)
+
+
+### Bug Fixes
+
+* on-save setup failing if editor is unavailable ([9ae6109](https://github.com/atom-ide-community/atom-ide-outline/commit/9ae6109df00ba141b5730b93194d38c7266ff361))
+
 # [1.1.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.0.0...v1.1.0) (2020-03-18)
 
 
