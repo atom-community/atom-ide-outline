@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.1.1...v1.2.0) (2020-04-02)
+
+
+### Features
+
+* add outline status ([fec774f](https://github.com/atom-ide-community/atom-ide-outline/commit/fec774f483e969c18167f8b70615d9de6ea88b90))
+
 ## [1.1.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.1.0...v1.1.1) (2020-03-19)
 
 
