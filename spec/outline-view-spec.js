@@ -2,6 +2,7 @@
 
 const { TextEditor } = require("atom");
 import OutlinePackage from "../lib/main";
+import { statuses } from "../lib/statuses";
 
 import outlineMock from "./outlineMock.json";
 
@@ -83,5 +84,26 @@ describe("Outline view", () => {
       expect(recordContentHolder.textContent).toEqual("fprimaryFunction");
       expect(recordIcon.textContent).toEqual("f");
     });
+  });
+
+  it("presents status message correctly", () => {
+    const mockStatus = {
+      title: "Error message",
+      description: "Something went wrong"
+    };
+    statuses.mockStatus = mockStatus;
+
+    atom.commands.dispatch(workspaceElement, "outline:toggle");
+
+    OutlinePackage.setStatus("mockStatus");
+
+    const statusHolder = workspaceElement.querySelector(
+      ".outline-view .status"
+    );
+    const title = statusHolder.querySelector("h5");
+    const description = statusHolder.querySelector("span");
+
+    expect(title.textContent).toEqual(mockStatus.title);
+    expect(description.textContent).toEqual(mockStatus.description);
   });
 });
