@@ -19,7 +19,12 @@ describe("Outline", () => {
     jasmine.attachToDOM(workspaceElement);
 
     waitsForPromise(() => atom.workspace.open(mockFilePath));
-    waitsForPromise(() => atom.packages.activatePackage("atom-ide-outline"));
+    // activation
+    waitsForPromise(() => {
+      atom.packages.triggerActivationHook("core:loaded-shell-environment");
+      atom.packages.activatePackage("atom-ide-outline");
+    });
+    atom.packages.triggerDeferredActivationHooks();
 
     runs(() => {
       activeEditor = atom.workspace.getActiveTextEditor();
