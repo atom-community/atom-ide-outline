@@ -100,7 +100,7 @@ describe("Outline view", () => {
     const statusHolder = workspaceElement.querySelector(
       ".outline-view .status"
     );
-    const title = statusHolder.querySelector("h5");
+    const title = statusHolder.querySelector("h1");
     const description = statusHolder.querySelector("span");
 
     expect(title.textContent).toEqual(mockStatus.title);
