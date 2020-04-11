@@ -27,6 +27,9 @@
     "prettier": "^1.19.1",
     "semantic-release": "^17.0.4"
   },
+   "activationHooks": [
+    "core:loaded-shell-environment"
+  ],
   "release": {
     "extends": "@semantic-release/apm-config"
   },
