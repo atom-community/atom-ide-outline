@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.2.0...v1.2.1) (2020-04-11)
+
+
+### Bug Fixes
+
+* follow ui theme's font size setting ([774ea61](https://github.com/atom-ide-community/atom-ide-outline/commit/774ea6164c5bd966e86bc0da182a7a90be5bbe5e))
+
 # [1.2.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.1.1...v1.2.0) (2020-04-02)
 
 
