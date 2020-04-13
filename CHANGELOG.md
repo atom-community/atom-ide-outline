@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.2.1...v1.2.2) (2020-04-13)
+
+
+### Bug Fixes
+
+* don't set busy signal if no provider is available ([a304686](https://github.com/atom-ide-community/atom-ide-outline/commit/a3046869b916191a8ca762831cfdb2c11a71eac8))
+
 ## [1.2.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.2.0...v1.2.1) (2020-04-11)
 
 
