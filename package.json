@@ -1,7 +1,7 @@
 {
   "name": "atom-ide-outline",
   "main": "./lib/main",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Outline UI compatible with IDE packages",
   "repository": "https://github.com/atom-ide-community/atom-ide-outline",
   "keywords": [
@@ -27,7 +27,7 @@
     "prettier": "^1.19.1",
     "semantic-release": "^17.0.4"
   },
-   "activationHooks": [
+  "activationHooks": [
     "core:loaded-shell-environment"
   ],
   "release": {

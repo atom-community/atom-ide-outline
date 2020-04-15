@@ -1,3 +1,12 @@
+## [1.2.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.2.2...v1.2.3) (2020-04-15)
+
+
+### Bug Fixes
+
+* activation hook to improve the loading time by deferring it ([b5125a9](https://github.com/atom-ide-community/atom-ide-outline/commit/b5125a90039e55ee2cfeb23272bf72434df79d74))
+* full activation in spec ([98cd86e](https://github.com/atom-ide-community/atom-ide-outline/commit/98cd86e0f4c99640b65cb9773af8b910f3cf20e0))
+* package activation ([52bd1bb](https://github.com/atom-ide-community/atom-ide-outline/commit/52bd1bb107dd593028079ca302ecd39825dfef09))
+
 ## [1.2.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.2.1...v1.2.2) (2020-04-13)
 
 
