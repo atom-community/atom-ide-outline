@@ -19,7 +19,10 @@ describe("Outline", () => {
     jasmine.attachToDOM(workspaceElement);
 
     waitsForPromise(() => atom.workspace.open(mockFilePath));
+    // Package activation will be deferred to the configured, activation hook, which is then triggered
     waitsForPromise(() => atom.packages.activatePackage("atom-ide-outline"));
+    atom.packages.triggerActivationHook("core:loaded-shell-environment");
+    atom.packages.triggerDeferredActivationHooks();
 
     runs(() => {
       activeEditor = atom.workspace.getActiveTextEditor();
