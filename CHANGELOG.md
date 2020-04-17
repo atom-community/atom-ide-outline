@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.2.3...v1.2.4) (2020-04-17)
+
+
+### Bug Fixes
+
+* entry with missing icon breaking outline generation ([479a422](https://github.com/atom-ide-community/atom-ide-outline/commit/479a422580f96c8772fe00e813834d77952862b0))
+
 ## [1.2.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.2.2...v1.2.3) (2020-04-15)
 
 
