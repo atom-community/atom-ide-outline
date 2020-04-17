@@ -45,7 +45,7 @@ describe("Outline view", () => {
       );
 
       expect(outlineViewElement.children.length > 0).toEqual(true);
-      expect(rootRecords.length).toEqual(2);
+      expect(rootRecords.length).toEqual(3);
     });
   });
 
@@ -86,6 +86,23 @@ describe("Outline view", () => {
 
       expect(recordContentHolder.textContent).toEqual("fprimaryFunction");
       expect(recordIcon.textContent).toEqual("f");
+    });
+  });
+
+  it("provides fallback for entries without icon", () => {
+    atom.commands.dispatch(workspaceElement, "outline:toggle");
+
+    const editor = new TextEditor();
+    waitsForPromise(() => OutlinePackage.getOutline(editor));
+
+    runs(() => {
+      const recordContentHolder = workspaceElement.querySelector(
+        ".outline-view li:nth-child(3) span"
+      );
+      const recordIcon =
+        recordContentHolder && recordContentHolder.querySelector(".icon");
+
+      expect(recordIcon.textContent).toEqual("?");
     });
   });
 

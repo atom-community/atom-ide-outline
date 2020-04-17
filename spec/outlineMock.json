@@ -46,6 +46,24 @@
           "value": "scondaryFunction"
         }
       ]
+    },
+    {
+      "children": [],
+      "endPosition": {
+        "column": 19,
+        "row": 8
+      },
+      "representativeName": "primaryFunction",
+      "startPosition": {
+        "column": 13,
+        "row": 6
+      },
+      "tokenizedText": [
+        {
+          "kind": "method",
+          "value": "primaryFunction"
+        }
+      ]
     }
   ]
 }
