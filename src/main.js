@@ -25,8 +25,7 @@ export function activate() {
 
         activeEditorContentUpdateSubscription?.dispose?.();
 
-        activeEditorContentUpdateSubscription =
-            editor && editor.onDidSave(getOutlineForActiveTextEditor);
+        activeEditorContentUpdateSubscription = editor?.onDidSave(getOutlineForActiveTextEditor);
       }
   );
   subscriptions.add(activeTextEditorObserver);
