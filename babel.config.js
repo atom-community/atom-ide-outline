@@ -12,8 +12,6 @@ let presets = [
 ];
 
 let plugins = [
-  "@babel/plugin-transform-async-to-generator",
-
   "@babel/plugin-proposal-function-bind",
 
   "@babel/plugin-proposal-export-default-from",
