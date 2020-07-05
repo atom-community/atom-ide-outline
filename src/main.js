@@ -30,14 +30,14 @@ export function consumeSignal(registry) {
   subscriptions.add(provider);
 }
 
-export function consumeOutlineProvider(provider) {
+export async function consumeOutlineProvider(provider) {
   const providerRegistryEntry = outlineProviderRegistry.addProvider(
       provider
   );
   subscriptions.add(providerRegistryEntry);
 
   // Generate (try) an outline after obtaining a provider
-  getOutline();
+  await getOutline();
 }
 
 function addCommands() {
