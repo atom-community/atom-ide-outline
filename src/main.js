@@ -5,10 +5,10 @@ import { ProviderRegistry } from "./providerRegistry";
 export { statuses } from "./statuses"; // for spec
 import { statuses } from "./statuses";
 
-let subscriptions
-let activeEditorContentUpdateSubscription
-let view
-let outlineProviderRegistry = new ProviderRegistry()
+let subscriptions: CompositeDisposable
+let activeEditorContentUpdateSubscription = null
+let view: OutlineView
+export let outlineProviderRegistry = new ProviderRegistry()
 let busySignalProvider
 
 export function activate() {
