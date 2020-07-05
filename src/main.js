@@ -2,6 +2,7 @@ import { CompositeDisposable } from "atom";
 import { OutlineView } from "./outlineView";
 import { ProviderRegistry } from "./providerRegistry";
 
+export { statuses } from "./statuses"; // for spec
 import { statuses } from "./statuses";
 
 export default {
