@@ -94,8 +94,7 @@ export async function getOutline(activeEditor) {
   }
 
   const target = editor.getFileName();
-  busySignalProvider &&
-  busySignalProvider.add(`Outline: ${target}`);
+  busySignalProvider?.add(`Outline: ${target}`);
 
   const outline = await provider.getOutline(editor);
 
@@ -104,7 +103,7 @@ export async function getOutline(activeEditor) {
     editor
   });
 
-  busySignalProvider && busySignalProvider.clear();
+  busySignalProvider?.clear();
 }
 
 export function setStatus(id) {
