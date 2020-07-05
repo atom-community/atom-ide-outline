@@ -2,7 +2,8 @@
 
 import path from "path";
 
-import OutlinePackage from "../dist/main";
+import * as OutlinePackage from "../dist/main";
+import {TextEditor} from "atom";
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 //

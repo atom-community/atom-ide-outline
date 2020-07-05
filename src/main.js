@@ -5,111 +5,109 @@ import { ProviderRegistry } from "./providerRegistry";
 export { statuses } from "./statuses"; // for spec
 import { statuses } from "./statuses";
 
-export default {
-  subscriptions: null,
-  activeEditorContentUpdateSubscription: null,
-  view: null,
-  outlineProviderRegistry: new ProviderRegistry(),
-  busySignalProvider: null,
+let subscriptions
+let activeEditorContentUpdateSubscription
+let view
+let outlineProviderRegistry = new ProviderRegistry()
+let busySignalProvider
 
-  activate() {
-    this.subscriptions = new CompositeDisposable();
-    this.view = new OutlineView();
+export function activate() {
+  subscriptions = new CompositeDisposable();
+  view = new OutlineView();
 
-    this.addCommands();
+  addCommands();
 
-    const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
+  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
       editor => {
-        const getOutlineForActiveTextEditor = () => this.getOutline(editor);
+        const getOutlineForActiveTextEditor = () => getOutline(editor);
 
         getOutlineForActiveTextEditor();
 
         const hasSaveSubscriptionToDispose =
-          this.activeEditorContentUpdateSubscription &&
-          this.activeEditorContentUpdateSubscription.dispose;
+            activeEditorContentUpdateSubscription &&
+            activeEditorContentUpdateSubscription.dispose;
         if (hasSaveSubscriptionToDispose) {
-          this.activeEditorContentUpdateSubscription.dispose();
+          activeEditorContentUpdateSubscription.dispose();
         }
 
-        this.activeEditorContentUpdateSubscription =
-          editor && editor.onDidSave(getOutlineForActiveTextEditor);
+        activeEditorContentUpdateSubscription =
+            editor && editor.onDidSave(getOutlineForActiveTextEditor);
       }
-    );
-    this.subscriptions.add(activeTextEditorObserver);
-  },
+  );
+  subscriptions.add(activeTextEditorObserver);
+}
 
-  deactivate() {
-    this.subscriptions.dispose();
-    this.view.destroy();
-  },
+export function deactivate() {
+  subscriptions.dispose();
+  view.destroy();
+}
 
-  consumeSignal(registry) {
-    const provider = registry.create();
+export function consumeSignal(registry) {
+  const provider = registry.create();
 
-    this.busySignalProvider = provider;
-    this.subscriptions.add(provider);
-  },
+  busySignalProvider = provider;
+  subscriptions.add(provider);
+}
 
-  consumeOutlineProvider(provider) {
-    const providerRegistryEntry = this.outlineProviderRegistry.addProvider(
+export function consumeOutlineProvider(provider) {
+  const providerRegistryEntry = outlineProviderRegistry.addProvider(
       provider
-    );
-    this.subscriptions.add(providerRegistryEntry);
+  );
+  subscriptions.add(providerRegistryEntry);
 
-    // Generate (try) an outline after obtaining a provider
-    this.getOutline();
-  },
+  // Generate (try) an outline after obtaining a provider
+  getOutline();
+}
 
-  addCommands() {
-    const outlineToggle = atom.commands.add("atom-workspace", {
-      "outline:toggle": () => this.toggleOutlineView()
-    });
-    this.subscriptions.add(outlineToggle);
-  },
+function addCommands() {
+  const outlineToggle = atom.commands.add("atom-workspace", {
+    "outline:toggle": () => toggleOutlineView()
+  });
+  subscriptions.add(outlineToggle);
+}
 
-  toggleOutlineView() {
-    const outlinePane = atom.workspace.paneForItem(this.view);
-    if (outlinePane) {
-      return outlinePane.destroyItem(this.view);
-    }
-
-    const rightDock = atom.workspace.getRightDock();
-    const [pane] = rightDock.getPanes();
-
-    pane.addItem(this.view);
-    pane.activateItem(this.view);
-
-    rightDock.show();
-  },
-
-  async getOutline(activeEditor) {
-    const editor = activeEditor || atom.workspace.getActiveTextEditor();
-    if (!editor) {
-      return this.setStatus("noEditor");
-    }
-
-    const provider = this.outlineProviderRegistry.getProvider(editor);
-
-    if (!provider) {
-      return this.setStatus("noProvider");
-    }
-
-    const target = editor.getFileName();
-    this.busySignalProvider &&
-      this.busySignalProvider.add(`Outline: ${target}`);
-
-    const outline = await provider.getOutline(editor);
-
-    this.view.setOutline({
-      tree: (outline && outline.outlineTrees) || [],
-      editor
-    });
-
-    this.busySignalProvider && this.busySignalProvider.clear();
-  },
-
-  setStatus(id) {
-    const status = statuses[id];
-    this.view.presentStatus(status);
+export function toggleOutlineView() {
+  const outlinePane = atom.workspace.paneForItem(view);
+  if (outlinePane) {
+    return outlinePane.destroyItem(view);
   }
-};
+
+  const rightDock = atom.workspace.getRightDock();
+  const [pane] = rightDock.getPanes();
+
+  pane.addItem(view);
+  pane.activateItem(view);
+
+  rightDock.show();
+}
+
+export async function getOutline(activeEditor) {
+  const editor = activeEditor || atom.workspace.getActiveTextEditor();
+  if (!editor) {
+    return setStatus("noEditor");
+  }
+
+  const provider = outlineProviderRegistry.getProvider(editor);
+
+  if (!provider) {
+    return setStatus("noProvider");
+  }
+
+  const target = editor.getFileName();
+  busySignalProvider &&
+  busySignalProvider.add(`Outline: ${target}`);
+
+  const outline = await provider.getOutline(editor);
+
+  view.setOutline({
+    tree: (outline && outline.outlineTrees) || [],
+    editor
+  });
+
+  busySignalProvider && busySignalProvider.clear();
+}
+
+export function setStatus(id) {
+  const status = statuses[id];
+  view.presentStatus(status);
+}

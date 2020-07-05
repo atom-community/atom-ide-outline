@@ -1,8 +1,8 @@
 "use babel";
 
 const { TextEditor } = require("atom");
-import OutlinePackage from "../dist/main";
-import { statuses } from "../dist/statuses";
+import * as OutlinePackage from "../dist/main";
+import { statuses } from "../dist/main";
 
 import outlineMock from "./outlineMock.json";
 
