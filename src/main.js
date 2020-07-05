@@ -23,12 +23,7 @@ export function activate() {
 
         getOutlineForActiveTextEditor();
 
-        const hasSaveSubscriptionToDispose =
-            activeEditorContentUpdateSubscription &&
-            activeEditorContentUpdateSubscription.dispose;
-        if (hasSaveSubscriptionToDispose) {
-          activeEditorContentUpdateSubscription.dispose();
-        }
+        activeEditorContentUpdateSubscription?.dispose?.();
 
         activeEditorContentUpdateSubscription =
             editor && editor.onDidSave(getOutlineForActiveTextEditor);
