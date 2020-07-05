@@ -2,7 +2,7 @@
 
 import path from "path";
 
-import OutlinePackage from "../lib/main";
+import OutlinePackage from "../dist/main";
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 //
