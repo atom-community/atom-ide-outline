@@ -16,19 +16,7 @@ export function activate() {
   view = new OutlineView();
 
   addCommands();
-
-  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
-      editor => {
-        const getOutlineForActiveTextEditor = () => getOutline(editor);
-
-        getOutlineForActiveTextEditor();
-
-        activeEditorContentUpdateSubscription?.dispose?.();
-
-        activeEditorContentUpdateSubscription = editor?.onDidSave(getOutlineForActiveTextEditor);
-      }
-  );
-  subscriptions.add(activeTextEditorObserver);
+  addObservers();
 }
 
 export function deactivate() {
@@ -58,6 +46,21 @@ function addCommands() {
     "outline:toggle": () => toggleOutlineView()
   });
   subscriptions.add(outlineToggle);
+}
+
+function addObservers() {
+  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
+      editor => {
+        const getOutlineForActiveTextEditor = () => getOutline(editor);
+
+        getOutlineForActiveTextEditor();
+
+        activeEditorContentUpdateSubscription?.dispose?.();
+
+        activeEditorContentUpdateSubscription = editor?.onDidSave(getOutlineForActiveTextEditor);
+      }
+  );
+  subscriptions.add(activeTextEditorObserver);
 }
 
 export function toggleOutlineView() {
