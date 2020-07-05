@@ -1,6 +1,6 @@
 {
   "name": "atom-ide-outline",
-  "main": "./lib/main",
+  "main": "./dist/main",
   "version": "1.2.4",
   "description": "Outline UI compatible with IDE packages",
   "repository": "https://github.com/atom-ide-community/atom-ide-outline",
@@ -14,6 +14,18 @@
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint . --fix --ext js,ts,coffee,json",
+    "test": "atom --test spec",
+    "clean": "shx rm -rf dist",
+    "babel": "npm run clean && shx cp -r src dist && env NODE_ENV=development env BABEL_ENV=development babel dist --out-dir dist",
+    "dev": "npm run clean && env NODE_ENV=development env BABEL_ENV=production rollup -c -w",
+    "build": "npm run clean && env NODE_ENV=production env BABEL_ENV=production rollup -c ",
+    "build-commit": "build-commit -o dist",
+    "bump": "ncu -u",
+    "prepare": "npm run build"
   },
   "dependencies": {},
   "devDependencies": {
