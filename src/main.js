@@ -1,4 +1,4 @@
-import { CompositeDisposable } from "atom";
+import { CompositeDisposable, TextEditor } from "atom";
 import { OutlineView } from "./outlineView";
 import { ProviderRegistry } from "./providerRegistry";
 
@@ -13,8 +13,7 @@ let busySignalProvider
 
 export function activate() {
   subscriptions = new CompositeDisposable();
-  view = new OutlineView();
-
+  view = new OutlineView(); // create outline pane
   addCommands();
   addObservers();
 }
@@ -50,14 +49,11 @@ function addCommands() {
 
 function addObservers() {
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
-      editor => {
-        const getOutlineForActiveTextEditor = () => getOutline(editor);
-
-        getOutlineForActiveTextEditor();
-
-        activeEditorContentUpdateSubscription?.dispose?.();
-
-        activeEditorContentUpdateSubscription = editor?.onDidSave(getOutlineForActiveTextEditor);
+      async (editor: TextEditor) => {
+        activeEditorContentUpdateSubscription?.dispose?.(); // dispose old content
+        await getOutline(editor) // initial outline
+        // changing of outline by changing the cursor
+        activeEditorContentUpdateSubscription = editor?.onDidChangeCursorPosition(() => getOutline(editor));
       }
   );
   subscriptions.add(activeTextEditorObserver);
@@ -79,11 +75,13 @@ export function toggleOutlineView() {
 }
 
 export async function getOutline(activeEditor) {
+  // editor
   const editor = activeEditor || atom.workspace.getActiveTextEditor();
   if (!editor) {
     return setStatus("noEditor");
   }
 
+  // provider
   const provider = outlineProviderRegistry.getProvider(editor);
 
   if (!provider) {
