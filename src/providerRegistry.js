@@ -1,5 +1,3 @@
-"use babel";
-
 import { Disposable } from "atom";
 
 export class ProviderRegistry {

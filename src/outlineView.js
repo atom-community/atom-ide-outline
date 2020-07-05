@@ -1,5 +1,3 @@
-"use babel";
-
 export class OutlineView {
   constructor() {
     this.element = document.createElement("div");

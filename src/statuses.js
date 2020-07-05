@@ -1,5 +1,3 @@
-"use babel";
-
 export const statuses = {
   noEditor: {
     title: "Outline is unavailable"

@@ -1,5 +1,3 @@
-"use babel";
-
 import { CompositeDisposable } from "atom";
 import { OutlineView } from "./outlineView";
 import { ProviderRegistry } from "./providerRegistry";
