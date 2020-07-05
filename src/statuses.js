@@ -1,6 +1,8 @@
 export const statuses = {
   noEditor: {
-    title: "Outline is unavailable"
+    title: "Outline is unavailable.",
+    description:
+        "Open a text editor."
   },
   noProvider: {
     title: "Provider is unavailable",
