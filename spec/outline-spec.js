@@ -3,7 +3,7 @@
 import path from "path";
 
 import * as OutlinePackage from "../dist/main";
-import {TextEditor} from "atom";
+import { TextEditor } from "atom";
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 //
@@ -34,12 +34,12 @@ describe("Outline", () => {
     expect(activeEditor).toBeInstanceOf(TextEditor);
   });
 
-  it("adds toggle command", function() {
+  it("adds toggle command", function () {
     const toggleCommand = atom.commands
       .findCommands({
-        target: workspaceElement
+        target: workspaceElement,
       })
-      .some(command => command.name === "outline:toggle");
+      .some((command) => command.name === "outline:toggle");
 
     expect(toggleCommand).toBe(true);
   });

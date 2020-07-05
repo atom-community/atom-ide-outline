@@ -24,7 +24,7 @@ export class OutlineView {
     addOutlineEntries({
       parent: outlineRoot,
       entries: outlineTree,
-      editor
+      editor,
     });
     outlineViewElement.append(outlineRoot);
   }
@@ -58,7 +58,7 @@ function generateStatusElement(status) {
 }
 
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
-  entries.forEach(item => {
+  entries.forEach((item) => {
     const symbol = document.createElement("li");
 
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
@@ -77,21 +77,23 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
       editorPane.activate();
 
       editor.cursors[0].setBufferPosition(item.startPosition, {
-        autoscroll: true
+        autoscroll: true,
       });
     });
 
     const hasChildren = item.children && !!item.children[0];
     if (hasChildren) {
       const childrenList = document.createElement("ul");
-      childrenList.addEventListener("click", event => event.stopPropagation());
+      childrenList.addEventListener("click", (event) =>
+        event.stopPropagation()
+      );
 
       symbol.append(childrenList);
       addOutlineEntries({
         parent: childrenList,
         entries: item.children,
         editor,
-        level: level + 1
+        level: level + 1,
       });
     }
 

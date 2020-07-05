@@ -28,8 +28,8 @@ describe("Outline view", () => {
 
     OutlinePackage.outlineProviderRegistry = {
       getProvider: () => ({
-        getOutline: async () => outlineMock
-      })
+        getOutline: async () => outlineMock,
+      }),
     };
   });
 
@@ -39,11 +39,9 @@ describe("Outline view", () => {
     const editor = new TextEditor();
     await OutlinePackage.getOutline(editor);
 
-    const outlineViewElement = workspaceElement.querySelector(
-        ".outline-view"
-    );
+    const outlineViewElement = workspaceElement.querySelector(".outline-view");
     const rootRecords = outlineViewElement.querySelectorAll(
-        ".outline-view > ul > li"
+      ".outline-view > ul > li"
     );
 
     expect(outlineViewElement.children.length > 0).toEqual(true);
@@ -57,14 +55,12 @@ describe("Outline view", () => {
     const editor = new TextEditor();
     await OutlinePackage.getOutline(editor);
 
-    const outlineViewElement = workspaceElement.querySelector(
-        ".outline-view"
-    );
+    const outlineViewElement = workspaceElement.querySelector(".outline-view");
     const recordWithoutChildren = outlineViewElement.querySelector(
-        ".outline-view li:nth-child(1) > ul"
+      ".outline-view li:nth-child(1) > ul"
     );
     const recordWithChildren = outlineViewElement.querySelector(
-        ".outline-view li:nth-child(2) > ul"
+      ".outline-view li:nth-child(2) > ul"
     );
 
     expect(recordWithoutChildren).toEqual(null);
@@ -79,11 +75,11 @@ describe("Outline view", () => {
     await OutlinePackage.getOutline(editor);
 
     const recordContentHolder = workspaceElement.querySelector(
-        ".outline-view li span"
+      ".outline-view li span"
     );
     const recordIcon =
-        recordContentHolder && recordContentHolder.querySelector(".icon");
-        
+      recordContentHolder && recordContentHolder.querySelector(".icon");
+
     // TODO
     // expect(recordContentHolder.textContent).toEqual("fprimaryFunction");
     // expect(recordIcon.textContent).toEqual("f");
@@ -96,10 +92,10 @@ describe("Outline view", () => {
     await OutlinePackage.getOutline(editor);
 
     const recordContentHolder = workspaceElement.querySelector(
-        ".outline-view li:nth-child(3) span"
+      ".outline-view li:nth-child(3) span"
     );
     const recordIcon =
-        recordContentHolder && recordContentHolder.querySelector(".icon");
+      recordContentHolder && recordContentHolder.querySelector(".icon");
 
     // TODO
     // expect(recordIcon.textContent).toEqual("?");
@@ -108,7 +104,7 @@ describe("Outline view", () => {
   it("presents status message correctly", async () => {
     const mockStatus = {
       title: "Error message",
-      description: "Something went wrong"
+      description: "Something went wrong",
     };
     statuses.mockStatus = mockStatus;
 

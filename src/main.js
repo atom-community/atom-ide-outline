@@ -5,11 +5,11 @@ import { ProviderRegistry } from "./providerRegistry";
 export { statuses } from "./statuses"; // for spec
 import { statuses } from "./statuses";
 
-let subscriptions: CompositeDisposable
-let activeEditorContentUpdateSubscription = null
-let view: OutlineView
-export let outlineProviderRegistry = new ProviderRegistry()
-let busySignalProvider
+let subscriptions: CompositeDisposable;
+let activeEditorContentUpdateSubscription = null;
+let view: OutlineView;
+export let outlineProviderRegistry = new ProviderRegistry();
+let busySignalProvider;
 
 export function activate() {
   subscriptions = new CompositeDisposable();
@@ -31,9 +31,7 @@ export function consumeSignal(registry) {
 }
 
 export async function consumeOutlineProvider(provider) {
-  const providerRegistryEntry = outlineProviderRegistry.addProvider(
-      provider
-  );
+  const providerRegistryEntry = outlineProviderRegistry.addProvider(provider);
   subscriptions.add(providerRegistryEntry);
 
   // Generate (try) an outline after obtaining a provider
@@ -42,19 +40,21 @@ export async function consumeOutlineProvider(provider) {
 
 function addCommands() {
   const outlineToggle = atom.commands.add("atom-workspace", {
-    "outline:toggle": () => toggleOutlineView()
+    "outline:toggle": () => toggleOutlineView(),
   });
   subscriptions.add(outlineToggle);
 }
 
 function addObservers() {
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
-      async (editor: TextEditor) => {
-        activeEditorContentUpdateSubscription?.dispose?.(); // dispose old content
-        await getOutline(editor) // initial outline
-        // changing of outline by changing the cursor
-        activeEditorContentUpdateSubscription = editor?.onDidChangeCursorPosition(() => getOutline(editor));
-      }
+    async (editor: TextEditor) => {
+      activeEditorContentUpdateSubscription?.dispose?.(); // dispose old content
+      await getOutline(editor); // initial outline
+      // changing of outline by changing the cursor
+      activeEditorContentUpdateSubscription = editor?.onDidChangeCursorPosition(
+        () => getOutline(editor)
+      );
+    }
   );
   subscriptions.add(activeTextEditorObserver);
 }
@@ -95,7 +95,7 @@ export async function getOutline(activeEditor) {
 
   view.setOutline({
     tree: (outline && outline.outlineTrees) || [],
-    editor
+    editor,
   });
 
   busySignalProvider?.clear();
