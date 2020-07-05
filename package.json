@@ -27,6 +27,7 @@
     "bump": "ncu -u",
     "prepare": "npm run build"
   },
+  "atomTestRunner": "./spec/runner",
   "dependencies": {},
   "devDependencies": {
     "@types/atom": "latest",
