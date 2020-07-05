@@ -1,5 +1,3 @@
-"use babel";
-
 import { Disposable } from "atom";
 
 export class ProviderRegistry {
@@ -24,7 +22,7 @@ export class ProviderRegistry {
   getProvider(editor) {
     const grammarScope = editor.getGrammar().scopeName;
 
-    return this.providers.find(provider =>
+    return this.providers.find((provider) =>
       provider.grammarScopes.includes(grammarScope)
     );
   }
