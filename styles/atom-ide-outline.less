@@ -15,74 +15,69 @@
 
   font-size: 1rem;
   font-family: @font-family;
-}
 
-.outline-view ul {
-  list-style-type: none;
-  padding: 0;
+  ul {
+    list-style-type: none;
+    padding: 0;
 
-  li > span {
-    display: inline-block;
-    width: 100%;
+    li > span {
+      display: inline-block;
+      width: 100%;
+      padding: 2px 5px;
 
-    padding: 2px 5px;
-
-    &:hover {
-      cursor: pointer;
-      background: @background-color-highlight;
+      &:hover {
+        cursor: pointer;
+        background: @background-color-highlight;
+      }
     }
   }
-}
 
-.outline-view .icon {
-  display: inline-block;
-  height: 100%;
-  width: 20px;
+  .icon {
+    display: inline-block;
+    height: 100%;
+    width: 20px;
+    text-align: center;
+    font-weight: bold;
 
-  text-align: center;
-  font-weight: bold;
+    // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
+    // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
-  // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
-  // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
-
-  .styleByType(array, @syntax-color-value);
-  .styleByType(boolean, @syntax-color-value);
-  .styleByType(class, @syntax-color-class);
-  .styleByType(constant, @syntax-color-constant);
-  .styleByType(constructor, @syntax-color-function);
-  .styleByType(enum, @syntax-color-variable);
-  .styleByType(field, @syntax-color-tag);
-  .styleByType(file, @syntax-color-import);
-  .styleByType(function, @syntax-color-function);
-  .styleByType(interface, @syntax-color-class);
-  .styleByType(method, @syntax-color-method);
-  .styleByType(module, @syntax-color-import);
-  .styleByType(namespace, @syntax-color-keyword);
-  .styleByType(number, @syntax-color-value);
-  .styleByType(package, @syntax-color-import);
-  .styleByType(property, @syntax-color-property);
-  .styleByType(string, @syntax-color-value);
-  .styleByType(variable, @syntax-color-variable);
-}
-
-.styleByType(@type, @color) {
-  &.type-@{type} {
-    color: @color;
+    .styleByType(array, @syntax-color-value);
+    .styleByType(boolean, @syntax-color-value);
+    .styleByType(class, @syntax-color-class);
+    .styleByType(constant, @syntax-color-constant);
+    .styleByType(constructor, @syntax-color-function);
+    .styleByType(enum, @syntax-color-variable);
+    .styleByType(field, @syntax-color-tag);
+    .styleByType(file, @syntax-color-import);
+    .styleByType(function, @syntax-color-function);
+    .styleByType(interface, @syntax-color-class);
+    .styleByType(method, @syntax-color-method);
+    .styleByType(module, @syntax-color-import);
+    .styleByType(namespace, @syntax-color-keyword);
+    .styleByType(number, @syntax-color-value);
+    .styleByType(package, @syntax-color-import);
+    .styleByType(property, @syntax-color-property);
+    .styleByType(string, @syntax-color-value);
+    .styleByType(variable, @syntax-color-variable);
   }
-}
 
-.outline-view .status {
-  height: 100%;
+  .status {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 0 @component-padding;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
 
-  text-align: center;
-
-  padding: 0 @component-padding;
-
-  h1 {
-    font-size: 1.5rem;
+  .styleByType(@type, @color) {
+    &.type-@{type} {
+      color: @color;
+    }
   }
 }
