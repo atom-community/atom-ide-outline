@@ -74,7 +74,6 @@
     "prettier": "^2.0.5",
     "rollup": "latest",
     "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-coffee-script": "latest",
     "rollup-plugin-terser": "latest",
     "shx": "latest",
     "tslib": "^2.0.0",
