@@ -1,3 +1,12 @@
+## [1.3.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.3.0...v1.3.1) (2020-07-11)
+
+
+### Bug Fixes
+
+* remove icon height rule ([937c647](https://github.com/atom-ide-community/atom-ide-outline/commit/937c647cf3096cbf416396ce6f66d5dc3cb813b1))
+* Remove outline-view display, flex-drection, height, width: ([2274262](https://github.com/atom-ide-community/atom-ide-outline/commit/227426205a97c669bf794bbcd5301231b0ef4399))
+* remove outline-view font rules ([1a4dc00](https://github.com/atom-ide-community/atom-ide-outline/commit/1a4dc009410ffa9f1783ec8ef59561c5dc9a4907))
+
 # [1.3.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.2.4...v1.3.0) (2020-07-05)
 
 
