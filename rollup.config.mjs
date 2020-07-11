@@ -22,7 +22,7 @@ let plugins = [
   babel(),
 
   // so Rollup can find externals
-  resolve({ extensions: ["ts", ".js", ".coffee"], preferBuiltins: true }),
+  resolve({ extensions: ["ts", ".js"], preferBuiltins: true }),
 
   // so Rollup can convert externals to an ES module
   commonjs(),

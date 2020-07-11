@@ -17,7 +17,7 @@
   },
   "scripts": {
     "format": "prettier --write .",
-    "lint": "eslint . --fix --ext js,ts,coffee,json",
+    "lint": "eslint . --fix --ext js,ts,json",
     "test": "atom --test spec",
     "clean": "shx rm -rf dist",
     "babel": "npm run clean && shx cp -r src dist && env NODE_ENV=development env BABEL_ENV=development babel dist --out-dir dist",
@@ -65,7 +65,6 @@
     "build-commit": "latest",
     "eslint": "latest",
     "eslint-config-prettier": "latest",
-    "eslint-plugin-coffee": "latest",
     "eslint-plugin-json": "latest",
     "eslint-plugin-only-warn": "latest",
     "eslint-plugin-prettier": "latest",
