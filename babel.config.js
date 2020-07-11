@@ -7,7 +7,6 @@ let presets = [
       },
     },
   ],
-  "@babel/preset-react",
   "@babel/preset-flow",
 ];
 
