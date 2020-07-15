@@ -58,7 +58,7 @@
     "@rollup/plugin-json": "latest",
     "rollup-plugin-terser": "latest",
     "shx": "latest",
-    "@babel/cli": "7.10.4",
+    "@babel/cli": "7.10.5",
     "@babel/core": "7.10.4",
     "@babel/plugin-proposal-class-properties": "latest",
     "@babel/plugin-proposal-decorators": "latest",
