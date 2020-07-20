@@ -17,7 +17,7 @@ export function activate() {
   addCommands();
   addObservers();
   if (atom.config.get("atom-ide-outline.InitialDisplay")) {
-    toggleOutlineView(); // initially show outline pane    
+    toggleOutlineView(); // initially show outline pane
   }
 }
 

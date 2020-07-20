@@ -101,12 +101,12 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   });
 }
 
-function getIcon(iconType:? string, kindType:? string) {
+function getIcon(iconType: ?string, kindType: ?string) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
   const iconElement = document.createElement("span");
-  iconElement.classList.add("icon")
+  iconElement.classList.add("icon");
 
   // icon
   const hasIconType = typeof iconType === "string" && iconType.length > 0;
@@ -119,10 +119,12 @@ function getIcon(iconType:? string, kindType:? string) {
   let type;
   if (hasKindType) {
     let kindClass;
-    if (kindType.indexOf("type-") === 0) { // supplied with type-...
+    if (kindType.indexOf("type-") === 0) {
+      // supplied with type-...
       kindClass = `${kindType}`;
       type = kindType.replace("type-", "");
-    } else { // supplied without type-
+    } else {
+      // supplied without type-
       kindClass = `type-${kindType}`;
       type = kindType;
     }

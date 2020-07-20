@@ -54,7 +54,6 @@ describe("Outline", () => {
     atom.commands.dispatch(workspaceElement, "outline:toggle");
 
     expect(workspaceElement.querySelector(".outline-view")).toBeVisible();
-
   });
 
   it("triggers outline generation for active editor on save", async () => {
