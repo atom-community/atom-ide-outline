@@ -108,7 +108,15 @@ function getIcon(iconType:? string) {
   const iconElement = document.createElement("span");
   const hasIconType = typeof iconType === "string" && iconType.length > 0;
 
-  iconElement.className = hasIconType ? `icon ${iconType}` : "icon";
+  if (hasIconType) {
+    if (iconType.indexOf("type-") === 0) { // supplied with type-...
+      iconElement.className = `icon ${iconType}`;
+    } else { // supplied without type-
+      iconElement.className = `icon type-${iconType}`;
+    }
+  } else {
+    iconElement.className = "icon";
+  }
 
   const type = hasIconType && iconType.replace("type-", "");
   const iconSymbol = type ? type.substring(0, 1) : "?";
