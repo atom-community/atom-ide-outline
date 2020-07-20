@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.4.0...v1.5.0) (2020-07-20)
+
+
+### Bug Fixes
+
+* larget outline entries ([bea7f98](https://github.com/atom-ide-community/atom-ide-outline/commit/bea7f9803e5fda76c0daed3097ddb45cba54d888))
+
+
+### Features
+
+* InitialDisplay config ([91beb00](https://github.com/atom-ide-community/atom-ide-outline/commit/91beb0080e5205d5420b3b9ba20bb91413f87ba2))
+* show outline initially ([82fa270](https://github.com/atom-ide-community/atom-ide-outline/commit/82fa2708cb31c04739ef9cd953b0d064b55fec92))
+
 ## [1.4.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.4.0...v1.4.1) (2020-07-20)
 
 
