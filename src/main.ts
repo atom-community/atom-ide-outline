@@ -1,9 +1,9 @@
-import {CompositeDisposable, Disposable, TextEditor} from "atom";
-import {OutlineView} from "./outlineView";
-import {ProviderRegistry} from "./providerRegistry";
+import { CompositeDisposable, Disposable, TextEditor } from "atom";
+import { OutlineView } from "./outlineView";
+import { ProviderRegistry } from "./providerRegistry";
 
-export {statuses} from "./statuses"; // for spec
-import {statuses} from "./statuses";
+export { statuses } from "./statuses"; // for spec
+import { statuses } from "./statuses";
 
 let subscriptions: CompositeDisposable;
 let activeEditorContentUpdateSubscription: Disposable | null;
@@ -50,7 +50,9 @@ function addCommands() {
 function addObservers() {
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
     async (editor?: TextEditor) => {
-      if (!editor) {return}
+      if (!editor) {
+        return;
+      }
       activeEditorContentUpdateSubscription?.dispose?.(); // dispose old content
       await getOutline(editor); // initial outline
       // changing of outline by changing the cursor

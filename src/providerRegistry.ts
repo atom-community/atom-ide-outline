@@ -1,4 +1,4 @@
-import {Disposable, TextEditor} from "atom";
+import { Disposable, TextEditor } from "atom";
 
 export class ProviderRegistry {
   private providers: any[]; // TODO Type

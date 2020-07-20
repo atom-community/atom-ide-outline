@@ -49,7 +49,7 @@ export class OutlineView {
   }
 }
 
-function generateStatusElement(status: {title: string, description: string}) {
+function generateStatusElement(status: { title: string; description: string }) {
   const element = document.createElement("div");
   element.className = "status";
 
@@ -112,13 +112,15 @@ function getIcon(iconType?: string, kindType?: string) {
   iconElement.classList.add("icon");
 
   // icon
-  if (typeof iconType === "string" && iconType.length > 0) { // hasIcon
+  if (typeof iconType === "string" && iconType.length > 0) {
+    // hasIcon
     iconElement.classList.add(iconType!);
   }
 
   // kind
   let type;
-  if (typeof kindType === "string" && kindType.length > 0) { // hasKind
+  if (typeof kindType === "string" && kindType.length > 0) {
+    // hasKind
     let kindClass: string;
     if (kindType.indexOf("type-") === 0) {
       // supplied with type-...
