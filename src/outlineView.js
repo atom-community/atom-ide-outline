@@ -66,7 +66,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     labelElement.style.paddingLeft = `${10 * level}px`;
     labelElement.innerText = item.representativeName;
 
-    const iconElement = getIcon(item?.icon || item?.kind);
+    const iconElement = getIcon(item?.icon, item?.kind);
     labelElement.prepend(iconElement);
 
     symbol.append(labelElement);
@@ -101,24 +101,34 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   });
 }
 
-function getIcon(iconType:? string) {
+function getIcon(iconType:? string, kindType:? string) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
   const iconElement = document.createElement("span");
-  const hasIconType = typeof iconType === "string" && iconType.length > 0;
+  iconElement.classList.add("icon")
 
+  // icon
+  const hasIconType = typeof iconType === "string" && iconType.length > 0;
   if (hasIconType) {
-    if (iconType.indexOf("type-") === 0) { // supplied with type-...
-      iconElement.className = `icon ${iconType}`;
-    } else { // supplied without type-
-      iconElement.className = `icon type-${iconType}`;
-    }
-  } else {
-    iconElement.className = "icon";
+    iconElement.classList.add(iconType);
   }
 
-  const type = hasIconType && iconType.replace("type-", "");
+  // kind
+  const hasKindType = typeof kindType === "string" && kindType.length > 0;
+  let type;
+  if (hasKindType) {
+    let kindClass;
+    if (kindType.indexOf("type-") === 0) { // supplied with type-...
+      kindClass = `${kindType}`;
+      type = kindType.replace("type-", "");
+    } else { // supplied without type-
+      kindClass = `type-${kindType}`;
+      type = kindType;
+    }
+    iconElement.classList.add(kindClass);
+  }
+
   const iconSymbol = type ? type.substring(0, 1) : "?";
   iconElement.innerHTML = `<span>${iconSymbol}</span>`;
 
