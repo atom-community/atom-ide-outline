@@ -16,7 +16,9 @@ export function activate() {
   view = new OutlineView(); // create outline pane
   addCommands();
   addObservers();
-  toggleOutlineView(); // initially show outline pane
+  if (atom.config.get("atom-ide-outline.InitialDisplay")) {
+    toggleOutlineView(); // initially show outline pane    
+  }
 }
 
 export function deactivate() {
@@ -106,3 +108,12 @@ export function setStatus(id) {
   const status = statuses[id];
   view.presentStatus(status);
 }
+
+export const config = {
+  InitialDisplay: {
+    title: "Initial Outline Display",
+    description: "Show outline initially aftern atom loads",
+    type: "boolean",
+    default: true,
+  },
+};
