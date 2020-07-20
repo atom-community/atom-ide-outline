@@ -64,9 +64,9 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     const labelElement = document.createElement("span");
     labelElement.style.paddingLeft = `${10 * level}px`;
-    labelElement.innerText = item.representativeName;
+    labelElement.innerText = item.representativeName || item.plainText;
 
-    const iconElement = getIcon(item.icon);
+    const iconElement = getIcon(item.icon || item.kind);
     labelElement.prepend(iconElement);
 
     symbol.append(labelElement);
