@@ -34,8 +34,6 @@ describe("Outline view", () => {
   });
 
   it("renders outline into HTML", async () => {
-    await atom.commands.dispatch(workspaceElement, "outline:toggle");
-
     const editor = new TextEditor();
     await OutlinePackage.getOutline(editor);
 
@@ -50,8 +48,6 @@ describe("Outline view", () => {
   });
 
   it("nests lists for records with children", async () => {
-    await atom.commands.dispatch(workspaceElement, "outline:toggle");
-
     const editor = new TextEditor();
     await OutlinePackage.getOutline(editor);
 
@@ -69,8 +65,6 @@ describe("Outline view", () => {
   });
 
   it("generates icon and label for an entry", async () => {
-    await atom.commands.dispatch(workspaceElement, "outline:toggle");
-
     const editor = new TextEditor();
     await OutlinePackage.getOutline(editor);
 
@@ -86,8 +80,6 @@ describe("Outline view", () => {
   });
 
   it("provides fallback for entries without icon", async () => {
-    await atom.commands.dispatch(workspaceElement, "outline:toggle");
-
     const editor = new TextEditor();
     await OutlinePackage.getOutline(editor);
 
@@ -107,8 +99,6 @@ describe("Outline view", () => {
       description: "Something went wrong",
     };
     statuses.mockStatus = mockStatus;
-
-    await atom.commands.dispatch(workspaceElement, "outline:toggle");
 
     OutlinePackage.setStatus("mockStatus");
 

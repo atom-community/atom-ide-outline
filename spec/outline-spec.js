@@ -45,15 +45,16 @@ describe("Outline", () => {
   });
 
   it("adds/removes outline view from workspace when toggled", () => {
+    expect(workspaceElement.querySelector(".outline-view")).toBeVisible();
+
+    atom.commands.dispatch(workspaceElement, "outline:toggle");
+
     expect(workspaceElement.querySelector(".outline-view")).not.toExist();
 
     atom.commands.dispatch(workspaceElement, "outline:toggle");
 
     expect(workspaceElement.querySelector(".outline-view")).toBeVisible();
 
-    atom.commands.dispatch(workspaceElement, "outline:toggle");
-
-    expect(workspaceElement.querySelector(".outline-view")).not.toExist();
   });
 
   it("triggers outline generation for active editor on save", async () => {
