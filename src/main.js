@@ -16,6 +16,7 @@ export function activate() {
   view = new OutlineView(); // create outline pane
   addCommands();
   addObservers();
+  toggleOutlineView(); // initially show outline pane
 }
 
 export function deactivate() {
