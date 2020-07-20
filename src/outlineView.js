@@ -66,7 +66,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     labelElement.style.paddingLeft = `${10 * level}px`;
     labelElement.innerText = item.representativeName;
 
-    const iconElement = getIcon(item.icon);
+    const iconElement = getIcon(item?.icon || item?.kind);
     labelElement.prepend(iconElement);
 
     symbol.append(labelElement);
@@ -101,7 +101,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   });
 }
 
-function getIcon(iconType) {
+function getIcon(iconType:? string) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
