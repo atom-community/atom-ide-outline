@@ -1,15 +1,16 @@
-import { CompositeDisposable, TextEditor } from "atom";
-import { OutlineView } from "./outlineView";
-import { ProviderRegistry } from "./providerRegistry";
+import {CompositeDisposable, Disposable, TextEditor} from "atom";
+import {OutlineView} from "./outlineView";
+import {ProviderRegistry} from "./providerRegistry";
 
-export { statuses } from "./statuses"; // for spec
-import { statuses } from "./statuses";
+export {statuses} from "./statuses"; // for spec
+import {statuses} from "./statuses";
 
 let subscriptions: CompositeDisposable;
-let activeEditorContentUpdateSubscription = null;
+let activeEditorContentUpdateSubscription: Disposable | null;
 let view: OutlineView;
-export let outlineProviderRegistry = new ProviderRegistry();
-let busySignalProvider;
+export const outlineProviderRegistry = new ProviderRegistry();
+
+let busySignalProvider; // TODO Type
 
 export function activate() {
   subscriptions = new CompositeDisposable();
@@ -27,10 +28,8 @@ export function deactivate() {
 }
 
 export function consumeSignal(registry) {
-  const provider = registry.create();
-
-  busySignalProvider = provider;
-  subscriptions.add(provider);
+  busySignalProvider = registry.create();
+  subscriptions.add(busySignalProvider);
 }
 
 export async function consumeOutlineProvider(provider) {
@@ -50,11 +49,12 @@ function addCommands() {
 
 function addObservers() {
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
-    async (editor: TextEditor) => {
+    async (editor?: TextEditor) => {
+      if (!editor) {return}
       activeEditorContentUpdateSubscription?.dispose?.(); // dispose old content
       await getOutline(editor); // initial outline
       // changing of outline by changing the cursor
-      activeEditorContentUpdateSubscription = editor?.onDidChangeCursorPosition(
+      activeEditorContentUpdateSubscription = editor.onDidChangeCursorPosition(
         () => getOutline(editor)
       );
     }
@@ -65,7 +65,7 @@ function addObservers() {
 export function toggleOutlineView() {
   const outlinePane = atom.workspace.paneForItem(view);
   if (outlinePane) {
-    return outlinePane.destroyItem(view);
+    outlinePane.destroyItem(view);
   }
 
   const rightDock = atom.workspace.getRightDock();
@@ -77,7 +77,7 @@ export function toggleOutlineView() {
   rightDock.show();
 }
 
-export async function getOutline(activeEditor) {
+export async function getOutline(activeEditor?: TextEditor) {
   // editor
   const editor = activeEditor || atom.workspace.getActiveTextEditor();
   if (!editor) {
@@ -104,7 +104,7 @@ export async function getOutline(activeEditor) {
   busySignalProvider?.clear();
 }
 
-export function setStatus(id) {
+export function setStatus(id: "noEditor" | "noProvider") {
   const status = statuses[id];
   view.presentStatus(status);
 }
