@@ -65,7 +65,7 @@ function addObservers() {
 export function toggleOutlineView() {
   const outlinePane = atom.workspace.paneForItem(view);
   if (outlinePane) {
-    outlinePane.destroyItem(view);
+    return outlinePane.destroyItem(view);
   }
 
   const rightDock = atom.workspace.getRightDock();
