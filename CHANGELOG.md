@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.4.0...v1.4.1) (2020-07-20)
+
+
+### Bug Fixes
+
+* larget outline entries ([bea7f98](https://github.com/atom-ide-community/atom-ide-outline/commit/bea7f9803e5fda76c0daed3097ddb45cba54d888))
+
 # [1.4.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.3.1...v1.4.0) (2020-07-20)
 
 
