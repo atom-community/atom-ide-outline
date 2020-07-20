@@ -64,9 +64,9 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     const labelElement = document.createElement("span");
     labelElement.style.paddingLeft = `${10 * level}px`;
-    labelElement.innerText = item.representativeName;
+    labelElement.innerText = item.representativeName || item.plainText;
 
-    const iconElement = getIcon(item.icon);
+    const iconElement = getIcon(item?.icon, item?.kind);
     labelElement.prepend(iconElement);
 
     symbol.append(labelElement);
@@ -101,16 +101,34 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   });
 }
 
-function getIcon(iconType) {
+function getIcon(iconType:? string, kindType:? string) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
   const iconElement = document.createElement("span");
+  iconElement.classList.add("icon")
+
+  // icon
   const hasIconType = typeof iconType === "string" && iconType.length > 0;
+  if (hasIconType) {
+    iconElement.classList.add(iconType);
+  }
 
-  iconElement.className = hasIconType ? `icon ${iconType}` : "icon";
+  // kind
+  const hasKindType = typeof kindType === "string" && kindType.length > 0;
+  let type;
+  if (hasKindType) {
+    let kindClass;
+    if (kindType.indexOf("type-") === 0) { // supplied with type-...
+      kindClass = `${kindType}`;
+      type = kindType.replace("type-", "");
+    } else { // supplied without type-
+      kindClass = `type-${kindType}`;
+      type = kindType;
+    }
+    iconElement.classList.add(kindClass);
+  }
 
-  const type = hasIconType && iconType.replace("type-", "");
   const iconSymbol = type ? type.substring(0, 1) : "?";
   iconElement.innerHTML = `<span>${iconSymbol}</span>`;
 
