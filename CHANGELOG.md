@@ -1,3 +1,13 @@
+# [1.4.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.3.1...v1.4.0) (2020-07-20)
+
+
+### Features
+
+* accept both kind and icon ([9fd1a0e](https://github.com/atom-ide-community/atom-ide-outline/commit/9fd1a0ecd7c7843918447923bafbaa7a70f6de29))
+* accept icon or kind as the icon API ([11eecfd](https://github.com/atom-ide-community/atom-ide-outline/commit/11eecfdea8ebe72e30a6c5ca61424885ae5c6548))
+* accept iconType supplied with/without "type-" ([f223ba2](https://github.com/atom-ide-community/atom-ide-outline/commit/f223ba2b2efe084ef379aaa1f9873a6e92b4fd60))
+* plainText support ([d8f79ed](https://github.com/atom-ide-community/atom-ide-outline/commit/d8f79edc1c8817dc4ae2905b9bfd1940e5884ea2))
+
 ## [1.3.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.3.0...v1.3.1) (2020-07-11)
 
 
