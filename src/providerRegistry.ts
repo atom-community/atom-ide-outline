@@ -1,6 +1,7 @@
-import { Disposable } from "atom";
+import { Disposable, TextEditor } from "atom";
 
 export class ProviderRegistry {
+  private providers: any[]; // TODO Type
   constructor() {
     this.providers = [];
   }
@@ -19,7 +20,7 @@ export class ProviderRegistry {
     }
   }
 
-  getProvider(editor) {
+  getProvider(editor: TextEditor) {
     const grammarScope = editor.getGrammar().scopeName;
 
     return this.providers.find((provider) =>

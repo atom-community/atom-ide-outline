@@ -1,10 +1,10 @@
 import { createPlugins } from "rollup-plugin-atomic";
 
-const plugins = createPlugins(["js"], true);
+const plugins = createPlugins(["ts", "js"], true);
 
 export default [
   {
-    input: "src/main.js",
+    input: "src/main.ts",
     output: [
       {
         dir: "dist",

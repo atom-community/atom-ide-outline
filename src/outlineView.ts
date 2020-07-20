@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 export class OutlineView {
+  public element: HTMLDivElement;
   constructor() {
     this.element = document.createElement("div");
     this.element.classList.add("outline-view");
@@ -46,7 +49,7 @@ export class OutlineView {
   }
 }
 
-function generateStatusElement(status) {
+function generateStatusElement(status: { title: string; description: string }) {
   const element = document.createElement("div");
   element.className = "status";
 
@@ -101,7 +104,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   });
 }
 
-function getIcon(iconType: ?string, kindType: ?string) {
+function getIcon(iconType?: string, kindType?: string) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
@@ -109,16 +112,16 @@ function getIcon(iconType: ?string, kindType: ?string) {
   iconElement.classList.add("icon");
 
   // icon
-  const hasIconType = typeof iconType === "string" && iconType.length > 0;
-  if (hasIconType) {
-    iconElement.classList.add(iconType);
+  if (typeof iconType === "string" && iconType.length > 0) {
+    // hasIcon
+    iconElement.classList.add(iconType!);
   }
 
   // kind
-  const hasKindType = typeof kindType === "string" && kindType.length > 0;
   let type;
-  if (hasKindType) {
-    let kindClass;
+  if (typeof kindType === "string" && kindType.length > 0) {
+    // hasKind
+    let kindClass: string;
     if (kindType.indexOf("type-") === 0) {
       // supplied with type-...
       kindClass = `${kindType}`;

@@ -10,7 +10,8 @@ Outline UI compatible with IDE packages. Presents symbols of an active text edit
 
 2. Install relevant IDE language packages e.g.:
 
-- [ide-typescript](https://atom.io/packages/ide-typescript) for TypeScript and JavaScript
+- [atom-typescript](https://atom.io/packages/atom-typescript) for TypeScript
+- [atom-ide-javascript](https://atom.io/packages/atom-ide-javascript) for JavaScript
 - [ide-css](https://atom.io/packages/ide-css) for CSS
 - [ide-python](https://atom.io/packages/ide-python) for Python
 - [ide-rust](https://atom.io/packages/ide-rust) for Rust
