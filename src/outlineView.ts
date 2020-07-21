@@ -114,32 +114,56 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   });
 }
 
+
+const supportedTypes = [
+  "array",
+  "boolean",
+  "class",
+  "constant",
+  "constructor",
+  "enum",
+  "field",
+  "file",
+  "function",
+  "interface",
+  "method",
+  "module",
+  "namespace",
+  "number",
+  "package",
+  "property",
+  "string",
+  "variable",
+]
+
 function getIcon(iconType?: string, kindType?: string) {
+
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
   const iconElement = document.createElement("span");
   iconElement.classList.add("icon");
 
-  // icon
-  if (typeof iconType === "string" && iconType.length > 0) {
-    // hasIcon
-    iconElement.classList.add(iconType!);
+  // if iconType given instead
+  if (kindType == undefined && iconType != undefined) {
+    kindType = iconType
   }
 
-  // kind
-  let type;
   let kindClass = "";
+  let type;
   if (typeof kindType === "string" && kindType.length > 0) {
     // hasKind
     if (kindType.indexOf("type-") === 0) {
       // supplied with type-...
       kindClass = `${kindType}`;
       type = kindType.replace("type-", "");
-    } else {
+    } else if (supportedTypes.includes(kindType)) {
       // supplied without type-
       kindClass = `type-${kindType}`;
       type = kindType;
+    } else {
+      // as is
+      kindClass = kindType
     }
     iconElement.classList.add(kindClass);
   }
