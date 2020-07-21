@@ -195,6 +195,19 @@ const supportedTypes = [
   "variable",
 ]
 
+const symbolMap = {
+  class: '\\e600',
+  struct: '\\e601',
+  macro: '\\e602',
+  typedef: '\\e603',
+  union: '\\e604',
+  interface: '\\e605',
+  enum: '\\e606',
+  variable: '\\e607',
+  function: '\\e608',
+  namespace: '\\e609',
+}
+
 function getIcon(iconType?: string, kindType?: string) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
@@ -226,8 +239,8 @@ function getIcon(iconType?: string, kindType?: string) {
     iconElement.classList.add(kindClass)
   }
 
-  const iconSymbol = type ? type.substring(0, 1) : "•"
-  iconElement.innerHTML = `<span>${iconSymbol}</span>`
+  const iconSymbol = type ? (symbolMap[type] ?? type.substring(0, 1)) : "•";
+  iconElement.innerHTML = `<span>${iconSymbol}</span>`;
 
   return { iconElement, kindClass }
 }
