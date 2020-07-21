@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.0...v1.6.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* detect given API automatically ([29b8ff5](https://github.com/atom-ide-community/atom-ide-outline/commit/29b8ff5299848684d0f00f91fd2ab40de9871db6))
+
 # [1.6.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.5.1...v1.6.0) (2020-07-21)
 
 
