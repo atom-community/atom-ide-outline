@@ -8,6 +8,13 @@
 // @contain_all: size layout paint style;
 @contain_except_size: layout paint style;
 
+@font-face {
+  font-family: 'symbol-icons';
+  src: url('atom://atom-ide-outline/styles/symbol-icons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .outline-view {
   contain: @contain_except_size;
   overflow-y: auto;
@@ -84,6 +91,7 @@
   .styleByType(@type, @color) {
     .type-@{type} {
       color: @color;
+      font-family: 'symbol-icons';
     }
 
     .fold-type-@{type} {
