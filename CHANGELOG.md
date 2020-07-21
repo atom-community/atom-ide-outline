@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.1...v1.6.2) (2020-07-21)
+
+
+### Bug Fixes
+
+* indent when level is 0 ([197495c](https://github.com/atom-ide-community/atom-ide-outline/commit/197495c8579d05ade88eea3416955a68452885f8))
+
 ## [1.6.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.0...v1.6.1) (2020-07-21)
 
 
