@@ -69,7 +69,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     labelElement.style.paddingLeft = `${10 * level}px`;
     labelElement.innerText = item.representativeName || item.plainText;
 
-    const iconElement = getIcon(item?.icon, item?.kind);
+    const {iconElement, kindClass} = getIcon(item?.icon, item?.kind);
     labelElement.prepend(iconElement);
 
     symbol.append(labelElement);
@@ -119,9 +119,9 @@ function getIcon(iconType?: string, kindType?: string) {
 
   // kind
   let type;
+  let kindClass: string = "";
   if (typeof kindType === "string" && kindType.length > 0) {
     // hasKind
-    let kindClass: string;
     if (kindType.indexOf("type-") === 0) {
       // supplied with type-...
       kindClass = `${kindType}`;
@@ -134,8 +134,8 @@ function getIcon(iconType?: string, kindType?: string) {
     iconElement.classList.add(kindClass);
   }
 
-  const iconSymbol = type ? type.substring(0, 1) : "?";
+  const iconSymbol = type ? type.substring(0, 1) : "•";
   iconElement.innerHTML = `<span>${iconSymbol}</span>`;
 
-  return iconElement;
+  return {iconElement, kindClass};
 }
