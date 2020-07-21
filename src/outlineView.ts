@@ -66,7 +66,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
 
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     const labelElement = document.createElement("span");
-    labelElement.style.paddingLeft = `${10 * level}px`;
+    labelElement.style.paddingLeft = `${25 * level}px`;
     labelElement.innerText = item.representativeName || item.plainText;
 
     const {iconElement, kindClass} = getIcon(item?.icon, item?.kind);
@@ -84,8 +84,13 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
       });
     });
 
+    // if hasChildren
     const hasChildren = item.children && !!item.children[0];
+
+    // create Child elements
     if (hasChildren) {
+      labelElement.style.paddingLeft =`${10 * level}px`
+
       const childrenList = document.createElement("ul");
       childrenList.addEventListener("click", (event) =>
         event.stopPropagation()
