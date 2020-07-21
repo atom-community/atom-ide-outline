@@ -34,29 +34,40 @@
     width: 20px;
     text-align: center;
     font-weight: bold;
-
-    // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
-    // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
-
-    .styleByType(array, @syntax-color-value);
-    .styleByType(boolean, @syntax-color-value);
-    .styleByType(class, @syntax-color-class);
-    .styleByType(constant, @syntax-color-constant);
-    .styleByType(constructor, @syntax-color-function);
-    .styleByType(enum, @syntax-color-variable);
-    .styleByType(field, @syntax-color-tag);
-    .styleByType(file, @syntax-color-import);
-    .styleByType(function, @syntax-color-function);
-    .styleByType(interface, @syntax-color-class);
-    .styleByType(method, @syntax-color-method);
-    .styleByType(module, @syntax-color-import);
-    .styleByType(namespace, @syntax-color-keyword);
-    .styleByType(number, @syntax-color-value);
-    .styleByType(package, @syntax-color-import);
-    .styleByType(property, @syntax-color-property);
-    .styleByType(string, @syntax-color-value);
-    .styleByType(variable, @syntax-color-variable);
   }
+
+  // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
+  // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
+
+  .styleByType(@type, @color) {
+    .type-@{type} {
+      color: @color;
+    }
+
+    .fold-type-@{type} {
+      background-color: @color;
+    }
+  }
+
+  .styleByType("", @syntax-color-value);
+  .styleByType(array, @syntax-color-value);
+  .styleByType(boolean, @syntax-color-value);
+  .styleByType(class, @syntax-color-class);
+  .styleByType(constant, @syntax-color-constant);
+  .styleByType(constructor, @syntax-color-function);
+  .styleByType(enum, @syntax-color-variable);
+  .styleByType(field, @syntax-color-tag);
+  .styleByType(file, @syntax-color-import);
+  .styleByType(function, @syntax-color-function);
+  .styleByType(interface, @syntax-color-class);
+  .styleByType(method, @syntax-color-method);
+  .styleByType(module, @syntax-color-import);
+  .styleByType(namespace, @syntax-color-keyword);
+  .styleByType(number, @syntax-color-value);
+  .styleByType(package, @syntax-color-import);
+  .styleByType(property, @syntax-color-property);
+  .styleByType(string, @syntax-color-value);
+  .styleByType(variable, @syntax-color-variable);
 
   .status {
     height: 100%;
@@ -71,9 +82,4 @@
     }
   }
 
-  .styleByType(@type, @color) {
-    &.type-@{type} {
-      color: @color;
-    }
-  }
 }
