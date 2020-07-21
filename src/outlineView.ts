@@ -66,10 +66,10 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
 
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     const labelElement = document.createElement("span");
-    labelElement.style.paddingLeft = `${10 * level}px`;
+    labelElement.style.paddingLeft = `${25 * level}px`;
     labelElement.innerText = item.representativeName || item.plainText;
 
-    const iconElement = getIcon(item?.icon, item?.kind);
+    const { iconElement, kindClass } = getIcon(item?.icon, item?.kind);
     labelElement.prepend(iconElement);
 
     symbol.append(labelElement);
@@ -84,14 +84,24 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
       });
     });
 
+    // if hasChildren
     const hasChildren = item.children && !!item.children[0];
+
+    // create Child elements
     if (hasChildren) {
+      labelElement.style.paddingLeft = `${10 * level}px`;
+
       const childrenList = document.createElement("ul");
       childrenList.addEventListener("click", (event) =>
         event.stopPropagation()
       );
-
       symbol.append(childrenList);
+
+      // fold Button
+      const foldButton = createFoldButton(kindClass, childrenList);
+      labelElement.prepend(foldButton);
+
+      // add children to outline
       addOutlineEntries({
         parent: childrenList,
         entries: item.children,
@@ -119,9 +129,9 @@ function getIcon(iconType?: string, kindType?: string) {
 
   // kind
   let type;
+  let kindClass = "";
   if (typeof kindType === "string" && kindType.length > 0) {
     // hasKind
-    let kindClass: string;
     if (kindType.indexOf("type-") === 0) {
       // supplied with type-...
       kindClass = `${kindType}`;
@@ -134,8 +144,37 @@ function getIcon(iconType?: string, kindType?: string) {
     iconElement.classList.add(kindClass);
   }
 
-  const iconSymbol = type ? type.substring(0, 1) : "?";
+  const iconSymbol = type ? type.substring(0, 1) : "•";
   iconElement.innerHTML = `<span>${iconSymbol}</span>`;
 
-  return iconElement;
+  return { iconElement, kindClass };
+}
+
+function createFoldButton(kindClass: string, childrenList: HTMLUListElement) {
+  // fold button
+  const foldButton = document.createElement("button");
+  foldButton.classList.add("fold", `fold-${kindClass}`);
+  const div = document.createElement("div"); // viewBox='4 0 15 10'
+  div.innerHTML = `
+  <svg xmlns='http://www.w3.org/2000/svg'  viewBox='5 0 16 10' width='13' height='13' transform = 'rotate(45)'>
+    <path d='M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z' fill='black'></path>
+  </svg>
+  `;
+  foldButton.appendChild(div);
+
+  // fold listener
+  foldButton.addEventListener("click", (event) => {
+    childrenList.hidden = !childrenList.hidden;
+    const svg = div.firstElementChild;
+    if (childrenList.hidden) {
+      svg!.setAttribute("transform", "rotate(0)");
+      svg!.setAttribute("viewBox", "5 5 16 10");
+    } else {
+      svg!.setAttribute("transform", "rotate(45)");
+      svg!.setAttribute("viewBox", "5 0 16 10");
+    }
+    event.stopPropagation();
+  });
+
+  return foldButton;
 }
