@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.5.0...v1.5.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* use same font and size of the editor ([b041a3d](https://github.com/atom-ide-community/atom-ide-outline/commit/b041a3d28b99b1a370e690da0341028389657da1))
+
 # [1.5.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.4.0...v1.5.0) (2020-07-20)
 
 ### Bug Fixes
