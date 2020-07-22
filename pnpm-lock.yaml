@@ -4,11 +4,11 @@ devDependencies:
   '@types/atom': 1.40.4
   '@types/jasmine': 3.5.11
   '@types/node': 14.0.24
-  atom-jasmine3-test-runner: 4.4.9
+  atom-jasmine3-test-runner: 5.0.0
   babel-preset-atomic: 0.1.0_d72946d1a81dd74f7df92ec0224a35e0
   build-commit: 0.1.1
-  eslint: 7.4.0
-  eslint-config-atomic: 0.1.0_eslint@7.4.0+typescript@3.9.7
+  eslint: 7.5.0
+  eslint-config-atomic: 1.3.0_eslint@7.5.0
   jasmine: 3.5.0
   npm-check-updates: 7.0.2
   prettier: 2.0.5
@@ -1444,12 +1444,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==
-  /@typescript-eslint/eslint-plugin/3.7.0_07648823a16e47ce0a9ba6c2bc76331e:
+  /@typescript-eslint/eslint-plugin/3.7.0_a7d792035c43f2b80bcf395c5516fe5c:
     dependencies:
-      '@typescript-eslint/experimental-utils': 3.7.0_eslint@7.4.0+typescript@3.9.7
-      '@typescript-eslint/parser': 3.7.0_eslint@7.4.0+typescript@3.9.7
+      '@typescript-eslint/experimental-utils': 3.7.0_eslint@7.5.0+typescript@3.9.7
+      '@typescript-eslint/parser': 3.7.0_eslint@7.5.0+typescript@3.9.7
       debug: 4.1.1
-      eslint: 7.4.0
+      eslint: 7.5.0
       functional-red-black-tree: 1.0.1
       regexpp: 3.1.0
       semver: 7.3.2
@@ -1467,12 +1467,12 @@ packages:
         optional: true
     resolution:
       integrity: sha512-4OEcPON3QIx0ntsuiuFP/TkldmBGXf0uKxPQlGtS/W2F3ndYm8Vgdpj/woPJkzUc65gd3iR+qi3K8SDQP/obFg==
-  /@typescript-eslint/experimental-utils/3.7.0_eslint@7.4.0+typescript@3.9.7:
+  /@typescript-eslint/experimental-utils/3.7.0_eslint@7.5.0+typescript@3.9.7:
     dependencies:
       '@types/json-schema': 7.0.5
       '@typescript-eslint/types': 3.7.0
       '@typescript-eslint/typescript-estree': 3.7.0_typescript@3.9.7
-      eslint: 7.4.0
+      eslint: 7.5.0
       eslint-scope: 5.1.0
       eslint-utils: 2.1.0
     dev: true
@@ -1483,13 +1483,13 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-xpfXXAfZqhhqs5RPQBfAFrWDHoNxD5+sVB5A46TF58Bq1hRfVROrWHcQHHUM9aCBdy9+cwATcvCbRg8aIRbaHQ==
-  /@typescript-eslint/parser/3.7.0_eslint@7.4.0+typescript@3.9.7:
+  /@typescript-eslint/parser/3.7.0_eslint@7.5.0+typescript@3.9.7:
     dependencies:
       '@types/eslint-visitor-keys': 1.0.0
-      '@typescript-eslint/experimental-utils': 3.7.0_eslint@7.4.0+typescript@3.9.7
+      '@typescript-eslint/experimental-utils': 3.7.0_eslint@7.5.0+typescript@3.9.7
       '@typescript-eslint/types': 3.7.0
       '@typescript-eslint/typescript-estree': 3.7.0_typescript@3.9.7
-      eslint: 7.4.0
+      eslint: 7.5.0
       eslint-visitor-keys: 1.3.0
       typescript: 3.9.7
     dev: true
@@ -1810,7 +1810,7 @@ packages:
     optional: true
     resolution:
       integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
-  /atom-jasmine3-test-runner/4.4.9:
+  /atom-jasmine3-test-runner/5.0.0:
     dependencies:
       etch: 0.14.0
       find-parent-dir: 0.3.0
@@ -1818,12 +1818,20 @@ packages:
       glob: 7.1.6
       grim: 2.0.2
       jasmine: 3.5.0
+      jasmine-local-storage: 1.1.1_jasmine@3.5.0
+      jasmine-pass: 1.1.0_jasmine@3.5.0
+      jasmine-should-fail: 1.1.7_jasmine@3.5.0
+      jasmine-unspy: 1.1.0_jasmine@3.5.0
+      jasmine2-atom-matchers: 1.1.4_jasmine@3.5.0
+      jasmine2-focused: 1.1.1_jasmine@3.5.0
+      jasmine2-json: 1.1.1_jasmine@3.5.0
+      jasmine2-tagged: 1.1.1_jasmine@3.5.0
       semver: 7.3.2
       temp: 0.9.1
       underscore-plus: 1.7.0
     dev: true
     resolution:
-      integrity: sha512-8Dy3m2rSCKq6WjWE5kUikVwvHqpIKbzeA8DTrGEyq0bQspwxWkowWBeK80dy+l65E++kniOYH+b/2OYFsWB6Bw==
+      integrity: sha512-MA8Bi4vMKWZ6vJDFMEIkmioSrCzBKsQUYzjmWcaVAg8PPC8qZjsgnFByrxxwSZdxxx79AgB4c34L/fyvdZ5zMA==
   /aws-sign2/0.7.0:
     dev: true
     resolution:
@@ -1850,13 +1858,13 @@ packages:
     dev: true
     resolution:
       integrity: sha1-Y/1D99weO7fONZR9uP42mj9Yx0s=
-  /babel-eslint/10.1.0_eslint@7.4.0:
+  /babel-eslint/10.1.0_eslint@7.5.0:
     dependencies:
       '@babel/code-frame': 7.10.4
       '@babel/parser': 7.10.5
       '@babel/traverse': 7.10.5
       '@babel/types': 7.10.5
-      eslint: 7.4.0
+      eslint: 7.5.0
       eslint-visitor-keys: 1.3.0
       resolve: 1.17.0
     dev: true
@@ -2338,6 +2346,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
+  /coffeescript/1.12.7:
+    dev: true
+    engines:
+      node: '>=0.8.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-pLXHFxQMPklVoEekowk8b3erNynC+DVJzChxS/LCBBgR6/8AJkHivkm//zbowcfc7BTCAjryuhx6gPqPRfsFoA==
   /coffeescript/2.5.1:
     dev: true
     engines:
@@ -2858,11 +2873,11 @@ packages:
       node: '>=0.8.0'
     resolution:
       integrity: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
-  /eslint-config-airbnb-base/14.2.0_c68bb5016e109f58285db45d8cc55073:
+  /eslint-config-airbnb-base/14.2.0_093ea580bf7daeceab51c14c56f17883:
     dependencies:
       confusing-browser-globals: 1.0.9
-      eslint: 7.4.0
-      eslint-plugin-import: 2.22.0_eslint@7.4.0
+      eslint: 7.5.0
+      eslint-plugin-import: 2.22.0_eslint@7.5.0
       object.assign: 4.1.0
       object.entries: 1.1.2
     dev: true
@@ -2873,13 +2888,13 @@ packages:
       eslint-plugin-import: ^2.21.2
     resolution:
       integrity: sha512-Snswd5oC6nJaevs3nZoLSTvGJBvzTfnBqOIArkf3cbyTyq9UD79wOk8s+RiL6bhca0p/eRO6veczhf6A/7Jy8Q==
-  /eslint-config-airbnb/18.2.0_3be0c35a494db0586615a78644667f4d:
+  /eslint-config-airbnb/18.2.0_75d99aa7b0f7cf59193796fccfb9939f:
     dependencies:
-      eslint: 7.4.0
-      eslint-config-airbnb-base: 14.2.0_c68bb5016e109f58285db45d8cc55073
-      eslint-plugin-import: 2.22.0_eslint@7.4.0
-      eslint-plugin-jsx-a11y: 6.3.1_eslint@7.4.0
-      eslint-plugin-react: 7.20.3_eslint@7.4.0
+      eslint: 7.5.0
+      eslint-config-airbnb-base: 14.2.0_093ea580bf7daeceab51c14c56f17883
+      eslint-plugin-import: 2.22.0_eslint@7.5.0
+      eslint-plugin-jsx-a11y: 6.3.1_eslint@7.5.0
+      eslint-plugin-react: 7.20.3_eslint@7.5.0
       object.assign: 4.1.0
       object.entries: 1.1.2
     dev: true
@@ -2893,28 +2908,31 @@ packages:
       eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
     resolution:
       integrity: sha512-Fz4JIUKkrhO0du2cg5opdyPKQXOI2MvF8KUvN2710nJMT6jaRUpRE2swrJftAjVGL7T1otLM5ieo5RqS1v9Udg==
-  /eslint-config-atomic/0.1.0_eslint@7.4.0+typescript@3.9.7:
+  /eslint-config-atomic/1.3.0_eslint@7.5.0:
     dependencies:
-      '@typescript-eslint/eslint-plugin': 3.7.0_07648823a16e47ce0a9ba6c2bc76331e
-      '@typescript-eslint/parser': 3.7.0_eslint@7.4.0+typescript@3.9.7
-      babel-eslint: 10.1.0_eslint@7.4.0
-      eslint: 7.4.0
-      eslint-config-prettier: 6.11.0_eslint@7.4.0
-      eslint-plugin-coffee: 0.1.12_eslint@7.4.0
+      '@babel/core': 7.10.5
+      '@typescript-eslint/eslint-plugin': 3.7.0_a7d792035c43f2b80bcf395c5516fe5c
+      '@typescript-eslint/parser': 3.7.0_eslint@7.5.0+typescript@3.9.7
+      babel-eslint: 10.1.0_eslint@7.5.0
+      coffeescript: 1.12.7
+      eslint: 7.5.0
+      eslint-config-prettier: 6.11.0_eslint@7.5.0
+      eslint-plugin-coffee: 0.1.12_eslint@7.5.0
       eslint-plugin-json: 2.1.1
       eslint-plugin-only-warn: 1.0.2
-      eslint-plugin-prettier: 3.1.4_eslint@7.4.0+prettier@2.0.5
-      eslint-plugin-yaml: 0.2.0
+      eslint-plugin-prettier: 3.1.4_eslint@7.5.0+prettier@2.0.5
+      eslint-plugin-react: 7.20.3_eslint@7.5.0
+      eslint-plugin-yaml: 0.3.0
       prettier: 2.0.5
+      typescript: 3.9.7
     dev: true
     peerDependencies:
-      eslint: '>= 4'
-      typescript: '*'
+      eslint: '>=7'
     resolution:
-      integrity: sha512-Gmj+RqK1qiF3+Q74mQPd/9XfvLFQcC55hkFzCpT2k7pWGKQL9kquLpYTESfeyJicGXwyFaGiRV4ljux7BWe46w==
-  /eslint-config-prettier/6.11.0_eslint@7.4.0:
+      integrity: sha512-2IF9cQD3gUoWW3IZkQEqSHKFJDi1FqK7V8ntN39xlg7jdyfkoveQWHaD7MHTEkjRPIF0zd7ILEoL0T6iqyYNHA==
+  /eslint-config-prettier/6.11.0_eslint@7.5.0:
     dependencies:
-      eslint: 7.4.0
+      eslint: 7.5.0
       get-stdin: 6.0.0
     dev: true
     hasBin: true
@@ -2938,20 +2956,20 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-6j9xxegbqe8/kZY8cYpcp0xhbK0EgJlg3g9mib3/miLaExuuwc3n5UEfSnU6hWMbT0FAYVvDbL9RrRgpUeQIvA==
-  /eslint-plugin-coffee/0.1.12_eslint@7.4.0:
+  /eslint-plugin-coffee/0.1.12_eslint@7.5.0:
     dependencies:
       axe-core: 3.5.5
       babel-eslint: 7.2.3
       babylon: 7.0.0-beta.47
       coffeescript: 2.5.1
       doctrine: 2.1.0
-      eslint: 7.4.0
-      eslint-config-airbnb: 18.2.0_3be0c35a494db0586615a78644667f4d
-      eslint-config-airbnb-base: 14.2.0_c68bb5016e109f58285db45d8cc55073
-      eslint-plugin-import: 2.22.0_eslint@7.4.0
-      eslint-plugin-jsx-a11y: 6.3.1_eslint@7.4.0
-      eslint-plugin-react: 7.20.3_eslint@7.4.0
-      eslint-plugin-react-native: 3.8.1_eslint@7.4.0
+      eslint: 7.5.0
+      eslint-config-airbnb: 18.2.0_75d99aa7b0f7cf59193796fccfb9939f
+      eslint-config-airbnb-base: 14.2.0_093ea580bf7daeceab51c14c56f17883
+      eslint-plugin-import: 2.22.0_eslint@7.5.0
+      eslint-plugin-jsx-a11y: 6.3.1_eslint@7.5.0
+      eslint-plugin-react: 7.20.3_eslint@7.5.0
+      eslint-plugin-react-native: 3.8.1_eslint@7.5.0
       eslint-scope: 3.7.3
       eslint-utils: 1.4.3
       eslint-visitor-keys: 1.3.0
@@ -2962,14 +2980,14 @@ packages:
       eslint: '>=6.0.0'
     resolution:
       integrity: sha512-ThsCQLHhuxpQrqV7mH5+Xlf6Zt3rrzAgkvoduhdzoIwa8xRLxXUahAW1R3FGT/ci04f+8Z9kqlz52/9QtVWxtw==
-  /eslint-plugin-import/2.22.0_eslint@7.4.0:
+  /eslint-plugin-import/2.22.0_eslint@7.5.0:
     dependencies:
       array-includes: 3.1.1
       array.prototype.flat: 1.2.3
       contains-path: 0.1.0
       debug: 2.6.9
       doctrine: 1.5.0
-      eslint: 7.4.0
+      eslint: 7.5.0
       eslint-import-resolver-node: 0.3.4
       eslint-module-utils: 2.6.0
       has: 1.0.3
@@ -2994,7 +3012,7 @@ packages:
       node: '>=8.10.0'
     resolution:
       integrity: sha512-Ktsab8ij33V2KFLhh4alC1FYztdmbV32DeMZYYUCZm4kKLW1s4DrleKKgtbAHSJsmshCK5QGOZtfyc2r3jCRsg==
-  /eslint-plugin-jsx-a11y/6.3.1_eslint@7.4.0:
+  /eslint-plugin-jsx-a11y/6.3.1_eslint@7.5.0:
     dependencies:
       '@babel/runtime': 7.10.5
       aria-query: 4.2.2
@@ -3004,7 +3022,7 @@ packages:
       axobject-query: 2.2.0
       damerau-levenshtein: 1.0.6
       emoji-regex: 9.0.0
-      eslint: 7.4.0
+      eslint: 7.5.0
       has: 1.0.3
       jsx-ast-utils: 2.4.1
       language-tags: 1.0.5
@@ -3021,9 +3039,9 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-DCG8vuUynDnyfkm0POT50JoE9VJfbtKf+COHn3q79+ExW4dg9ZWM/hsMWX1mjZqxMjQledL/9TmGipon/vwWmw==
-  /eslint-plugin-prettier/3.1.4_eslint@7.4.0+prettier@2.0.5:
+  /eslint-plugin-prettier/3.1.4_eslint@7.5.0+prettier@2.0.5:
     dependencies:
-      eslint: 7.4.0
+      eslint: 7.5.0
       prettier: 2.0.5
       prettier-linter-helpers: 1.0.0
     dev: true
@@ -3038,21 +3056,21 @@ packages:
     dev: true
     resolution:
       integrity: sha512-9aEPf1JEpiTjcFAmmyw8eiIXmcNZOqaZyHO77wgm0/dWfT/oxC1SrIq8ET38pMxHYrcB6Uew+TzUVsBeczF88g==
-  /eslint-plugin-react-native/3.8.1_eslint@7.4.0:
+  /eslint-plugin-react-native/3.8.1_eslint@7.5.0:
     dependencies:
-      eslint: 7.4.0
+      eslint: 7.5.0
       eslint-plugin-react-native-globals: 0.1.2
     dev: true
     peerDependencies:
       eslint: ^3.17.0 || ^4 || ^5 || ^6
     resolution:
       integrity: sha512-6Z4s4nvgFRdda/1s1+uu4a6EMZwEjjJ9Bk/1yBImv0fd9U2CsGu2cUakAtV83cZKhizbWhSouXoaK4JtlScdFg==
-  /eslint-plugin-react/7.20.3_eslint@7.4.0:
+  /eslint-plugin-react/7.20.3_eslint@7.5.0:
     dependencies:
       array-includes: 3.1.1
       array.prototype.flatmap: 1.2.3
       doctrine: 2.1.0
-      eslint: 7.4.0
+      eslint: 7.5.0
       has: 1.0.3
       jsx-ast-utils: 2.4.1
       object.entries: 1.1.2
@@ -3068,13 +3086,13 @@ packages:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7
     resolution:
       integrity: sha512-txbo090buDeyV0ugF3YMWrzLIUqpYTsWSDZV9xLSmExE1P/Kmgg9++PD931r+KEWS66O1c9R4srLVVHmeHpoAg==
-  /eslint-plugin-yaml/0.2.0:
+  /eslint-plugin-yaml/0.3.0:
     dependencies:
       js-yaml: 3.14.0
       jshint: 2.11.1
     dev: true
     resolution:
-      integrity: sha512-ZgIG89/Jucm+r6Qlya/H/EGC+2AJ76u/yr4UIJjAReM6gxo8PE1pOjtRic3bbS11MJjiAINKVqm4k4Fqsg8knw==
+      integrity: sha512-m8CUdHAxaTA6rtjOIXNnifR3mz4sKrLHvtofXedZBW4MK8faHq8VNprQ73KH9uw2qoqOxzeF8TiZVNBxYFdaAg==
   /eslint-scope/3.7.3:
     dependencies:
       esrecurse: 4.2.1
@@ -3115,7 +3133,7 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
-  /eslint/7.4.0:
+  /eslint/7.5.0:
     dependencies:
       '@babel/code-frame': 7.10.4
       ajv: 6.12.3
@@ -3158,7 +3176,7 @@ packages:
       node: ^10.12.0 || >=12.0.0
     hasBin: true
     resolution:
-      integrity: sha512-gU+lxhlPHu45H3JkEGgYhWhkR9wLHHEXC9FbWFnTlEkbKyZKWgWRLgf61E8zWmBuI6g5xKBph9ltg3NtZMVF8g==
+      integrity: sha512-vlUP10xse9sWt9SGRtcr1LAC67BENcQMFeV+w5EvLEoFe3xJ8cF1Skd0msziRx/VMC+72B4DxreCE+OR12OA6Q==
   /espree/7.2.0:
     dependencies:
       acorn: 7.3.1
@@ -4187,6 +4205,38 @@ packages:
     dev: true
     resolution:
       integrity: sha512-nCeAiw37MIMA9w9IXso7bRaLl+c/ef3wnxsoSAlYrzS+Ot0zTG6nU8G/cIfGkqpkjX2wNaIW9RFG0TwIFnG6bA==
+  /jasmine-local-storage/1.1.1_jasmine@3.5.0:
+    dependencies:
+      jasmine: 3.5.0
+    dev: true
+    peerDependencies:
+      jasmine: '>=2 <4'
+    resolution:
+      integrity: sha512-GBqtas3l8SBo39NwjbHuzWhQhgHabq/mVVDabGvKLUXRFH8GtPy4jPKRIMDLWC+q7S+q4M6pIY4OHoVuU8hsCQ==
+  /jasmine-pass/1.1.0_jasmine@3.5.0:
+    dependencies:
+      jasmine: 3.5.0
+    dev: true
+    peerDependencies:
+      jasmine: <4
+    resolution:
+      integrity: sha512-gtsHtIj1zNS/90REIpyDH2HRSW7vFwKMau5A2hcfL/RsSwUiKAS8EdOY1Z67m8giyaUMe7I8O7SzJF2oevCX0A==
+  /jasmine-should-fail/1.1.7_jasmine@3.5.0:
+    dependencies:
+      jasmine: 3.5.0
+    dev: true
+    peerDependencies:
+      jasmine: '>=2 <4'
+    resolution:
+      integrity: sha512-MNtae0/NUAU0OknPcM4cTA04JEXmxMH0+hqZxBjdt4+8LvDqm+oYIQcY70OqpRwVhTTcAyG7HxiPw/4AGlxfgw==
+  /jasmine-unspy/1.1.0_jasmine@3.5.0:
+    dependencies:
+      jasmine: 3.5.0
+    dev: true
+    peerDependencies:
+      jasmine: '>=2 <4'
+    resolution:
+      integrity: sha512-TlddbVtz9FiVmgz4qw89LZj2K8Oq3/ojGfA4L8NDiJJEJ9OuAk6Y+OpVJZTxvoqIn4tWfV/9CES8rpgku9POeQ==
   /jasmine/3.5.0:
     dependencies:
       glob: 7.1.6
@@ -4195,6 +4245,40 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-DYypSryORqzsGoMazemIHUfMkXM7I7easFaxAvNM3Mr6Xz3Fy36TupTrAOxZWN8MVKEU5xECv22J4tUQf3uBzQ==
+  /jasmine2-atom-matchers/1.1.4_jasmine@3.5.0:
+    dependencies:
+      jasmine: 3.5.0
+      jquery: 3.5.1
+      underscore-plus: 1.7.0
+    dev: true
+    peerDependencies:
+      jasmine: '>=2 <4'
+    resolution:
+      integrity: sha512-HBhy4CZAo5nxGCUXuFeah24/5ZzJVS7tedfRrgoikg+OQcuKVJHcg5Jv8e+Luw7nSbD8bN3Wq8RWBpPMqtdNrQ==
+  /jasmine2-focused/1.1.1_jasmine@3.5.0:
+    dependencies:
+      jasmine: 3.5.0
+    dev: true
+    peerDependencies:
+      jasmine: '>=2 <4'
+    resolution:
+      integrity: sha512-2NnQD+Lwqu/0RIVentOiDtdsjhP/4jJooG88rQC3A6lKHxnm2d9Q/wGbQBDZlIA7bDUrQpuHZ6d2A/lACLwfhQ==
+  /jasmine2-json/1.1.1_jasmine@3.5.0:
+    dependencies:
+      jasmine: 3.5.0
+    dev: true
+    peerDependencies:
+      jasmine: '>=2 <4'
+    resolution:
+      integrity: sha512-D8dFHVDsDZpqgYK4eR3SYkMXypRjK0MpnHzVkO38ByXe7R3QaZDsoRt3Kh4rqI1U4iq9hkxHuKr+gy+OzuL+8g==
+  /jasmine2-tagged/1.1.1_jasmine@3.5.0:
+    dependencies:
+      jasmine: 3.5.0
+    dev: true
+    peerDependencies:
+      jasmine: '>=2 <4'
+    resolution:
+      integrity: sha512-PK/83f9hBI6R/gGZ8zEYHt4OUtZu3xpcoUFICMBVsdbbanrhCCNC3EkWldIQgvuSHaUMhVptXAihWjNJI3uiRw==
   /jest-worker/26.1.0:
     dependencies:
       merge-stream: 2.0.0
@@ -4208,6 +4292,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-o6vicYryQaKykE+EpiWXDzia4yo=
+  /jquery/3.5.1:
+    dev: true
+    resolution:
+      integrity: sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
   /js-tokens/3.0.2:
     dev: true
     resolution:
@@ -6824,16 +6912,16 @@ specifiers:
   '@babel/core': 7.10.5
   '@types/atom': latest
   '@types/jasmine': ^3.5.11
-  '@types/node': ^14.0.23
-  atom-jasmine3-test-runner: ^4.4.8
+  '@types/node': ^14.0.24
+  atom-jasmine3-test-runner: ^5.0.0
   babel-preset-atomic: latest
   build-commit: latest
-  eslint: 7.4.0
-  eslint-config-atomic: ^0.1.0
+  eslint: 7.5.0
+  eslint-config-atomic: ^1.3.0
   jasmine: ^3.5.0
   npm-check-updates: latest
   prettier: ^2.0.5
-  rollup: ^2.21.0
+  rollup: ^2.22.2
   rollup-plugin-atomic: ^1.0.2
   shx: latest
   tslib: ^2.0.0
