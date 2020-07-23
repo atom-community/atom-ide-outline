@@ -71,7 +71,7 @@ function addObservers() {
       // clean up if the editor editor is closed
       activeEditorDisposeSubscription = editor.onDidDestroy(() => {
         setStatus("noEditor");
-      })
+      });
     }
   );
   subscriptions.add(activeTextEditorObserver);
