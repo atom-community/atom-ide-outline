@@ -1,28 +1,25 @@
 ## [1.6.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.1...v1.6.2) (2020-07-21)
 
-
 ### Bug Fixes
 
-* indent when level is 0 ([197495c](https://github.com/atom-ide-community/atom-ide-outline/commit/197495c8579d05ade88eea3416955a68452885f8))
+- indent when level is 0 ([197495c](https://github.com/atom-ide-community/atom-ide-outline/commit/197495c8579d05ade88eea3416955a68452885f8))
 
 ## [1.6.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.0...v1.6.1) (2020-07-21)
 
-
 ### Bug Fixes
 
-* detect given API automatically ([29b8ff5](https://github.com/atom-ide-community/atom-ide-outline/commit/29b8ff5299848684d0f00f91fd2ab40de9871db6))
+- detect given API automatically ([29b8ff5](https://github.com/atom-ide-community/atom-ide-outline/commit/29b8ff5299848684d0f00f91fd2ab40de9871db6))
 
 # [1.6.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.5.1...v1.6.0) (2020-07-21)
 
-
 ### Features
 
-* fold button ([6016cd8](https://github.com/atom-ide-community/atom-ide-outline/commit/6016cd8c7c8ef33a4e424467d3bac205a2cfc55c))
-* fold class ([028256a](https://github.com/atom-ide-community/atom-ide-outline/commit/028256af9c25b0d075d85315498c4d084b9342c2))
-* padding based on having a child ([fadc7d6](https://github.com/atom-ide-community/atom-ide-outline/commit/fadc7d6558a97a52eb3200385e0df9c26f67f4e1))
-* return kindClass ([9d67893](https://github.com/atom-ide-community/atom-ide-outline/commit/9d67893153d7f6e541326eb55b733d348118483e))
-* styleByType for all classes ([a732e26](https://github.com/atom-ide-community/atom-ide-outline/commit/a732e26afa2ebeb0159e596778cbe6b1a42102b6))
-* update screenshot ([80b12de](https://github.com/atom-ide-community/atom-ide-outline/commit/80b12de9a11eab75160dddd1fb4d80aa6fb399e2))
+- fold button ([6016cd8](https://github.com/atom-ide-community/atom-ide-outline/commit/6016cd8c7c8ef33a4e424467d3bac205a2cfc55c))
+- fold class ([028256a](https://github.com/atom-ide-community/atom-ide-outline/commit/028256af9c25b0d075d85315498c4d084b9342c2))
+- padding based on having a child ([fadc7d6](https://github.com/atom-ide-community/atom-ide-outline/commit/fadc7d6558a97a52eb3200385e0df9c26f67f4e1))
+- return kindClass ([9d67893](https://github.com/atom-ide-community/atom-ide-outline/commit/9d67893153d7f6e541326eb55b733d348118483e))
+- styleByType for all classes ([a732e26](https://github.com/atom-ide-community/atom-ide-outline/commit/a732e26afa2ebeb0159e596778cbe6b1a42102b6))
+- update screenshot ([80b12de](https://github.com/atom-ide-community/atom-ide-outline/commit/80b12de9a11eab75160dddd1fb4d80aa6fb399e2))
 
 ## [1.5.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.5.0...v1.5.1) (2020-07-21)
 

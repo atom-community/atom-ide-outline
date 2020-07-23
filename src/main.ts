@@ -6,7 +6,11 @@ export { statuses } from "./statuses"; // for spec
 import { statuses } from "./statuses";
 
 let subscriptions: CompositeDisposable;
+
+// disposables returned inside the oberservers
 let activeEditorContentUpdateSubscription: Disposable | null;
+let activeEditorDisposeSubscription: Disposable | null;
+
 let view: OutlineView;
 export const outlineProviderRegistry = new ProviderRegistry();
 
@@ -53,12 +57,21 @@ function addObservers() {
       if (!editor) {
         return;
       }
-      activeEditorContentUpdateSubscription?.dispose?.(); // dispose old content
+      // dispose the old subscriptions
+      activeEditorContentUpdateSubscription?.dispose?.();
+      activeEditorDisposeSubscription?.dispose?.();
+
       await getOutline(editor); // initial outline
-      // changing of outline by changing the cursor
+
+      // update outline if cursor changes position
       activeEditorContentUpdateSubscription = editor.onDidChangeCursorPosition(
         () => getOutline(editor)
       );
+
+      // clean up if the editor editor is closed
+      activeEditorDisposeSubscription = editor.onDidDestroy(() => {
+        setStatus("noEditor");
+      });
     }
   );
   subscriptions.add(activeTextEditorObserver);
