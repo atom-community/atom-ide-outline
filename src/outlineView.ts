@@ -235,15 +235,15 @@ export function selectAtCursorLine({
   if (focusedElms !== undefined) {
     for (const elm of focusedElms) {
       elm.toggleAttribute("cursorOn", true);
-      elm.scrollIntoView();
+
+      const level = parseInt(elm.getAttribute("level") ?? "0", 10);
+      if (level <= 1) {
+        // if level is 1 or 0, scroll to itslef
+        elm.scrollIntoView();
+      } else {
+        // otherwise scroll to its parent entry
+        elm.parentElement?.parentElement?.scrollIntoView();
+      }
     }
-    // TODO does not work ?!
-    // // scroll to parrent or itself
-    // const parrent = focusedElms[0].parentNode
-    // if (parrent) {
-    //   parrent.scrollIntoView()
-    // } else {
-    //   focusedElms[0].scrollIntoView()
-    // }
   }
 }
