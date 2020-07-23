@@ -57,13 +57,13 @@ function addObservers() {
       if (!editor) {
         return;
       }
-      // dispose old content
+      // dispose the old subscriptions
       activeEditorContentUpdateSubscription?.dispose?.();
       activeEditorDisposeSubscription?.dispose?.();
 
       await getOutline(editor); // initial outline
 
-      // changing of outline by changing the cursor
+      // update outline if cursor changes position
       activeEditorContentUpdateSubscription = editor.onDidChangeCursorPosition(
         () => getOutline(editor)
       );
