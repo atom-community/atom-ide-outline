@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.2...v1.6.3) (2020-07-23)
+
+
+### Bug Fixes
+
+* clean up if the editor is closed ([1ae25a3](https://github.com/atom-ide-community/atom-ide-outline/commit/1ae25a325e1d901c32c49f4bfd419cfe1c96900d))
+
 ## [1.6.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.1...v1.6.2) (2020-07-21)
 
 ### Bug Fixes
