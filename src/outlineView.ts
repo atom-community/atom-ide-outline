@@ -232,7 +232,15 @@ export function selectAtCursorLine({newBufferPosition}: CursorPositionChangedEve
     if (focusedElms) {
       for (const elm of focusedElms) {
         elm.toggleAttribute("cursorOn", true)
-        elm.scrollIntoView();
+        elm.scrollIntoView()
       }
+      // TODO does not work ?!
+      // // scroll to parrent or itself
+      // const parrent = focusedElms[0].parentNode
+      // if (parrent) {
+      //   parrent.scrollIntoView()
+      // } else {
+      //   focusedElms[0].scrollIntoView()
+      // }
     }
 }
