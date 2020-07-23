@@ -221,6 +221,9 @@ let focusedElms: HTMLElement[] | undefined; // cache for focused elements
 export function selectAtCursorLine({
   newBufferPosition,
 }: CursorPositionChangedEvent) {
+
+  // TODO use range of start and end instead of just the line number
+
   // remove old cursorOn attribue
   if (focusedElms !== undefined) {
     for (const elm of focusedElms) {
@@ -237,8 +240,11 @@ export function selectAtCursorLine({
       elm.toggleAttribute("cursorOn", true);
 
       const level = parseInt(elm.getAttribute("level") ?? "0", 10);
+
+      // TODO this works for the LSPs that their 0 level is the file name or module.
+      // For json for example, they do not have such a thing, and so it scrolls to the element itself
       if (level <= 1) {
-        // if level is 1 or 0, scroll to itslef
+        // if level is 1 or 0, scroll to itself
         elm.scrollIntoView();
       } else {
         // otherwise scroll to its parent entry
