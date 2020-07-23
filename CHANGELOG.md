@@ -1,3 +1,16 @@
+# [1.8.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.7.0...v1.8.0) (2020-07-23)
+
+
+### Features
+
+* add selectAtCursorLine callback to the observer ([505b884](https://github.com/atom-ide-community/atom-ide-outline/commit/505b88403ac2200e93fae6d42e5215d81e81a948))
+* callback for scrolling and highlighting the element that the cursor is on ([850ce49](https://github.com/atom-ide-community/atom-ide-outline/commit/850ce49f9bc340613fa1ded6cc0bc1cff999b8ff))
+* CSS highlight when the editor cursor is on them ([cc268e2](https://github.com/atom-ide-community/atom-ide-outline/commit/cc268e221dd97d1d0730e61c0d309b06a14a008d))
+* PointToElementsMap ([c03e4c6](https://github.com/atom-ide-community/atom-ide-outline/commit/c03e4c6e1127483eb95ce2e6f0f8a29d09066bbb))
+* scroll to element or its parent ([569545d](https://github.com/atom-ide-community/atom-ide-outline/commit/569545d1d1b16b28d8b6d1d262c39767bee9abf8))
+* store level in the element as an attribute ([faa779c](https://github.com/atom-ide-community/atom-ide-outline/commit/faa779c286a64027244acd89d207a3c62d85a403))
+* update the preview ([1bf8d69](https://github.com/atom-ide-community/atom-ide-outline/commit/1bf8d69f292ced5abdef79d61d9b95235dfdb680))
+
 # [1.7.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.3...v1.7.0) (2020-07-23)
 
 ### Features
