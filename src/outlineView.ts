@@ -220,7 +220,7 @@ export function selectAtCursorLine({
   newBufferPosition,
 }: CursorPositionChangedEvent) {
   // remove old cursorOn attribue
-  if (focusedElms) {
+  if (focusedElms !== undefined) {
     for (const elm of focusedElms) {
       elm.toggleAttribute("cursorOn", false);
     }
@@ -230,7 +230,7 @@ export function selectAtCursorLine({
   const cursorPoint = newBufferPosition.row;
   focusedElms = PointToElementsMap.get(cursorPoint);
 
-  if (focusedElms) {
+  if (focusedElms !== undefined) {
     for (const elm of focusedElms) {
       elm.toggleAttribute("cursorOn", true);
       elm.scrollIntoView();
