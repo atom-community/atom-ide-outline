@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { TextEditor, Point, CursorPositionChangedEvent } from "atom";
 
 export class OutlineView {
   public element: HTMLDivElement;
@@ -60,9 +61,13 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element;
 }
 
+const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
+
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   entries.forEach((item) => {
     const symbol = document.createElement("li");
+
+    symbol.setAttribute("level", `${level}`); // store level in the element
 
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     const labelElement = document.createElement("span");
@@ -73,6 +78,15 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     labelElement.prepend(iconElement);
 
     symbol.append(labelElement);
+
+    // update start position => elements map
+    const elms = PointToElementsMap.get(item.startPosition.row);
+    if (elms !== undefined) {
+      elms.push(symbol);
+      PointToElementsMap.set(item.startPosition.row, elms);
+    } else {
+      PointToElementsMap.set(item.startPosition.row, [symbol]);
+    }
 
     // Cursor reposition on click
     symbol.addEventListener("click", () => {
@@ -199,4 +213,43 @@ function createFoldButton(kindClass: string, childrenList: HTMLUListElement) {
   });
 
   return foldButton;
+}
+
+let focusedElms: HTMLElement[] | undefined; // cache for focused elements
+
+// callback for scrolling and highlighting the element that the cursor is on
+export function selectAtCursorLine({
+  newBufferPosition,
+}: CursorPositionChangedEvent) {
+
+  // TODO use range of start and end instead of just the line number
+
+  // remove old cursorOn attribue
+  if (focusedElms !== undefined) {
+    for (const elm of focusedElms) {
+      elm.toggleAttribute("cursorOn", false);
+    }
+  }
+
+  // add new cursorOn attribue
+  const cursorPoint = newBufferPosition.row;
+  focusedElms = PointToElementsMap.get(cursorPoint);
+
+  if (focusedElms !== undefined) {
+    for (const elm of focusedElms) {
+      elm.toggleAttribute("cursorOn", true);
+
+      const level = parseInt(elm.getAttribute("level") ?? "0", 10);
+
+      // TODO this works for the LSPs that their 0 level is the file name or module.
+      // For json for example, they do not have such a thing, and so it scrolls to the element itself
+      if (level <= 1) {
+        // if level is 1 or 0, scroll to itself
+        elm.scrollIntoView();
+      } else {
+        // otherwise scroll to its parent entry
+        elm.parentElement?.parentElement?.scrollIntoView();
+      }
+    }
+  }
 }

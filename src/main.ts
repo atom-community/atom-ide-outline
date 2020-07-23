@@ -1,5 +1,5 @@
 import { CompositeDisposable, Disposable, TextEditor } from "atom";
-import { OutlineView } from "./outlineView";
+import { OutlineView, selectAtCursorLine } from "./outlineView";
 import { ProviderRegistry } from "./providerRegistry";
 
 export { statuses } from "./statuses"; // for spec
@@ -63,9 +63,15 @@ function addObservers() {
 
       await getOutline(editor); // initial outline
 
+      // update the outline if editor stops changing
+      activeEditorContentUpdateSubscription = editor.onDidStopChanging(() =>
+        getOutline(editor)
+      );
+
       // update outline if cursor changes position
       activeEditorContentUpdateSubscription = editor.onDidChangeCursorPosition(
-        () => getOutline(editor)
+        (cursorPositionChangedEvent) =>
+          selectAtCursorLine(cursorPositionChangedEvent)
       );
 
       // clean up if the editor editor is closed
