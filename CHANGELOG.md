@@ -1,17 +1,15 @@
 # [1.7.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.3...v1.7.0) (2020-07-23)
 
-
 ### Features
 
-* change fold button opacity based on focus ([6cd1fe9](https://github.com/atom-ide-community/atom-ide-outline/commit/6cd1fe984a296fcf3ab2eb55e63b27ac895f7ce8))
-* darker color for fold buttons ([6e0bc91](https://github.com/atom-ide-community/atom-ide-outline/commit/6e0bc9101234cc29abbb510f464d2bbcc9683295))
+- change fold button opacity based on focus ([6cd1fe9](https://github.com/atom-ide-community/atom-ide-outline/commit/6cd1fe984a296fcf3ab2eb55e63b27ac895f7ce8))
+- darker color for fold buttons ([6e0bc91](https://github.com/atom-ide-community/atom-ide-outline/commit/6e0bc9101234cc29abbb510f464d2bbcc9683295))
 
 ## [1.6.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.2...v1.6.3) (2020-07-23)
 
-
 ### Bug Fixes
 
-* clean up if the editor is closed ([1ae25a3](https://github.com/atom-ide-community/atom-ide-outline/commit/1ae25a325e1d901c32c49f4bfd419cfe1c96900d))
+- clean up if the editor is closed ([1ae25a3](https://github.com/atom-ide-community/atom-ide-outline/commit/1ae25a325e1d901c32c49f4bfd419cfe1c96900d))
 
 ## [1.6.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.6.1...v1.6.2) (2020-07-21)
 

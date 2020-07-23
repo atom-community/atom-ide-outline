@@ -64,13 +64,14 @@ function addObservers() {
       await getOutline(editor); // initial outline
 
       // update the outline if editor stops changing
-      activeEditorContentUpdateSubscription = editor.onDidStopChanging(
-        () => getOutline(editor)
+      activeEditorContentUpdateSubscription = editor.onDidStopChanging(() =>
+        getOutline(editor)
       );
 
       // update outline if cursor changes position
       activeEditorContentUpdateSubscription = editor.onDidChangeCursorPosition(
-        (cursorPositionChangedEvent) => selectAtCursorLine(cursorPositionChangedEvent)
+        (cursorPositionChangedEvent) =>
+          selectAtCursorLine(cursorPositionChangedEvent)
       );
 
       // clean up if the editor editor is closed

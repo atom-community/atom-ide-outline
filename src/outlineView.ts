@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {TextEditor, Point, CursorPositionChangedEvent} from "atom"
+import { TextEditor, Point, CursorPositionChangedEvent } from "atom";
 
 export class OutlineView {
   public element: HTMLDivElement;
@@ -61,7 +61,7 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element;
 }
 
-const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map() // TODO Point to element
+const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
 
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   entries.forEach((item) => {
@@ -78,12 +78,12 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     symbol.append(labelElement);
 
     // update start position => elements map
-    const elms = PointToElementsMap.get(item.startPosition.row)
-    if (elms !== undefined ) {
-      elms.push(symbol)
-      PointToElementsMap.set(item.startPosition.row, elms)
+    const elms = PointToElementsMap.get(item.startPosition.row);
+    if (elms !== undefined) {
+      elms.push(symbol);
+      PointToElementsMap.set(item.startPosition.row, elms);
     } else {
-      PointToElementsMap.set(item.startPosition.row, [symbol])
+      PointToElementsMap.set(item.startPosition.row, [symbol]);
     }
 
     // Cursor reposition on click
@@ -213,34 +213,35 @@ function createFoldButton(kindClass: string, childrenList: HTMLUListElement) {
   return foldButton;
 }
 
-
-let focusedElms: HTMLElement[] | undefined // cache for focused elements
+let focusedElms: HTMLElement[] | undefined; // cache for focused elements
 
 // callback for scrolling and highlighting the element that the cursor is on
-export function selectAtCursorLine({newBufferPosition}: CursorPositionChangedEvent) {
-    // remove old cursorOn attribue
-    if (focusedElms) {
-      for (const elm of focusedElms) {
-        elm.toggleAttribute("cursorOn", false)
-      }
+export function selectAtCursorLine({
+  newBufferPosition,
+}: CursorPositionChangedEvent) {
+  // remove old cursorOn attribue
+  if (focusedElms) {
+    for (const elm of focusedElms) {
+      elm.toggleAttribute("cursorOn", false);
     }
+  }
 
-    // add new cursorOn attribue
-    const cursorPoint = newBufferPosition.row
-    focusedElms = PointToElementsMap.get(cursorPoint)
+  // add new cursorOn attribue
+  const cursorPoint = newBufferPosition.row;
+  focusedElms = PointToElementsMap.get(cursorPoint);
 
-    if (focusedElms) {
-      for (const elm of focusedElms) {
-        elm.toggleAttribute("cursorOn", true)
-        elm.scrollIntoView()
-      }
-      // TODO does not work ?!
-      // // scroll to parrent or itself
-      // const parrent = focusedElms[0].parentNode
-      // if (parrent) {
-      //   parrent.scrollIntoView()
-      // } else {
-      //   focusedElms[0].scrollIntoView()
-      // }
+  if (focusedElms) {
+    for (const elm of focusedElms) {
+      elm.toggleAttribute("cursorOn", true);
+      elm.scrollIntoView();
     }
+    // TODO does not work ?!
+    // // scroll to parrent or itself
+    // const parrent = focusedElms[0].parentNode
+    // if (parrent) {
+    //   parrent.scrollIntoView()
+    // } else {
+    //   focusedElms[0].scrollIntoView()
+    // }
+  }
 }
