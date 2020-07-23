@@ -212,3 +212,27 @@ function createFoldButton(kindClass: string, childrenList: HTMLUListElement) {
 
   return foldButton;
 }
+
+
+let focusedElms: HTMLElement[] | undefined // cache for focused elements
+
+// callback for scrolling and highlighting the element that the cursor is on
+export function selectAtCursorLine({newBufferPosition}: CursorPositionChangedEvent) {
+    // remove old cursorOn attribue
+    if (focusedElms) {
+      for (const elm of focusedElms) {
+        elm.toggleAttribute("cursorOn", false)
+      }
+    }
+
+    // add new cursorOn attribue
+    const cursorPoint = newBufferPosition.row
+    focusedElms = PointToElementsMap.get(cursorPoint)
+
+    if (focusedElms) {
+      for (const elm of focusedElms) {
+        elm.toggleAttribute("cursorOn", true)
+        elm.scrollIntoView();
+      }
+    }
+}
