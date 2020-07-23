@@ -37,6 +37,7 @@
     border-radius: 2px;
     height: var(--editor-line-height);
     width: 14px;
+    opacity: 0.5;
   }
 
   .icon {
@@ -55,7 +56,11 @@
     }
 
     .fold-type-@{type} {
-      background-color: @color;
+      background-color: darken(@color, 10%);
+
+      &:focus {
+        opacity: 1;
+      }
     }
   }
 
