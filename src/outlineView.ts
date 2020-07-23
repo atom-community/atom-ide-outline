@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import {TextEditor, Point, CursorPositionChangedEvent} from "atom"
 
 export class OutlineView {
   public element: HTMLDivElement;
@@ -60,6 +61,8 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element;
 }
 
+const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map() // TODO Point to element
+
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   entries.forEach((item) => {
     const symbol = document.createElement("li");
@@ -73,6 +76,15 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     labelElement.prepend(iconElement);
 
     symbol.append(labelElement);
+
+    // update start position => elements map
+    const elms = PointToElementsMap.get(item.startPosition.row)
+    if (elms !== undefined ) {
+      elms.push(symbol)
+      PointToElementsMap.set(item.startPosition.row, elms)
+    } else {
+      PointToElementsMap.set(item.startPosition.row, [symbol])
+    }
 
     // Cursor reposition on click
     symbol.addEventListener("click", () => {
