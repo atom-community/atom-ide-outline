@@ -243,13 +243,14 @@ export function selectAtCursorLine({
 
       // TODO this works for the LSPs that their 0 level is the file name or module.
       // For json for example, they do not have such a thing, and so it scrolls to the element itself
-      if (level <= 1) {
-        // if level is 1 or 0, scroll to itself
-        elm.scrollIntoView();
-      } else {
-        // otherwise scroll to its parent entry
-        elm.parentElement?.parentElement?.scrollIntoView();
-      }
+      elm.scrollIntoView();
+      // if (level <= 1) {
+      //   // if level is 1 or 0, scroll to itself
+      //   elm.scrollIntoView();
+      // } else {
+      //   // otherwise scroll to its parent entry
+      //   elm.parentElement?.parentElement?.scrollIntoView();
+      // }
     }
   }
 }
