@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.8.0...v1.8.1) (2020-07-24)
+
+
+### Bug Fixes
+
+* always scroll to itself ([fbed5d2](https://github.com/atom-ide-community/atom-ide-outline/commit/fbed5d2553f6e6bc01de6992a382204dac18d18a))
+
 # [1.8.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.7.0...v1.8.0) (2020-07-23)
 
 
