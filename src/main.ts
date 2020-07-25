@@ -23,7 +23,7 @@ export function activate() {
 }
 
 export function deactivate() {
-  onDidCompositeDisposable?.dispose?.()
+  onDidCompositeDisposable?.dispose?.();
   subscriptions.dispose();
   view.destroy();
 }
@@ -59,30 +59,24 @@ function addObservers() {
         return;
       }
       // dispose the old subscriptions
-      onDidCompositeDisposable?.dispose?.()
+      onDidCompositeDisposable?.dispose?.();
 
       await getOutline(editor); // initial outline
 
       onDidCompositeDisposable!.add(
-
         // update the outline if editor stops changing
-          editor.onDidStopChanging(() =>
-          getOutline(editor)
-        ),
+        editor.onDidStopChanging(() => getOutline(editor)),
 
         // update outline if cursor changes position
-        editor.onDidChangeCursorPosition(
-          (cursorPositionChangedEvent) =>
-            selectAtCursorLine(cursorPositionChangedEvent)
+        editor.onDidChangeCursorPosition((cursorPositionChangedEvent) =>
+          selectAtCursorLine(cursorPositionChangedEvent)
         ),
 
         // clean up if the editor editor is closed
         editor.onDidDestroy(() => {
-          setStatus("noEditor")
-        }),
-        
-      )
-
+          setStatus("noEditor");
+        })
+      );
     }
   );
   subscriptions.add(activeTextEditorObserver);
