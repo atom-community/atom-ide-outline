@@ -23,6 +23,7 @@ export function activate() {
 }
 
 export function deactivate() {
+  onDidCompositeDisposable?.dispose?.();
   subscriptions.dispose();
   view.destroy();
 }
@@ -48,38 +49,34 @@ function addCommands() {
 }
 
 // disposables returned inside the oberservers
-let onDidStopChangeDisposable: Disposable | null;
-let onDidChangeCursorPositionDisposable: Disposable | null;
-let onDidDestroyDispoable: Disposable | null;
+let onDidCompositeDisposable: CompositeDisposable | null;
 
 function addObservers() {
+  onDidCompositeDisposable = new CompositeDisposable();
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
     async (editor?: TextEditor) => {
       if (!editor) {
         return;
       }
       // dispose the old subscriptions
-      onDidStopChangeDisposable?.dispose?.();
-      onDidChangeCursorPositionDisposable?.dispose?.();
-      onDidDestroyDispoable?.dispose?.();
+      onDidCompositeDisposable?.dispose?.();
 
       await getOutline(editor); // initial outline
 
-      // update the outline if editor stops changing
-      onDidStopChangeDisposable = editor.onDidStopChanging(() =>
-        getOutline(editor)
-      );
+      onDidCompositeDisposable!.add(
+        // update the outline if editor stops changing
+        editor.onDidStopChanging(() => getOutline(editor)),
 
-      // update outline if cursor changes position
-      onDidChangeCursorPositionDisposable = editor.onDidChangeCursorPosition(
-        (cursorPositionChangedEvent) =>
+        // update outline if cursor changes position
+        editor.onDidChangeCursorPosition((cursorPositionChangedEvent) =>
           selectAtCursorLine(cursorPositionChangedEvent)
-      );
+        ),
 
-      // clean up if the editor editor is closed
-      onDidDestroyDispoable = editor.onDidDestroy(() => {
-        setStatus("noEditor");
-      });
+        // clean up if the editor editor is closed
+        editor.onDidDestroy(() => {
+          setStatus("noEditor");
+        })
+      );
     }
   );
   subscriptions.add(activeTextEditorObserver);
