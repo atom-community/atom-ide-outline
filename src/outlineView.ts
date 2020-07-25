@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { TextEditor, Point, CursorPositionChangedEvent } from "atom";
 
+type OutlineEntry = any; // TODO type
+type OutlineTree = any; // TODO type
+
 export class OutlineView {
   public element: HTMLDivElement;
   constructor() {
@@ -20,7 +23,13 @@ export class OutlineView {
     return "Outline";
   }
 
-  setOutline({ tree: outlineTree, editor }) {
+  setOutline({
+    tree: outlineTree,
+    editor,
+  }: {
+    tree: OutlineTree;
+    editor: TextEditor;
+  }) {
     const outlineViewElement = this.getElement();
     outlineViewElement.innerHTML = "";
 
@@ -38,7 +47,7 @@ export class OutlineView {
     outlineViewElement.innerHTML = "";
   }
 
-  presentStatus(status) {
+  presentStatus(status: { title: string; description: string }) {
     this.clearOutline();
 
     const statusElement = status && generateStatusElement(status);
@@ -63,19 +72,28 @@ function generateStatusElement(status: { title: string; description: string }) {
 
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
 
-function addOutlineEntries({ parent, entries, editor, level = 0 }) {
-
+function addOutlineEntries({
+  parent,
+  entries,
+  editor,
+  level = 0,
+}: {
+  parent: HTMLUListElement;
+  entries: OutlineTree;
+  editor: TextEditor;
+  level?: number;
+}) {
   // NOTE: this function is called multiple times with each update in an editor!
   // a few of the calls is slow ~1-100ms
 
   // calculate indent length
   const tabLength = editor.getTabLength();
-  const indentRatio = 12 * (typeof tabLength === 'number' ? tabLength : 4);
+  const indentRatio = 12 * (typeof tabLength === "number" ? tabLength : 4);
 
   // sort entries
   // TIME 0.1ms
   if (atom.config.get("atom-ide-outline.sortEntries")) {
-    entries.sort((e1, e2) => {
+    entries.sort((e1: OutlineEntry, e2: OutlineEntry) => {
       const rowCompare = e1.startPosition.row - e2.startPosition.row;
       if (rowCompare === 0) {
         // compare based on column if on the same row
@@ -85,7 +103,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     });
   }
 
-  entries.forEach((item) => {
+  entries.forEach((item: OutlineEntry) => {
     const symbol = document.createElement("li");
 
     // symbol.setAttribute("level", `${level}`); // store level in the element
@@ -114,9 +132,12 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     // TIME: 0-0.1ms
     symbol.addEventListener("click", () => {
       const editorPane = atom.workspace.paneForItem(editor);
+      if (!editorPane) {
+        return;
+      }
       editorPane.activate();
 
-      editor.cursors[0].setBufferPosition(item.startPosition, {
+      editor.getCursors()[0].setBufferPosition(item.startPosition, {
         autoscroll: true,
       });
     });
@@ -256,7 +277,6 @@ let focusedElms: HTMLElement[] | undefined; // cache for focused elements
 export function selectAtCursorLine({
   newBufferPosition,
 }: CursorPositionChangedEvent) {
-
   // TIME: ~0.2-0.3ms
   // TODO use range of start and end instead of just the line number
 
