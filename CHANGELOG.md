@@ -1,27 +1,24 @@
 ## [1.9.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.2...v1.9.3) (2020-07-25)
 
-
 ### Bug Fixes
 
-* correct compensation for foldButtonWidth ([0298d12](https://github.com/atom-ide-community/atom-ide-outline/commit/0298d1234359332d3ea27e598894041fc606041f))
-* set default indentRatio to 24 ([a9b2836](https://github.com/atom-ide-community/atom-ide-outline/commit/a9b28363ead97c74ac43e54f1ae6621218d7cf5c))
-* use 0 px for parents with level 0 ([5e50ace](https://github.com/atom-ide-community/atom-ide-outline/commit/5e50acea097bc9a4b7d214ace5f6054b7ae7e491))
-* use tabLength to determine the indentLength ([43cb28e](https://github.com/atom-ide-community/atom-ide-outline/commit/43cb28ef654e7b575438b064654cec50c767b45e))
+- correct compensation for foldButtonWidth ([0298d12](https://github.com/atom-ide-community/atom-ide-outline/commit/0298d1234359332d3ea27e598894041fc606041f))
+- set default indentRatio to 24 ([a9b2836](https://github.com/atom-ide-community/atom-ide-outline/commit/a9b28363ead97c74ac43e54f1ae6621218d7cf5c))
+- use 0 px for parents with level 0 ([5e50ace](https://github.com/atom-ide-community/atom-ide-outline/commit/5e50acea097bc9a4b7d214ace5f6054b7ae7e491))
+- use tabLength to determine the indentLength ([43cb28e](https://github.com/atom-ide-community/atom-ide-outline/commit/43cb28ef654e7b575438b064654cec50c767b45e))
 
 ## [1.9.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.1...v1.9.2) (2020-07-25)
 
-
 ### Bug Fixes
 
-* disable unused level ([46ab6c0](https://github.com/atom-ide-community/atom-ide-outline/commit/46ab6c0035958ebc7f37ab9b272abfecf78ac957))
-* use CompositeDisposable ([12ea6f1](https://github.com/atom-ide-community/atom-ide-outline/commit/12ea6f1ce21106fbd47e0c3b02ac7fd5357d72dd))
+- disable unused level ([46ab6c0](https://github.com/atom-ide-community/atom-ide-outline/commit/46ab6c0035958ebc7f37ab9b272abfecf78ac957))
+- use CompositeDisposable ([12ea6f1](https://github.com/atom-ide-community/atom-ide-outline/commit/12ea6f1ce21106fbd47e0c3b02ac7fd5357d72dd))
 
 ## [1.9.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.0...v1.9.1) (2020-07-25)
 
-
 ### Bug Fixes
 
-* disposable leak fix ([dd70b30](https://github.com/atom-ide-community/atom-ide-outline/commit/dd70b30f02bfb6c89026331ae5bdcd7599cc0918))
+- disposable leak fix ([dd70b30](https://github.com/atom-ide-community/atom-ide-outline/commit/dd70b30f02bfb6c89026331ae5bdcd7599cc0918))
 
 # [1.9.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.8.1...v1.9.0) (2020-07-25)
 
