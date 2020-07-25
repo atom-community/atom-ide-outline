@@ -64,6 +64,19 @@ function generateStatusElement(status: { title: string; description: string }) {
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
 
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
+
+  // sort entries
+  if (atom.config.get("atom-ide-outline.sortEntries")) {
+    entries.sort((e1, e2) => {
+      const rowCompare = e1.startPosition.row - e2.startPosition.row
+      if (rowCompare === 0 ) {
+        // compare based on column if on the same row
+        return e1.startPosition.column - e1.startPosition.column
+      }
+      return rowCompare
+    })
+  }
+
   entries.forEach((item) => {
     const symbol = document.createElement("li");
 
