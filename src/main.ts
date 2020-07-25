@@ -7,10 +7,6 @@ import { statuses } from "./statuses";
 
 let subscriptions: CompositeDisposable;
 
-// disposables returned inside the oberservers
-let activeEditorContentUpdateSubscription: Disposable | null;
-let activeEditorDisposeSubscription: Disposable | null;
-
 let view: OutlineView;
 export const outlineProviderRegistry = new ProviderRegistry();
 
@@ -51,6 +47,11 @@ function addCommands() {
   subscriptions.add(outlineToggle);
 }
 
+// disposables returned inside the oberservers
+let onDidStopChangeDisposable: Disposable | null;
+let onDidChangeCursorPositionDisposable: Disposable | null;
+let onDidDestroyDispoable: Disposable | null;
+
 function addObservers() {
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
     async (editor?: TextEditor) => {
@@ -58,24 +59,25 @@ function addObservers() {
         return;
       }
       // dispose the old subscriptions
-      activeEditorContentUpdateSubscription?.dispose?.();
-      activeEditorDisposeSubscription?.dispose?.();
+      onDidStopChangeDisposable?.dispose?.();
+      onDidChangeCursorPositionDisposable?.dispose?.();
+      onDidDestroyDispoable?.dispose?.();
 
       await getOutline(editor); // initial outline
 
       // update the outline if editor stops changing
-      activeEditorContentUpdateSubscription = editor.onDidStopChanging(() =>
+      onDidStopChangeDisposable = editor.onDidStopChanging(() =>
         getOutline(editor)
       );
 
       // update outline if cursor changes position
-      activeEditorContentUpdateSubscription = editor.onDidChangeCursorPosition(
+      onDidChangeCursorPositionDisposable = editor.onDidChangeCursorPosition(
         (cursorPositionChangedEvent) =>
           selectAtCursorLine(cursorPositionChangedEvent)
       );
 
       // clean up if the editor editor is closed
-      activeEditorDisposeSubscription = editor.onDidDestroy(() => {
+      onDidDestroyDispoable = editor.onDidDestroy(() => {
         setStatus("noEditor");
       });
     }
