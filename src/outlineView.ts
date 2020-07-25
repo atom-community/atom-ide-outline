@@ -64,7 +64,6 @@ function generateStatusElement(status: { title: string; description: string }) {
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
 
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
-
   // calculate indent length
   const tabLength = editor.getTabLength;
   const indentRatio = 6 * (!isNaN(tabLength) ? tabLength : 4);
@@ -123,7 +122,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     } else {
       // compensate for the fold button
       labelElement.style.paddingLeft =
-      level !== 0 ? `${indentRatio * level - foldButtonWidth}px` : `0px`;
+        level !== 0 ? `${indentRatio * level - foldButtonWidth}px` : `0px`;
     }
 
     // create Child elements
