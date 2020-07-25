@@ -21,7 +21,7 @@ export function activate() {
   view = new OutlineView(); // create outline pane
   addCommands();
   addObservers();
-  if (atom.config.get("atom-ide-outline.InitialDisplay")) {
+  if (atom.config.get("atom-ide-outline.initialDisplay")) {
     toggleOutlineView(); // initially show outline pane
   }
 }
@@ -131,9 +131,16 @@ export function setStatus(id: "noEditor" | "noProvider") {
 }
 
 export const config = {
-  InitialDisplay: {
+  initialDisplay: {
     title: "Initial Outline Display",
     description: "Show outline initially aftern atom loads",
+    type: "boolean",
+    default: true,
+  },
+  sortEntries: {
+    title: "Sort entries based on the line number",
+    description:
+      "This option sorts the entries based on where they appear in the code.",
     type: "boolean",
     default: true,
   },
