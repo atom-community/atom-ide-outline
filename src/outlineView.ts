@@ -69,8 +69,8 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   // a few of the calls is slow ~1-100ms
 
   // calculate indent length
-  const tabLength = editor.getTabLength;
-  const indentRatio = 6 * (!isNaN(tabLength) ? tabLength : 4);
+  const tabLength = editor.getTabLength();
+  const indentRatio = 12 * (typeof tabLength === 'number' ? tabLength : 4);
 
   // sort entries
   // TIME 0.1ms
