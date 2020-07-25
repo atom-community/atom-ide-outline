@@ -64,8 +64,10 @@ function generateStatusElement(status: { title: string; description: string }) {
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
 
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
+
+  // calculate indent length
   const tabLength = editor.getTabLength;
-  const indentLength = !isNaN(tabLength) ? tabLength * 5 : 20; // used for indentation
+  const indentLength = !isNaN(tabLength) ? tabLength * 5 : 20;
 
   // sort entries
   if (atom.config.get("atom-ide-outline.sortEntries")) {
@@ -86,8 +88,6 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
 
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     const labelElement = document.createElement("span");
-    labelElement.style.paddingLeft =
-      level !== 0 ? `${indentLength * level}px` : `${foldButtonWidth}px`;
     labelElement.innerText = item.representativeName || item.plainText;
 
     const { iconElement, kindClass } = getIcon(item?.icon, item?.kind);
@@ -114,16 +114,20 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
       });
     });
 
-    // if hasChildren
     const hasChildren = item.children && !!item.children[0];
+
+    // indentation
+    if (!hasChildren) {
+      labelElement.style.paddingLeft =
+        level !== 0 ? `${indentLength * level}px` : `${foldButtonWidth}px`;
+    } else {
+      // compensate for the fold button
+      labelElement.style.paddingLeft =
+      level !== 0 ? `${indentLength * level - foldButtonWidth}px` : `0px`;
+    }
 
     // create Child elements
     if (hasChildren) {
-      // compensate for the fold button
-      labelElement.style.paddingLeft = `${
-        indentLength * level - foldButtonWidth
-      }px`;
-
       const childrenList = document.createElement("ul");
       childrenList.addEventListener("click", (event) =>
         event.stopPropagation()
