@@ -67,7 +67,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
 
   // calculate indent length
   const tabLength = editor.getTabLength;
-  const indentLength = !isNaN(tabLength) ? tabLength * 5 : 20;
+  const indentRatio = 6 * (!isNaN(tabLength) ? tabLength : 4);
 
   // sort entries
   if (atom.config.get("atom-ide-outline.sortEntries")) {
@@ -119,11 +119,11 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     // indentation
     if (!hasChildren) {
       labelElement.style.paddingLeft =
-        level !== 0 ? `${indentLength * level}px` : `${foldButtonWidth}px`;
+        level !== 0 ? `${indentRatio * level}px` : `${foldButtonWidth}px`;
     } else {
       // compensate for the fold button
       labelElement.style.paddingLeft =
-      level !== 0 ? `${indentLength * level - foldButtonWidth}px` : `0px`;
+      level !== 0 ? `${indentRatio * level - foldButtonWidth}px` : `0px`;
     }
 
     // create Child elements
