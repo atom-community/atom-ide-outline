@@ -1,9 +1,8 @@
 # [1.9.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.8.1...v1.9.0) (2020-07-25)
 
-
 ### Features
 
-* sort entries based on the line number ([e23e26b](https://github.com/atom-ide-community/atom-ide-outline/commit/e23e26bfe6c75e7343bb3b881ac8ed519b13ee7e))
+- sort entries based on the line number ([e23e26b](https://github.com/atom-ide-community/atom-ide-outline/commit/e23e26bfe6c75e7343bb3b881ac8ed519b13ee7e))
 
 ## [1.8.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.8.0...v1.8.1) (2020-07-24)
 
