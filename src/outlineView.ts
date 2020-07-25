@@ -79,7 +79,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
   entries.forEach((item) => {
     const symbol = document.createElement("li");
 
-    symbol.setAttribute("level", `${level}`); // store level in the element
+    // symbol.setAttribute("level", `${level}`); // store level in the element
 
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     const labelElement = document.createElement("span");
@@ -250,7 +250,7 @@ export function selectAtCursorLine({
     for (const elm of focusedElms) {
       elm.toggleAttribute("cursorOn", true);
 
-      const level = parseInt(elm.getAttribute("level") ?? "0", 10);
+      // const level = parseInt(elm.getAttribute("level") ?? "0", 10);
 
       // TODO this works for the LSPs that their 0 level is the file name or module.
       // For json for example, they do not have such a thing, and so it scrolls to the element itself
