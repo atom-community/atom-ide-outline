@@ -1,3 +1,11 @@
+## [1.9.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.1...v1.9.2) (2020-07-25)
+
+
+### Bug Fixes
+
+* disable unused level ([46ab6c0](https://github.com/atom-ide-community/atom-ide-outline/commit/46ab6c0035958ebc7f37ab9b272abfecf78ac957))
+* use CompositeDisposable ([12ea6f1](https://github.com/atom-ide-community/atom-ide-outline/commit/12ea6f1ce21106fbd47e0c3b02ac7fd5357d72dd))
+
 ## [1.9.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.0...v1.9.1) (2020-07-25)
 
 
