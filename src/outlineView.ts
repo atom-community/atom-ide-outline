@@ -64,11 +64,16 @@ function generateStatusElement(status: { title: string; description: string }) {
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
 
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
+
+  // NOTE: this function is called multiple times with each update in an editor!
+  // a few of the calls is slow ~1-100ms
+
   // calculate indent length
   const tabLength = editor.getTabLength;
   const indentRatio = 6 * (!isNaN(tabLength) ? tabLength : 4);
 
   // sort entries
+  // TIME 0.1ms
   if (atom.config.get("atom-ide-outline.sortEntries")) {
     entries.sort((e1, e2) => {
       const rowCompare = e1.startPosition.row - e2.startPosition.row;
@@ -86,6 +91,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     // symbol.setAttribute("level", `${level}`); // store level in the element
 
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
+    // TIME: ~0-0.1ms
     const labelElement = document.createElement("span");
     labelElement.innerText = item.representativeName || item.plainText;
 
@@ -95,6 +101,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     symbol.append(labelElement);
 
     // update start position => elements map
+    // TIME: 0-0.2ms
     const elms = PointToElementsMap.get(item.startPosition.row);
     if (elms !== undefined) {
       elms.push(symbol);
@@ -104,6 +111,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
     }
 
     // Cursor reposition on click
+    // TIME: 0-0.1ms
     symbol.addEventListener("click", () => {
       const editorPane = atom.workspace.paneForItem(editor);
       editorPane.activate();
@@ -127,6 +135,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
 
     // create Child elements
     if (hasChildren) {
+      // TIME 0-0.2ms
       const childrenList = document.createElement("ul");
       childrenList.addEventListener("click", (event) =>
         event.stopPropagation()
@@ -138,6 +147,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
       labelElement.prepend(foldButton);
 
       // add children to outline
+      // TIME: last one of each batch is slower 0-20ms
       addOutlineEntries({
         parent: childrenList,
         entries: item.children,
@@ -146,6 +156,7 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
       });
     }
 
+    // TIME: <0.1ms
     parent.append(symbol);
   });
 }
@@ -211,6 +222,7 @@ function getIcon(iconType?: string, kindType?: string) {
 const foldButtonWidth = 14;
 
 function createFoldButton(kindClass: string, childrenList: HTMLUListElement) {
+  // TIME: ~0.1-0.5ms
   // fold button
   const foldButton = document.createElement("button");
   foldButton.classList.add("fold", `fold-${kindClass}`);
@@ -235,7 +247,6 @@ function createFoldButton(kindClass: string, childrenList: HTMLUListElement) {
     }
     event.stopPropagation();
   });
-
   return foldButton;
 }
 
@@ -245,6 +256,8 @@ let focusedElms: HTMLElement[] | undefined; // cache for focused elements
 export function selectAtCursorLine({
   newBufferPosition,
 }: CursorPositionChangedEvent) {
+
+  // TIME: ~0.2-0.3ms
   // TODO use range of start and end instead of just the line number
 
   // remove old cursorOn attribue
