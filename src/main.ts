@@ -139,8 +139,9 @@ export const config = {
   },
   sortEntries: {
     title: "Sort entries based on the line number",
-    description: "This option sorts the entries based on where they appear in the code.",
+    description:
+      "This option sorts the entries based on where they appear in the code.",
     type: "boolean",
     default: true,
-  }
+  },
 };
