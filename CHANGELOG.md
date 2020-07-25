@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.0...v1.9.1) (2020-07-25)
+
+
+### Bug Fixes
+
+* disposable leak fix ([dd70b30](https://github.com/atom-ide-community/atom-ide-outline/commit/dd70b30f02bfb6c89026331ae5bdcd7599cc0918))
+
 # [1.9.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.8.1...v1.9.0) (2020-07-25)
 
 ### Features
