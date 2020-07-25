@@ -64,6 +64,10 @@ function generateStatusElement(status: { title: string; description: string }) {
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
 
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
+  // calculate indent length
+  const tabLength = editor.getTabLength;
+  const indentRatio = 6 * (!isNaN(tabLength) ? tabLength : 4);
+
   // sort entries
   if (atom.config.get("atom-ide-outline.sortEntries")) {
     entries.sort((e1, e2) => {
@@ -83,7 +87,6 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
 
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     const labelElement = document.createElement("span");
-    labelElement.style.paddingLeft = level !== 0 ? `${25 * level}px` : "15px";
     labelElement.innerText = item.representativeName || item.plainText;
 
     const { iconElement, kindClass } = getIcon(item?.icon, item?.kind);
@@ -110,13 +113,20 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
       });
     });
 
-    // if hasChildren
     const hasChildren = item.children && !!item.children[0];
+
+    // indentation
+    if (!hasChildren) {
+      labelElement.style.paddingLeft =
+        level !== 0 ? `${indentRatio * level}px` : `${foldButtonWidth}px`;
+    } else {
+      // compensate for the fold button
+      labelElement.style.paddingLeft =
+        level !== 0 ? `${indentRatio * level - foldButtonWidth}px` : `0px`;
+    }
 
     // create Child elements
     if (hasChildren) {
-      labelElement.style.paddingLeft = `${10 * level}px`;
-
       const childrenList = document.createElement("ul");
       childrenList.addEventListener("click", (event) =>
         event.stopPropagation()
@@ -197,6 +207,8 @@ function getIcon(iconType?: string, kindType?: string) {
 
   return { iconElement, kindClass };
 }
+
+const foldButtonWidth = 14;
 
 function createFoldButton(kindClass: string, childrenList: HTMLUListElement) {
   // fold button
