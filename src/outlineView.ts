@@ -64,6 +64,9 @@ function generateStatusElement(status: { title: string; description: string }) {
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map(); // TODO Point to element
 
 function addOutlineEntries({ parent, entries, editor, level = 0 }) {
+  const tabLength = editor.getTabLength
+  const indentLength = !isNaN(tabLength) ? tabLength * 5 : 20; // used for indentation
+
   // sort entries
   if (atom.config.get("atom-ide-outline.sortEntries")) {
     entries.sort((e1, e2) => {
@@ -115,7 +118,8 @@ function addOutlineEntries({ parent, entries, editor, level = 0 }) {
 
     // create Child elements
     if (hasChildren) {
-      labelElement.style.paddingLeft = `${10 * level}px`;
+      // compensate for the fold button
+      labelElement.style.paddingLeft = `${(indentLength * level) - foldButtonWidth }px`;
 
       const childrenList = document.createElement("ul");
       childrenList.addEventListener("click", (event) =>
