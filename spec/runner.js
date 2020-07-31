@@ -1,6 +1,6 @@
-"use babel";
-import { createRunner } from "atom-jasmine3-test-runner";
-import pkg from "../package.json";
+"use babel"
+import { createRunner } from "atom-jasmine3-test-runner"
+import pkg from "../package.json"
 
 // https://github.com/UziTech/atom-jasmine3-test-runner#api
 export default createRunner({
@@ -19,4 +19,4 @@ export default createRunner({
   mockLocalStorage: false,
   profile: true,
   unspy: false,
-});
+})

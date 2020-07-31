@@ -1,132 +1,128 @@
-import { CompositeDisposable, Disposable, TextEditor } from "atom";
-import { OutlineView, selectAtCursorLine } from "./outlineView";
-import { ProviderRegistry } from "./providerRegistry";
+import { CompositeDisposable, Disposable, TextEditor } from "atom"
+import { OutlineView, selectAtCursorLine } from "./outlineView"
+import { ProviderRegistry } from "./providerRegistry"
 
-export { statuses } from "./statuses"; // for spec
-import { statuses } from "./statuses";
+export { statuses } from "./statuses" // for spec
+import { statuses } from "./statuses"
 
-let subscriptions: CompositeDisposable;
+let subscriptions: CompositeDisposable
 
-let view: OutlineView;
-export const outlineProviderRegistry = new ProviderRegistry();
+let view: OutlineView
+export const outlineProviderRegistry = new ProviderRegistry()
 
-let busySignalProvider; // TODO Type
+let busySignalProvider // TODO Type
 
 export function activate() {
-  subscriptions = new CompositeDisposable();
-  view = new OutlineView(); // create outline pane
-  addCommands();
-  addObservers();
+  subscriptions = new CompositeDisposable()
+  view = new OutlineView() // create outline pane
+  addCommands()
+  addObservers()
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
-    toggleOutlineView(); // initially show outline pane
+    toggleOutlineView() // initially show outline pane
   }
 }
 
 export function deactivate() {
-  onDidCompositeDisposable?.dispose?.();
-  subscriptions.dispose();
-  view.destroy();
+  onDidCompositeDisposable?.dispose?.()
+  subscriptions.dispose()
+  view.destroy()
 }
 
 export function consumeSignal(registry) {
-  busySignalProvider = registry.create();
-  subscriptions.add(busySignalProvider);
+  busySignalProvider = registry.create()
+  subscriptions.add(busySignalProvider)
 }
 
 export async function consumeOutlineProvider(provider) {
-  const providerRegistryEntry = outlineProviderRegistry.addProvider(provider);
-  subscriptions.add(providerRegistryEntry);
+  const providerRegistryEntry = outlineProviderRegistry.addProvider(provider)
+  subscriptions.add(providerRegistryEntry)
 
   // Generate (try) an outline after obtaining a provider
-  await getOutline();
+  await getOutline()
 }
 
 function addCommands() {
   const outlineToggle = atom.commands.add("atom-workspace", {
     "outline:toggle": () => toggleOutlineView(),
-  });
-  subscriptions.add(outlineToggle);
+  })
+  subscriptions.add(outlineToggle)
 }
 
 // disposables returned inside the oberservers
-let onDidCompositeDisposable: CompositeDisposable | null;
+let onDidCompositeDisposable: CompositeDisposable | null
 
 function addObservers() {
-  onDidCompositeDisposable = new CompositeDisposable();
-  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(
-    async (editor?: TextEditor) => {
-      if (!editor) {
-        return;
-      }
-      // dispose the old subscriptions
-      onDidCompositeDisposable?.dispose?.();
-
-      await getOutline(editor); // initial outline
-
-      onDidCompositeDisposable!.add(
-        // update the outline if editor stops changing
-        editor.onDidStopChanging(() => getOutline(editor)),
-
-        // update outline if cursor changes position
-        editor.onDidChangeCursorPosition((cursorPositionChangedEvent) =>
-          selectAtCursorLine(cursorPositionChangedEvent)
-        ),
-
-        // clean up if the editor editor is closed
-        editor.onDidDestroy(() => {
-          setStatus("noEditor");
-        })
-      );
+  onDidCompositeDisposable = new CompositeDisposable()
+  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor?: TextEditor) => {
+    if (!editor) {
+      return
     }
-  );
-  subscriptions.add(activeTextEditorObserver);
+    // dispose the old subscriptions
+    onDidCompositeDisposable?.dispose?.()
+
+    await getOutline(editor) // initial outline
+
+    onDidCompositeDisposable!.add(
+      // update the outline if editor stops changing
+      editor.onDidStopChanging(() => getOutline(editor)),
+
+      // update outline if cursor changes position
+      editor.onDidChangeCursorPosition((cursorPositionChangedEvent) => selectAtCursorLine(cursorPositionChangedEvent)),
+
+      // clean up if the editor editor is closed
+      editor.onDidDestroy(() => {
+        setStatus("noEditor")
+      })
+    )
+  })
+  subscriptions.add(activeTextEditorObserver)
 }
 
 export function toggleOutlineView() {
-  const outlinePane = atom.workspace.paneForItem(view);
+  const outlinePane = atom.workspace.paneForItem(view)
   if (outlinePane) {
-    return outlinePane.destroyItem(view);
+    return outlinePane.destroyItem(view)
   }
 
-  const rightDock = atom.workspace.getRightDock();
-  const [pane] = rightDock.getPanes();
+  const rightDock = atom.workspace.getRightDock()
+  const [pane] = rightDock.getPanes()
 
-  pane.addItem(view);
-  pane.activateItem(view);
+  pane.addItem(view)
+  pane.activateItem(view)
 
-  rightDock.show();
+  rightDock.show()
 }
 
 export async function getOutline(activeEditor?: TextEditor) {
   // editor
-  const editor = activeEditor || atom.workspace.getActiveTextEditor();
+  const editor = activeEditor || atom.workspace.getActiveTextEditor()
   if (!editor) {
-    return setStatus("noEditor");
+    return setStatus("noEditor")
   }
 
   // provider
-  const provider = outlineProviderRegistry.getProvider(editor);
+  const provider = outlineProviderRegistry.getProvider(editor)
 
   if (!provider) {
-    return setStatus("noProvider");
+    return setStatus("noProvider")
   }
 
-  const target = editor.getFileName();
-  busySignalProvider?.add(`Outline: ${target}`);
+  const target = editor.getFileName()
+  busySignalProvider?.add(`Outline: ${target}`)
 
-  const outline = await provider.getOutline(editor);
+  const outline = await provider.getOutline(editor)
 
   view.setOutline({
     tree: (outline && outline.outlineTrees) || [],
     editor,
-  });
+  })
 
-  busySignalProvider?.clear();
+  busySignalProvider?.clear()
 }
 
 export function setStatus(id: "noEditor" | "noProvider") {
-  const status = statuses[id];
-  view.presentStatus(status);
+  const status = statuses[id]
+  view.presentStatus(status)
 }
 
 export const config = {
@@ -138,9 +134,8 @@ export const config = {
   },
   sortEntries: {
     title: "Sort entries based on the line number",
-    description:
-      "This option sorts the entries based on where they appear in the code.",
+    description: "This option sorts the entries based on where they appear in the code.",
     type: "boolean",
     default: true,
   },
-};
+}

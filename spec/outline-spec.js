@@ -1,9 +1,9 @@
-"use babel";
+"use babel"
 
-import path from "path";
+import path from "path"
 
-import * as OutlinePackage from "../dist/main";
-import { TextEditor } from "atom";
+import * as OutlinePackage from "../dist/main"
+import { TextEditor } from "atom"
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 //
@@ -11,58 +11,58 @@ import { TextEditor } from "atom";
 // or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe("Outline", () => {
-  let workspaceElement, activeEditor;
+  let workspaceElement, activeEditor
 
   beforeEach(async () => {
-    const mockFilePath = path.join(__dirname, "mockFile");
+    const mockFilePath = path.join(__dirname, "mockFile")
 
-    workspaceElement = atom.views.getView(atom.workspace);
-    jasmine.attachToDOM(workspaceElement);
+    workspaceElement = atom.views.getView(atom.workspace)
+    jasmine.attachToDOM(workspaceElement)
 
-    await atom.workspace.open(mockFilePath);
+    await atom.workspace.open(mockFilePath)
 
     // Package activation will be deferred to the configured, activation hook, which is then triggered
     // Activate activation hook
-    atom.packages.triggerDeferredActivationHooks();
-    atom.packages.triggerActivationHook("core:loaded-shell-environment");
-    await atom.packages.activatePackage("atom-ide-outline");
+    atom.packages.triggerDeferredActivationHooks()
+    atom.packages.triggerActivationHook("core:loaded-shell-environment")
+    await atom.packages.activatePackage("atom-ide-outline")
 
-    expect(atom.packages.isPackageLoaded("atom-ide-outline")).toBeTruthy();
+    expect(atom.packages.isPackageLoaded("atom-ide-outline")).toBeTruthy()
 
-    activeEditor = atom.workspace.getActiveTextEditor();
+    activeEditor = atom.workspace.getActiveTextEditor()
 
-    expect(activeEditor).toBeInstanceOf(TextEditor);
-  });
+    expect(activeEditor).toBeInstanceOf(TextEditor)
+  })
 
   it("adds toggle command", function () {
     const toggleCommand = atom.commands
       .findCommands({
         target: workspaceElement,
       })
-      .some((command) => command.name === "outline:toggle");
+      .some((command) => command.name === "outline:toggle")
 
-    expect(toggleCommand).toBe(true);
-  });
+    expect(toggleCommand).toBe(true)
+  })
 
   it("adds/removes outline view from workspace when toggled", () => {
-    expect(workspaceElement.querySelector(".outline-view")).toBeVisible();
+    expect(workspaceElement.querySelector(".outline-view")).toBeVisible()
 
-    atom.commands.dispatch(workspaceElement, "outline:toggle");
+    atom.commands.dispatch(workspaceElement, "outline:toggle")
 
-    expect(workspaceElement.querySelector(".outline-view")).not.toExist();
+    expect(workspaceElement.querySelector(".outline-view")).not.toExist()
 
-    atom.commands.dispatch(workspaceElement, "outline:toggle");
+    atom.commands.dispatch(workspaceElement, "outline:toggle")
 
-    expect(workspaceElement.querySelector(".outline-view")).toBeVisible();
-  });
+    expect(workspaceElement.querySelector(".outline-view")).toBeVisible()
+  })
 
   it("triggers outline generation for active editor on save", async () => {
-    spyOn(OutlinePackage, "getOutline");
+    spyOn(OutlinePackage, "getOutline")
 
-    await activeEditor.save();
+    await activeEditor.save()
     // const editor = await atom.workspace.open(path.join(__dirname, "outline-spec.js"));
     // editor.setCursorScreenPosition([0,0])
     // TODO Fix
     // expect(OutlinePackage.getOutline).toHaveBeenCalled();
-  });
-});
+  })
+})

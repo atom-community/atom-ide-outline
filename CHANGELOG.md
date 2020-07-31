@@ -1,9 +1,8 @@
 ## [1.9.4](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.3...v1.9.4) (2020-07-25)
 
-
 ### Bug Fixes
 
-* tabLength fix ([ad11a35](https://github.com/atom-ide-community/atom-ide-outline/commit/ad11a35ec34977cee57f6850a3272401dcf2e9eb))
+- tabLength fix ([ad11a35](https://github.com/atom-ide-community/atom-ide-outline/commit/ad11a35ec34977cee57f6850a3272401dcf2e9eb))
 
 ## [1.9.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.2...v1.9.3) (2020-07-25)
 
