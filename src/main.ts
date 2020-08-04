@@ -104,7 +104,7 @@ export async function getOutline(activeEditor?: TextEditor) {
   if (!provider) {
     return setStatus("noProvider")
   }
-
+  // @ts-ignore
   const target = editor.getFileName()
   busySignalProvider?.add(`Outline: ${target}`)
 
