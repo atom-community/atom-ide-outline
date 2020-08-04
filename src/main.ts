@@ -42,9 +42,7 @@ export async function consumeOutlineProvider(provider) {
 }
 
 function addCommands() {
-  const outlineToggle = atom.commands.add("atom-workspace", {
-    "outline:toggle": () => toggleOutlineView(),
-  })
+  const outlineToggle = atom.commands.add("atom-workspace", "outline:toggle", () => toggleOutlineView())
   subscriptions.add(outlineToggle)
 }
 
