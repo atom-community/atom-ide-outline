@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.4...v1.9.5) (2020-08-12)
+
+
+### Bug Fixes
+
+* bump ([7b48359](https://github.com/atom-ide-community/atom-ide-outline/commit/7b48359b1c79130ad47b30cf1f611b9fac494354))
+
 ## [1.9.4](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.3...v1.9.4) (2020-07-25)
 
 ### Bug Fixes
