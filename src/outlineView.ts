@@ -154,7 +154,7 @@ function addOutlineEntries({
       symbol.append(childrenList)
 
       // fold Button
-      const foldButton = createFoldButton(kindClass, childrenList)
+      const foldButton = createFoldButton(childrenList)
       labelElement.prepend(foldButton)
 
       // add children to outline
@@ -230,31 +230,23 @@ function getIcon(iconType?: string, kindType?: string) {
   return { iconElement, kindClass }
 }
 
-const foldButtonWidth = 14
+const foldButtonWidth = 20
 
-function createFoldButton(kindClass: string, childrenList: HTMLUListElement) {
+function createFoldButton(childrenList: HTMLUListElement) {
   // TIME: ~0.1-0.5ms
   // fold button
   const foldButton = document.createElement("button")
-  foldButton.classList.add("fold", `fold-${kindClass}`)
-  const div = document.createElement("div") // viewBox='4 0 15 10'
-  div.innerHTML = `
-  <svg xmlns='http://www.w3.org/2000/svg'  viewBox='5 0 16 10' width='13' height='13' transform = 'rotate(45)'>
-    <path d='M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z' fill='black'></path>
-  </svg>
-  `
-  foldButton.appendChild(div)
+  foldButton.classList.add("fold", "expanded")
 
   // fold listener
   foldButton.addEventListener("click", (event) => {
     childrenList.hidden = !childrenList.hidden
-    const svg = div.firstElementChild
     if (childrenList.hidden) {
-      svg!.setAttribute("transform", "rotate(0)")
-      svg!.setAttribute("viewBox", "5 5 16 10")
+      foldButton.classList.remove("expanded")
+      foldButton.classList.add("collapsed")
     } else {
-      svg!.setAttribute("transform", "rotate(45)")
-      svg!.setAttribute("viewBox", "5 0 16 10")
+      foldButton.classList.remove("collapsed")
+      foldButton.classList.add("expanded")
     }
     event.stopPropagation()
   })
