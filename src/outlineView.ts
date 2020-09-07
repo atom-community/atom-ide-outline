@@ -23,6 +23,10 @@ export class OutlineView {
     return "Outline"
   }
 
+  getIconName() {
+    return 'list-unordered';
+  }
+
   setOutline({ tree: outlineTree, editor }: { tree: OutlineTree; editor: TextEditor }) {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
