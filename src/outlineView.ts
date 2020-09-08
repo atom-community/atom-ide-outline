@@ -24,7 +24,7 @@ export class OutlineView {
   }
 
   getIconName() {
-    return 'list-unordered';
+    return "list-unordered"
   }
 
   setOutline({ tree: outlineTree, editor }: { tree: OutlineTree; editor: TextEditor }) {
