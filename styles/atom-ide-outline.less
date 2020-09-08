@@ -37,13 +37,30 @@
 
   .fold {
     display: inline-block;
-    vertical-align: middle;
-    text-align: center;
+    position: relative;
+    top: -1px;
+    width: 20px;
+    padding-left: 7px;
+    padding-right: 0;
+    opacity: 1;
     border: none;
-    border-radius: 2px;
-    height: var(--editor-line-height);
-    width: 14px;
-    opacity: 0.5;
+    background-color: inherit;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    font-family: "Octicons Regular";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+
+    &.collapsed::before {
+      content: "\f078";
+    }
+
+    &.expanded::before {
+      content: "\f0a3";
+    }
   }
 
   .icon {
