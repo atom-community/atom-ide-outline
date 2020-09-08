@@ -1,3 +1,16 @@
+# [1.10.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.5...v1.10.0) (2020-09-08)
+
+
+### Bug Fixes
+
+* replace expanded and collapsed buttons ([70999f5](https://github.com/atom-ide-community/atom-ide-outline/commit/70999f51bc0bb53010a05872ed88b7aacfa54698))
+
+
+### Features
+
+* set the opacity of the fold button to 1 ([650c41b](https://github.com/atom-ide-community/atom-ide-outline/commit/650c41bedc57798a42a64802942e941f0e3d109f))
+* update preview ([2c6f159](https://github.com/atom-ide-community/atom-ide-outline/commit/2c6f159d6839e66fe2fa42d11de23bf166daddcb))
+
 ## [1.9.5](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.9.4...v1.9.5) (2020-08-12)
 
 
