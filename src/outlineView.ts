@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { TextEditor, Point, CursorPositionChangedEvent } from "atom"
+import { TextEditor, CursorPositionChangedEvent } from "atom"
 import { OutlineTree } from "atom-ide-base"
 
 export class OutlineView {
@@ -109,7 +109,7 @@ function addOutlineEntries({
     const labelElement = document.createElement("span")
     labelElement.innerText = (item.representativeName || item.plainText) ?? ''
 
-    const { iconElement, kindClass } = getIcon(item?.icon, item?.kind)
+    const { iconElement } = getIcon(item?.icon, item?.kind)
     labelElement.prepend(iconElement)
 
     symbol.append(labelElement)

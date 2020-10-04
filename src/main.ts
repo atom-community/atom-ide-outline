@@ -1,4 +1,4 @@
-import { CompositeDisposable, Disposable, TextEditor } from "atom"
+import { CompositeDisposable, TextEditor } from "atom"
 import { OutlineView, selectAtCursorLine } from "./outlineView"
 import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
