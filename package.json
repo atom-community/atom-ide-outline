@@ -28,7 +28,9 @@
     "prepare": "npm run build"
   },
   "atomTestRunner": "./spec/runner",
-  "dependencies": {},
+  "dependencies": {
+    "atom-ide-base": "^1.5.2"
+  },
   "devDependencies": {
     "@types/atom": "latest",
     "@types/node": "^14.0.27",

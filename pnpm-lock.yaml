@@ -1,3 +1,5 @@
+dependencies:
+  atom-ide-base: 1.5.2
 devDependencies:
   '@babel/cli': 7.10.5_@babel+core@7.11.1
   '@babel/core': 7.11.1
@@ -1909,6 +1911,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+  /atom-ide-base/1.5.2:
+    dependencies:
+      atom-package-deps: 6.0.0
+    dev: false
+    engines:
+      atom: '>=0.174.0 <2.0.0'
+    resolution:
+      integrity: sha512-l7obRvKkRhK1bm4DeOdbmwJvexvNnPrirS/9tylbnO68Fsy3T5bwko4C9bvgw0OioIfdaki7d5bX4Ai8yivNKQ==
   /atom-jasmine3-test-runner/5.0.5:
     dependencies:
       etch: 0.14.0
@@ -1931,6 +1941,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-pdT6DxRmDsss0To94tEDYedpTwX4ChSc3c8ZSMdjk1aPM7n/0VGIQyUQHOPjvtyDLJArchr/m3KVxG1tM8cgSA==
+  /atom-package-deps/6.0.0:
+    dependencies:
+      sb-fs: 4.0.0
+      semver: 7.3.2
+    dev: false
+    resolution:
+      integrity: sha512-9UQx2sTvBiaIHcZ3le/B0djM+jsZXBQRPXatrmtNfjkbAOV5bGrcXzcV4U0EBfGdzB7QmWeOnwMIJwa3HvW7Kg==
   /aws-sign2/0.7.0:
     dev: true
     resolution:
@@ -4241,6 +4258,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
+  /is-utf8/0.2.1:
+    dev: false
+    resolution:
+      integrity: sha1-Sw2hRCEE0bM2NA6AeX6GXPOffXI=
   /is-windows/1.0.2:
     dev: true
     engines:
@@ -6018,6 +6039,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
+  /sb-fs/4.0.0:
+    dependencies:
+      strip-bom-buf: 1.0.0
+    dev: false
+    engines:
+      node: '>= 8'
+    resolution:
+      integrity: sha512-UjjIHC4uahPWvKYqgknvFCCJ11S0oDahz+nsmyTCAmARKto31aoE+Lu7GGGK0nogengJEKGzFdh46ho5+IL88Q==
   /semver-diff/3.1.1:
     dependencies:
       semver: 6.3.0
@@ -6046,7 +6075,6 @@ packages:
     resolution:
       integrity: sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==
   /semver/7.3.2:
-    dev: true
     engines:
       node: '>=10'
     hasBin: true
@@ -6407,6 +6435,14 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==
+  /strip-bom-buf/1.0.0:
+    dependencies:
+      is-utf8: 0.2.1
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-HLRar1dTD0yvhsf3UXnSyaUd1XI=
   /strip-bom/3.0.0:
     dev: true
     engines:
@@ -6923,6 +6959,7 @@ specifiers:
   '@types/atom': latest
   '@types/jasmine': ^3.5.12
   '@types/node': ^14.0.27
+  atom-ide-base: ^1.5.2
   atom-jasmine3-test-runner: ^5.0.5
   babel-preset-atomic: latest
   build-commit: latest
