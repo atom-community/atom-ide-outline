@@ -1,6 +1,6 @@
 import { CompositeDisposable, Disposable, TextEditor } from "atom"
 import { OutlineView, selectAtCursorLine } from "./outlineView"
-import { OutlineProvider } from "atom-ide-base"
+import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
 export { statuses } from "./statuses" // for spec
@@ -11,7 +11,7 @@ let subscriptions: CompositeDisposable
 let view: OutlineView
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
-let busySignalProvider // TODO Type
+let busySignalProvider: BusySignalProvider
 
 export function activate() {
   subscriptions = new CompositeDisposable()
@@ -29,7 +29,7 @@ export function deactivate() {
   view.destroy()
 }
 
-export function consumeSignal(registry) {
+export function consumeSignal(registry: BusySignalRegistry) {
   busySignalProvider = registry.create()
   subscriptions.add(busySignalProvider)
 }
