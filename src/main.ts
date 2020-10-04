@@ -1,6 +1,7 @@
 import { CompositeDisposable, Disposable, TextEditor } from "atom"
 import { OutlineView, selectAtCursorLine } from "./outlineView"
-import { ProviderRegistry } from "./providerRegistry"
+import { OutlineProvider } from "atom-ide-base"
+import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
@@ -8,7 +9,7 @@ import { statuses } from "./statuses"
 let subscriptions: CompositeDisposable
 
 let view: OutlineView
-export const outlineProviderRegistry = new ProviderRegistry()
+export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
 let busySignalProvider // TODO Type
 
@@ -33,7 +34,7 @@ export function consumeSignal(registry) {
   subscriptions.add(busySignalProvider)
 }
 
-export async function consumeOutlineProvider(provider) {
+export async function consumeOutlineProvider(provider: OutlineProvider) {
   const providerRegistryEntry = outlineProviderRegistry.addProvider(provider)
   subscriptions.add(providerRegistryEntry)
 
@@ -100,7 +101,7 @@ export async function getOutline(activeEditor?: TextEditor) {
   }
 
   // provider
-  const provider = outlineProviderRegistry.getProvider(editor)
+  const provider = outlineProviderRegistry.getProviderForEditor(editor)
 
   if (!provider) {
     return setStatus("noProvider")
