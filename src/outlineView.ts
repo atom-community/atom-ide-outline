@@ -107,7 +107,7 @@ function addOutlineEntries({
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     // TIME: ~0-0.1ms
     const labelElement = document.createElement("span")
-    labelElement.innerText = (item.representativeName || item.plainText) ?? ''
+    labelElement.innerText = (item.representativeName || item.plainText) ?? ""
 
     const { iconElement } = getIcon(item?.icon, item?.kind)
     labelElement.prepend(iconElement)
