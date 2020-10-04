@@ -1,5 +1,5 @@
 dependencies:
-  atom-ide-base: 1.5.2
+  atom-ide-base: 1.6.1
 devDependencies:
   '@babel/cli': 7.10.5_@babel+core@7.11.1
   '@babel/core': 7.11.1
@@ -1911,14 +1911,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
-  /atom-ide-base/1.5.2:
+  /atom-ide-base/1.6.1:
     dependencies:
       atom-package-deps: 6.0.0
     dev: false
     engines:
       atom: '>=0.174.0 <2.0.0'
     resolution:
-      integrity: sha512-l7obRvKkRhK1bm4DeOdbmwJvexvNnPrirS/9tylbnO68Fsy3T5bwko4C9bvgw0OioIfdaki7d5bX4Ai8yivNKQ==
+      integrity: sha512-bc+gE0HdgL6Ag0HmCTsHiY4vjY37hwc6XDcIIMm2z5KzMPvRSfc+jKygPbQf1otPc0WxazPXnwrwtfrQkmaNng==
   /atom-jasmine3-test-runner/5.0.5:
     dependencies:
       etch: 0.14.0
@@ -6959,7 +6959,7 @@ specifiers:
   '@types/atom': latest
   '@types/jasmine': ^3.5.12
   '@types/node': ^14.0.27
-  atom-ide-base: ^1.5.2
+  atom-ide-base: ^1.6.1
   atom-jasmine3-test-runner: ^5.0.5
   babel-preset-atomic: latest
   build-commit: latest

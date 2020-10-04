@@ -29,7 +29,7 @@
   },
   "atomTestRunner": "./spec/runner",
   "dependencies": {
-    "atom-ide-base": "^1.5.2"
+    "atom-ide-base": "^1.6.1"
   },
   "devDependencies": {
     "@types/atom": "latest",
