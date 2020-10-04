@@ -113,7 +113,7 @@ export async function getOutline(activeEditor?: TextEditor) {
   const outline = await provider.getOutline(editor)
 
   view.setOutline({
-    tree: (outline && outline.outlineTrees) || [],
+    tree: outline?.outlineTrees ?? [],
     editor,
   })
 
