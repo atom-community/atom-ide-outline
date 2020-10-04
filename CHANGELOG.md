@@ -1,3 +1,21 @@
+# [1.11.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.10.1...v1.11.0) (2020-10-04)
+
+
+### Bug Fixes
+
+* fix busy signal types ([1aa7eee](https://github.com/atom-ide-community/atom-ide-outline/commit/1aa7eeeb4fd1211722e13360689e84ad80d00095))
+* remove unused imports ([5919e3f](https://github.com/atom-ide-community/atom-ide-outline/commit/5919e3f6cfa317c1d837c263952d3ec3728162f5))
+* update the list of ides ([d1b174b](https://github.com/atom-ide-community/atom-ide-outline/commit/d1b174bf8fd9133f90221000e5596db61da79c0e))
+* use optional chaining to setOutline ([693e9d4](https://github.com/atom-ide-community/atom-ide-outline/commit/693e9d49d01218025410c8bfd93d738f38b54a46))
+
+
+### Features
+
+* atom-ide-base 1.6.1 ([284a7b0](https://github.com/atom-ide-community/atom-ide-outline/commit/284a7b0c25bcdd47e53cac4874eb7d2731d63450))
+* fix the OutlineTree types ([7848113](https://github.com/atom-ide-community/atom-ide-outline/commit/7848113dd0366226725622db61485640cb30c76d))
+* install atom-ide-base ([11a3f2f](https://github.com/atom-ide-community/atom-ide-outline/commit/11a3f2f4b61d417e3d55be8aa55923078b22e6f2))
+* use ProviderRegistry from atom-ide-base ([1cbff48](https://github.com/atom-ide-community/atom-ide-outline/commit/1cbff483571c1c47f9d1c449cd326742cca107ac))
+
 ## [1.10.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.10.0...v1.10.1) (2020-09-08)
 
 
