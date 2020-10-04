@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { TextEditor, Point, CursorPositionChangedEvent } from "atom"
-
-type OutlineEntry = any // TODO type
-type OutlineTree = any // TODO type
+import { TextEditor, CursorPositionChangedEvent } from "atom"
+import { OutlineTree } from "atom-ide-base"
 
 export class OutlineView {
   public element: HTMLDivElement
@@ -27,7 +25,7 @@ export class OutlineView {
     return "list-unordered"
   }
 
-  setOutline({ tree: outlineTree, editor }: { tree: OutlineTree; editor: TextEditor }) {
+  setOutline({ tree: outlineTree, editor }: { tree: OutlineTree[]; editor: TextEditor }) {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
 
@@ -77,7 +75,7 @@ function addOutlineEntries({
   level = 0,
 }: {
   parent: HTMLUListElement
-  entries: OutlineTree
+  entries: OutlineTree[]
   editor: TextEditor
   level?: number
 }) {
@@ -91,7 +89,7 @@ function addOutlineEntries({
   // sort entries
   // TIME 0.1ms
   if (atom.config.get("atom-ide-outline.sortEntries")) {
-    entries.sort((e1: OutlineEntry, e2: OutlineEntry) => {
+    entries.sort((e1: OutlineTree, e2: OutlineTree) => {
       const rowCompare = e1.startPosition.row - e2.startPosition.row
       if (rowCompare === 0) {
         // compare based on column if on the same row
@@ -101,7 +99,7 @@ function addOutlineEntries({
     })
   }
 
-  entries.forEach((item: OutlineEntry) => {
+  entries.forEach((item: OutlineTree) => {
     const symbol = document.createElement("li")
 
     // symbol.setAttribute("level", `${level}`); // store level in the element
@@ -109,9 +107,9 @@ function addOutlineEntries({
     // Hold an entry in a dedicated element to prevent hover conflicts - hover over an <li> tag would be cought by a parent <li>
     // TIME: ~0-0.1ms
     const labelElement = document.createElement("span")
-    labelElement.innerText = item.representativeName || item.plainText
+    labelElement.innerText = (item.representativeName || item.plainText) ?? ""
 
-    const { iconElement, kindClass } = getIcon(item?.icon, item?.kind)
+    const { iconElement } = getIcon(item?.icon, item?.kind)
     labelElement.prepend(iconElement)
 
     symbol.append(labelElement)
