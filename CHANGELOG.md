@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.11.1...v1.11.2) (2020-10-14)
+
+
+### Bug Fixes
+
+* increase indentRatio ([1462f69](https://github.com/atom-ide-community/atom-ide-outline/commit/1462f69aa3c8b8d48ecd40576ebb88b5bc6e4dc5))
+
 ## [1.11.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.11.0...v1.11.1) (2020-10-14)
 
 
