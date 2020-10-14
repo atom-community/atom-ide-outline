@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.11.0...v1.11.1) (2020-10-14)
+
+
+### Bug Fixes
+
+* css containment. ([e862983](https://github.com/atom-ide-community/atom-ide-outline/commit/e8629833bfd4aa4ab286d7fe1ab9cef385c2d1d0))
+
 # [1.11.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.10.1...v1.11.0) (2020-10-04)
 
 
