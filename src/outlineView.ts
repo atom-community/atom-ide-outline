@@ -84,7 +84,7 @@ function addOutlineEntries({
 
   // calculate indent length
   const tabLength = editor.getTabLength()
-  const indentRatio = 12 * (typeof tabLength === "number" ? tabLength : 4)
+  const indentRatio = 16 * (typeof tabLength === "number" ? tabLength : 4)
 
   // sort entries
   // TIME 0.1ms
