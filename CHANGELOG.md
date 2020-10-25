@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.11.2...v1.12.0) (2020-10-25)
+
+
+### Features
+
+* add updateDebounceTime: ([f499fc4](https://github.com/atom-ide-community/atom-ide-outline/commit/f499fc4954bb70a5fee41eda37081bd674ff3062))
+* install lodash ([5706ac6](https://github.com/atom-ide-community/atom-ide-outline/commit/5706ac62656424c8e317b26e5efb648af499b2a0))
+
 ## [1.11.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.11.1...v1.11.2) (2020-10-14)
 
 
