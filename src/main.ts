@@ -5,6 +5,7 @@ import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
+import { debounce } from "lodash"
 
 let subscriptions: CompositeDisposable
 
@@ -12,6 +13,7 @@ let view: OutlineView
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
 let busySignalProvider: BusySignalProvider
+let updateDebounceTime: number
 
 export function activate() {
   subscriptions = new CompositeDisposable()
@@ -21,6 +23,7 @@ export function activate() {
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
     toggleOutlineView() // initially show outline pane
   }
+  updateDebounceTime = atom.config.get("atom-ide-outline.updateDebounceTime")
 }
 
 export function deactivate() {
@@ -52,6 +55,15 @@ let onDidCompositeDisposable: CompositeDisposable | null
 
 function addObservers() {
   onDidCompositeDisposable = new CompositeDisposable()
+
+  const onDidChangeCursorPosition = debounce((cursorPositionChangedEvent) => {
+    selectAtCursorLine(cursorPositionChangedEvent)
+  }, updateDebounceTime)
+
+  const onDidStopChanging = debounce((editor) => {
+    getOutline(editor)
+  }, updateDebounceTime)
+
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor?: TextEditor) => {
     if (!editor) {
       return
@@ -63,10 +75,14 @@ function addObservers() {
 
     onDidCompositeDisposable!.add(
       // update the outline if editor stops changing
-      editor.onDidStopChanging(() => getOutline(editor)),
+      editor.onDidStopChanging(() => {
+        onDidStopChanging(editor)
+      }),
 
       // update outline if cursor changes position
-      editor.onDidChangeCursorPosition((cursorPositionChangedEvent) => selectAtCursorLine(cursorPositionChangedEvent)),
+      editor.onDidChangeCursorPosition((cursorPositionChangedEvent) => {
+        onDidChangeCursorPosition(cursorPositionChangedEvent)
+      }),
 
       // clean up if the editor editor is closed
       editor.onDidDestroy(() => {
@@ -137,5 +153,12 @@ export const config = {
     description: "This option sorts the entries based on where they appear in the code.",
     type: "boolean",
     default: true,
+  },
+  updateDebounceTime: {
+    title: "Outline Update Debounce Time",
+    description:
+      "How long to wait for the new changes before updating the outline. \n A high number will increase the responsiveness of the text editor in large files.",
+    type: "number",
+    default: 300,
   },
 }
