@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.12.0...v1.12.1) (2020-10-26)
+
+
+### Bug Fixes
+
+* bump ([d07b4a2](https://github.com/atom-ide-community/atom-ide-outline/commit/d07b4a2f6ffea1dc345a55151507d9e351b4a3b3))
+
 # [1.12.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.11.2...v1.12.0) (2020-10-25)
 
 
