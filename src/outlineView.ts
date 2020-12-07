@@ -195,7 +195,6 @@ const supportedTypes = [
   "variable",
 ]
 
-
 // find better symbols for the rest
 const symbolMap = new Map([
   // ["class", '\ue600'],
@@ -205,9 +204,9 @@ const symbolMap = new Map([
   // ["union", '\ue604'],
   // ["interface", '\ue605'],
   // ["enum", '\ue606'],
-  ["variable", '\ue607'],
-  ["function", '\ue608'],
-  ["namespace", '\ue609'],
+  ["variable", "\ue607"],
+  ["function", "\ue608"],
+  ["namespace", "\ue609"],
 ])
 
 // find better symbols for the rest
@@ -232,7 +231,6 @@ const abbreviationMap = new Map([
   ["variable", "var"],
 ])
 
-
 function getIconHTML(type: string | undefined) {
   if (type) {
     if (symbolMap.has(type)) {
@@ -240,14 +238,12 @@ function getIconHTML(type: string | undefined) {
     }
     if (abbreviationMap.has(type)) {
       return `<span>${abbreviationMap.get(type)}</span>`
-    }
-    else {
+    } else {
       return `<span>${type.substring(0, 3)}</span>`
     }
   } else {
     return "<span>•</span>"
   }
-
 }
 
 function getIcon(iconType?: string, kindType?: string) {
@@ -281,7 +277,7 @@ function getIcon(iconType?: string, kindType?: string) {
     iconElement.classList.add(kindClass)
   }
 
-  iconElement.innerHTML = getIconHTML(type);
+  iconElement.innerHTML = getIconHTML(type)
 
   return { iconElement, kindClass }
 }
