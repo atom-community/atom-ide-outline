@@ -136,7 +136,7 @@ function addOutlineEntries({
       editor.getCursors()[0].setBufferPosition(item.startPosition, {
         autoscroll: true,
       })
-    })
+    }, {passive: true})
 
     const hasChildren = item.children && !!item.children[0]
 
@@ -152,7 +152,7 @@ function addOutlineEntries({
     if (hasChildren) {
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
-      childrenList.addEventListener("click", (event) => event.stopPropagation())
+      childrenList.addEventListener("click", (event) => event.stopPropagation(), {passive: true})
       symbol.append(childrenList)
 
       // fold Button
@@ -301,7 +301,7 @@ function createFoldButton(childrenList: HTMLUListElement) {
       foldButton.classList.add("expanded")
     }
     event.stopPropagation()
-  })
+  }, {passive: true})
   return foldButton
 }
 
