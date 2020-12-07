@@ -143,17 +143,21 @@ function addOutlineEntries({
 
     // Cursor reposition on click
     // TIME: 0-0.1ms
-    symbol.addEventListener("click", () => {
-      const editorPane = atom.workspace.paneForItem(editor)
-      if (!editorPane) {
-        return
-      }
-      editorPane.activate()
+    symbol.addEventListener(
+      "click",
+      () => {
+        const editorPane = atom.workspace.paneForItem(editor)
+        if (!editorPane) {
+          return
+        }
+        editorPane.activate()
 
-      editor.getCursors()[0].setBufferPosition(item.startPosition, {
-        autoscroll: true,
-      })
-    }, {passive: true})
+        editor.getCursors()[0].setBufferPosition(item.startPosition, {
+          autoscroll: true,
+        })
+      },
+      { passive: true }
+    )
 
     const hasChildren = item.children && !!item.children[0]
 
@@ -169,7 +173,7 @@ function addOutlineEntries({
     if (hasChildren) {
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
-      childrenList.addEventListener("click", (event) => event.stopPropagation(), {passive: true})
+      childrenList.addEventListener("click", (event) => event.stopPropagation(), { passive: true })
       symbol.append(childrenList)
 
       // fold Button
@@ -316,17 +320,21 @@ function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean
   }
 
   // fold listener
-  foldButton.addEventListener("click", (event) => {
-    childrenList.hidden = !childrenList.hidden
-    if (childrenList.hidden) {
-      foldButton.classList.remove("expanded")
-      foldButton.classList.add("collapsed")
-    } else {
-      foldButton.classList.remove("collapsed")
-      foldButton.classList.add("expanded")
-    }
-    event.stopPropagation()
-  }, {passive: true})
+  foldButton.addEventListener(
+    "click",
+    (event) => {
+      childrenList.hidden = !childrenList.hidden
+      if (childrenList.hidden) {
+        foldButton.classList.remove("expanded")
+        foldButton.classList.add("collapsed")
+      } else {
+        foldButton.classList.remove("collapsed")
+        foldButton.classList.add("expanded")
+      }
+      event.stopPropagation()
+    },
+    { passive: true }
+  )
   return foldButton
 }
 

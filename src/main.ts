@@ -77,12 +77,11 @@ function addObservers() {
     await getOutline(editor) // initial outline
 
     const lineCount = lineCountIfLarge(editor as TextEditor)
-    const isLarge =  Boolean(lineCount)
+    const isLarge = Boolean(lineCount)
 
     // How long to wait for the new changes before updating the outline.
     // A high number will increase the responsiveness of the text editor in large files.
     const updateDebounceTime = Math.min(lineCount / 10, 300) // 1/10 of the line count
-
 
     // skip following cursor in large files
     let onDidChangeCursorPosition: DebouncedFunc<(event: CursorPositionChangedEvent) => void>
