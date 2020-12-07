@@ -1,3 +1,20 @@
+# [1.14.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.13.0...v1.14.0) (2020-12-07)
+
+
+### Bug Fixes
+
+* make event listeners passive ([da37db0](https://github.com/atom-ide-community/atom-ide-outline/commit/da37db0b74756c625c6be87c76554cd590908052))
+* make large file mode update rate slower ([0ea2652](https://github.com/atom-ide-community/atom-ide-outline/commit/0ea26523819d1a0cbd5d3a45e914a162c2ba64fd))
+* make updateDebounceTime editor's size dependant ([4c452a3](https://github.com/atom-ide-community/atom-ide-outline/commit/4c452a3cd02419120a0d6b717974c0bc8e03825b))
+* remove updateDebounceTime config ([9dc937a](https://github.com/atom-ide-community/atom-ide-outline/commit/9dc937a6a91c820421d7572193433150a2954533))
+
+
+### Features
+
+* add large file mode notificaiton ([ebe5a07](https://github.com/atom-ide-community/atom-ide-outline/commit/ebe5a07eb55111f6c64f51e0925b810c7f649e6a))
+* fold initially in large files ([3252809](https://github.com/atom-ide-community/atom-ide-outline/commit/3252809e9983f69e6216c32a7157d8d82249179d))
+* skip following cursor in large files ([fd1b326](https://github.com/atom-ide-community/atom-ide-outline/commit/fd1b326bf1a5f29465ec5429225f8b2121991d5d))
+
 # [1.13.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.12.1...v1.13.0) (2020-12-07)
 
 
