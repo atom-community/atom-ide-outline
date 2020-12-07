@@ -8,6 +8,13 @@
 // @contain_all: size layout paint style;
 @contain_except_size: layout paint style;
 
+@font-face {
+  font-family: 'symbol-icons';
+  src: url('atom://atom-ide-outline/styles/symbol-icons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .outline-view {
   contain: @contain_except_size;
   overflow-y: auto;
@@ -72,10 +79,10 @@
   .icon {
     contain: @contain_except_size;
     display: inline-block;
-    width: 20px;
+    width: 40px;
     text-align: center;
     vertical-align: top; // align icon with text vertically
-    font-weight: bold;
+    font-weight: normal;
   }
 
   // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
@@ -84,6 +91,7 @@
   .styleByType(@type, @color) {
     .type-@{type} {
       color: @color;
+      font-size: smaller;
     }
 
     .fold-type-@{type} {

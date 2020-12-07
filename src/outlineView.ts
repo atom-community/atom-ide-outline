@@ -195,6 +195,61 @@ const supportedTypes = [
   "variable",
 ]
 
+
+// find better symbols for the rest
+const symbolMap = new Map([
+  // ["class", '\ue600'],
+  // ["struct", '\ue601'],
+  // ["macro", '\ue602'],
+  // ["typedef", '\ue603'],
+  // ["union", '\ue604'],
+  // ["interface", '\ue605'],
+  // ["enum", '\ue606'],
+  ["variable", '\ue607'],
+  ["function", '\ue608'],
+  ["namespace", '\ue609'],
+])
+
+// find better symbols for the rest
+const abbreviationMap = new Map([
+  ["array", "arr"],
+  ["boolean", "bool"],
+  ["class", "clas"],
+  ["constant", "cons"],
+  ["constructor", "ctor"],
+  ["enum", "enum"],
+  ["field", "fild"],
+  ["file", "file"],
+  ["function", "func"],
+  ["interface", "intf"],
+  ["method", "meth"],
+  ["module", "mod"],
+  ["namespace", "ns"],
+  ["number", "num"],
+  ["package", "pkg"],
+  ["property", "prop"],
+  ["string", "str"],
+  ["variable", "var"],
+])
+
+
+function getIconHTML(type: string | undefined) {
+  if (type) {
+    if (symbolMap.has(type)) {
+      return `<span style="font-family: 'symbol-icons';">${symbolMap.get(type)}</span>`
+    }
+    if (abbreviationMap.has(type)) {
+      return `<span>${abbreviationMap.get(type)}</span>`
+    }
+    else {
+      return `<span>${type.substring(0, 3)}</span>`
+    }
+  } else {
+    return "<span>•</span>"
+  }
+
+}
+
 function getIcon(iconType?: string, kindType?: string) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
@@ -226,8 +281,7 @@ function getIcon(iconType?: string, kindType?: string) {
     iconElement.classList.add(kindClass)
   }
 
-  const iconSymbol = type ? type.substring(0, 1) : "•"
-  iconElement.innerHTML = `<span>${iconSymbol}</span>`
+  iconElement.innerHTML = getIconHTML(type);
 
   return { iconElement, kindClass }
 }
