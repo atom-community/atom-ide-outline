@@ -209,6 +209,22 @@ const symbolMap = new Map([
   ["function", '\ue608'],
   ["namespace", '\ue609'],
 ])
+
+function getIconHTML(type: string | undefined) {
+  if (type) {
+    if (symbolMap.has(type)) {
+      return `<span style="font-family: 'symbol-icons';">${symbolMap.get(type)}</span>`
+    }
+    if (abbreviationMap.has(type)) {
+      return `<span>${abbreviationMap.get(type)}</span>`
+    }
+    else {
+      return `<span>${type.substring(0, 3)}</span>`
+    }
+  } else {
+    return "<span>•</span>"
+  }
+
 }
 
 function getIcon(iconType?: string, kindType?: string) {
@@ -242,8 +258,7 @@ function getIcon(iconType?: string, kindType?: string) {
     iconElement.classList.add(kindClass)
   }
 
-  const iconSymbol = type ? (symbolMap[type] ?? type.substring(0, 1)) : "•";
-  iconElement.innerHTML = `<span>${iconSymbol}</span>`;
+  iconElement.innerHTML = getIconHTML(type);
 
   return { iconElement, kindClass }
 }
