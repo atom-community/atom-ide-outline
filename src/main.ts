@@ -99,6 +99,11 @@ function addObservers() {
         })
       )
     }
+
+    const onDidStopChanging = debounce((editor) => {
+      getOutline(editor)
+    }, updateDebounceTime)
+
     onDidCompositeDisposable!.add(
       // update the outline if editor stops changing
       editor.onDidStopChanging(() => {
