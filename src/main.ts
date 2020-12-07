@@ -13,7 +13,6 @@ let view: OutlineView
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
 let busySignalProvider: BusySignalProvider
-let updateDebounceTime: number
 
 export function activate() {
   subscriptions = new CompositeDisposable()
@@ -23,7 +22,6 @@ export function activate() {
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
     toggleOutlineView() // initially show outline pane
   }
-  updateDebounceTime = atom.config.get("atom-ide-outline.updateDebounceTime")
 }
 
 export function deactivate() {
@@ -148,12 +146,5 @@ export const config = {
     description: "This option sorts the entries based on where they appear in the code.",
     type: "boolean",
     default: true,
-  },
-  updateDebounceTime: {
-    title: "Outline Update Debounce Time",
-    description:
-      "How long to wait for the new changes before updating the outline. \n A high number will increase the responsiveness of the text editor in large files.",
-    type: "number",
-    default: 300,
   },
 }
