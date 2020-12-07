@@ -1,4 +1,4 @@
-import { CompositeDisposable, TextEditor } from "atom"
+import { CompositeDisposable, TextEditor, CursorPositionChangedEvent } from "atom"
 import { OutlineView, selectAtCursorLine } from "./outlineView"
 import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
@@ -67,8 +67,6 @@ let onDidCompositeDisposable: CompositeDisposable | null
 
 function addObservers() {
   onDidCompositeDisposable = new CompositeDisposable()
-
-  const onDidChangeCursorPosition = debounce((cursorPositionChangedEvent) => {
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor?: TextEditor) => {
     if (!editor) {
       return
@@ -85,15 +83,26 @@ function addObservers() {
     // A high number will increase the responsiveness of the text editor in large files.
     const updateDebounceTime = Math.min(lineCount / 10, 300) // 1/10 of the line count
 
+
+    // skip following cursor in large files
+    let onDidChangeCursorPosition: DebouncedFunc<(event: CursorPositionChangedEvent) => void>
+    if (!isLarge) {
+      // following cursor disposable
+      onDidChangeCursorPosition = debounce((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
+        selectAtCursorLine(cursorPositionChangedEvent)
+      }, updateDebounceTime)
+
+      onDidCompositeDisposable!.add(
+        // update outline if cursor changes position
+        editor.onDidChangeCursorPosition((cursorPositionChangedEvent) => {
+          onDidChangeCursorPosition(cursorPositionChangedEvent)
+        })
+      )
+    }
     onDidCompositeDisposable!.add(
       // update the outline if editor stops changing
       editor.onDidStopChanging(() => {
         onDidStopChanging(editor)
-      }),
-
-      // update outline if cursor changes position
-      editor.onDidChangeCursorPosition((cursorPositionChangedEvent) => {
-        onDidChangeCursorPosition(cursorPositionChangedEvent)
       }),
 
       // clean up if the editor editor is closed
