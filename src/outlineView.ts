@@ -226,7 +226,7 @@ const abbreviationMap = new Map([
   ["module", "mod"],
   ["namespace", "ns"],
   ["number", "num"],
-  ["package", "pack"],
+  ["package", "pkg"],
   ["property", "prop"],
   ["string", "str"],
   ["variable", "var"],
