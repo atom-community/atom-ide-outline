@@ -79,10 +79,10 @@
   .icon {
     contain: @contain_except_size;
     display: inline-block;
-    width: 35px;
+    width: 40px;
     text-align: center;
     vertical-align: top; // align icon with text vertically
-    font-weight: bold;
+    font-weight: normal;
   }
 
   // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
@@ -91,7 +91,7 @@
   .styleByType(@type, @color) {
     .type-@{type} {
       color: @color;
-      font-family: 'symbol-icons';
+      font-size: smaller;
     }
 
     .fold-type-@{type} {
