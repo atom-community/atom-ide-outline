@@ -29,6 +29,20 @@ export class OutlineView {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
 
+    if (isLarge) {
+      const largeFileElement = document.createElement("div")
+      largeFileElement.innerHTML = `
+        <span style = "
+          font-size: var(--editor-font-size);
+          font-family: var(--editor-font-family);
+          line-height: var(--editor-line-height);
+          color: #71844c;
+        "
+        >Large file mode</span>
+      `
+      outlineViewElement.appendChild(largeFileElement)
+    }
+
     const outlineRoot = document.createElement("ul")
     addOutlineEntries({
       parent: outlineRoot,
