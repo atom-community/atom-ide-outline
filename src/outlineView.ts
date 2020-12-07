@@ -25,15 +25,30 @@ export class OutlineView {
     return "list-unordered"
   }
 
-  setOutline({ tree: outlineTree, editor }: { tree: OutlineTree[]; editor: TextEditor }) {
+  setOutline({ tree: outlineTree, editor, isLarge }: { tree: OutlineTree[]; editor: TextEditor; isLarge: boolean }) {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
+
+    if (isLarge) {
+      const largeFileElement = document.createElement("div")
+      largeFileElement.innerHTML = `
+        <span style = "
+          font-size: var(--editor-font-size);
+          font-family: var(--editor-font-family);
+          line-height: var(--editor-line-height);
+          color: #71844c;
+        "
+        >Large file mode</span>
+      `
+      outlineViewElement.appendChild(largeFileElement)
+    }
 
     const outlineRoot = document.createElement("ul")
     addOutlineEntries({
       parent: outlineRoot,
       entries: outlineTree,
       editor,
+      isLarge,
     })
     outlineViewElement.append(outlineRoot)
   }
@@ -72,11 +87,13 @@ function addOutlineEntries({
   parent,
   entries,
   editor,
+  isLarge,
   level = 0,
 }: {
   parent: HTMLUListElement
   entries: OutlineTree[]
   editor: TextEditor
+  isLarge: boolean
   level?: number
 }) {
   // NOTE: this function is called multiple times with each update in an editor!
@@ -126,17 +143,21 @@ function addOutlineEntries({
 
     // Cursor reposition on click
     // TIME: 0-0.1ms
-    symbol.addEventListener("click", () => {
-      const editorPane = atom.workspace.paneForItem(editor)
-      if (!editorPane) {
-        return
-      }
-      editorPane.activate()
+    symbol.addEventListener(
+      "click",
+      () => {
+        const editorPane = atom.workspace.paneForItem(editor)
+        if (!editorPane) {
+          return
+        }
+        editorPane.activate()
 
-      editor.getCursors()[0].setBufferPosition(item.startPosition, {
-        autoscroll: true,
-      })
-    })
+        editor.getCursors()[0].setBufferPosition(item.startPosition, {
+          autoscroll: true,
+        })
+      },
+      { passive: true }
+    )
 
     const hasChildren = item.children && !!item.children[0]
 
@@ -152,11 +173,11 @@ function addOutlineEntries({
     if (hasChildren) {
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
-      childrenList.addEventListener("click", (event) => event.stopPropagation())
+      childrenList.addEventListener("click", (event) => event.stopPropagation(), { passive: true })
       symbol.append(childrenList)
 
       // fold Button
-      const foldButton = createFoldButton(childrenList)
+      const foldButton = createFoldButton(childrenList, isLarge)
       labelElement.prepend(foldButton)
 
       // add children to outline
@@ -165,6 +186,7 @@ function addOutlineEntries({
         parent: childrenList,
         entries: item.children,
         editor,
+        isLarge,
         level: level + 1,
       })
     }
@@ -284,24 +306,35 @@ function getIcon(iconType?: string, kindType?: string) {
 
 const foldButtonWidth = 20
 
-function createFoldButton(childrenList: HTMLUListElement) {
+function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean) {
   // TIME: ~0.1-0.5ms
   // fold button
   const foldButton = document.createElement("button")
-  foldButton.classList.add("fold", "expanded")
+
+  if (foldInitially) {
+    // collapse in large files by default
+    childrenList.hidden = true
+    foldButton.classList.add("fold", "collapsed")
+  } else {
+    foldButton.classList.add("fold", "expanded")
+  }
 
   // fold listener
-  foldButton.addEventListener("click", (event) => {
-    childrenList.hidden = !childrenList.hidden
-    if (childrenList.hidden) {
-      foldButton.classList.remove("expanded")
-      foldButton.classList.add("collapsed")
-    } else {
-      foldButton.classList.remove("collapsed")
-      foldButton.classList.add("expanded")
-    }
-    event.stopPropagation()
-  })
+  foldButton.addEventListener(
+    "click",
+    (event) => {
+      childrenList.hidden = !childrenList.hidden
+      if (childrenList.hidden) {
+        foldButton.classList.remove("expanded")
+        foldButton.classList.add("collapsed")
+      } else {
+        foldButton.classList.remove("collapsed")
+        foldButton.classList.add("expanded")
+      }
+      event.stopPropagation()
+    },
+    { passive: true }
+  )
   return foldButton
 }
 

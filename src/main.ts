@@ -1,11 +1,11 @@
-import { CompositeDisposable, TextEditor } from "atom"
+import { CompositeDisposable, TextEditor, CursorPositionChangedEvent } from "atom"
 import { OutlineView, selectAtCursorLine } from "./outlineView"
 import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
-import { debounce } from "lodash"
+import { debounce, DebouncedFunc } from "lodash"
 
 let subscriptions: CompositeDisposable
 
@@ -13,7 +13,6 @@ let view: OutlineView
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
 let busySignalProvider: BusySignalProvider
-let updateDebounceTime: number
 
 export function activate() {
   subscriptions = new CompositeDisposable()
@@ -23,7 +22,6 @@ export function activate() {
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
     toggleOutlineView() // initially show outline pane
   }
-  updateDebounceTime = atom.config.get("atom-ide-outline.updateDebounceTime")
 }
 
 export function deactivate() {
@@ -50,20 +48,25 @@ function addCommands() {
   subscriptions.add(outlineToggle)
 }
 
+const largeFileLineCount = 3000 // minimum number of lines to trigger large file optimizations
+function lineCountIfLarge(editor: TextEditor) {
+  // @ts-ignore
+  if (editor.largeFileMode) {
+    return 20000
+  }
+  const lineCount = editor.getLineCount()
+  if (lineCount > largeFileLineCount) {
+    return lineCount
+  } else {
+    return 0
+  }
+}
+
 // disposables returned inside the oberservers
 let onDidCompositeDisposable: CompositeDisposable | null
 
 function addObservers() {
   onDidCompositeDisposable = new CompositeDisposable()
-
-  const onDidChangeCursorPosition = debounce((cursorPositionChangedEvent) => {
-    selectAtCursorLine(cursorPositionChangedEvent)
-  }, updateDebounceTime)
-
-  const onDidStopChanging = debounce((editor) => {
-    getOutline(editor)
-  }, updateDebounceTime)
-
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor?: TextEditor) => {
     if (!editor) {
       return
@@ -73,15 +76,37 @@ function addObservers() {
 
     await getOutline(editor) // initial outline
 
+    const lineCount = lineCountIfLarge(editor as TextEditor)
+    const isLarge = Boolean(lineCount)
+
+    // How long to wait for the new changes before updating the outline.
+    // A high number will increase the responsiveness of the text editor in large files.
+    const updateDebounceTime = Math.min(lineCount / 5, 300) // 1/10 of the line count
+
+    // skip following cursor in large files
+    let onDidChangeCursorPosition: DebouncedFunc<(event: CursorPositionChangedEvent) => void>
+    if (!isLarge) {
+      // following cursor disposable
+      onDidChangeCursorPosition = debounce((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
+        selectAtCursorLine(cursorPositionChangedEvent)
+      }, updateDebounceTime)
+
+      onDidCompositeDisposable!.add(
+        // update outline if cursor changes position
+        editor.onDidChangeCursorPosition((cursorPositionChangedEvent) => {
+          onDidChangeCursorPosition(cursorPositionChangedEvent)
+        })
+      )
+    }
+
+    const onDidStopChanging = debounce((editor) => {
+      getOutline(editor)
+    }, updateDebounceTime)
+
     onDidCompositeDisposable!.add(
       // update the outline if editor stops changing
       editor.onDidStopChanging(() => {
         onDidStopChanging(editor)
-      }),
-
-      // update outline if cursor changes position
-      editor.onDidChangeCursorPosition((cursorPositionChangedEvent) => {
-        onDidChangeCursorPosition(cursorPositionChangedEvent)
       }),
 
       // clean up if the editor editor is closed
@@ -131,6 +156,7 @@ export async function getOutline(activeEditor?: TextEditor) {
   view.setOutline({
     tree: outline?.outlineTrees ?? [],
     editor,
+    isLarge: Boolean(lineCountIfLarge(editor as TextEditor)),
   })
 
   busySignalProvider?.clear()
@@ -153,12 +179,5 @@ export const config = {
     description: "This option sorts the entries based on where they appear in the code.",
     type: "boolean",
     default: true,
-  },
-  updateDebounceTime: {
-    title: "Outline Update Debounce Time",
-    description:
-      "How long to wait for the new changes before updating the outline. \n A high number will increase the responsiveness of the text editor in large files.",
-    type: "number",
-    default: 300,
   },
 }
