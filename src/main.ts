@@ -48,6 +48,20 @@ function addCommands() {
   subscriptions.add(outlineToggle)
 }
 
+const largeFileLineCount = 3000 // minimum number of lines to trigger large file optimizations
+function lineCountIfLarge(editor: TextEditor) {
+  // @ts-ignore
+  if (editor.largeFileMode) {
+    return 20000
+  }
+  const lineCount = editor.getLineCount()
+  if (lineCount > largeFileLineCount) {
+    return lineCount
+  } else {
+    return 0
+  }
+}
+
 // disposables returned inside the oberservers
 let onDidCompositeDisposable: CompositeDisposable | null
 
