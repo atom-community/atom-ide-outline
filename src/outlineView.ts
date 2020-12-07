@@ -210,6 +210,29 @@ const symbolMap = new Map([
   ["namespace", '\ue609'],
 ])
 
+// find better symbols for the rest
+const abbreviationMap = new Map([
+  ["array", "arr"],
+  ["boolean", "bool"],
+  ["class", "clas"],
+  ["constant", "cons"],
+  ["constructor", "ctor"],
+  ["enum", "enum"],
+  ["field", "fild"],
+  ["file", "file"],
+  ["function", "func"],
+  ["interface", "intf"],
+  ["method", "meth"],
+  ["module", "mod"],
+  ["namespace", "ns"],
+  ["number", "num"],
+  ["package", "pack"],
+  ["property", "prop"],
+  ["string", "str"],
+  ["variable", "var"],
+])
+
+
 function getIconHTML(type: string | undefined) {
   if (type) {
     if (symbolMap.has(type)) {
