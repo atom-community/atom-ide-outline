@@ -1,3 +1,22 @@
+# [1.13.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.12.1...v1.13.0) (2020-12-07)
+
+
+### Bug Fixes
+
+* adjust font size and width ([4ec9557](https://github.com/atom-ide-community/atom-ide-outline/commit/4ec9557be658d462e37199229309e5a133a87f43))
+* escape symbols using \ue ([a11e9e7](https://github.com/atom-ide-community/atom-ide-outline/commit/a11e9e72a1780dde7dbe3bbba9965c4c04cea425))
+* increase the width of the icon ([53c1959](https://github.com/atom-ide-community/atom-ide-outline/commit/53c195978c37fc538964dec45c021d1f3da15e5f))
+* use Map and disable less intuitive icons ([77cbc97](https://github.com/atom-ide-community/atom-ide-outline/commit/77cbc9782ee863bc8e1ab5ea69bd0350b76d79b0))
+* use pkg for package [skip ci] ([d00eef0](https://github.com/atom-ide-community/atom-ide-outline/commit/d00eef0a2fa3095d1a3cea2b21ac0936a3611635))
+
+
+### Features
+
+* add abbreviationMap ([48a6052](https://github.com/atom-ide-community/atom-ide-outline/commit/48a6052de5741a72aad73015240974fd4cfeae62))
+* add fonts ([38ccfd7](https://github.com/atom-ide-community/atom-ide-outline/commit/38ccfd7fa434fc12a17ce274540256e9f75b19a5))
+* add symbol map ([5aeef4c](https://github.com/atom-ide-community/atom-ide-outline/commit/5aeef4c800ee56fe7aa70656cd18e36c50e95bb1))
+* make icon from symbol or abbreviation ([a1190a9](https://github.com/atom-ide-community/atom-ide-outline/commit/a1190a9eba68c9603b1cf5ea41c0d200bcd5d83b))
+
 ## [1.12.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.12.0...v1.12.1) (2020-10-26)
 
 
