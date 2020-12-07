@@ -195,17 +195,20 @@ const supportedTypes = [
   "variable",
 ]
 
-const symbolMap = {
-  class: '\ue600',
-  struct: '\ue601',
-  macro: '\ue602',
-  typedef: '\ue603',
-  union: '\ue604',
-  interface: '\ue605',
-  enum: '\ue606',
-  variable: '\ue607',
-  function: '\ue608',
-  namespace: '\ue609',
+
+// find better symbols for the rest
+const symbolMap = new Map([
+  // ["class", '\ue600'],
+  // ["struct", '\ue601'],
+  // ["macro", '\ue602'],
+  // ["typedef", '\ue603'],
+  // ["union", '\ue604'],
+  // ["interface", '\ue605'],
+  // ["enum", '\ue606'],
+  ["variable", '\ue607'],
+  ["function", '\ue608'],
+  ["namespace", '\ue609'],
+])
 }
 
 function getIcon(iconType?: string, kindType?: string) {
