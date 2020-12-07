@@ -25,7 +25,7 @@ export class OutlineView {
     return "list-unordered"
   }
 
-  setOutline({ tree: outlineTree, editor }: { tree: OutlineTree[]; editor: TextEditor }) {
+  setOutline({ tree: outlineTree, editor, isLarge }: { tree: OutlineTree[]; editor: TextEditor; isLarge: boolean }) {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
 
@@ -34,6 +34,7 @@ export class OutlineView {
       parent: outlineRoot,
       entries: outlineTree,
       editor,
+      isLarge,
     })
     outlineViewElement.append(outlineRoot)
   }
@@ -72,11 +73,13 @@ function addOutlineEntries({
   parent,
   entries,
   editor,
+  isLarge,
   level = 0,
 }: {
   parent: HTMLUListElement
   entries: OutlineTree[]
   editor: TextEditor
+  isLarge: boolean
   level?: number
 }) {
   // NOTE: this function is called multiple times with each update in an editor!
@@ -156,7 +159,7 @@ function addOutlineEntries({
       symbol.append(childrenList)
 
       // fold Button
-      const foldButton = createFoldButton(childrenList)
+      const foldButton = createFoldButton(childrenList, isLarge)
       labelElement.prepend(foldButton)
 
       // add children to outline
@@ -165,6 +168,7 @@ function addOutlineEntries({
         parent: childrenList,
         entries: item.children,
         editor,
+        isLarge,
         level: level + 1,
       })
     }
@@ -284,11 +288,18 @@ function getIcon(iconType?: string, kindType?: string) {
 
 const foldButtonWidth = 20
 
-function createFoldButton(childrenList: HTMLUListElement) {
+function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean) {
   // TIME: ~0.1-0.5ms
   // fold button
   const foldButton = document.createElement("button")
-  foldButton.classList.add("fold", "expanded")
+
+  if (foldInitially) {
+    // collapse in large files by default
+    childrenList.hidden = true
+    foldButton.classList.add("fold", "collapsed")
+  } else {
+    foldButton.classList.add("fold", "expanded")
+  }
 
   // fold listener
   foldButton.addEventListener("click", (event) => {

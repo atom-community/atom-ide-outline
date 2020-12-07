@@ -5,7 +5,7 @@ import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
-import { debounce } from "lodash"
+import { debounce, DebouncedFunc } from "lodash"
 
 let subscriptions: CompositeDisposable
 
@@ -57,13 +57,6 @@ function addObservers() {
   onDidCompositeDisposable = new CompositeDisposable()
 
   const onDidChangeCursorPosition = debounce((cursorPositionChangedEvent) => {
-    selectAtCursorLine(cursorPositionChangedEvent)
-  }, updateDebounceTime)
-
-  const onDidStopChanging = debounce((editor) => {
-    getOutline(editor)
-  }, updateDebounceTime)
-
   const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor?: TextEditor) => {
     if (!editor) {
       return
@@ -73,6 +66,7 @@ function addObservers() {
 
     await getOutline(editor) // initial outline
 
+    const lineCount = lineCountIfLarge(editor as TextEditor)
     onDidCompositeDisposable!.add(
       // update the outline if editor stops changing
       editor.onDidStopChanging(() => {
@@ -131,6 +125,7 @@ export async function getOutline(activeEditor?: TextEditor) {
   view.setOutline({
     tree: outline?.outlineTrees ?? [],
     editor,
+    isLarge: Boolean(lineCountIfLarge(editor as TextEditor)),
   })
 
   busySignalProvider?.clear()
