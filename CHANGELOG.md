@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.14.0...v1.14.1) (2020-12-08)
+
+
+### Bug Fixes
+
+* updateDebounceTime: use max instead of min ([1b12606](https://github.com/atom-ide-community/atom-ide-outline/commit/1b1260645cf9712a87dc7726a57389876dd495f1))
+
 # [1.14.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.13.0...v1.14.0) (2020-12-07)
 
 
