@@ -5,7 +5,7 @@
 @import "ui-variables";
 @import "syntax-variables";
 
-// @contain_all: size layout paint style;
+@contain_all: size layout paint style;
 @contain_except_size: layout paint style;
 
 @font-face {
@@ -37,6 +37,7 @@
 
       // highlight on hover
       &:hover {
+        contain: @contain_except_size;
         cursor: pointer;
         background: @background-color-highlight;
       }
@@ -44,6 +45,7 @@
 
     // highlight when the editor cursor is on them
     li[cursorOn] {
+      contain: @contain_except_size;
       background: @background-color-highlight;
     }
   }
@@ -68,10 +70,12 @@
     -webkit-font-smoothing: antialiased;
 
     &.collapsed::before {
+      contain: @contain_except_size;
       content: "\f078";
     }
 
     &.expanded::before {
+      contain: @contain_except_size;
       content: "\f0a3";
     }
   }
@@ -90,6 +94,7 @@
 
   .styleByType(@type, @color) {
     .type-@{type} {
+      contain: @contain_except_size;
       color: @color;
       font-size: smaller;
     }
@@ -99,6 +104,7 @@
       background-color: darken(@color, 10%);
 
       &:focus {
+        contain: @contain_except_size;
         opacity: 1;
       }
     }
