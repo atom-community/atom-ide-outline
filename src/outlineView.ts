@@ -48,7 +48,7 @@ export class OutlineView {
       parent: outlineRoot,
       entries: outlineTree,
       editor,
-      isLarge,
+      isLarge: isLarge || atom.config.get("atom-ide-outline.foldInitially"),
     })
     outlineViewElement.append(outlineRoot)
   }

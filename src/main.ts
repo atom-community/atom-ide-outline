@@ -180,4 +180,10 @@ export const config = {
     type: "boolean",
     default: true,
   },
+  foldInitially: {
+    title: "Fold the entries initially",
+    description: "If enabled, the outline entries are folded initially. This is enabled automatically in large file mode.",
+    type: "boolean",
+    default: false,
+  },
 }
