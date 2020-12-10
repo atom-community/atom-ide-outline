@@ -280,9 +280,9 @@ function getIcon(iconType?: string, kindType?: string) {
     kindType = iconType
   }
 
-  let kindClass = ""
   let type
   if (typeof kindType === "string" && kindType.length > 0) {
+    let kindClass: string
     // hasKind
     if (kindType.indexOf("type-") === 0) {
       // supplied with type-...
