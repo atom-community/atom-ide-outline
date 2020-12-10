@@ -84,17 +84,17 @@ function addObservers() {
     const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
 
     // skip following cursor in large files
-    let onDidChangeCursorPosition: DebouncedFunc<(event: CursorPositionChangedEvent) => void>
+    let onDidChangeCursorPosition: DebouncedFunc<(event: CursorPositionChangedEvent["newBufferPosition"]) => void>
     if (!isLarge) {
       // following cursor disposable
-      onDidChangeCursorPosition = debounce((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
-        selectAtCursorLine(cursorPositionChangedEvent)
+      onDidChangeCursorPosition = debounce((newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) => {
+        selectAtCursorLine(newBufferPosition)
       }, updateDebounceTime)
 
       onDidCompositeDisposable!.add(
         // update outline if cursor changes position
-        editor.onDidChangeCursorPosition((cursorPositionChangedEvent) => {
-          onDidChangeCursorPosition(cursorPositionChangedEvent)
+        editor.onDidChangeCursorPosition((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
+          onDidChangeCursorPosition(cursorPositionChangedEvent.newBufferPosition)
         })
       )
     }

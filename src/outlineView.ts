@@ -335,7 +335,7 @@ function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean
 let focusedElms: HTMLElement[] | undefined // cache for focused elements
 
 // callback for scrolling and highlighting the element that the cursor is on
-export function selectAtCursorLine({ newBufferPosition }: CursorPositionChangedEvent) {
+export function selectAtCursorLine(newBufferPosition : CursorPositionChangedEvent["newBufferPosition"]) {
   // TIME: ~0.2-0.3ms
   // TODO use range of start and end instead of just the line number
 
