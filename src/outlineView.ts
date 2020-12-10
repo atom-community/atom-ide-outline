@@ -110,7 +110,7 @@ function addOutlineEntries(
     })
   }
 
-  entries.forEach((item: OutlineTree) => {
+  for (const item of entries) {
     const symbol = document.createElement("li")
 
     // symbol.setAttribute("level", `${level}`); // store level in the element
@@ -178,7 +178,7 @@ function addOutlineEntries(
 
     // TIME: <0.1ms
     parent.appendChild(symbol)
-  })
+  }
 }
 
 const supportedTypes = [
