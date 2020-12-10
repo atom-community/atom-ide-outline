@@ -88,7 +88,7 @@ function addOutlineEntries(
   entries: OutlineTree[],
   editor: TextEditor,
   isLarge: boolean,
-  level: number = 0
+  level = 0
 ) {
   // NOTE: this function is called multiple times with each update in an editor!
   // a few of the calls is slow ~1-100ms
