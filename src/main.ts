@@ -5,7 +5,7 @@ import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
-import { debounce, DebouncedFunc } from "lodash"
+import { debounce } from "lodash"
 
 let subscriptions: CompositeDisposable
 
@@ -84,10 +84,8 @@ function addObservers() {
 
     // skip following cursor in large files
     if (/* !isLarge */ lineCount !== 0) {
-      let onDidChangeCursorPosition: DebouncedFunc<(event: CursorPositionChangedEvent["newBufferPosition"]) => void>
-
       // following cursor disposable
-      onDidChangeCursorPosition = debounce((newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) => {
+      const onDidChangeCursorPosition = debounce((newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) => {
         selectAtCursorLine(newBufferPosition)
       }, updateDebounceTime)
 
