@@ -126,7 +126,7 @@ function addOutlineEntries({
     const labelElement = document.createElement("span")
     labelElement.innerText = (item.representativeName || item.plainText) ?? ""
 
-    const { iconElement } = getIcon(item?.icon, item?.kind)
+    const iconElement = getIcon(item?.icon, item?.kind)
     labelElement.prepend(iconElement)
 
     symbol.append(labelElement)
@@ -301,7 +301,7 @@ function getIcon(iconType?: string, kindType?: string) {
 
   iconElement.innerHTML = getIconHTML(type)
 
-  return { iconElement, kindClass }
+  return iconElement
 }
 
 const foldButtonWidth = 20
