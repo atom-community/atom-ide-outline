@@ -26,8 +26,7 @@ export class OutlineView {
   }
 
   setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
-    const outlineViewElement = this.getElement()
-    outlineViewElement.innerHTML = ""
+    const outlineViewElement = this.clearOutline()
 
     if (isLarge) {
       const largeFileElement = document.createElement("div")
@@ -51,6 +50,7 @@ export class OutlineView {
   clearOutline() {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
+    return outlineViewElement
   }
 
   presentStatus(status: { title: string; description: string }) {
