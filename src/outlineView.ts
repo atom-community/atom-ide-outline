@@ -156,12 +156,11 @@ function addOutlineEntries(
       // indentation
       labelElement.style.paddingLeft = level !== 0 ? `${indentRatio * level}px` : `${foldButtonWidth}px`
     } else {
+      // indentation
       // compensate for the fold button
       labelElement.style.paddingLeft = level !== 0 ? `${indentRatio * level - foldButtonWidth}px` : `0px`
-    }
 
-    // create Child elements
-    if (hasChildren) {
+      // create Child elements
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
       childrenList.addEventListener("click", (event) => event.stopPropagation(), { passive: true })
