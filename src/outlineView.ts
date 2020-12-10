@@ -44,12 +44,12 @@ export class OutlineView {
     }
 
     const outlineRoot = document.createElement("ul")
-    addOutlineEntries({
-      parent: outlineRoot,
-      entries: outlineTree,
+    addOutlineEntries(
+      outlineRoot,
+      outlineTree,
       editor,
-      isLarge: isLarge || atom.config.get("atom-ide-outline.foldInitially"),
-    })
+      isLarge || atom.config.get("atom-ide-outline.foldInitially"),
+    )
     outlineViewElement.appendChild(outlineRoot)
   }
 
@@ -83,19 +83,13 @@ function generateStatusElement(status: { title: string; description: string }) {
 
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map() // TODO Point to element
 
-function addOutlineEntries({
-  parent,
-  entries,
-  editor,
-  isLarge,
-  level = 0,
-}: {
-  parent: HTMLUListElement
-  entries: OutlineTree[]
-  editor: TextEditor
-  isLarge: boolean
-  level?: number
-}) {
+function addOutlineEntries(
+  parent: HTMLUListElement,
+  entries: OutlineTree[],
+  editor: TextEditor,
+  isLarge: boolean,
+  level: number = 0,
+) {
   // NOTE: this function is called multiple times with each update in an editor!
   // a few of the calls is slow ~1-100ms
 
@@ -182,13 +176,13 @@ function addOutlineEntries({
 
       // add children to outline
       // TIME: last one of each batch is slower 0-20ms
-      addOutlineEntries({
-        parent: childrenList,
-        entries: item.children,
+      addOutlineEntries(
+        childrenList,
+        item.children,
         editor,
         isLarge,
-        level: level + 1,
-      })
+        level + 1,
+      )
     }
 
     // TIME: <0.1ms
