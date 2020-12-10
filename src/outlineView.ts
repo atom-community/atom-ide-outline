@@ -43,7 +43,12 @@ export class OutlineView {
     }
 
     const outlineRoot = document.createElement("ul")
-    addOutlineEntries(outlineRoot, outlineTree, editor, isLarge || atom.config.get("atom-ide-outline.foldInitially"))
+    addOutlineEntries(
+      outlineRoot,
+      outlineTree,
+      editor,
+      /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially")
+    )
     outlineViewElement.appendChild(outlineRoot)
   }
 
@@ -115,8 +120,7 @@ function addOutlineEntries(
     const labelElement = document.createElement("span")
     labelElement.innerText = (item.representativeName || item.plainText) ?? ""
 
-    const iconElement = getIcon(item?.icon, item?.kind)
-    labelElement.prepend(iconElement)
+    labelElement.prepend(/* iconElement */ getIcon(item?.icon, item?.kind))
 
     symbol.appendChild(labelElement)
 
@@ -148,10 +152,8 @@ function addOutlineEntries(
       { passive: true }
     )
 
-    const hasChildren = item.children && !!item.children[0]
-
-    // indentation
-    if (!hasChildren) {
+    if (/* hasChildren */ !item.children && !item.children[0]) {
+      // indentation
       labelElement.style.paddingLeft = level !== 0 ? `${indentRatio * level}px` : `${foldButtonWidth}px`
     } else {
       // compensate for the fold button

@@ -36,16 +36,16 @@ export function consumeSignal(registry: BusySignalRegistry) {
 }
 
 export async function consumeOutlineProvider(provider: OutlineProvider) {
-  const providerRegistryEntry = outlineProviderRegistry.addProvider(provider)
-  subscriptions.add(providerRegistryEntry)
+  subscriptions.add(/*  providerRegistryEntry */ outlineProviderRegistry.addProvider(provider))
 
   // Generate (try) an outline after obtaining a provider
   await getOutline()
 }
 
 function addCommands() {
-  const outlineToggle = atom.commands.add("atom-workspace", "outline:toggle", () => toggleOutlineView())
-  subscriptions.add(outlineToggle)
+  subscriptions.add(
+    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", () => toggleOutlineView())
+  )
 }
 
 const largeFileLineCount = 3000 // minimum number of lines to trigger large file optimizations
@@ -77,15 +77,15 @@ function addObservers() {
     await getOutline(editor) // initial outline
 
     const lineCount = lineCountIfLarge(editor as TextEditor)
-    const isLarge = Boolean(lineCount)
 
     // How long to wait for the new changes before updating the outline.
     // A high number will increase the responsiveness of the text editor in large files.
     const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
 
     // skip following cursor in large files
-    let onDidChangeCursorPosition: DebouncedFunc<(event: CursorPositionChangedEvent["newBufferPosition"]) => void>
-    if (!isLarge) {
+    if (/* !isLarge */ lineCount !== 0) {
+      let onDidChangeCursorPosition: DebouncedFunc<(event: CursorPositionChangedEvent["newBufferPosition"]) => void>
+
       // following cursor disposable
       onDidChangeCursorPosition = debounce((newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) => {
         selectAtCursorLine(newBufferPosition)
@@ -159,8 +159,7 @@ export async function getOutline(activeEditor?: TextEditor) {
 }
 
 export function setStatus(id: "noEditor" | "noProvider") {
-  const status = statuses[id]
-  view.presentStatus(status)
+  view.presentStatus(statuses[id])
 }
 
 export const config = {
