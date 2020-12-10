@@ -1,3 +1,16 @@
+# [1.15.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.14.1...v1.15.0) (2020-12-10)
+
+
+### Bug Fixes
+
+* add css containment to all selectors ([1624082](https://github.com/atom-ide-community/atom-ide-outline/commit/16240826460687f543964f7f73ffaf4d2c369b07))
+* remove excess return in getIcon ([b390641](https://github.com/atom-ide-community/atom-ide-outline/commit/b39064185de465618b378df14b10926014fbe5f6))
+
+
+### Features
+
+* add foldInitially option ([d57b026](https://github.com/atom-ide-community/atom-ide-outline/commit/d57b0262fde955ddcbe6dc8318eb1c66849ac56c))
+
 ## [1.14.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.14.0...v1.14.1) (2020-12-08)
 
 
