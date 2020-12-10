@@ -153,11 +153,11 @@ export async function getOutline(activeEditor?: TextEditor) {
 
   const outline = await provider.getOutline(editor)
 
-  view.setOutline({
-    tree: outline?.outlineTrees ?? [],
+  view.setOutline(
+    outline?.outlineTrees ?? [],
     editor,
-    isLarge: Boolean(lineCountIfLarge(editor as TextEditor)),
-  })
+    Boolean(lineCountIfLarge(editor as TextEditor)),
+  )
 
   busySignalProvider?.clear()
 }

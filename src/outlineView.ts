@@ -25,7 +25,7 @@ export class OutlineView {
     return "list-unordered"
   }
 
-  setOutline({ tree: outlineTree, editor, isLarge }: { tree: OutlineTree[]; editor: TextEditor; isLarge: boolean }) {
+  setOutline(outlineTree: OutlineTree[], editor:  TextEditor, isLarge: boolean ) {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
 
