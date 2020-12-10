@@ -25,7 +25,7 @@ export class OutlineView {
     return "list-unordered"
   }
 
-  setOutline(outlineTree: OutlineTree[], editor:  TextEditor, isLarge: boolean ) {
+  setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
 
@@ -44,12 +44,7 @@ export class OutlineView {
     }
 
     const outlineRoot = document.createElement("ul")
-    addOutlineEntries(
-      outlineRoot,
-      outlineTree,
-      editor,
-      isLarge || atom.config.get("atom-ide-outline.foldInitially"),
-    )
+    addOutlineEntries(outlineRoot, outlineTree, editor, isLarge || atom.config.get("atom-ide-outline.foldInitially"))
     outlineViewElement.appendChild(outlineRoot)
   }
 
@@ -88,7 +83,7 @@ function addOutlineEntries(
   entries: OutlineTree[],
   editor: TextEditor,
   isLarge: boolean,
-  level: number = 0,
+  level: number = 0
 ) {
   // NOTE: this function is called multiple times with each update in an editor!
   // a few of the calls is slow ~1-100ms
@@ -176,13 +171,7 @@ function addOutlineEntries(
 
       // add children to outline
       // TIME: last one of each batch is slower 0-20ms
-      addOutlineEntries(
-        childrenList,
-        item.children,
-        editor,
-        isLarge,
-        level + 1,
-      )
+      addOutlineEntries(childrenList, item.children, editor, isLarge, level + 1)
     }
 
     // TIME: <0.1ms
@@ -335,7 +324,7 @@ function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean
 let focusedElms: HTMLElement[] | undefined // cache for focused elements
 
 // callback for scrolling and highlighting the element that the cursor is on
-export function selectAtCursorLine(newBufferPosition : CursorPositionChangedEvent["newBufferPosition"]) {
+export function selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
   // TIME: ~0.2-0.3ms
   // TODO use range of start and end instead of just the line number
 

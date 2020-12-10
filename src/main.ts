@@ -153,11 +153,7 @@ export async function getOutline(activeEditor?: TextEditor) {
 
   const outline = await provider.getOutline(editor)
 
-  view.setOutline(
-    outline?.outlineTrees ?? [],
-    editor,
-    Boolean(lineCountIfLarge(editor as TextEditor)),
-  )
+  view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(lineCountIfLarge(editor as TextEditor)))
 
   busySignalProvider?.clear()
 }
@@ -182,7 +178,8 @@ export const config = {
   },
   foldInitially: {
     title: "Fold the entries initially",
-    description: "If enabled, the outline entries are folded initially. This is enabled automatically in large file mode.",
+    description:
+      "If enabled, the outline entries are folded initially. This is enabled automatically in large file mode.",
     type: "boolean",
     default: false,
   },
