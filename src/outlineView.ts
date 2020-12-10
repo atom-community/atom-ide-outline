@@ -50,7 +50,7 @@ export class OutlineView {
       editor,
       isLarge: isLarge || atom.config.get("atom-ide-outline.foldInitially"),
     })
-    outlineViewElement.append(outlineRoot)
+    outlineViewElement.appendChild(outlineRoot)
   }
 
   clearOutline() {
@@ -65,7 +65,7 @@ export class OutlineView {
 
     if (statusElement) {
       const outlineViewElement = this.getElement()
-      outlineViewElement.append(statusElement)
+      outlineViewElement.appendChild(statusElement)
     }
   }
 }
@@ -129,7 +129,7 @@ function addOutlineEntries({
     const iconElement = getIcon(item?.icon, item?.kind)
     labelElement.prepend(iconElement)
 
-    symbol.append(labelElement)
+    symbol.appendChild(labelElement)
 
     // update start position => elements map
     // TIME: 0-0.2ms
@@ -174,7 +174,7 @@ function addOutlineEntries({
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
       childrenList.addEventListener("click", (event) => event.stopPropagation(), { passive: true })
-      symbol.append(childrenList)
+      symbol.appendChild(childrenList)
 
       // fold Button
       const foldButton = createFoldButton(childrenList, isLarge)
@@ -192,7 +192,7 @@ function addOutlineEntries({
     }
 
     // TIME: <0.1ms
-    parent.append(symbol)
+    parent.appendChild(symbol)
   })
 }
 
