@@ -1,3 +1,17 @@
+## [1.15.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.0...v1.15.1) (2020-12-10)
+
+
+### Bug Fixes
+
+* addOutlineEntries: replace object with normal function arguments ([e9511ef](https://github.com/atom-ide-community/atom-ide-outline/commit/e9511ef9941134404623839c6f03752bf7b159aa))
+* fuse ifs and inline hasChildren ([0843a27](https://github.com/atom-ide-community/atom-ide-outline/commit/0843a272fde964642cd313edf83d96d030a610a1))
+* inline unused variables ([3a84f8f](https://github.com/atom-ide-community/atom-ide-outline/commit/3a84f8f8ec442a8af213f898e2358efad86ae97c))
+* only pass newBufferPosition ([dff2f73](https://github.com/atom-ide-community/atom-ide-outline/commit/dff2f73dce382911a88ddca425c8340c0851f08d))
+* refactor clearOutline ([271e315](https://github.com/atom-ide-community/atom-ide-outline/commit/271e315c5eff5ce95a8e69b6972a0e6be0a9dbb6))
+* replace append with appendChild ([37aa9f7](https://github.com/atom-ide-community/atom-ide-outline/commit/37aa9f785752702c823bd98cdb75445d66230a11))
+* replace forEach with for of ([ff7e3de](https://github.com/atom-ide-community/atom-ide-outline/commit/ff7e3de693c92fe34cfde054f6fc680760783119))
+* setOutline: replace object with normal function arguments ([7e19c02](https://github.com/atom-ide-community/atom-ide-outline/commit/7e19c02c771bf803b11a323d2300a30304f3b4be))
+
 # [1.15.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.14.1...v1.15.0) (2020-12-10)
 
 
