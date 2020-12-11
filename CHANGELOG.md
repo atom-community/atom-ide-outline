@@ -1,3 +1,11 @@
+## [1.15.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.1...v1.15.2) (2020-12-11)
+
+
+### Bug Fixes
+
+* all the entries had fold buttons ([38ccf8a](https://github.com/atom-ide-community/atom-ide-outline/commit/38ccf8a1731a27314d2a2a0cd7410ec194a80c0a))
+* cursor following was broken in the previous release ([f840f43](https://github.com/atom-ide-community/atom-ide-outline/commit/f840f43af5780ddc6292ed10819123f73d897081))
+
 ## [1.15.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.0...v1.15.1) (2020-12-10)
 
 
