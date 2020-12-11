@@ -58,7 +58,7 @@ function lineCountIfLarge(editor: TextEditor) {
   if (lineCount > largeFileLineCount) {
     return lineCount
   } else {
-    return 0
+    return 0 // small file
   }
 }
 
@@ -83,7 +83,7 @@ function addObservers() {
     const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
 
     // skip following cursor in large files
-    if (/* !isLarge */ lineCount !== 0) {
+    if (/* !isLarge */ lineCount === 0) {
       // following cursor disposable
       const onDidChangeCursorPosition = debounce((newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) => {
         selectAtCursorLine(newBufferPosition)
