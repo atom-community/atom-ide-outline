@@ -152,7 +152,7 @@ function addOutlineEntries(
       { passive: true }
     )
 
-    if (/* hasChildren */ !item.children && !item.children[0]) {
+    if (/* hasChildren */ item.children == null || item.children[0] == null) {
       // indentation
       labelElement.style.paddingLeft = level !== 0 ? `${indentRatio * level}px` : `${foldButtonWidth}px`
     } else {
