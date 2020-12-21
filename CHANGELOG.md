@@ -1,3 +1,11 @@
+## [1.15.5](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.4...v1.15.5) (2020-12-21)
+
+
+### Bug Fixes
+
+* trigger release again ([3803da1](https://github.com/atom-ide-community/atom-ide-outline/commit/3803da15d2f0247752405d1b1d49269c249081d9))
+* trigger release again ([1ebccae](https://github.com/atom-ide-community/atom-ide-outline/commit/1ebccae19e1875b7da7c7867a0651c6810cb94be))
+
 ## [1.15.4](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.3...v1.15.4) (2020-12-21)
 
 
