@@ -353,19 +353,9 @@ export function selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent
   if (focusedElms !== undefined) {
     for (const elm of focusedElms) {
       elm.toggleAttribute("cursorOn", true)
-
-      // const level = parseInt(elm.getAttribute("level") ?? "0", 10);
-
-      // TODO this works for the LSPs that their 0 level is the file name or module.
-      // For json for example, they do not have such a thing, and so it scrolls to the element itself
-      elm.scrollIntoView()
-      // if (level <= 1) {
-      //   // if level is 1 or 0, scroll to itself
-      //   elm.scrollIntoView();
-      // } else {
-      //   // otherwise scroll to its parent entry
-      //   elm.parentElement?.parentElement?.scrollIntoView();
-      // }
+      elm.scrollIntoView({
+        block: "center", // scroll until the entry is in the center of outline
+      })
     }
   }
 }
