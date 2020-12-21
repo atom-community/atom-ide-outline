@@ -85,9 +85,12 @@ function addObservers() {
     // skip following cursor in large files
     if (/* !isLarge */ lineCount === 0) {
       // following cursor disposable
-      const onDidChangeCursorPosition = debounce((newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) => {
-        selectAtCursorLine(newBufferPosition)
-      }, updateDebounceTime)
+      const onDidChangeCursorPosition = debounce(
+        (newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) => {
+          selectAtCursorLine(newBufferPosition)
+        },
+        updateDebounceTime
+      )
 
       onDidCompositeDisposable!.add(
         // update outline if cursor changes position
