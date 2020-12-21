@@ -83,6 +83,8 @@ function generateStatusElement(status: { title: string; description: string }) {
 
 const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map() // TODO Point to element
 
+let clicked: boolean = false // used to prevent scrolling in the outline list when an entry is clicked
+
 function addOutlineEntries(
   parent: HTMLUListElement,
   entries: OutlineTree[],
@@ -148,6 +150,8 @@ function addOutlineEntries(
         editor.getCursors()[0].setBufferPosition(item.startPosition, {
           autoscroll: true,
         })
+
+        clicked = true
       },
       { passive: true }
     )
@@ -326,6 +330,12 @@ let focusedElms: HTMLElement[] | undefined // cache for focused elements
 
 // callback for scrolling and highlighting the element that the cursor is on
 export function selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
+  if (clicked) {
+    // do not scroll when the cursor has moved to a click on the outline entry
+    clicked = false
+    return
+  }
+
   // TIME: ~0.2-0.3ms
   // TODO use range of start and end instead of just the line number
 
