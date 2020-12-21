@@ -1,3 +1,10 @@
+## [1.15.4](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.3...v1.15.4) (2020-12-21)
+
+
+### Bug Fixes
+
+* on cursor move scroll until the entry is in the center of outline ([9bdac23](https://github.com/atom-ide-community/atom-ide-outline/commit/9bdac23f7aaf466fa17fc9baf133912a9226ac04))
+
 ## [1.15.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.2...v1.15.3) (2020-12-21)
 
 
