@@ -1,3 +1,10 @@
+## [1.15.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.2...v1.15.3) (2020-12-21)
+
+
+### Bug Fixes
+
+* do not scroll outline entries when it is clicked on one ([3be0a19](https://github.com/atom-ide-community/atom-ide-outline/commit/3be0a196773c30697582fd1136829c59a0ac786f))
+
 ## [1.15.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.1...v1.15.2) (2020-12-11)
 
 
