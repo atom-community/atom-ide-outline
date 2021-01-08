@@ -48,16 +48,23 @@ function addCommands() {
   )
 }
 
-const largeFileLineCount = 3000 // minimum number of lines to trigger large file optimizations
+const longLineLength = atom.config.get('linter-ui-default.longLineLength') || 4000
+const largeFileLineCount = atom.config.get('linter-ui-default.largeFileLineCount') / 6 || 3000  // minimum number of lines to trigger large file optimizations
 function lineCountIfLarge(editor: TextEditor) {
   // @ts-ignore
   if (editor.largeFileMode) {
     return 20000
   }
   const lineCount = editor.getLineCount()
-  if (lineCount > largeFileLineCount) {
+  if (lineCount >= largeFileLineCount) {
     return lineCount
   } else {
+    const buffer = editor.getBuffer()
+    for (let i = 0, len = lineCount; i < len; i++) {
+      if (buffer.lineLengthForRow(i) > longLineLength) {
+        return longLineLength
+      }
+    }
     return 0 // small file
   }
 }
