@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.5...v1.16.0) (2021-01-08)
+
+
+### Features
+
+* go into large file mode if the file is minified ([a1ec8ad](https://github.com/atom-ide-community/atom-ide-outline/commit/a1ec8adf5399df4fc0caecdef85ec399e4ec6343))
+
 ## [1.15.5](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.4...v1.15.5) (2020-12-21)
 
 
