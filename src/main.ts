@@ -48,8 +48,8 @@ function addCommands() {
   )
 }
 
-const longLineLength = atom.config.get('linter-ui-default.longLineLength') || 4000
-const largeFileLineCount = atom.config.get('linter-ui-default.largeFileLineCount') / 6 || 3000  // minimum number of lines to trigger large file optimizations
+const longLineLength = atom.config.get("linter-ui-default.longLineLength") || 4000
+const largeFileLineCount = atom.config.get("linter-ui-default.largeFileLineCount") / 6 || 3000 // minimum number of lines to trigger large file optimizations
 function lineCountIfLarge(editor: TextEditor) {
   // @ts-ignore
   if (editor.largeFileMode) {
@@ -171,24 +171,4 @@ export function setStatus(id: "noEditor" | "noProvider") {
   view.presentStatus(statuses[id])
 }
 
-export const config = {
-  initialDisplay: {
-    title: "Initial Outline Display",
-    description: "Show outline initially aftern atom loads",
-    type: "boolean",
-    default: true,
-  },
-  sortEntries: {
-    title: "Sort entries based on the line number",
-    description: "This option sorts the entries based on where they appear in the code.",
-    type: "boolean",
-    default: true,
-  },
-  foldInitially: {
-    title: "Fold the entries initially",
-    description:
-      "If enabled, the outline entries are folded initially. This is enabled automatically in large file mode.",
-    type: "boolean",
-    default: false,
-  },
-}
+export { default as config } from "./config.json"
