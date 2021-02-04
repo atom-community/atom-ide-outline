@@ -74,8 +74,8 @@ let onDidCompositeDisposable: CompositeDisposable | null
 
 function addObservers() {
   onDidCompositeDisposable = new CompositeDisposable()
-  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor?: TextEditor) => {
-    if (!editor) {
+  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor) => {
+    if (editor === undefined) {
       return
     }
     // dispose the old subscriptions
@@ -135,10 +135,9 @@ export function toggleOutlineView() {
   rightDock.show()
 }
 
-export async function getOutline(activeEditor?: TextEditor) {
+export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
   // editor
-  const editor = activeEditor || atom.workspace.getActiveTextEditor()
-  if (!editor) {
+  if (editor === undefined) {
     return setStatus("noEditor")
   }
 
