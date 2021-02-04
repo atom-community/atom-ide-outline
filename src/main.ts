@@ -102,14 +102,12 @@ function addObservers() {
       )
     }
 
-    const onDidStopChanging = debounce((editor) => {
-      getOutline(editor)
-    }, updateDebounceTime)
+    const doubouncedGetOutline = debounce(getOutline as (editor: TextEditor) => Promise<void>, updateDebounceTime)
 
     onDidCompositeDisposable!.add(
       // update the outline if editor stops changing
-      editor.onDidStopChanging(() => {
-        onDidStopChanging(editor)
+      editor.onDidStopChanging(async () => {
+        await doubouncedGetOutline(editor)
       }),
 
       // clean up if the editor editor is closed
