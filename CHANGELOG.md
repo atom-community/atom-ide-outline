@@ -1,3 +1,12 @@
+## [1.16.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.16.2...v1.16.3) (2021-02-04)
+
+
+### Bug Fixes
+
+* add onlyForFile to busySignal ([876a768](https://github.com/atom-ide-community/atom-ide-outline/commit/876a7688df7e807ca045f812ba60340f9db390e2))
+* disable busy signal temporarily ([c5d036c](https://github.com/atom-ide-community/atom-ide-outline/commit/c5d036c75fd4bd63fa749486fff02384b69ccf6d))
+* use filePath  in busySignalID ([bbe2bda](https://github.com/atom-ide-community/atom-ide-outline/commit/bbe2bdaf80e135e763758ce6d79c59bf69809187))
+
 ## [1.16.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.16.1...v1.16.2) (2021-02-04)
 
 

@@ -542,8 +542,8 @@
         "affectsGlobalScope": true
       },
       "../src/main.ts": {
-        "version": "6051403d312c75c36db6ed150e8a8be99c07c31d9ef60647e639346ac2f02b63",
-        "signature": "ab06039a294553df7c9c91b731d14bbc661e53e806580b0143dbf690ac8e4818",
+        "version": "b3831fce46fae0ce9571fd8511a018047992b43e495e6129f996c98cf5c32bde",
+        "signature": "6e672193a328e1d1a6c39b029e04ad2dd602923875597ffb2d33e63f3f6324e6",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/estree/index.d.ts": {
@@ -1579,7 +1579,29 @@
       "../node_modules/typescript/lib/lib.es5.d.ts",
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../src/config.json",
-      "../src/main.ts",
+      [
+        "../src/main.ts",
+        [
+          {
+            "file": "../src/main.ts",
+            "start": 173,
+            "length": 18,
+            "messageText": "'BusySignalRegistry' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "../src/main.ts",
+            "start": 193,
+            "length": 18,
+            "messageText": "'BusySignalProvider' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          }
+        ]
+      ],
       "../src/outlineView.ts",
       "../src/statuses.ts"
     ]
