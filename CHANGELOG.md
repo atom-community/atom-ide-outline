@@ -1,3 +1,13 @@
+## [1.16.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.16.0...v1.16.1) (2021-02-04)
+
+
+### Bug Fixes
+
+* make config a json file ([20737f6](https://github.com/atom-ide-community/atom-ide-outline/commit/20737f6ad1b986e0074a1e9b970ea7e808d0d71d))
+* only import debounce from lodash ([fad64a2](https://github.com/atom-ide-community/atom-ide-outline/commit/fad64a2955a4ffbfb8cd9da71bed1b203c9f6b3e))
+* update deps ([9805350](https://github.com/atom-ide-community/atom-ide-outline/commit/9805350b3b54115bed1b4c081551e4c7ae998248))
+* use busySignalProvider.remove ([24826e2](https://github.com/atom-ide-community/atom-ide-outline/commit/24826e21ac79329e1a49a785aafeede46fc9f931))
+
 # [1.16.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.15.5...v1.16.0) (2021-01-08)
 
 

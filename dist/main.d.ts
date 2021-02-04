@@ -1,0 +1,13 @@
+import { TextEditor } from "atom";
+import { OutlineProvider, BusySignalRegistry } from "atom-ide-base";
+import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry";
+export { statuses } from "./statuses";
+export declare const outlineProviderRegistry: ProviderRegistry<OutlineProvider>;
+export declare function activate(): void;
+export declare function deactivate(): void;
+export declare function consumeSignal(registry: BusySignalRegistry): void;
+export declare function consumeOutlineProvider(provider: OutlineProvider): Promise<void>;
+export declare function toggleOutlineView(): void;
+export declare function getOutline(activeEditor?: TextEditor): Promise<void>;
+export declare function setStatus(id: "noEditor" | "noProvider"): void;
+export { default as config } from "./config.json";
