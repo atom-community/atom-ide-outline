@@ -542,8 +542,8 @@
         "affectsGlobalScope": true
       },
       "../src/main.ts": {
-        "version": "a551cd2ca164a605119a33cc36e46a4201436a8f63ce9d66555c121eeb52af88",
-        "signature": "6608256ede8e9fec368cd74085b952bd5d91f392a20d88142d696800e3569e53",
+        "version": "6051403d312c75c36db6ed150e8a8be99c07c31d9ef60647e639346ac2f02b63",
+        "signature": "ab06039a294553df7c9c91b731d14bbc661e53e806580b0143dbf690ac8e4818",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/estree/index.d.ts": {

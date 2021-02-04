@@ -1,3 +1,13 @@
+## [1.16.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.16.1...v1.16.2) (2021-02-04)
+
+
+### Bug Fixes
+
+* cleaner check editor === undefined ([e9af331](https://github.com/atom-ide-community/atom-ide-outline/commit/e9af3318f9553169fec395cca6ec86ad53b3ddcf))
+* direct debouncedSelectAtCursorLine ([9c7a9bc](https://github.com/atom-ide-community/atom-ide-outline/commit/9c7a9bcbc2ccaa2c08072282d1e15446f9bc60e6))
+* direct doubouncedGetOutline ([3a7353a](https://github.com/atom-ide-community/atom-ide-outline/commit/3a7353a8d07bc0f684ef5a231eb3b7ac0dc7b209))
+* redundant toggleOutlineView callback ([1f8b080](https://github.com/atom-ide-community/atom-ide-outline/commit/1f8b0807425933d53d83b5a1acd5c4e470e08523))
+
 ## [1.16.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.16.0...v1.16.1) (2021-02-04)
 
 
