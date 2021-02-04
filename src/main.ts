@@ -44,7 +44,7 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
 
 function addCommands() {
   subscriptions.add(
-    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", () => toggleOutlineView())
+    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView)
   )
 }
 
@@ -74,8 +74,8 @@ let onDidCompositeDisposable: CompositeDisposable | null
 
 function addObservers() {
   onDidCompositeDisposable = new CompositeDisposable()
-  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor?: TextEditor) => {
-    if (!editor) {
+  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor) => {
+    if (editor === undefined) {
       return
     }
     // dispose the old subscriptions
@@ -92,29 +92,22 @@ function addObservers() {
     // skip following cursor in large files
     if (/* !isLarge */ lineCount === 0) {
       // following cursor disposable
-      const onDidChangeCursorPosition = debounce(
-        (newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) => {
-          selectAtCursorLine(newBufferPosition)
-        },
-        updateDebounceTime
-      )
+      const debouncedSelectAtCursorLine = debounce(selectAtCursorLine, updateDebounceTime)
 
       onDidCompositeDisposable!.add(
         // update outline if cursor changes position
         editor.onDidChangeCursorPosition((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
-          onDidChangeCursorPosition(cursorPositionChangedEvent.newBufferPosition)
+          debouncedSelectAtCursorLine(cursorPositionChangedEvent.newBufferPosition)
         })
       )
     }
 
-    const onDidStopChanging = debounce((editor) => {
-      getOutline(editor)
-    }, updateDebounceTime)
+    const doubouncedGetOutline = debounce(getOutline as (editor: TextEditor) => Promise<void>, updateDebounceTime)
 
     onDidCompositeDisposable!.add(
       // update the outline if editor stops changing
-      editor.onDidStopChanging(() => {
-        onDidStopChanging(editor)
+      editor.onDidStopChanging(async () => {
+        await doubouncedGetOutline(editor)
       }),
 
       // clean up if the editor editor is closed
@@ -142,10 +135,9 @@ export function toggleOutlineView() {
   rightDock.show()
 }
 
-export async function getOutline(activeEditor?: TextEditor) {
+export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
   // editor
-  const editor = activeEditor || atom.workspace.getActiveTextEditor()
-  if (!editor) {
+  if (editor === undefined) {
     return setStatus("noEditor")
   }
 
