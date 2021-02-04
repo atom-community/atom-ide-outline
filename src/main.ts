@@ -157,13 +157,14 @@ export async function getOutline(activeEditor?: TextEditor) {
   }
   // @ts-ignore
   const target = editor.getFileName()
-  busySignalProvider?.add(`Outline: ${target}`)
+
+  const busySignalID = `Outline: ${target}`
+  busySignalProvider.add(busySignalID)
 
   const outline = await provider.getOutline(editor)
-
   view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(lineCountIfLarge(editor as TextEditor)))
 
-  busySignalProvider?.clear()
+  busySignalProvider.remove(busySignalID)
 }
 
 export function setStatus(id: "noEditor" | "noProvider") {
