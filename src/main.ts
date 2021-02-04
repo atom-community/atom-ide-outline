@@ -12,7 +12,7 @@ let subscriptions: CompositeDisposable
 let view: OutlineView
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
-let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
+// let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
 
 export function activate() {
   subscriptions = new CompositeDisposable()
@@ -30,10 +30,10 @@ export function deactivate() {
   view.destroy()
 }
 
-export function consumeSignal(registry: BusySignalRegistry) {
-  busySignalProvider = registry.create()
-  subscriptions.add(busySignalProvider)
-}
+// export function consumeSignal(registry: BusySignalRegistry) {
+//   busySignalProvider = registry.create()
+//   subscriptions.add(busySignalProvider)
+// }
 
 export async function consumeOutlineProvider(provider: OutlineProvider) {
   subscriptions.add(/*  providerRegistryEntry */ outlineProviderRegistry.addProvider(provider))
@@ -147,16 +147,17 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   if (!provider) {
     return setStatus("noProvider")
   }
-  // @ts-ignore
-  const target = editor.getFileName()
+  
+  // const target = editor.getPath()
 
-  const busySignalID = `Outline: ${target}`
-  busySignalProvider?.add(busySignalID)
+  // const busySignalID = `Outline: ${target}`
+  // // @ts-ignore
+  // busySignalProvider?.add(busySignalID, { onlyForFile: target })
 
   const outline = await provider.getOutline(editor)
   view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(lineCountIfLarge(editor as TextEditor)))
 
-  busySignalProvider?.remove(busySignalID)
+  // busySignalProvider?.remove(busySignalID)
 }
 
 export function setStatus(id: "noEditor" | "noProvider") {
