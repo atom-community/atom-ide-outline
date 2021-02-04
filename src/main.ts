@@ -9,14 +9,13 @@ import debounce from "lodash/debounce"
 
 let subscriptions: CompositeDisposable
 
-let view: OutlineView
+let view: OutlineView | undefined
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
 // let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
 
 export function activate() {
   subscriptions = new CompositeDisposable()
-  view = new OutlineView() // create outline pane
   addCommands()
   addObservers()
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
@@ -27,7 +26,8 @@ export function activate() {
 export function deactivate() {
   onDidCompositeDisposable?.dispose?.()
   subscriptions.dispose()
-  view.destroy()
+  view?.destroy()
+  view = undefined
 }
 
 // export function consumeSignal(registry: BusySignalRegistry) {
@@ -43,9 +43,7 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
 }
 
 function addCommands() {
-  subscriptions.add(
-    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView)
-  )
+  subscriptions.add(/* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView))
 }
 
 const longLineLength = atom.config.get("linter-ui-default.longLineLength") || 4000
@@ -120,6 +118,9 @@ function addObservers() {
 }
 
 export function toggleOutlineView() {
+  if (view === undefined) {
+    view = new OutlineView() // create outline pane
+  }
   const outlinePane = atom.workspace.paneForItem(view)
   if (outlinePane) {
     outlinePane.destroyItem(view)
@@ -136,6 +137,9 @@ export function toggleOutlineView() {
 }
 
 export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
+  if (view === undefined) {
+    view = new OutlineView() // create outline pane
+  }
   // editor
   if (editor === undefined) {
     return setStatus("noEditor")
@@ -147,7 +151,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   if (!provider) {
     return setStatus("noProvider")
   }
-  
+
   // const target = editor.getPath()
 
   // const busySignalID = `Outline: ${target}`
@@ -161,7 +165,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
 }
 
 export function setStatus(id: "noEditor" | "noProvider") {
-  view.presentStatus(statuses[id])
+  view?.presentStatus(statuses[id])
 }
 
 export { default as config } from "./config.json"
