@@ -147,8 +147,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   if (!provider) {
     return setStatus("noProvider")
   }
-  // @ts-ignore
-  const target = editor.getFileName()
+  const target = editor.getPath()
 
   const busySignalID = `Outline: ${target}`
   // @ts-ignore
