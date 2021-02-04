@@ -5,7 +5,7 @@ import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
-import { debounce } from "lodash"
+import debounce from "lodash/debounce"
 
 let subscriptions: CompositeDisposable
 
