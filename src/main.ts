@@ -44,7 +44,7 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
 
 function addCommands() {
   subscriptions.add(
-    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", () => toggleOutlineView())
+    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView)
   )
 }
 
