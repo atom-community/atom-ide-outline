@@ -1,0 +1,20 @@
+{
+  "initialDisplay": {
+    "title": "Initial Outline Display",
+    "description": "Show outline initially aftern atom loads",
+    "type": "boolean",
+    "default": true
+  },
+  "sortEntries": {
+    "title": "Sort entries based on the line number",
+    "description": "This option sorts the entries based on where they appear in the code.",
+    "type": "boolean",
+    "default": true
+  },
+  "foldInitially": {
+    "title": "Fold the entries initially",
+    "description": "If enabled, the outline entries are folded initially. This is enabled automatically in large file mode.",
+    "type": "boolean",
+    "default": false
+  }
+}
