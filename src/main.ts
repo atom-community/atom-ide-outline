@@ -7,7 +7,7 @@ export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
 import debounce from "lodash/debounce"
 
-let subscriptions: CompositeDisposable
+const subscriptions = new CompositeDisposable()
 
 let view: OutlineView | undefined
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
@@ -15,7 +15,6 @@ export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 // let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
 
 export function activate() {
-  subscriptions = new CompositeDisposable()
   addCommands()
   addObservers()
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
