@@ -12,7 +12,7 @@ let subscriptions: CompositeDisposable
 let view: OutlineView
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
-let busySignalProvider: BusySignalProvider
+let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
 
 export function activate() {
   subscriptions = new CompositeDisposable()
@@ -159,12 +159,12 @@ export async function getOutline(activeEditor?: TextEditor) {
   const target = editor.getFileName()
 
   const busySignalID = `Outline: ${target}`
-  busySignalProvider.add(busySignalID)
+  busySignalProvider?.add(busySignalID)
 
   const outline = await provider.getOutline(editor)
   view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(lineCountIfLarge(editor as TextEditor)))
 
-  busySignalProvider.remove(busySignalID)
+  busySignalProvider?.remove(busySignalID)
 }
 
 export function setStatus(id: "noEditor" | "noProvider") {
