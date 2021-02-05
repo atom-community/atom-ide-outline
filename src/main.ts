@@ -95,7 +95,9 @@ function addObservers() {
       onDidCompositeDisposable!.add(
         // update outline if cursor changes position
         editor.onDidChangeCursorPosition((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
-          debouncedSelectAtCursorLine(cursorPositionChangedEvent.newBufferPosition)
+          if (view !== undefined) {
+            debouncedSelectAtCursorLine(cursorPositionChangedEvent.newBufferPosition, view.pointToElementsMap)
+          }
         })
       )
     }

@@ -4,6 +4,8 @@ import { OutlineTree } from "atom-ide-base"
 
 export class OutlineView {
   public element: HTMLDivElement
+  public pointToElementsMap = new Map<number, Array<HTMLLIElement>>() // TODO Point to element
+
   constructor() {
     this.element = document.createElement("div")
     this.element.classList.add("outline-view")
@@ -47,6 +49,7 @@ export class OutlineView {
       outlineRoot,
       outlineTree,
       editor,
+      this.pointToElementsMap,
       /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially")
     )
     outlineViewElement.appendChild(outlineRoot)
@@ -81,14 +84,13 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element
 }
 
-const pointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map() // TODO Point to element
-
 let clicked: boolean = false // used to prevent scrolling in the outline list when an entry is clicked
 
 function addOutlineEntries(
   parent: HTMLUListElement,
   entries: OutlineTree[],
   editor: TextEditor,
+  pointToElementsMap: Map<number, Array<HTMLLIElement>>,
   isLarge: boolean,
   level = 0
 ) {
@@ -176,7 +178,7 @@ function addOutlineEntries(
 
       // add children to outline
       // TIME: last one of each batch is slower 0-20ms
-      addOutlineEntries(childrenList, item.children, editor, isLarge, level + 1)
+      addOutlineEntries(childrenList, item.children, editor, pointToElementsMap, isLarge, level + 1)
     }
 
     // TIME: <0.1ms
@@ -329,7 +331,10 @@ function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean
 let focusedElms: HTMLElement[] | undefined // cache for focused elements
 
 // callback for scrolling and highlighting the element that the cursor is on
-export function selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
+export function selectAtCursorLine(
+  newBufferPosition: CursorPositionChangedEvent["newBufferPosition"],
+  pointToElementsMap: Map<number, Array<HTMLLIElement>>
+) {
   if (clicked) {
     // do not scroll when the cursor has moved to a click on the outline entry
     clicked = false
