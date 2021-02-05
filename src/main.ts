@@ -82,7 +82,6 @@ function addObservers() {
     await getOutline(editor) // initial outline
 
     const lineCount = lineCountIfLarge(editor as TextEditor)
-
     // How long to wait for the new changes before updating the outline.
     // A high number will increase the responsiveness of the text editor in large files.
     const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
@@ -91,13 +90,15 @@ function addObservers() {
     if (/* !isLarge */ lineCount === 0) {
       // following cursor disposable
 
+      const debouncedSlectAtCursorLine = debounce((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
+        if (view !== undefined) {
+          view.selectAtCursorLine(cursorPositionChangedEvent.newBufferPosition)
+        }
+      }, updateDebounceTime)
+
       onDidCompositeDisposable!.add(
         // update outline if cursor changes position
-        editor.onDidChangeCursorPosition((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
-          if (view !== undefined) {
-            view.selectAtCursorLine(cursorPositionChangedEvent.newBufferPosition)
-          }
-        })
+        editor.onDidChangeCursorPosition(debouncedSlectAtCursorLine)
       )
     }
 
