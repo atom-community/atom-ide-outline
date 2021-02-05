@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { TextEditor, CursorPositionChangedEvent } from "atom"
 import { OutlineTree } from "atom-ide-base"
+import { isItemVisible } from "./utils"
 
 export class OutlineView {
   public element: HTMLDivElement
+  private pointToElementsMap = new Map<number, Array<HTMLLIElement>>() // TODO Point to element
+  private focusedElms: HTMLElement[] | undefined // cache for focused elements
+
   constructor() {
     this.element = document.createElement("div")
     this.element.classList.add("outline-view")
@@ -47,6 +51,7 @@ export class OutlineView {
       outlineRoot,
       outlineTree,
       editor,
+      this.pointToElementsMap,
       /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially")
     )
     outlineViewElement.appendChild(outlineRoot)
@@ -68,6 +73,47 @@ export class OutlineView {
       outlineViewElement.appendChild(statusElement)
     }
   }
+
+  // callback for scrolling and highlighting the element that the cursor is on
+  selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
+    // skip if not visible
+    if (!this.isVisible()) {
+      return
+    }
+
+    if (clicked) {
+      // do not scroll when the cursor has moved to a click on the outline entry
+      clicked = false
+      return
+    }
+
+    // TIME: ~0.2-0.3ms
+    // TODO use range of start and end instead of just the line number
+
+    // remove old cursorOn attribue
+    if (this.focusedElms !== undefined) {
+      for (const elm of this.focusedElms) {
+        elm.toggleAttribute("cursorOn", false)
+      }
+    }
+
+    // add new cursorOn attribue
+    const cursorPoint = newBufferPosition.row
+    this.focusedElms = this.pointToElementsMap.get(cursorPoint)
+
+    if (this.focusedElms !== undefined) {
+      for (const elm of this.focusedElms) {
+        elm.toggleAttribute("cursorOn", true)
+        elm.scrollIntoView({
+          block: "center", // scroll until the entry is in the center of outline
+        })
+      }
+    }
+  }
+
+  isVisible() {
+    return isItemVisible(this)
+  }
 }
 
 function generateStatusElement(status: { title: string; description: string }) {
@@ -81,14 +127,13 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element
 }
 
-const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map() // TODO Point to element
-
 let clicked: boolean = false // used to prevent scrolling in the outline list when an entry is clicked
 
 function addOutlineEntries(
   parent: HTMLUListElement,
   entries: OutlineTree[],
   editor: TextEditor,
+  pointToElementsMap: Map<number, Array<HTMLLIElement>>,
   isLarge: boolean,
   level = 0
 ) {
@@ -128,12 +173,12 @@ function addOutlineEntries(
 
     // update start position => elements map
     // TIME: 0-0.2ms
-    const elms = PointToElementsMap.get(item.startPosition.row)
+    const elms = pointToElementsMap.get(item.startPosition.row)
     if (elms !== undefined) {
       elms.push(symbol)
-      PointToElementsMap.set(item.startPosition.row, elms)
+      pointToElementsMap.set(item.startPosition.row, elms)
     } else {
-      PointToElementsMap.set(item.startPosition.row, [symbol])
+      pointToElementsMap.set(item.startPosition.row, [symbol])
     }
 
     // Cursor reposition on click
@@ -176,7 +221,7 @@ function addOutlineEntries(
 
       // add children to outline
       // TIME: last one of each batch is slower 0-20ms
-      addOutlineEntries(childrenList, item.children, editor, isLarge, level + 1)
+      addOutlineEntries(childrenList, item.children, editor, pointToElementsMap, isLarge, level + 1)
     }
 
     // TIME: <0.1ms
@@ -324,38 +369,4 @@ function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean
     { passive: true }
   )
   return foldButton
-}
-
-let focusedElms: HTMLElement[] | undefined // cache for focused elements
-
-// callback for scrolling and highlighting the element that the cursor is on
-export function selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
-  if (clicked) {
-    // do not scroll when the cursor has moved to a click on the outline entry
-    clicked = false
-    return
-  }
-
-  // TIME: ~0.2-0.3ms
-  // TODO use range of start and end instead of just the line number
-
-  // remove old cursorOn attribue
-  if (focusedElms !== undefined) {
-    for (const elm of focusedElms) {
-      elm.toggleAttribute("cursorOn", false)
-    }
-  }
-
-  // add new cursorOn attribue
-  const cursorPoint = newBufferPosition.row
-  focusedElms = PointToElementsMap.get(cursorPoint)
-
-  if (focusedElms !== undefined) {
-    for (const elm of focusedElms) {
-      elm.toggleAttribute("cursorOn", true)
-      elm.scrollIntoView({
-        block: "center", // scroll until the entry is in the center of outline
-      })
-    }
-  }
 }

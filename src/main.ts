@@ -1,5 +1,6 @@
 import { CompositeDisposable, TextEditor, CursorPositionChangedEvent } from "atom"
-import { OutlineView, selectAtCursorLine } from "./outlineView"
+import { isItemVisible } from "./utils"
+import { OutlineView } from "./outlineView"
 import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
@@ -7,16 +8,14 @@ export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
 import debounce from "lodash/debounce"
 
-let subscriptions: CompositeDisposable
+const subscriptions = new CompositeDisposable()
 
-let view: OutlineView
+let view: OutlineView | undefined
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
 // let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
 
 export function activate() {
-  subscriptions = new CompositeDisposable()
-  view = new OutlineView() // create outline pane
   addCommands()
   addObservers()
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
@@ -27,7 +26,8 @@ export function activate() {
 export function deactivate() {
   onDidCompositeDisposable?.dispose?.()
   subscriptions.dispose()
-  view.destroy()
+  view?.destroy()
+  view = undefined
 }
 
 // export function consumeSignal(registry: BusySignalRegistry) {
@@ -43,9 +43,7 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
 }
 
 function addCommands() {
-  subscriptions.add(
-    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView)
-  )
+  subscriptions.add(/* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView))
 }
 
 const longLineLength = atom.config.get("linter-ui-default.longLineLength") || 4000
@@ -84,7 +82,6 @@ function addObservers() {
     await getOutline(editor) // initial outline
 
     const lineCount = lineCountIfLarge(editor as TextEditor)
-
     // How long to wait for the new changes before updating the outline.
     // A high number will increase the responsiveness of the text editor in large files.
     const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
@@ -92,13 +89,16 @@ function addObservers() {
     // skip following cursor in large files
     if (/* !isLarge */ lineCount === 0) {
       // following cursor disposable
-      const debouncedSelectAtCursorLine = debounce(selectAtCursorLine, updateDebounceTime)
+
+      const debouncedSlectAtCursorLine = debounce((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
+        if (view !== undefined) {
+          view.selectAtCursorLine(cursorPositionChangedEvent.newBufferPosition)
+        }
+      }, updateDebounceTime)
 
       onDidCompositeDisposable!.add(
         // update outline if cursor changes position
-        editor.onDidChangeCursorPosition((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
-          debouncedSelectAtCursorLine(cursorPositionChangedEvent.newBufferPosition)
-        })
+        editor.onDidChangeCursorPosition(debouncedSlectAtCursorLine)
       )
     }
 
@@ -120,6 +120,9 @@ function addObservers() {
 }
 
 export function toggleOutlineView() {
+  if (view === undefined) {
+    view = new OutlineView() // create outline pane
+  }
   const outlinePane = atom.workspace.paneForItem(view)
   if (outlinePane) {
     outlinePane.destroyItem(view)
@@ -136,6 +139,13 @@ export function toggleOutlineView() {
 }
 
 export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
+  if (view === undefined) {
+    view = new OutlineView() // create outline pane
+  }
+  // if outline is not visible return
+  if (!view.isVisible()) {
+    return
+  }
   // editor
   if (editor === undefined) {
     return setStatus("noEditor")
@@ -147,7 +157,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   if (!provider) {
     return setStatus("noProvider")
   }
-  
+
   // const target = editor.getPath()
 
   // const busySignalID = `Outline: ${target}`
@@ -161,7 +171,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
 }
 
 export function setStatus(id: "noEditor" | "noProvider") {
-  view.presentStatus(statuses[id])
+  view?.presentStatus(statuses[id])
 }
 
 export { default as config } from "./config.json"
