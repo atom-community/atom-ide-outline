@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { TextEditor, CursorPositionChangedEvent } from "atom"
 import { OutlineTree } from "atom-ide-base"
+import { isItemVisible } from "./utils"
 
 export class OutlineView {
   public element: HTMLDivElement
@@ -103,6 +104,10 @@ export class OutlineView {
         })
       }
     }
+  }
+
+  isVisible() {
+    return isItemVisible(this)
   }
 }
 

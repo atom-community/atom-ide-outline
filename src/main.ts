@@ -143,7 +143,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
     view = new OutlineView() // create outline pane
   }
   // if outline is not visible return
-  if (!isItemVisible(view)) {
+  if (!view.isVisible()) {
     return
   }
   // editor
