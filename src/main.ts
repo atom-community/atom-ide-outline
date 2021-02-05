@@ -1,4 +1,5 @@
 import { CompositeDisposable, TextEditor, CursorPositionChangedEvent } from "atom"
+import { isItemVisible } from "./utils"
 import { OutlineView, selectAtCursorLine } from "./outlineView"
 import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
@@ -138,6 +139,10 @@ export function toggleOutlineView() {
 export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
   if (view === undefined) {
     view = new OutlineView() // create outline pane
+  }
+  // if outline is not visible return
+  if (!isItemVisible(view)) {
+    return
   }
   // editor
   if (editor === undefined) {
