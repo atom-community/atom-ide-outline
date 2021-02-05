@@ -1,6 +1,6 @@
 import { CompositeDisposable, TextEditor, CursorPositionChangedEvent } from "atom"
 import { isItemVisible } from "./utils"
-import { OutlineView, selectAtCursorLine } from "./outlineView"
+import { OutlineView } from "./outlineView"
 import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
@@ -90,13 +90,12 @@ function addObservers() {
     // skip following cursor in large files
     if (/* !isLarge */ lineCount === 0) {
       // following cursor disposable
-      const debouncedSelectAtCursorLine = debounce(selectAtCursorLine, updateDebounceTime)
 
       onDidCompositeDisposable!.add(
         // update outline if cursor changes position
         editor.onDidChangeCursorPosition((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
           if (view !== undefined) {
-            debouncedSelectAtCursorLine(cursorPositionChangedEvent.newBufferPosition, view.pointToElementsMap)
+            view.selectAtCursorLine(cursorPositionChangedEvent.newBufferPosition)
           }
         })
       )
