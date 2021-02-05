@@ -81,7 +81,7 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element
 }
 
-const PointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map() // TODO Point to element
+const pointToElementsMap: Map<number, Array<HTMLLIElement>> = new Map() // TODO Point to element
 
 let clicked: boolean = false // used to prevent scrolling in the outline list when an entry is clicked
 
@@ -128,12 +128,12 @@ function addOutlineEntries(
 
     // update start position => elements map
     // TIME: 0-0.2ms
-    const elms = PointToElementsMap.get(item.startPosition.row)
+    const elms = pointToElementsMap.get(item.startPosition.row)
     if (elms !== undefined) {
       elms.push(symbol)
-      PointToElementsMap.set(item.startPosition.row, elms)
+      pointToElementsMap.set(item.startPosition.row, elms)
     } else {
-      PointToElementsMap.set(item.startPosition.row, [symbol])
+      pointToElementsMap.set(item.startPosition.row, [symbol])
     }
 
     // Cursor reposition on click
@@ -348,7 +348,7 @@ export function selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent
 
   // add new cursorOn attribue
   const cursorPoint = newBufferPosition.row
-  focusedElms = PointToElementsMap.get(cursorPoint)
+  focusedElms = pointToElementsMap.get(cursorPoint)
 
   if (focusedElms !== undefined) {
     for (const elm of focusedElms) {
