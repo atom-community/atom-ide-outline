@@ -1,3 +1,22 @@
+# [1.17.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.16.3...v1.17.0) (2021-02-05)
+
+
+### Bug Fixes
+
+* ad OutlineView.isVisible ([1d13b73](https://github.com/atom-ide-community/atom-ide-outline/commit/1d13b737d4f693838c76527b80fd8472296648ad))
+* add back debounce to selectAtCursorLine ([4735a89](https://github.com/atom-ide-community/atom-ide-outline/commit/4735a893c111928c4289be0b7007c73d209707f3))
+* check for visibility before selecting the line ([5c54116](https://github.com/atom-ide-community/atom-ide-outline/commit/5c541165ababcd76d49a1886c913bbd1dc285ca5))
+* create subscriptions in the global scope ([68136da](https://github.com/atom-ide-community/atom-ide-outline/commit/68136da178e65c32d48eb94c26e94fefea7d4725))
+* delay the creation of OutlineView ([98bfa18](https://github.com/atom-ide-community/atom-ide-outline/commit/98bfa18102ac92d8a1a9d754897951572b3c294a))
+* make pointToElementsMap a class prop ([0a87965](https://github.com/atom-ide-community/atom-ide-outline/commit/0a879651fd1442f009573e4e58fb0ff4b50324bd))
+* make selectAtCursorLine a method so it can use the struct props ([a2b961b](https://github.com/atom-ide-community/atom-ide-outline/commit/a2b961b892955d0152fe026deec23bad1ec1bd97))
+
+
+### Features
+
+* isItemVisible ([d373ef8](https://github.com/atom-ide-community/atom-ide-outline/commit/d373ef82cd905ae9339ece6a2f5ca97cc5030e3d))
+* skip outline calculation if the item is not visible ([71a5216](https://github.com/atom-ide-community/atom-ide-outline/commit/71a52168082929d29e15495dab70561f39607cfa))
+
 ## [1.16.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.16.2...v1.16.3) (2021-02-04)
 
 

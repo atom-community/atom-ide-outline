@@ -386,6 +386,11 @@
         "signature": "fd5cfe95a40dd40a80dce2e6513c7059d43aad0e9f13474ca42f2c343b5ec906",
         "affectsGlobalScope": true
       },
+      "../src/utils.ts": {
+        "version": "69364dbad38530758d99fd6d63c12da36f5b4abc57a6d8570ba1e3bc9f4b2c76",
+        "signature": "9ce8fc4263d432cd8590aef43c75cb6b5e003edea7f4900e305ddc82b07831a8",
+        "affectsGlobalScope": false
+      },
       "../node_modules/atom-ide-base/types-packages/busy-signal.d.ts": {
         "version": "921b3ecb9fa8126c8df1aa6ca84d826aeec4b79ec626862dcc95848559ac3e42",
         "signature": "921b3ecb9fa8126c8df1aa6ca84d826aeec4b79ec626862dcc95848559ac3e42",
@@ -452,8 +457,8 @@
         "affectsGlobalScope": false
       },
       "../src/outlineView.ts": {
-        "version": "e68d11b1b4db180d0a3a3ec6f4072a8e20f218519872181069606540ff9a00e7",
-        "signature": "8835e10c73433d461e2ae13b303e947b3c3959befafd9fed492cfc30d945b84e",
+        "version": "0d5aa93d3bdc98182cb51031dda10d3d9946cf4377347bb893486f72d57b018b",
+        "signature": "4e2a8191ce82be907109e776a96d7e21628ee92b98067569bc3c25934c16a304",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/commons-atom/ProviderRegistry.d.ts": {
@@ -542,7 +547,7 @@
         "affectsGlobalScope": true
       },
       "../src/main.ts": {
-        "version": "b3831fce46fae0ce9571fd8511a018047992b43e495e6129f996c98cf5c32bde",
+        "version": "d12f77f777af597178c2261482f7736f862552032616465fa0e9b75cec135faa",
         "signature": "6e672193a328e1d1a6c39b029e04ad2dd602923875597ffb2d33e63f3f6324e6",
         "affectsGlobalScope": false
       },
@@ -1032,14 +1037,20 @@
         "../node_modules/tslib/tslib.d.ts",
         "../src/config.json",
         "../src/outlineView.ts",
-        "../src/statuses.ts"
+        "../src/statuses.ts",
+        "../src/utils.ts"
       ],
       "../src/outlineView.ts": [
         "../node_modules/@types/atom/index.d.ts",
         "../node_modules/atom-ide-base/types-packages/main.d.ts",
-        "../node_modules/tslib/tslib.d.ts"
+        "../node_modules/tslib/tslib.d.ts",
+        "../src/utils.ts"
       ],
       "../src/statuses.ts": [
+        "../node_modules/tslib/tslib.d.ts"
+      ],
+      "../src/utils.ts": [
+        "../node_modules/@types/atom/index.d.ts",
         "../node_modules/tslib/tslib.d.ts"
       ]
     },
@@ -1584,7 +1595,16 @@
         [
           {
             "file": "../src/main.ts",
-            "start": 173,
+            "start": 83,
+            "length": 39,
+            "messageText": "'isItemVisible' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "../src/main.ts",
+            "start": 193,
             "length": 18,
             "messageText": "'BusySignalRegistry' is declared but its value is never read.",
             "category": 1,
@@ -1593,7 +1613,7 @@
           },
           {
             "file": "../src/main.ts",
-            "start": 193,
+            "start": 213,
             "length": 18,
             "messageText": "'BusySignalProvider' is declared but its value is never read.",
             "category": 1,
@@ -1603,7 +1623,8 @@
         ]
       ],
       "../src/outlineView.ts",
-      "../src/statuses.ts"
+      "../src/statuses.ts",
+      "../src/utils.ts"
     ]
   },
   "version": "4.1.3"
