@@ -76,6 +76,11 @@ export class OutlineView {
 
   // callback for scrolling and highlighting the element that the cursor is on
   selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
+    // skip if not visible
+    if (!this.isVisible()) {
+      return
+    }
+
     if (clicked) {
       // do not scroll when the cursor has moved to a click on the outline entry
       clicked = false
