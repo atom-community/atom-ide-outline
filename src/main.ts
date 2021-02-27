@@ -1,5 +1,4 @@
 import { CompositeDisposable, TextEditor, CursorPositionChangedEvent } from "atom"
-import { isItemVisible } from "./utils"
 import { OutlineView } from "./outlineView"
 import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
@@ -43,7 +42,10 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
 }
 
 function addCommands() {
-  subscriptions.add(/* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView))
+  subscriptions.add(
+    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView),
+    /* revealCursor */ atom.commands.add("atom-workspace", "outline:reveal-cursor", revealCursor)
+  )
 }
 
 const longLineLength = atom.config.get("linter-ui-default.longLineLength") || 4000
@@ -86,22 +88,6 @@ function addObservers() {
     // A high number will increase the responsiveness of the text editor in large files.
     const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
 
-    // skip following cursor in large files
-    if (/* !isLarge */ lineCount === 0) {
-      // following cursor disposable
-
-      const debouncedSlectAtCursorLine = debounce((cursorPositionChangedEvent: CursorPositionChangedEvent) => {
-        if (view !== undefined) {
-          view.selectAtCursorLine(cursorPositionChangedEvent.newBufferPosition)
-        }
-      }, updateDebounceTime)
-
-      onDidCompositeDisposable!.add(
-        // update outline if cursor changes position
-        editor.onDidChangeCursorPosition(debouncedSlectAtCursorLine)
-      )
-    }
-
     const doubouncedGetOutline = debounce(getOutline as (editor: TextEditor) => Promise<void>, updateDebounceTime)
 
     onDidCompositeDisposable!.add(
@@ -117,6 +103,18 @@ function addObservers() {
     )
   })
   subscriptions.add(activeTextEditorObserver)
+}
+
+export function revealCursor() {
+  const editor = atom.workspace.getActiveTextEditor()
+  if (editor === undefined) {
+    return
+  }
+
+  // following cursor disposable
+  if (view !== undefined) {
+    view.selectAtCursorLine(editor.getCursorBufferPosition())
+  }
 }
 
 export function toggleOutlineView() {
