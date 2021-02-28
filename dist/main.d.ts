@@ -6,6 +6,7 @@ export declare const outlineProviderRegistry: ProviderRegistry<OutlineProvider>;
 export declare function activate(): void;
 export declare function deactivate(): void;
 export declare function consumeOutlineProvider(provider: OutlineProvider): Promise<void>;
+export declare function revealCursor(): void;
 export declare function toggleOutlineView(): void;
 export declare function getOutline(editor?: TextEditor | undefined): Promise<void>;
 export declare function setStatus(id: "noEditor" | "noProvider"): void;

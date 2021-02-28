@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.17.0...v2.0.0) (2021-02-28)
+
+
+### Performance Improvements
+
+* replace automatic cursor following with a reveal-in-outline command ([78a8bd1](https://github.com/atom-ide-community/atom-ide-outline/commit/78a8bd17133d755781edf371e609ab965a515d25))
+
+
+### BREAKING CHANGES
+
+* No longer cursor is followed automatically
+
+This is done for performance reasons
+
 # [1.17.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.16.3...v1.17.0) (2021-02-05)
 
 
