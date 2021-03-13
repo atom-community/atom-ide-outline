@@ -1,7 +1,8 @@
-import { CompositeDisposable, TextEditor, CursorPositionChangedEvent } from "atom"
+import { CompositeDisposable, TextEditor } from "atom"
 import { OutlineView } from "./outlineView"
-import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
+import { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
+import { notifyError } from "./utils"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
@@ -18,7 +19,10 @@ export function activate() {
   addCommands()
   addObservers()
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
-    toggleOutlineView() // initially show outline pane
+    // initially show outline pane
+    toggleOutlineView().catch((e) => {
+      notifyError(e)
+    })
   }
 }
 
@@ -74,35 +78,37 @@ let onDidCompositeDisposable: CompositeDisposable | null
 
 function addObservers() {
   onDidCompositeDisposable = new CompositeDisposable()
-  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor) => {
-    if (editor === undefined) {
-      return
-    }
-    // dispose the old subscriptions
-    onDidCompositeDisposable?.dispose?.()
-
-    await getOutline(editor) // initial outline
-
-    const lineCount = lineCountIfLarge(editor as TextEditor)
-    // How long to wait for the new changes before updating the outline.
-    // A high number will increase the responsiveness of the text editor in large files.
-    const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
-
-    const doubouncedGetOutline = debounce(getOutline as (editor: TextEditor) => Promise<void>, updateDebounceTime)
-
-    onDidCompositeDisposable!.add(
-      // update the outline if editor stops changing
-      editor.onDidStopChanging(async () => {
-        await doubouncedGetOutline(editor)
-      }),
-
-      // clean up if the editor editor is closed
-      editor.onDidDestroy(() => {
-        setStatus("noEditor")
-      })
-    )
-  })
+  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(editorChanged)
   subscriptions.add(activeTextEditorObserver)
+}
+
+async function editorChanged(editor?: TextEditor) {
+  if (editor === undefined) {
+    return
+  }
+  // dispose the old subscriptions
+  onDidCompositeDisposable?.dispose?.()
+
+  await getOutline(editor) // initial outline
+
+  const lineCount = lineCountIfLarge(editor as TextEditor)
+  // How long to wait for the new changes before updating the outline.
+  // A high number will increase the responsiveness of the text editor in large files.
+  const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
+
+  const doubouncedGetOutline = debounce(getOutline as (textEditor: TextEditor) => Promise<void>, updateDebounceTime)
+
+  onDidCompositeDisposable!.add(
+    // update the outline if editor stops changing
+    editor.onDidStopChanging(async () => {
+      await doubouncedGetOutline(editor)
+    }),
+
+    // clean up if the editor editor is closed
+    editor.onDidDestroy(() => {
+      setStatus("noEditor")
+    })
+  )
 }
 
 export function revealCursor() {
@@ -117,7 +123,7 @@ export function revealCursor() {
   }
 }
 
-export function toggleOutlineView() {
+export async function toggleOutlineView() {
   if (view === undefined) {
     view = new OutlineView() // create outline pane
   }
@@ -134,6 +140,13 @@ export function toggleOutlineView() {
   pane.activateItem(view)
 
   rightDock.show()
+
+  // Trigger an editor change whenever an outline is toggeled.
+  try {
+    await editorChanged(atom.workspace.getActiveTextEditor())
+  } catch (e) {
+    notifyError(e)
+  }
 }
 
 export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
