@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.0.0...v2.0.1) (2021-03-13)
+
+
+### Bug Fixes
+
+* initialize outline on initial show ([c4eba08](https://github.com/atom-ide-community/atom-ide-outline/commit/c4eba0866ddabab8ba342b0009e301cb773c810e)), closes [#94](https://github.com/atom-ide-community/atom-ide-outline/issues/94)
+* make toggleOutlineView async ([e670161](https://github.com/atom-ide-community/atom-ide-outline/commit/e670161cc195152569094160bd50b8ab06e33094))
+
 # [2.0.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v1.17.0...v2.0.0) (2021-02-28)
 
 
