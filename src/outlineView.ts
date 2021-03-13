@@ -229,78 +229,6 @@ function addOutlineEntries(
   }
 }
 
-const supportedTypes = [
-  "array",
-  "boolean",
-  "class",
-  "constant",
-  "constructor",
-  "enum",
-  "field",
-  "file",
-  "function",
-  "interface",
-  "method",
-  "module",
-  "namespace",
-  "number",
-  "package",
-  "property",
-  "string",
-  "variable",
-]
-
-// find better symbols for the rest
-const symbolMap = new Map([
-  // ["class", '\ue600'],
-  // ["struct", '\ue601'],
-  // ["macro", '\ue602'],
-  // ["typedef", '\ue603'],
-  // ["union", '\ue604'],
-  // ["interface", '\ue605'],
-  // ["enum", '\ue606'],
-  ["variable", "\ue607"],
-  ["function", "\ue608"],
-  ["namespace", "\ue609"],
-])
-
-// find better symbols for the rest
-const abbreviationMap = new Map([
-  ["array", "arr"],
-  ["boolean", "bool"],
-  ["class", "clas"],
-  ["constant", "cons"],
-  ["constructor", "ctor"],
-  ["enum", "enum"],
-  ["field", "fild"],
-  ["file", "file"],
-  ["function", "func"],
-  ["interface", "intf"],
-  ["method", "meth"],
-  ["module", "mod"],
-  ["namespace", "ns"],
-  ["number", "num"],
-  ["package", "pkg"],
-  ["property", "prop"],
-  ["string", "str"],
-  ["variable", "var"],
-])
-
-function getIconHTML(type: string | undefined) {
-  if (type) {
-    if (symbolMap.has(type)) {
-      return `<span style="font-family: 'symbol-icons';">${symbolMap.get(type)}</span>`
-    }
-    if (abbreviationMap.has(type)) {
-      return `<span>${abbreviationMap.get(type)}</span>`
-    } else {
-      return `<span>${type.substring(0, 3)}</span>`
-    }
-  } else {
-    return "<span>•</span>"
-  }
-}
-
 function getIcon(iconType?: string, kindType?: string) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
@@ -313,7 +241,7 @@ function getIcon(iconType?: string, kindType?: string) {
     kindType = iconType
   }
 
-  let type: string | undefined
+  let type: string = "•"
   if (typeof kindType === "string" && kindType.length > 0) {
     let kindClass: string
     // hasKind
@@ -321,18 +249,15 @@ function getIcon(iconType?: string, kindType?: string) {
       // supplied with type-...
       kindClass = `${kindType}`
       type = kindType.replace("type-", "")
-    } else if (supportedTypes.includes(kindType)) {
+    } else {
       // supplied without type-
       kindClass = `type-${kindType}`
       type = kindType
-    } else {
-      // as is
-      kindClass = kindType
     }
     iconElement.classList.add(kindClass)
   }
 
-  iconElement.innerHTML = getIconHTML(type)
+  iconElement.innerHTML = `<span>${type.substring(0, 3)}</span>`
 
   return iconElement
 }

@@ -92,11 +92,57 @@
   // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
+  .iconByType(@type) {
+    content: replace(@type, "^(....).*$", '"$1"');
+  }
+  .iconByType(array) {
+    content: "arr";
+  }
+  .iconByType(constructor) {
+    content: "ctor";
+  }
+  .iconByType(field) {
+    content: "fild";
+  }
+  .iconByType(function) {
+    font-family: "symbol-icons";
+    content: "\e608";
+  }
+  .iconByType(interface) {
+    content: "intf";
+  }
+  .iconByType(module) {
+    content: "mod";
+  }
+  .iconByType(namespace) {
+    font-family: "symbol-icons";
+    content: "\e609";
+  }
+  .iconByType(number) {
+    content: "num";
+  }
+  .iconByType(package) {
+    content: "pkg";
+  }
+  .iconByType(string) {
+    content: "str";
+  }
+  .iconByType(variable) {
+    font-family: "symbol-icons";
+    content: "\e607";
+  }
+
   .styleByType(@type, @color) {
     .type-@{type} {
       contain: @contain_except_size;
       color: @color;
       font-size: smaller;
+      &::before {
+        .iconByType(@type);
+      }
+      & > span {
+        display: none;
+      }
     }
 
     .fold-type-@{type} {
