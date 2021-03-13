@@ -83,9 +83,10 @@
   .icon {
     contain: @contain_except_size;
     display: inline-block;
-    width: 40px;
+    width: 5ex;
+    font-size: 75%;
     text-align: center;
-    vertical-align: top; // align icon with text vertically
+    vertical-align: middle; // align icon with text vertically
     font-weight: normal;
   }
 
@@ -134,9 +135,7 @@
 
   .styleByType(@type, @color) {
     .type-@{type} {
-      contain: @contain_except_size;
       color: @color;
-      font-size: smaller;
       &::before {
         .iconByType(@type);
       }
