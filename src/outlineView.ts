@@ -262,7 +262,7 @@ function getIcon(iconType?: string, kindType?: string) {
   return iconElement
 }
 
-const foldButtonWidth = 20
+const foldButtonWidth = 25 // from css: .fold witdth + .fold margin-right
 
 function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean) {
   // TIME: ~0.1-0.5ms
