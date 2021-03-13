@@ -74,35 +74,37 @@ let onDidCompositeDisposable: CompositeDisposable | null
 
 function addObservers() {
   onDidCompositeDisposable = new CompositeDisposable()
-  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(async (editor) => {
-    if (editor === undefined) {
-      return
-    }
-    // dispose the old subscriptions
-    onDidCompositeDisposable?.dispose?.()
-
-    await getOutline(editor) // initial outline
-
-    const lineCount = lineCountIfLarge(editor as TextEditor)
-    // How long to wait for the new changes before updating the outline.
-    // A high number will increase the responsiveness of the text editor in large files.
-    const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
-
-    const doubouncedGetOutline = debounce(getOutline as (editor: TextEditor) => Promise<void>, updateDebounceTime)
-
-    onDidCompositeDisposable!.add(
-      // update the outline if editor stops changing
-      editor.onDidStopChanging(async () => {
-        await doubouncedGetOutline(editor)
-      }),
-
-      // clean up if the editor editor is closed
-      editor.onDidDestroy(() => {
-        setStatus("noEditor")
-      })
-    )
-  })
+  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(editorChanged)
   subscriptions.add(activeTextEditorObserver)
+}
+
+async function editorChanged(editor?: TextEditor) {
+  if (editor === undefined) {
+    return
+  }
+  // dispose the old subscriptions
+  onDidCompositeDisposable?.dispose?.()
+
+  await getOutline(editor) // initial outline
+
+  const lineCount = lineCountIfLarge(editor as TextEditor)
+  // How long to wait for the new changes before updating the outline.
+  // A high number will increase the responsiveness of the text editor in large files.
+  const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
+
+  const doubouncedGetOutline = debounce(getOutline as (editor: TextEditor) => Promise<void>, updateDebounceTime)
+
+  onDidCompositeDisposable!.add(
+    // update the outline if editor stops changing
+    editor.onDidStopChanging(async () => {
+      await doubouncedGetOutline(editor)
+    }),
+
+    // clean up if the editor editor is closed
+    editor.onDidDestroy(() => {
+      setStatus("noEditor")
+    })
+  )
 }
 
 export function revealCursor() {
@@ -134,6 +136,13 @@ export function toggleOutlineView() {
   pane.activateItem(view)
 
   rightDock.show()
+
+  editorChanged(atom.workspace.getActiveTextEditor()).catch((e) => {
+    atom.notifications.addError(e, {
+      stack: e.stack,
+      detail: e.message,
+    })
+  })
 }
 
 export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
