@@ -47,6 +47,10 @@ export class OutlineView {
     }
 
     const outlineRoot = document.createElement("ul")
+    const tabLength = editor.getTabLength()
+    if (typeof tabLength === "number") {
+      outlineRoot.style.setProperty("--editor-tab-length", tabLength.toString(10))
+    }
     addOutlineEntries(
       outlineRoot,
       outlineTree,
@@ -140,10 +144,6 @@ function addOutlineEntries(
   // NOTE: this function is called multiple times with each update in an editor!
   // a few of the calls is slow ~1-100ms
 
-  // calculate indent length
-  const tabLength = editor.getTabLength()
-  const indentRatio = 16 * (typeof tabLength === "number" ? tabLength : 4)
-
   // sort entries
   // TIME 0.1ms
   if (atom.config.get("atom-ide-outline.sortEntries")) {
@@ -201,17 +201,11 @@ function addOutlineEntries(
       { passive: true }
     )
 
-    if (/* hasChildren */ item.children == null || item.children[0] == null) {
-      // indentation
-      labelElement.style.paddingLeft = level !== 0 ? `${indentRatio * level}px` : `${foldButtonWidth}px`
-    } else {
-      // indentation
-      // compensate for the fold button
-      labelElement.style.paddingLeft = level !== 0 ? `${indentRatio * level - foldButtonWidth}px` : `0px`
-
+    if (/* hasChildren */ item.children != null && item.children[0] != null) {
       // create Child elements
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
+      childrenList.style.setProperty("--indent-level", level.toString(10))
       childrenList.addEventListener("click", (event) => event.stopPropagation(), { passive: true })
       symbol.appendChild(childrenList)
 
@@ -261,8 +255,6 @@ function getIcon(iconType?: string, kindType?: string) {
 
   return iconElement
 }
-
-const foldButtonWidth = 20
 
 function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean) {
   // TIME: ~0.1-0.5ms

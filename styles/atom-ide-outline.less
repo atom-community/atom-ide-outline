@@ -19,6 +19,12 @@
   contain: @contain_except_size;
   overflow-y: auto;
 
+  @fold-width: 24px;
+
+  --editor-tab-length: 4; // default
+  --level-indent-size: 16px;
+  --indent-level: 0; // initial
+
   ul {
     contain: @contain_except_size;
     list-style-type: none;
@@ -35,6 +41,8 @@
       width: 100%;
       padding: 2px 5px;
       white-space: nowrap;
+
+      padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + 5px + @{fold-width})";
 
       // highlight on hover
       &:hover {
@@ -55,9 +63,9 @@
     contain: @contain_except_size;
     display: inline-block;
     position: relative;
-    width: 20px;
-    padding-left: 7px;
-    padding-right: 0;
+    width: @fold-width;
+    margin: 0 0 0 -@fold-width;
+    padding: 0;
     opacity: 1;
     border: none;
     background-color: inherit;
