@@ -92,7 +92,7 @@ async function editorChanged(editor?: TextEditor) {
   // A high number will increase the responsiveness of the text editor in large files.
   const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
 
-  const doubouncedGetOutline = debounce(getOutline as (editor: TextEditor) => Promise<void>, updateDebounceTime)
+  const doubouncedGetOutline = debounce(getOutline as (textEditor: TextEditor) => Promise<void>, updateDebounceTime)
 
   onDidCompositeDisposable!.add(
     // update the outline if editor stops changing
