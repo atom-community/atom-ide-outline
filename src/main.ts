@@ -1,6 +1,6 @@
-import { CompositeDisposable, TextEditor, CursorPositionChangedEvent } from "atom"
+import { CompositeDisposable, TextEditor } from "atom"
 import { OutlineView } from "./outlineView"
-import { OutlineProvider, BusySignalRegistry, BusySignalProvider } from "atom-ide-base"
+import { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 
 export { statuses } from "./statuses" // for spec
