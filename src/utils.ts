@@ -12,3 +12,11 @@ export function isItemVisible(item: object) {
     return true
   }
 }
+
+/** Throw an Error using atom notifications */
+export function notifyError(e: Error) {
+  atom.notifications.addError(e.name, {
+    stack: e.stack,
+    detail: e.message,
+  })
+}

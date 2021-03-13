@@ -2,6 +2,7 @@ import { CompositeDisposable, TextEditor } from "atom"
 import { OutlineView } from "./outlineView"
 import { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
+import { notifyError } from "./utils"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
@@ -18,7 +19,10 @@ export function activate() {
   addCommands()
   addObservers()
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
-    toggleOutlineView() // initially show outline pane
+    // initially show outline pane
+    toggleOutlineView().catch((e) => {
+      notifyError(e)
+    })
   }
 }
 
@@ -119,7 +123,7 @@ export function revealCursor() {
   }
 }
 
-export function toggleOutlineView() {
+export async function toggleOutlineView() {
   if (view === undefined) {
     view = new OutlineView() // create outline pane
   }
@@ -137,12 +141,12 @@ export function toggleOutlineView() {
 
   rightDock.show()
 
-  editorChanged(atom.workspace.getActiveTextEditor()).catch((e) => {
-    atom.notifications.addError(e, {
-      stack: e.stack,
-      detail: e.message,
-    })
-  })
+  // Trigger an editor change whenever an outline is toggeled.
+  try {
+    await editorChanged(atom.workspace.getActiveTextEditor())
+  } catch (e) {
+    notifyError(e)
+  }
 }
 
 export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
