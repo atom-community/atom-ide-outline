@@ -95,7 +95,7 @@
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
   .iconByType(@type) {
-    content: replace(@type, "^(....).*$", '"$1"');
+    content: replace(@type, "^(....).*$", '"$1"'); // use the first 4 letter of the type
   }
   .iconByType(array) {
     content: "arr";
