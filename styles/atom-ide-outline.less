@@ -16,10 +16,11 @@
 }
 
 .outline-view {
+  margin-left: 10px; // overal left margin
   contain: @contain_except_size;
   overflow-y: auto;
 
-  @fold-width: 24px;
+  @fold-width: 8px;
 
   --editor-tab-length: 4; // default
   --level-indent-size: 16px;
@@ -42,7 +43,7 @@
       padding: 2px 5px;
       white-space: nowrap;
 
-      padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + 5px + @{fold-width})";
+      padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + @{fold-width})";
 
       // highlight on hover
       &:hover {
