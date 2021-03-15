@@ -50,7 +50,7 @@ export class OutlineView {
     const outlineRoot = document.createElement("ul")
     const tabLength = editor.getTabLength()
     if (typeof tabLength === "number") {
-      outlineRoot.style.setProperty("--editor-tab-length", tabLength.toString(10))
+      outlineRoot.style.setProperty("--editor-tab-length", Math.max(tabLength / 2, 2).toString(10))
     }
     addOutlineEntries(
       outlineRoot,
