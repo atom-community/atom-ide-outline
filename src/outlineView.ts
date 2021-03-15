@@ -234,7 +234,7 @@ function getIcon(iconType?: string, kindType?: string) {
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
   const iconElement = document.createElement("span")
-  iconElement.classList.add("icon")
+  iconElement.classList.add("outline-icon")
 
   // if iconType given instead
   if (kindType == undefined && iconType != undefined) {
@@ -272,9 +272,9 @@ function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean
   if (foldInitially) {
     // collapse in large files by default
     childrenList.hidden = true
-    foldButton.classList.add("fold", "collapsed")
+    foldButton.classList.add("outline-fold-btn", "collapsed")
   } else {
-    foldButton.classList.add("fold", "expanded")
+    foldButton.classList.add("outline-fold-btn", "expanded")
   }
 
   // fold listener
