@@ -237,7 +237,7 @@ function getIcon(iconType?: string, kindType?: string) {
     kindType = iconType
   }
 
-  let type: string = "•"
+  let type: string = "🞇"
   if (typeof kindType === "string" && kindType.length > 0) {
     let kindClass: string
     // hasKind
