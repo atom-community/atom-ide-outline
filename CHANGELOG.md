@@ -1,3 +1,20 @@
+# [2.1.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.0.2...v2.1.0) (2021-03-15)
+
+
+### Bug Fixes
+
+* define padding-side ([360249b](https://github.com/atom-ide-community/atom-ide-outline/commit/360249bd623c832b393a4881cf90766c0f9c8a2f))
+* increase indent level for first children ([15c04ca](https://github.com/atom-ide-community/atom-ide-outline/commit/15c04ca89cb68932874660ff1d0975de1712f337))
+* make the fold button smaller ([23abe67](https://github.com/atom-ide-community/atom-ide-outline/commit/23abe67ba43b591695bdc85b4082c6d668a8dd76))
+* make the outline condense by using less indentation ([19be944](https://github.com/atom-ide-community/atom-ide-outline/commit/19be944b8ed5521334d9efe2e23c04745c1d2585))
+* use a larger default icon ([87db24d](https://github.com/atom-ide-community/atom-ide-outline/commit/87db24d340b850cbde0a0bde9f5f82aa0350fe25))
+* use padding-side instead of overall margin-left ([019f508](https://github.com/atom-ide-community/atom-ide-outline/commit/019f508f87a4e4e4b8a273cb6963436565a57cf3))
+
+
+### Features
+
+* add editor root scope data attribute to outline root elem ([a376740](https://github.com/atom-ide-community/atom-ide-outline/commit/a376740112628690818a1f5888e2a08f0f1b9c46))
+
 ## [2.0.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.0.1...v2.0.2) (2021-03-15)
 
 

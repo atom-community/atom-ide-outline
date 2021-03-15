@@ -782,7 +782,7 @@
         "affectsGlobalScope": false
       },
       "../src/outlineView.ts": {
-        "version": "6c42d01140258df914d4638e2c76a12ab0c5ff2837307affb3097e0dd90bc3d1",
+        "version": "8f899c1ba6c52998207902424fc8b07a59ef80e7285ef15af54ba9164f2fbaa4",
         "signature": "4e2a8191ce82be907109e776a96d7e21628ee92b98067569bc3c25934c16a304",
         "affectsGlobalScope": false
       },
