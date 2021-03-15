@@ -31,6 +31,7 @@ export class OutlineView {
 
   setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     const outlineViewElement = this.clearOutline()
+    outlineViewElement.dataset.editorRootScope = editor.getRootScopeDescriptor().getScopesArray().join(" ")
 
     if (isLarge) {
       const largeFileElement = document.createElement("div")
@@ -64,6 +65,7 @@ export class OutlineView {
   clearOutline() {
     const outlineViewElement = this.getElement()
     outlineViewElement.innerHTML = ""
+    outlineViewElement.dataset.editorRootScope = ""
     return outlineViewElement
   }
 
