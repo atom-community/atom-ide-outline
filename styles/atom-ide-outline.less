@@ -16,7 +16,7 @@
 }
 
 .outline-view {
-  margin-left: 10px; // overal left margin
+  margin-left: 5px; // overal left margin
   contain: @contain_except_size;
   overflow-y: auto;
 
@@ -40,10 +40,11 @@
       contain: @contain_except_size;
       display: inline-block;
       width: 100%;
-      padding: 2px 5px;
+      @padding-side: 5px;
+      padding: 2px @padding-side;
       white-space: nowrap;
 
-      padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + @{fold-width})";
+      padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + @{padding-side} + @{fold-width})";
 
       // highlight on hover
       &:hover {
