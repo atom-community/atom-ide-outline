@@ -1,3 +1,20 @@
+## [2.0.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.0.1...v2.0.2) (2021-03-15)
+
+
+### Bug Fixes
+
+* add margin after the fold button ([e83fbfa](https://github.com/atom-ide-community/atom-ide-outline/commit/e83fbfa70cbddeb5a89905dcb56fa9e9f189c8df))
+* disable line wrapping on <li> ([91d2fef](https://github.com/atom-ide-community/atom-ide-outline/commit/91d2fef92cdd74782c2a7db681c5ea58297426f0))
+* make icons work with arbitrary editor font sizes ([789ca44](https://github.com/atom-ide-community/atom-ide-outline/commit/789ca4499aa200d94744c370cd5f74c93ed5e92c))
+* make the icon width 6ch ([cd18f93](https://github.com/atom-ide-community/atom-ide-outline/commit/cd18f93ef1fbbeed70f0cc92a4902fb1ffa5df0a))
+* rename classes to prevent conflict with file-icons ([0ec4e39](https://github.com/atom-ide-community/atom-ide-outline/commit/0ec4e3949be842831fc339d20f95f790c7d8d46b))
+* use ch instead of ex for width ([ac37e17](https://github.com/atom-ide-community/atom-ide-outline/commit/ac37e1743d736726ba7d99850648f2fa318f88a8))
+
+
+### Reverts
+
+* fix: add margin after the fold button ([ef12969](https://github.com/atom-ide-community/atom-ide-outline/commit/ef12969e7cd7c32703cab6dd3a976cd365445032))
+
 ## [2.0.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.0.0...v2.0.1) (2021-03-13)
 
 
