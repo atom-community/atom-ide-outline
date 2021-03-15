@@ -207,7 +207,7 @@ function addOutlineEntries(
       // create Child elements
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
-      childrenList.style.setProperty("--indent-level", level.toString(10))
+      childrenList.style.setProperty("--indent-level", (level + 1).toString(10))
       childrenList.addEventListener("click", (event) => event.stopPropagation(), { passive: true })
       symbol.appendChild(childrenList)
 
