@@ -143,6 +143,10 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element
 }
 
+function hasChildren(entry: OutlineTree) {
+  return entry.children.length >= 1
+}
+
 function addOutlineEntries(
   parent: HTMLUListElement,
   entries: OutlineTree[],
@@ -195,7 +199,7 @@ function addOutlineEntries(
     // TIME: 0-0.1ms
     symbol.addEventListener("click", () => onClickEntry(item, editor), { passive: true })
 
-    if (/* hasChildren */ item.children.length >= 1) {
+    if (hasChildren(item)) {
       // create Child elements
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
