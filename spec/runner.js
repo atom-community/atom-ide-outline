@@ -7,16 +7,5 @@ export default createRunner({
   testPackages: Array.from(pkg["package-deps"]),
   timeReporter: true,
   specHelper: true,
-  attachToDOM: true,
-  // Extra Packages
-  customMatchers: true,
-  jasmineFocused: false,
-  jasmineJson: false,
-  jasminePass: false,
-  jasmineShouldFail: false,
-  jasmineTagged: false,
-  mockClock: true,
-  mockLocalStorage: false,
-  profile: true,
-  unspy: false,
+  showEditor: true,
 })
