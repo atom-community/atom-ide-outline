@@ -21,6 +21,8 @@ export class OutlineView {
   constructor() {
     this.element = document.createElement("div")
 
+    this.element.appendChild(makeOutlineToolbar())
+
     this.outlineContent = document.createElement("div")
     this.element.appendChild(this.outlineContent)
 
@@ -185,6 +187,23 @@ function hasEqualContent(ot1: OutlineTree[], ot2: OutlineTree[]) {
     }
   }
   return true
+}
+
+function makeOutlineToolbar() {
+  const toolbar = document.createElement("span")
+  toolbar.className = "outline-toolbar"
+
+  const revealCursorButton = document.createElement("button")
+  revealCursorButton.innerHTML = "Reveal Cursor"
+  revealCursorButton.className = "btn outline-btn"
+
+  revealCursorButton.addEventListener("click", () => {
+    // @ts-ignore: internal API
+    atom.commands.dispatch(atom.workspace.getElement(), "outline:reveal-cursor")
+  })
+
+  toolbar.appendChild(revealCursorButton)
+  return toolbar
 }
 
 function createLargeFileElement() {
