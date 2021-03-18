@@ -2,8 +2,10 @@ import { TextEditor, CursorPositionChangedEvent } from "atom";
 import { OutlineTree } from "atom-ide-base";
 export declare class OutlineView {
     element: HTMLDivElement;
+    private outlineRoot;
     private pointToElementsMap;
     private focusedElms;
+    lastEntries: OutlineTree[] | undefined;
     constructor();
     destroy(): void;
     getElement(): HTMLDivElement;

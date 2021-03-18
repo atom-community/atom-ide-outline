@@ -222,8 +222,8 @@
         "affectsGlobalScope": false
       },
       "../node_modules/@types/node/http2.d.ts": {
-        "version": "4c260129d649d69f0608cd123e7016e61364b553a5ca2de9b66b0398594959cf",
-        "signature": "4c260129d649d69f0608cd123e7016e61364b553a5ca2de9b66b0398594959cf",
+        "version": "9aff68f1b847b846d3d50a58c9f8f99389bedd0258d1b1c201f11b97ecfd36f8",
+        "signature": "9aff68f1b847b846d3d50a58c9f8f99389bedd0258d1b1c201f11b97ecfd36f8",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/node/https.d.ts": {
@@ -496,14 +496,14 @@
         "signature": "e42db4296d48fa63531ac389627d0577a0dd6f6491b47fd7398b17ff6abd2f6c",
         "affectsGlobalScope": false
       },
-      "../node_modules/@types/atom/src/config-schema.d.ts": {
-        "version": "7e86edb41dda0f44642e6e68548ddad7df7f8ae45b978208b7a00c69a721410d",
-        "signature": "7e86edb41dda0f44642e6e68548ddad7df7f8ae45b978208b7a00c69a721410d",
+      "../node_modules/@types/atom/src/config.d.ts": {
+        "version": "bddc0d81daa46345e19c159cbc90638380b24e8d6ddd89d1542c6d9e31ebeddc",
+        "signature": "bddc0d81daa46345e19c159cbc90638380b24e8d6ddd89d1542c6d9e31ebeddc",
         "affectsGlobalScope": false
       },
-      "../node_modules/@types/atom/src/config.d.ts": {
-        "version": "5edc1f912f34fb7fec2e4419e253c54d83afbdbb5f91eb86e5bbac0872d16a4f",
-        "signature": "5edc1f912f34fb7fec2e4419e253c54d83afbdbb5f91eb86e5bbac0872d16a4f",
+      "../node_modules/@types/atom/src/config-schema.d.ts": {
+        "version": "a204b31c3672914ff68bb20bfdaae933bf7f8f943687c371b0fd32a3482fc5d4",
+        "signature": "a204b31c3672914ff68bb20bfdaae933bf7f8f943687c371b0fd32a3482fc5d4",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/atom/src/context-menu-manager.d.ts": {
@@ -782,8 +782,8 @@
         "affectsGlobalScope": false
       },
       "../src/outlineView.ts": {
-        "version": "8f899c1ba6c52998207902424fc8b07a59ef80e7285ef15af54ba9164f2fbaa4",
-        "signature": "4e2a8191ce82be907109e776a96d7e21628ee92b98067569bc3c25934c16a304",
+        "version": "9c86035dabc2c7a610d358709d6231722bc6a2f39ebe2a9f19fad21936ab03dd",
+        "signature": "114aa9432cc2c8e864557bf7727988264aaa969482c9c5524ac0bd9a433cd6ef",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/commons-atom/ProviderRegistry.d.ts": {
@@ -882,8 +882,8 @@
         "affectsGlobalScope": false
       },
       "../node_modules/@types/jasmine/index.d.ts": {
-        "version": "2f3d09b70ec828c33a686aa2d7cc6b886263996791992c06499bccee336a69db",
-        "signature": "2f3d09b70ec828c33a686aa2d7cc6b886263996791992c06499bccee336a69db",
+        "version": "2c23cf04e1fa16783615b625c0ef5d865b11a7019b6e72c6b523928e379cd011",
+        "signature": "2c23cf04e1fa16783615b625c0ef5d865b11a7019b6e72c6b523928e379cd011",
         "affectsGlobalScope": true
       },
       "../node_modules/@types/json-schema/index.d.ts": {
@@ -1057,7 +1057,8 @@
         "../node_modules/@types/node/index.d.ts"
       ],
       "../node_modules/@types/atom/linter/config.d.ts": [
-        "../node_modules/@types/atom/index.d.ts"
+        "../node_modules/@types/atom/index.d.ts",
+        "../node_modules/@types/atom/src/config-schema.d.ts"
       ],
       "../node_modules/@types/atom/linter/index.d.ts": [
         "../node_modules/@types/atom/index.d.ts",
@@ -1077,11 +1078,11 @@
         "../node_modules/@types/atom/index.d.ts"
       ],
       "../node_modules/@types/atom/src/config-schema.d.ts": [
-        "../node_modules/@types/atom/index.d.ts"
+        "../node_modules/@types/atom/index.d.ts",
+        "../node_modules/@types/atom/linter/config.d.ts"
       ],
       "../node_modules/@types/atom/src/config.d.ts": [
-        "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/@types/atom/src/config-schema.d.ts"
+        "../node_modules/@types/atom/index.d.ts"
       ],
       "../node_modules/@types/atom/src/context-menu-manager.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
@@ -1801,7 +1802,8 @@
         "../node_modules/@types/node/index.d.ts"
       ],
       "../node_modules/@types/atom/linter/config.d.ts": [
-        "../node_modules/@types/atom/index.d.ts"
+        "../node_modules/@types/atom/index.d.ts",
+        "../node_modules/@types/atom/src/config-schema.d.ts"
       ],
       "../node_modules/@types/atom/linter/index.d.ts": [
         "../node_modules/@types/atom/index.d.ts",
@@ -1821,11 +1823,11 @@
         "../node_modules/@types/atom/index.d.ts"
       ],
       "../node_modules/@types/atom/src/config-schema.d.ts": [
-        "../node_modules/@types/atom/index.d.ts"
+        "../node_modules/@types/atom/index.d.ts",
+        "../node_modules/@types/atom/linter/config.d.ts"
       ],
       "../node_modules/@types/atom/src/config.d.ts": [
-        "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/@types/atom/src/config-schema.d.ts"
+        "../node_modules/@types/atom/index.d.ts"
       ],
       "../node_modules/@types/atom/src/context-menu-manager.d.ts": [
         "../node_modules/@types/atom/index.d.ts"

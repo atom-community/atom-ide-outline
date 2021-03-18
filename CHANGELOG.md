@@ -1,3 +1,19 @@
+# [2.2.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.1.0...v2.2.0) (2021-03-18)
+
+
+### Bug Fixes
+
+* check the length of the Array for hasChildren ([d7e14cc](https://github.com/atom-ide-community/atom-ide-outline/commit/d7e14cc87d5d31f5d219cdf31fed91893c9488cf))
+* kindType and iconType can only be undefined ([0722369](https://github.com/atom-ide-community/atom-ide-outline/commit/072236983741a362a2d953e791f51cf9ea275af5))
+* only pass itemStartPosition to onClickEntry ([d4c1eb0](https://github.com/atom-ide-community/atom-ide-outline/commit/d4c1eb053291db030d4a3d9e55243b77a8d2ae45))
+* skip rendering if outlineTree is the same ([b86ba08](https://github.com/atom-ide-community/atom-ide-outline/commit/b86ba08f1fb030fba311466462f7dbd6f92a84b2))
+* update dependencies ([2c76e51](https://github.com/atom-ide-community/atom-ide-outline/commit/2c76e51c49948ab758ec6c3d7c6b38f408d75a9d))
+
+
+### Features
+
+* skip rerendering if the content of the outline is not changed ([27fda8b](https://github.com/atom-ide-community/atom-ide-outline/commit/27fda8b5f0ee6e2e3aa41ca37c38a28f8d7c0aeb))
+
 # [2.1.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.0.2...v2.1.0) (2021-03-15)
 
 
