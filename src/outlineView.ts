@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { TextEditor, CursorPositionChangedEvent } from "atom"
+import { TextEditor, CursorPositionChangedEvent, Point } from "atom"
 import { OutlineTree } from "atom-ide-base"
 import { isItemVisible } from "./utils"
 
@@ -271,7 +271,7 @@ function addEntriesOnClick(
     const element = entriesElements[iEntry] as HTMLLIElement
 
     // Cursor reposition on click
-    element.addEventListener("click", () => onClickEntry(item, editor), { passive: true })
+    element.addEventListener("click", () => onClickEntry(item.startPosition, editor), { passive: true })
 
     // update the cache for selectAtCursorLine
     addToPointToElementsMap(pointToElementsMap, item.startPosition.row, element)
@@ -301,7 +301,7 @@ function addToPointToElementsMap(
 
 let clicked: boolean = false // HACK used to prevent scrolling in the outline list when an entry is clicked
 
-function onClickEntry(item: OutlineTree, editor: TextEditor) {
+function onClickEntry(itemStartPosition: Point, editor: TextEditor) {
   // only uses a reference to the editor and the pane and corsur are calculated on the fly
   const editorPane = atom.workspace.paneForItem(editor)
   if (editorPane === undefined) {
@@ -309,7 +309,7 @@ function onClickEntry(item: OutlineTree, editor: TextEditor) {
   }
   editorPane.activate()
 
-  editor.getCursors()[0].setBufferPosition(item.startPosition, {
+  editor.getCursors()[0].setBufferPosition(itemStartPosition, {
     autoscroll: true,
   })
   // HACK
