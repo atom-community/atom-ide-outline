@@ -66,23 +66,7 @@ export class OutlineView {
       this.outlineContent.appendChild(createLargeFileElement())
     }
 
-    this.outlineList = document.createElement("ul")
-    this.outlineList.dataset.editorRootScope = editor.getRootScopeDescriptor().getScopesArray().join(" ")
-
-    this.outlineList = document.createElement("ul")
-    const tabLength = editor.getTabLength()
-    if (typeof tabLength === "number") {
-      this.outlineList.style.setProperty("--editor-tab-length", Math.max(tabLength / 2, 2).toString(10))
-    }
-    addOutlineEntries(
-      this.outlineList,
-      outlineTree,
-      editor,
-      /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially"),
-      0
-    )
-    // TIME 0.2-0.5m
-    addEntriesOnClick(this.outlineList, outlineTree, editor, this.pointToElementsMap, 0)
+    this.outlineList = createOutlineList(outlineTree, editor, isLarge, this.pointToElementsMap)
     this.outlineContent.appendChild(this.outlineList)
   }
 
@@ -143,6 +127,32 @@ export class OutlineView {
   isVisible() {
     return isItemVisible(this)
   }
+}
+
+/** create the main outline list */
+function createOutlineList(
+  outlineTree: OutlineTree[],
+  editor: TextEditor,
+  isLarge: boolean,
+  pointToElementsMap: Map<number, Array<HTMLLIElement>>
+) {
+  const outlineList = document.createElement("ul")
+  outlineList.dataset.editorRootScope = editor.getRootScopeDescriptor().getScopesArray().join(" ")
+
+  const tabLength = editor.getTabLength()
+  if (typeof tabLength === "number") {
+    outlineList.style.setProperty("--editor-tab-length", Math.max(tabLength / 2, 2).toString(10))
+  }
+  addOutlineEntries(
+    outlineList,
+    outlineTree,
+    editor,
+    /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially"),
+    0
+  )
+  // TIME 0.2-0.5m
+  addEntriesOnClick(outlineList, outlineTree, editor, pointToElementsMap, 0)
+  return outlineList
 }
 
 /** Compares the content of the two given {OutlineTree[]}
