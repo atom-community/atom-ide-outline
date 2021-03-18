@@ -5,6 +5,7 @@ import { isItemVisible } from "./utils"
 
 export class OutlineView {
   public element: HTMLDivElement
+  private outlineRoot: HTMLUListElement | undefined = undefined
   private pointToElementsMap = new Map<number, Array<HTMLLIElement>>() // TODO Point to element
   private focusedElms: HTMLElement[] | undefined // cache for focused elements
 
@@ -34,7 +35,16 @@ export class OutlineView {
 
   setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     // skip rendering if it is the same
-    if (outlineTree === this.lastEntries) {
+    // TIME 0.2-1.2ms // the check itself takes ~0.2-0.5ms, so it is better than rerendering
+    if (this.lastEntries !== undefined && hasEqualContent(outlineTree, this.lastEntries)) {
+      this.pointToElementsMap.clear() // empty revealCorsur cache
+      addEntriesOnClick(
+        this.outlineRoot! /* because this.lastEntries is not undefined */,
+        outlineTree,
+        editor,
+        this.pointToElementsMap,
+        0
+      )
       return
     } else {
       this.lastEntries = outlineTree
@@ -57,21 +67,21 @@ export class OutlineView {
       outlineViewElement.appendChild(largeFileElement)
     }
 
-    const outlineRoot = document.createElement("ul")
+    this.outlineRoot = document.createElement("ul")
     const tabLength = editor.getTabLength()
     if (typeof tabLength === "number") {
-      outlineRoot.style.setProperty("--editor-tab-length", Math.max(tabLength / 2, 2).toString(10))
+      this.outlineRoot.style.setProperty("--editor-tab-length", Math.max(tabLength / 2, 2).toString(10))
     }
     addOutlineEntries(
-      outlineRoot,
+      this.outlineRoot,
       outlineTree,
       editor,
       /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially"),
       0
     )
     // TIME 0.2-0.5m
-    addEntriesOnClick(outlineRoot, outlineTree, editor, this.pointToElementsMap, 0)
-    outlineViewElement.appendChild(outlineRoot)
+    addEntriesOnClick(this.outlineRoot, outlineTree, editor, this.pointToElementsMap, 0)
+    outlineViewElement.appendChild(this.outlineRoot)
   }
 
   clearOutline() {
@@ -132,6 +142,38 @@ export class OutlineView {
   isVisible() {
     return isItemVisible(this)
   }
+}
+
+/** Compares the content of the two given {OutlineTree[]}
+ *  It only compares the content that affects rendering
+ */
+function hasEqualContent(ot1: OutlineTree[], ot2: OutlineTree[]) {
+  // simple compare
+  if (ot1 === ot2) {
+    return true
+  } else {
+    // compare length
+    const ot1Len = ot1.length
+    const ot2Len = ot2.length
+    if (ot1Len !== ot2Len) {
+      return false
+    }
+    // compare the content
+    for (let iEntry = 0; iEntry < ot1Len; iEntry++) {
+      const e1 = ot1[iEntry]
+      const e2 = ot2[iEntry]
+      if (
+        e1.representativeName !== e2.representativeName ||
+        e1.plainText !== e2.plainText ||
+        e1.kind !== e2.kind ||
+        e1.icon !== e2.icon ||
+        !hasEqualContent(e1.children, e2.children)
+      ) {
+        return false
+      }
+    }
+  }
+  return true
 }
 
 function generateStatusElement(status: { title: string; description: string }) {
