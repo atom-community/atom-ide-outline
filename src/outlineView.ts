@@ -66,11 +66,11 @@ export class OutlineView {
       outlineRoot,
       outlineTree,
       editor,
-      this.pointToElementsMap,
       /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially"),
       0
     )
-    addEntriesOnClick(outlineRoot, outlineTree, editor, 0)
+    // TIME 0.2-0.5m
+    addEntriesOnClick(outlineRoot, outlineTree, editor, this.pointToElementsMap, 0)
     outlineViewElement.appendChild(outlineRoot)
   }
 
@@ -166,7 +166,6 @@ function addOutlineEntries(
   parent: HTMLUListElement,
   entries: OutlineTree[],
   editor: TextEditor,
-  pointToElementsMap: Map<number, Array<HTMLLIElement>>,
   isLarge: boolean,
   level: number
 ) {
@@ -190,16 +189,6 @@ function addOutlineEntries(
 
     symbol.appendChild(labelElement)
 
-    // update start position => elements map
-    // TIME: 0-0.2ms
-    const elms = pointToElementsMap.get(item.startPosition.row)
-    if (elms !== undefined) {
-      elms.push(symbol)
-      pointToElementsMap.set(item.startPosition.row, elms)
-    } else {
-      pointToElementsMap.set(item.startPosition.row, [symbol])
-    }
-
     if (hasChildren(item)) {
       // create Child elements
       // TIME 0-0.2ms
@@ -214,7 +203,7 @@ function addOutlineEntries(
 
       // add children to outline
       // TIME: last one of each batch is slower 0-20ms
-      addOutlineEntries(childrenList, item.children, editor, pointToElementsMap, isLarge, level + 1)
+      addOutlineEntries(childrenList, item.children, editor, isLarge, level + 1)
     }
 
     // TIME: <0.1ms
@@ -225,7 +214,13 @@ function addOutlineEntries(
 /** Adds onClick to the outline entries.
  * @attention The assumption about the type of Elements are added using `as HTML...`. After editing code, make sure that the types are correct
  */
-function addEntriesOnClick(parent: HTMLUListElement, entries: OutlineTree[], editor: TextEditor, level = 0) {
+function addEntriesOnClick(
+  parent: HTMLUListElement,
+  entries: OutlineTree[],
+  editor: TextEditor,
+  pointToElementsMap: Map<number, Array<HTMLLIElement>>,
+  level: number
+) {
   const entriesElements = parent.children
   for (let iEntry = 0, len = entries.length; iEntry < len; iEntry++) {
     const item = entries[iEntry]
@@ -234,10 +229,29 @@ function addEntriesOnClick(parent: HTMLUListElement, entries: OutlineTree[], edi
     // Cursor reposition on click
     element.addEventListener("click", () => onClickEntry(item, editor), { passive: true })
 
+    // update the cache for selectAtCursorLine
+    addToPointToElementsMap(pointToElementsMap, item.startPosition.row, element)
+
     if (hasChildren(item)) {
       const chilrenRootElement = element.lastElementChild as HTMLUListElement
-      addEntriesOnClick(chilrenRootElement, item.children, editor, level + 1)
+      addEntriesOnClick(chilrenRootElement, item.children, editor, pointToElementsMap, level + 1)
     }
+  }
+}
+
+/** update start position => elements map used in `selectAtCursorLine` */
+function addToPointToElementsMap(
+  pointToElementsMap: Map<number, Array<HTMLLIElement>>,
+  pointStartPositionRow: number,
+  element: HTMLLIElement
+) {
+  // TIME: 0-0.2ms
+  const elms = pointToElementsMap.get(pointStartPositionRow)
+  if (elms !== undefined) {
+    elms.push(element)
+    pointToElementsMap.set(pointStartPositionRow, elms)
+  } else {
+    pointToElementsMap.set(pointStartPositionRow, [element])
   }
 }
 
