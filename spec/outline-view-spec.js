@@ -37,8 +37,8 @@ describe("Outline view", () => {
     const editor = new TextEditor()
     await OutlinePackage.getOutline(editor)
 
-    const outlineViewElement = workspaceElement.querySelector(".outline-view")
-    const rootRecords = outlineViewElement.querySelectorAll(".outline-view > ul > li")
+    const outlineViewElement = workspaceElement.querySelector(".outline-content")
+    const rootRecords = outlineViewElement.querySelectorAll(".outline-content > ul > li")
 
     expect(outlineViewElement.children.length > 0).toEqual(true)
     // TODO
@@ -49,9 +49,9 @@ describe("Outline view", () => {
     const editor = new TextEditor()
     await OutlinePackage.getOutline(editor)
 
-    const outlineViewElement = workspaceElement.querySelector(".outline-view")
-    const recordWithoutChildren = outlineViewElement.querySelector(".outline-view li:nth-child(1) > ul")
-    const recordWithChildren = outlineViewElement.querySelector(".outline-view li:nth-child(2) > ul")
+    const outlineViewElement = workspaceElement.querySelector(".outline-content")
+    const recordWithoutChildren = outlineViewElement.querySelector(".outline-content li:nth-child(1) > ul")
+    const recordWithChildren = outlineViewElement.querySelector(".outline-content li:nth-child(2) > ul")
 
     expect(recordWithoutChildren).toEqual(null)
     // TODO
@@ -62,7 +62,7 @@ describe("Outline view", () => {
     const editor = new TextEditor()
     await OutlinePackage.getOutline(editor)
 
-    const recordContentHolder = workspaceElement.querySelector(".outline-view li span")
+    const recordContentHolder = workspaceElement.querySelector(".outline-content li span")
     const recordIcon = recordContentHolder && recordContentHolder.querySelector(".icon")
 
     // TODO
@@ -74,7 +74,7 @@ describe("Outline view", () => {
     const editor = new TextEditor()
     await OutlinePackage.getOutline(editor)
 
-    const recordContentHolder = workspaceElement.querySelector(".outline-view li:nth-child(3) span")
+    const recordContentHolder = workspaceElement.querySelector(".outline-content li:nth-child(3) span")
     const recordIcon = recordContentHolder && recordContentHolder.querySelector(".icon")
 
     // TODO
@@ -90,7 +90,7 @@ describe("Outline view", () => {
 
     OutlinePackage.setStatus("mockStatus")
 
-    const statusHolder = workspaceElement.querySelector(".outline-view .status")
+    const statusHolder = workspaceElement.querySelector(".outline-content .status")
     const title = statusHolder.querySelector("h1")
     const description = statusHolder.querySelector("span")
 
