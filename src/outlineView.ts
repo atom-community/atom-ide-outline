@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { TextEditor, CursorPositionChangedEvent, Point } from "atom"
+import { TextEditor, Point, Cursor } from "atom"
 import { OutlineTree } from "atom-ide-base"
 import { isItemVisible } from "./utils"
 
@@ -90,7 +90,12 @@ export class OutlineView {
   }
 
   // callback for scrolling and highlighting the element that the cursor is on
-  selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
+  selectAtCursorLine(cursor: Cursor | undefined) {
+    // no cursor
+    if (!cursor) {
+      return
+    }
+
     // skip if not visible
     if (!this.isVisible()) {
       return
@@ -113,7 +118,7 @@ export class OutlineView {
     }
 
     // add new cursorOn attribue
-    const cursorPoint = newBufferPosition.row
+    const cursorPoint = cursor.getBufferRow()
     this.focusedElms = this.pointToElementsMap.get(cursorPoint)
 
     if (this.focusedElms !== undefined) {
@@ -123,6 +128,15 @@ export class OutlineView {
           block: "center", // scroll until the entry is in the center of outline
         })
       }
+      // remove focus once cursor moved
+      const disposable = cursor.onDidChangePosition(() => {
+        if (this.focusedElms !== undefined) {
+          for (const elm of this.focusedElms) {
+            elm.toggleAttribute("cursorOn", false)
+          }
+        }
+        disposable.dispose()
+      })
     }
   }
 
