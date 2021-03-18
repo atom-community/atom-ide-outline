@@ -147,6 +147,19 @@ function hasChildren(entry: OutlineTree) {
   return entry.children.length >= 1
 }
 
+function sortEntries(entries: OutlineTree[]) {
+  if (atom.config.get("atom-ide-outline.sortEntries")) {
+    entries.sort((e1: OutlineTree, e2: OutlineTree) => {
+      const rowCompare = e1.startPosition.row - e2.startPosition.row
+      if (rowCompare === 0) {
+        // compare based on column if on the same row
+        return e1.startPosition.column - e1.startPosition.column
+      }
+      return rowCompare
+    })
+  }
+}
+
 function addOutlineEntries(
   parent: HTMLUListElement,
   entries: OutlineTree[],
@@ -158,18 +171,8 @@ function addOutlineEntries(
   // NOTE: this function is called multiple times with each update in an editor!
   // a few of the calls is slow ~1-100ms
 
-  // sort entries
   // TIME 0.1ms
-  if (atom.config.get("atom-ide-outline.sortEntries")) {
-    entries.sort((e1: OutlineTree, e2: OutlineTree) => {
-      const rowCompare = e1.startPosition.row - e2.startPosition.row
-      if (rowCompare === 0) {
-        // compare based on column if on the same row
-        return e1.startPosition.column - e1.startPosition.column
-      }
-      return rowCompare
-    })
-  }
+  sortEntries(entries)
 
   for (const item of entries) {
     const symbol = document.createElement("li")
