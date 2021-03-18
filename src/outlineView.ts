@@ -5,16 +5,26 @@ import { isItemVisible } from "./utils"
 
 export class OutlineView {
   public element: HTMLDivElement
-  private outlineRoot: HTMLUListElement | undefined = undefined
-  private pointToElementsMap = new Map<number, Array<HTMLLIElement>>() // TODO Point to element
-  private focusedElms: HTMLElement[] | undefined // cache for focused elements
 
-  // a cache to avoid rerendering
+  /** contains the content of the outline which is either the status element or the list element */
+  public outlineContent: HTMLDivElement
+  /** the actual outline list element */
+  private outlineList: HTMLUListElement | undefined = undefined
+
+  /** cache for reveal corsur */
+  private pointToElementsMap = new Map<number, Array<HTMLLIElement>>() // TODO Point to element
+  /** cache for focused elements */
+  private focusedElms: HTMLElement[] | undefined
+  /** cache of last rendered list used to avoid rerendering */
   lastEntries: OutlineTree[] | undefined
 
   constructor() {
     this.element = document.createElement("div")
-    this.element.classList.add("outline-view")
+
+    this.outlineContent = document.createElement("div")
+    this.element.appendChild(this.outlineContent)
+
+    this.outlineContent.classList.add("outline-content")
   }
 
   destroy() {
@@ -39,7 +49,7 @@ export class OutlineView {
     if (this.lastEntries !== undefined && hasEqualContent(outlineTree, this.lastEntries)) {
       this.pointToElementsMap.clear() // empty revealCorsur cache
       addEntriesOnClick(
-        this.outlineRoot! /* because this.lastEntries is not undefined */,
+        this.outlineList! /* because this.lastEntries is not undefined */,
         outlineTree,
         editor,
         this.pointToElementsMap,
@@ -50,45 +60,46 @@ export class OutlineView {
       this.lastEntries = outlineTree
     }
 
-    const outlineViewElement = this.clearOutline()
-    outlineViewElement.dataset.editorRootScope = editor.getRootScopeDescriptor().getScopesArray().join(" ")
+    this.clearContent()
 
     if (isLarge) {
-      outlineViewElement.appendChild(createLargeFileElement())
+      this.outlineContent.appendChild(createLargeFileElement())
     }
 
-    this.outlineRoot = document.createElement("ul")
+    this.outlineList = document.createElement("ul")
+    this.outlineList.dataset.editorRootScope = editor.getRootScopeDescriptor().getScopesArray().join(" ")
+
+    this.outlineList = document.createElement("ul")
     const tabLength = editor.getTabLength()
     if (typeof tabLength === "number") {
-      this.outlineRoot.style.setProperty("--editor-tab-length", Math.max(tabLength / 2, 2).toString(10))
+      this.outlineList.style.setProperty("--editor-tab-length", Math.max(tabLength / 2, 2).toString(10))
     }
     addOutlineEntries(
-      this.outlineRoot,
+      this.outlineList,
       outlineTree,
       editor,
       /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially"),
       0
     )
     // TIME 0.2-0.5m
-    addEntriesOnClick(this.outlineRoot, outlineTree, editor, this.pointToElementsMap, 0)
-    outlineViewElement.appendChild(this.outlineRoot)
+    addEntriesOnClick(this.outlineList, outlineTree, editor, this.pointToElementsMap, 0)
+    this.outlineContent.appendChild(this.outlineList)
   }
 
-  clearOutline() {
-    const outlineViewElement = this.getElement()
-    outlineViewElement.innerHTML = ""
-    outlineViewElement.dataset.editorRootScope = ""
-    return outlineViewElement
+  clearContent() {
+    this.outlineContent.innerHTML = ""
+    if (this.outlineList !== undefined) {
+      this.outlineList.dataset.editorRootScope = ""
+    }
   }
 
   presentStatus(status: { title: string; description: string }) {
-    this.clearOutline()
+    this.clearContent()
 
     const statusElement = status && generateStatusElement(status)
 
     if (statusElement) {
-      const outlineViewElement = this.getElement()
-      outlineViewElement.appendChild(statusElement)
+      this.outlineContent.appendChild(statusElement)
     }
   }
 
