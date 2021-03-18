@@ -143,7 +143,6 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element
 }
 
-
 function addOutlineEntries(
   parent: HTMLUListElement,
   entries: OutlineTree[],
@@ -194,11 +193,7 @@ function addOutlineEntries(
 
     // Cursor reposition on click
     // TIME: 0-0.1ms
-    symbol.addEventListener(
-      "click",
-      () => onClickEntry(item, editor),
-      { passive: true }
-    )
+    symbol.addEventListener("click", () => onClickEntry(item, editor), { passive: true })
 
     if (/* hasChildren */ item.children.length >= 1) {
       // create Child elements
