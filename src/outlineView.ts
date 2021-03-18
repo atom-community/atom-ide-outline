@@ -70,6 +70,7 @@ export class OutlineView {
       /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially"),
       0
     )
+    addEntriesOnClick(outlineRoot, outlineTree, editor, 0)
     outlineViewElement.appendChild(outlineRoot)
   }
 
@@ -199,10 +200,6 @@ function addOutlineEntries(
       pointToElementsMap.set(item.startPosition.row, [symbol])
     }
 
-    // Cursor reposition on click
-    // TIME: 0-0.1ms
-    symbol.addEventListener("click", () => onClickEntry(item, editor), { passive: true })
-
     if (hasChildren(item)) {
       // create Child elements
       // TIME 0-0.2ms
@@ -222,6 +219,25 @@ function addOutlineEntries(
 
     // TIME: <0.1ms
     parent.appendChild(symbol)
+  }
+}
+
+/** Adds onClick to the outline entries.
+ * @attention The assumption about the type of Elements are added using `as HTML...`. After editing code, make sure that the types are correct
+ */
+function addEntriesOnClick(parent: HTMLUListElement, entries: OutlineTree[], editor: TextEditor, level = 0) {
+  const entriesElements = parent.children
+  for (let iEntry = 0, len = entries.length; iEntry < len; iEntry++) {
+    const item = entries[iEntry]
+    const element = entriesElements[iEntry] as HTMLLIElement
+
+    // Cursor reposition on click
+    element.addEventListener("click", () => onClickEntry(item, editor), { passive: true })
+
+    if (hasChildren(item)) {
+      const chilrenRootElement = element.lastElementChild as HTMLUListElement
+      addEntriesOnClick(chilrenRootElement, item.children, editor, level + 1)
+    }
   }
 }
 
