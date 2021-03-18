@@ -88,7 +88,7 @@ export class OutlineView {
     }
 
     if (clicked) {
-      // do not scroll when the cursor has moved to a click on the outline entry
+      // HACK do not scroll when the cursor has moved to a click on the outline entry
       clicked = false
       return
     }
@@ -133,7 +133,6 @@ function generateStatusElement(status: { title: string; description: string }) {
   return element
 }
 
-let clicked: boolean = false // used to prevent scrolling in the outline list when an entry is clicked
 
 function addOutlineEntries(
   parent: HTMLUListElement,
@@ -187,19 +186,7 @@ function addOutlineEntries(
     // TIME: 0-0.1ms
     symbol.addEventListener(
       "click",
-      () => {
-        const editorPane = atom.workspace.paneForItem(editor)
-        if (!editorPane) {
-          return
-        }
-        editorPane.activate()
-
-        editor.getCursors()[0].setBufferPosition(item.startPosition, {
-          autoscroll: true,
-        })
-
-        clicked = true
-      },
+      () => onClickEntry(item, editor),
       { passive: true }
     )
 
@@ -223,6 +210,23 @@ function addOutlineEntries(
     // TIME: <0.1ms
     parent.appendChild(symbol)
   }
+}
+
+let clicked: boolean = false // HACK used to prevent scrolling in the outline list when an entry is clicked
+
+function onClickEntry(item: OutlineTree, editor: TextEditor) {
+  // only uses a reference to the editor and the pane and corsur are calculated on the fly
+  const editorPane = atom.workspace.paneForItem(editor)
+  if (editorPane === undefined) {
+    return
+  }
+  editorPane.activate()
+
+  editor.getCursors()[0].setBufferPosition(item.startPosition, {
+    autoscroll: true,
+  })
+  // HACK
+  clicked = true
 }
 
 function getIcon(iconType: string | undefined, kindType: string | undefined) {
