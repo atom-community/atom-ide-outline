@@ -7,6 +7,7 @@ export class OutlineView {
   public element: HTMLDivElement
   private pointToElementsMap = new Map<number, Array<HTMLLIElement>>() // TODO Point to element
   private focusedElms: HTMLElement[] | undefined // cache for focused elements
+  private clicked: boolean = false // HACK used to prevent scrolling in the outline list when an entry is clicked
 
   constructor() {
     this.element = document.createElement("div")
@@ -57,7 +58,8 @@ export class OutlineView {
       outlineTree,
       editor,
       this.pointToElementsMap,
-      /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially")
+      /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially"),
+      this.onClickEntry
     )
     outlineViewElement.appendChild(outlineRoot)
   }
@@ -80,6 +82,21 @@ export class OutlineView {
     }
   }
 
+  onClickEntry(item: OutlineTree, editor: TextEditor) {
+    // only uses a reference to the editor and the pane and corsur are calculated on the fly
+    const editorPane = atom.workspace.paneForItem(editor)
+    if (editorPane === undefined) {
+      return
+    }
+    editorPane.activate()
+
+    editor.getCursors()[0].setBufferPosition(item.startPosition, {
+      autoscroll: true,
+    })
+    // HACK
+    this.clicked = true
+  }
+
   // callback for scrolling and highlighting the element that the cursor is on
   selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
     // skip if not visible
@@ -87,9 +104,9 @@ export class OutlineView {
       return
     }
 
-    if (clicked) {
+    if (this.clicked) {
       // HACK do not scroll when the cursor has moved to a click on the outline entry
-      clicked = false
+      this.clicked = false
       return
     }
 
@@ -140,6 +157,7 @@ function addOutlineEntries(
   editor: TextEditor,
   pointToElementsMap: Map<number, Array<HTMLLIElement>>,
   isLarge: boolean,
+  onClickEntry: (item: OutlineTree, textEditor: TextEditor) => void,
   level = 0
 ) {
   // NOTE: this function is called multiple times with each update in an editor!
@@ -204,7 +222,7 @@ function addOutlineEntries(
 
       // add children to outline
       // TIME: last one of each batch is slower 0-20ms
-      addOutlineEntries(childrenList, item.children, editor, pointToElementsMap, isLarge, level + 1)
+      addOutlineEntries(childrenList, item.children, editor, pointToElementsMap, isLarge, onClickEntry, level + 1)
     }
 
     // TIME: <0.1ms
@@ -212,22 +230,6 @@ function addOutlineEntries(
   }
 }
 
-let clicked: boolean = false // HACK used to prevent scrolling in the outline list when an entry is clicked
-
-function onClickEntry(item: OutlineTree, editor: TextEditor) {
-  // only uses a reference to the editor and the pane and corsur are calculated on the fly
-  const editorPane = atom.workspace.paneForItem(editor)
-  if (editorPane === undefined) {
-    return
-  }
-  editorPane.activate()
-
-  editor.getCursors()[0].setBufferPosition(item.startPosition, {
-    autoscroll: true,
-  })
-  // HACK
-  clicked = true
-}
 
 function getIcon(iconType: string | undefined, kindType: string | undefined) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
