@@ -20,6 +20,15 @@
   overflow-y: auto;
 
   @fold-width: 8px;
+  @padding-h: 10px;
+  @padding-v: 2px;
+
+  // same font as editor
+  .font-common() {
+    font-size: var(--editor-font-size);
+    font-family: var(--editor-font-family);
+    line-height: var(--editor-line-height);
+  }
 
   --editor-tab-length: 4; // default
   --level-indent-size: 16px;
@@ -30,20 +39,16 @@
     list-style-type: none;
     padding: 0;
 
-    // same font as editor
-    font-size: var(--editor-font-size);
-    font-family: var(--editor-font-family);
-    line-height: var(--editor-line-height);
+    .font-common();
 
     li > span {
       contain: @contain_except_size;
       display: inline-block;
       width: 100%;
-      @padding-side: 10px;
-      padding: 2px @padding-side;
+      padding: @padding-v @padding-h;
       white-space: nowrap;
 
-      padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + @{padding-side} + @{fold-width})";
+      padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + @{padding-h} + @{fold-width})";
 
       // highlight on hover
       &:hover {
@@ -184,6 +189,14 @@
   .styleByType(property, @syntax-color-property);
   .styleByType(string, @syntax-color-value);
   .styleByType(variable, @syntax-color-variable);
+
+  .large-file-mode {
+    contain: @contain_except_size;
+    list-style-type: none;
+    padding: @padding-v @padding-h;
+    .font-common();
+    color: #71844c;
+  }
 
   .status {
     contain: @contain_except_size;
