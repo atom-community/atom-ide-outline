@@ -54,17 +54,7 @@ export class OutlineView {
     outlineViewElement.dataset.editorRootScope = editor.getRootScopeDescriptor().getScopesArray().join(" ")
 
     if (isLarge) {
-      const largeFileElement = document.createElement("div")
-      largeFileElement.innerHTML = `
-        <span style = "
-          font-size: var(--editor-font-size);
-          font-family: var(--editor-font-family);
-          line-height: var(--editor-line-height);
-          color: #71844c;
-        "
-        >Large file mode</span>
-      `
-      outlineViewElement.appendChild(largeFileElement)
+      outlineViewElement.appendChild(createLargeFileElement())
     }
 
     this.outlineRoot = document.createElement("ul")
@@ -174,6 +164,12 @@ function hasEqualContent(ot1: OutlineTree[], ot2: OutlineTree[]) {
     }
   }
   return true
+}
+
+function createLargeFileElement() {
+  const largeFileElement = document.createElement("div")
+  largeFileElement.innerHTML = `<span class="large-file-mode">Large file mode</span>`
+  return largeFileElement
 }
 
 function generateStatusElement(status: { title: string; description: string }) {
