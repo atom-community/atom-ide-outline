@@ -11,6 +11,12 @@ import outlineMock from "./outlineMock.json"
 // To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
 // or `fdescribe`). Remove the `f` to unfocus the block.
 
+function createMockProvider() {
+  return {
+    getOutline: () => outlineMock,
+  }
+}
+
 describe("Outline view", () => {
   let workspaceElement
 
@@ -26,75 +32,83 @@ describe("Outline view", () => {
 
     expect(atom.packages.isPackageLoaded("atom-ide-outline")).toBeTruthy()
 
-    OutlinePackage.outlineProviderRegistry = {
-      getProvider: () => ({
-        getOutline: async () => outlineMock,
-      }),
-    }
+    spyOn(OutlinePackage.outlineProviderRegistry, "getProviderForEditor").and.returnValue(createMockProvider())
   })
 
-  it("renders outline into HTML", async () => {
-    const editor = new TextEditor()
-    await OutlinePackage.getOutline(editor)
+  describe("getOutline", () => {
+    let editor
+    let outlineContent
 
-    const outlineViewElement = workspaceElement.querySelector(".outline-view")
-    const rootRecords = outlineViewElement.querySelectorAll(".outline-view > ul > li")
+    beforeEach(async () => {
+      atom.config.set("outline.sortEntries", false)
+      editor = new TextEditor()
+      await OutlinePackage.getOutline(editor)
+      outlineContent = workspaceElement.querySelector(".outline-content")
+    })
 
-    expect(outlineViewElement.children.length > 0).toEqual(true)
-    // TODO
-    // expect(rootRecords.length).toEqual(3);
+    it("renders outline into HTML", () => {
+      const rootRecords = outlineContent.querySelectorAll(".outline-content > ul > li")
+
+      expect(outlineContent.children.length > 0).toEqual(true)
+      expect(rootRecords.length).toEqual(3)
+    })
+
+    it("nests lists for records with children", () => {
+      const recordWithoutChildren = outlineContent.querySelector(".outline-content > ul > li:nth-child(1) > ul")
+      const recordWithChildren = outlineContent.querySelector(".outline-content > ul > li:nth-child(3) > ul")
+
+      expect(recordWithoutChildren).toEqual(null)
+      expect(Boolean(recordWithChildren)).toEqual(true)
+    })
+
+    it("generates icon and label for an entry", () => {
+      const recordContentHolder = outlineContent.querySelector(".outline-content > ul > li span")
+      const recordIcon = recordContentHolder && recordContentHolder.querySelector(".outline-icon")
+
+      expect(recordContentHolder.textContent).toEqual("funprimaryFunction")
+      expect(recordIcon.textContent).toEqual("fun")
+    })
+
+    it("provides fallback for entries without icon", () => {
+      const recordContentHolder = outlineContent.querySelector(".outline-content > ul > li:nth-child(2) span")
+      const recordIcon = recordContentHolder.querySelector(".outline-icon")
+
+      expect(recordIcon.textContent).toEqual("🞇")
+    })
   })
 
-  it("nests lists for records with children", async () => {
-    const editor = new TextEditor()
-    await OutlinePackage.getOutline(editor)
+  describe("setStatus", () => {
+    it("presents status message correctly", () => {
+      const mockStatus = {
+        title: "Error message",
+        description: "Something went wrong",
+      }
+      statuses.mockStatus = mockStatus
 
-    const outlineViewElement = workspaceElement.querySelector(".outline-view")
-    const recordWithoutChildren = outlineViewElement.querySelector(".outline-view li:nth-child(1) > ul")
-    const recordWithChildren = outlineViewElement.querySelector(".outline-view li:nth-child(2) > ul")
+      OutlinePackage.setStatus("mockStatus")
 
-    expect(recordWithoutChildren).toEqual(null)
-    // TODO
-    // expect(!!recordWithChildren).toEqual(true);
-  })
+      const statusHolder = workspaceElement.querySelector(".outline-content .status")
+      const title = statusHolder.querySelector("h1")
+      const description = statusHolder.querySelector("span")
 
-  it("generates icon and label for an entry", async () => {
-    const editor = new TextEditor()
-    await OutlinePackage.getOutline(editor)
+      expect(title.textContent).toEqual(mockStatus.title)
+      expect(description.textContent).toEqual(mockStatus.description)
+    })
+    it("presents status message correctly", () => {
+      const mockStatus = {
+        title: "Error message",
+        description: "Something went wrong",
+      }
+      statuses.mockStatus = mockStatus
 
-    const recordContentHolder = workspaceElement.querySelector(".outline-view li span")
-    const recordIcon = recordContentHolder && recordContentHolder.querySelector(".icon")
+      OutlinePackage.setStatus("mockStatus")
 
-    // TODO
-    // expect(recordContentHolder.textContent).toEqual("fprimaryFunction");
-    // expect(recordIcon.textContent).toEqual("f");
-  })
+      const statusHolder = workspaceElement.querySelector(".outline-content .status")
+      const title = statusHolder.querySelector("h1")
+      const description = statusHolder.querySelector("span")
 
-  it("provides fallback for entries without icon", async () => {
-    const editor = new TextEditor()
-    await OutlinePackage.getOutline(editor)
-
-    const recordContentHolder = workspaceElement.querySelector(".outline-view li:nth-child(3) span")
-    const recordIcon = recordContentHolder && recordContentHolder.querySelector(".icon")
-
-    // TODO
-    // expect(recordIcon.textContent).toEqual("?");
-  })
-
-  it("presents status message correctly", async () => {
-    const mockStatus = {
-      title: "Error message",
-      description: "Something went wrong",
-    }
-    statuses.mockStatus = mockStatus
-
-    OutlinePackage.setStatus("mockStatus")
-
-    const statusHolder = workspaceElement.querySelector(".outline-view .status")
-    const title = statusHolder.querySelector("h1")
-    const description = statusHolder.querySelector("span")
-
-    expect(title.textContent).toEqual(mockStatus.title)
-    expect(description.textContent).toEqual(mockStatus.description)
+      expect(title.textContent).toEqual(mockStatus.title)
+      expect(description.textContent).toEqual(mockStatus.description)
+    })
   })
 })
