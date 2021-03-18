@@ -122,11 +122,11 @@ export class OutlineView {
     this.focusedElms = this.pointToElementsMap.get(cursorPoint)
 
     if (this.focusedElms !== undefined) {
+      this.focusedElms[0].scrollIntoView({
+        block: "center", // scroll until the entry is in the center of outline
+      })
       for (const elm of this.focusedElms) {
         elm.toggleAttribute("cursorOn", true)
-        elm.scrollIntoView({
-          block: "center", // scroll until the entry is in the center of outline
-        })
       }
       // remove focus once cursor moved
       const disposable = cursor.onDidChangePosition(() => {
