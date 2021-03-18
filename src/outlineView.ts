@@ -225,7 +225,7 @@ function addOutlineEntries(
   }
 }
 
-function getIcon(iconType?: string, kindType?: string) {
+function getIcon(iconType: string | undefined, kindType: string | undefined) {
   // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
   // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
 
@@ -233,7 +233,7 @@ function getIcon(iconType?: string, kindType?: string) {
   iconElement.classList.add("outline-icon")
 
   // if iconType given instead
-  if (kindType == undefined && iconType != undefined) {
+  if (kindType === undefined && iconType !== undefined) {
     kindType = iconType
   }
 
