@@ -203,7 +203,7 @@ function addOutlineEntries(
       { passive: true }
     )
 
-    if (/* hasChildren */ item.children != null && item.children[0] != null) {
+    if (/* hasChildren */ item.children.length >= 1) {
       // create Child elements
       // TIME 0-0.2ms
       const childrenList = document.createElement("ul")
