@@ -8,6 +8,9 @@ export class OutlineView {
   private pointToElementsMap = new Map<number, Array<HTMLLIElement>>() // TODO Point to element
   private focusedElms: HTMLElement[] | undefined // cache for focused elements
 
+  // a cache to avoid rerendering
+  lastEntries: OutlineTree[] | undefined
+
   constructor() {
     this.element = document.createElement("div")
     this.element.classList.add("outline-view")
@@ -30,6 +33,13 @@ export class OutlineView {
   }
 
   setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
+    // skip rendering if it is the same
+    if (outlineTree === this.lastEntries) {
+      return
+    } else {
+      this.lastEntries = outlineTree
+    }
+
     const outlineViewElement = this.clearOutline()
     outlineViewElement.dataset.editorRootScope = editor.getRootScopeDescriptor().getScopesArray().join(" ")
 
