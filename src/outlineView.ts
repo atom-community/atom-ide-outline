@@ -67,7 +67,8 @@ export class OutlineView {
       outlineTree,
       editor,
       this.pointToElementsMap,
-      /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially")
+      /* foldInItially */ isLarge || atom.config.get("atom-ide-outline.foldInitially"),
+      0
     )
     outlineViewElement.appendChild(outlineRoot)
   }
@@ -166,7 +167,7 @@ function addOutlineEntries(
   editor: TextEditor,
   pointToElementsMap: Map<number, Array<HTMLLIElement>>,
   isLarge: boolean,
-  level = 0
+  level: number
 ) {
   // NOTE: this function is called multiple times with each update in an editor!
   // a few of the calls is slow ~1-100ms
