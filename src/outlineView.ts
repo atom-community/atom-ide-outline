@@ -75,6 +75,7 @@ export class OutlineView {
     if (this.outlineList !== undefined) {
       this.outlineList.dataset.editorRootScope = ""
     }
+    this.lastEntries = undefined
   }
 
   presentStatus(status: { title: string; description: string }) {
