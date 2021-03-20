@@ -213,8 +213,7 @@ function makeOutlineToolbar() {
   revealCursorButton.className = "btn outline-btn"
 
   revealCursorButton.addEventListener("click", () => {
-    // @ts-ignore: internal API
-    atom.commands.dispatch(atom.workspace.getElement(), "outline:reveal-cursor")
+    atom.commands.dispatch(atom.views.getView(atom.workspace), "outline:reveal-cursor")
   })
 
   toolbar.appendChild(revealCursorButton)
