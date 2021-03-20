@@ -1,3 +1,11 @@
+## [2.3.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.0...v2.3.1) (2021-03-20)
+
+
+### Bug Fixes
+
+* reveal button doesn't scroll into the entry ([af34255](https://github.com/atom-ide-community/atom-ide-outline/commit/af342554a1a404b20e27d42d67f159195d1f8218))
+* use scrollIntoViewIfNeeded ([a367c7d](https://github.com/atom-ide-community/atom-ide-outline/commit/a367c7d1b125dabefb6a9214567f3eb99f54b790))
+
 # [2.3.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.2.1...v2.3.0) (2021-03-20)
 
 

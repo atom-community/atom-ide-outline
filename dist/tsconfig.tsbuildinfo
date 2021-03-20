@@ -797,7 +797,7 @@
         "affectsGlobalScope": false
       },
       "../src/outlineView.ts": {
-        "version": "9af29780a4f214f06c1430762240138f1e28fa8f2fa76b3c57cc5131574add27",
+        "version": "c7890b1aac4e175fe5643e804475453c8ceaac49b15bcf4865c6c1fd5fcb39d7",
         "signature": "58b52bbaf34e827cf87e7c349bf39010f6e36b731bac0e4597f0a72aa295e418",
         "affectsGlobalScope": false
       },
