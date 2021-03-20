@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { TextEditor, CursorPositionChangedEvent, Point } from "atom"
+import { TextEditor, Point } from "atom"
 import { OutlineTree } from "atom-ide-base"
 import { isItemVisible } from "./utils"
 
@@ -20,6 +20,9 @@ export class OutlineView {
 
   constructor() {
     this.element = document.createElement("div")
+    this.element.classList.add("atom-ide-outline")
+
+    this.element.appendChild(makeOutlineToolbar())
 
     this.outlineContent = document.createElement("div")
     this.element.appendChild(this.outlineContent)
@@ -89,7 +92,14 @@ export class OutlineView {
   }
 
   // callback for scrolling and highlighting the element that the cursor is on
-  selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]) {
+  selectAtCursorLine(editor: TextEditor) {
+    const cursor = editor.getLastCursor()
+
+    // no cursor
+    if (!cursor) {
+      return
+    }
+
     // skip if not visible
     if (!this.isVisible()) {
       return
@@ -112,16 +122,25 @@ export class OutlineView {
     }
 
     // add new cursorOn attribue
-    const cursorPoint = newBufferPosition.row
+    const cursorPoint = cursor.getBufferRow()
     this.focusedElms = this.pointToElementsMap.get(cursorPoint)
 
     if (this.focusedElms !== undefined) {
+      this.focusedElms[0].scrollIntoView({
+        block: "center", // scroll until the entry is in the center of outline
+      })
       for (const elm of this.focusedElms) {
         elm.toggleAttribute("cursorOn", true)
-        elm.scrollIntoView({
-          block: "center", // scroll until the entry is in the center of outline
-        })
       }
+      // remove focus once cursor moved
+      const disposable = editor.onDidChangeCursorPosition(() => {
+        if (this.focusedElms !== undefined) {
+          for (const elm of this.focusedElms) {
+            elm.toggleAttribute("cursorOn", false)
+          }
+        }
+        disposable.dispose()
+      })
     }
   }
 
@@ -186,6 +205,22 @@ function hasEqualContent(ot1: OutlineTree[], ot2: OutlineTree[]) {
     }
   }
   return true
+}
+
+function makeOutlineToolbar() {
+  const toolbar = document.createElement("span")
+  toolbar.className = "outline-toolbar"
+
+  const revealCursorButton = document.createElement("button")
+  revealCursorButton.innerHTML = "Reveal Cursor"
+  revealCursorButton.className = "btn outline-btn"
+
+  revealCursorButton.addEventListener("click", () => {
+    atom.commands.dispatch(atom.views.getView(atom.workspace), "outline:reveal-cursor")
+  })
+
+  toolbar.appendChild(revealCursorButton)
+  return toolbar
 }
 
 function createLargeFileElement() {
