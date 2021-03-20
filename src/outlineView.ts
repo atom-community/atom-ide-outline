@@ -127,9 +127,8 @@ export class OutlineView {
 
     if (this.focusedElms !== undefined) {
       for (const elm of this.focusedElms) {
-        elm.scrollIntoView({
-          block: "center", // scroll until the entry is in the center of outline
-        })
+        // @ts-ignore: chrome-only API
+        ;(elm.scrollIntoViewIfNeeded as (center: boolean) => void)(true)
         elm.toggleAttribute("cursorOn", true)
       }
       // remove focus once cursor moved
