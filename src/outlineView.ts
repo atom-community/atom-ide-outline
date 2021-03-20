@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { TextEditor, Point, Cursor } from "atom"
+import { TextEditor, Point } from "atom"
 import { OutlineTree } from "atom-ide-base"
 import { isItemVisible } from "./utils"
 
@@ -91,7 +91,9 @@ export class OutlineView {
   }
 
   // callback for scrolling and highlighting the element that the cursor is on
-  selectAtCursorLine(cursor: Cursor | undefined) {
+  selectAtCursorLine(editor: TextEditor) {
+    const cursor = editor.getLastCursor()
+
     // no cursor
     if (!cursor) {
       return
@@ -130,7 +132,7 @@ export class OutlineView {
         elm.toggleAttribute("cursorOn", true)
       }
       // remove focus once cursor moved
-      const disposable = cursor.onDidChangePosition(() => {
+      const disposable = editor.onDidChangeCursorPosition(() => {
         if (this.focusedElms !== undefined) {
           for (const elm of this.focusedElms) {
             elm.toggleAttribute("cursorOn", false)

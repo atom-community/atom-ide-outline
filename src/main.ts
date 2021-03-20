@@ -119,7 +119,7 @@ export function revealCursor() {
 
   // following cursor disposable
   if (view !== undefined) {
-    view.selectAtCursorLine(editor.getCursors()[0])
+    view.selectAtCursorLine(editor)
   }
 }
 
