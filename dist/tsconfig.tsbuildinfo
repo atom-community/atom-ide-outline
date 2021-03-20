@@ -797,8 +797,8 @@
         "affectsGlobalScope": false
       },
       "../src/outlineView.ts": {
-        "version": "6deff5fc1f040006e30f21ac5d181d1f82acf24b3d2dff6b5606b12ee18fa811",
-        "signature": "205dc9398a7493b947953ff7116ae1dc9077031f0bad0982c154078351a221ca",
+        "version": "9af29780a4f214f06c1430762240138f1e28fa8f2fa76b3c57cc5131574add27",
+        "signature": "58b52bbaf34e827cf87e7c349bf39010f6e36b731bac0e4597f0a72aa295e418",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/commons-atom/ProviderRegistry.d.ts": {
@@ -887,7 +887,7 @@
         "affectsGlobalScope": true
       },
       "../src/main.ts": {
-        "version": "8eca3a76becf40d627742bad54caf1e3f4ca7c12f2307291c735e7a35cfeab1f",
+        "version": "d0487735d84734369d94bc92aad16f0388aedd4a716522dfd9f9809cb977b2e6",
         "signature": "3e5be602d3906c48186e0455e866bfead2fcae1fcf4c19c91ed936771d49db52",
         "affectsGlobalScope": false
       },

@@ -1,4 +1,4 @@
-import { TextEditor, CursorPositionChangedEvent } from "atom";
+import { TextEditor } from "atom";
 import { OutlineTree } from "atom-ide-base";
 export declare class OutlineView {
     element: HTMLDivElement;
@@ -18,6 +18,6 @@ export declare class OutlineView {
         title: string;
         description: string;
     }): void;
-    selectAtCursorLine(newBufferPosition: CursorPositionChangedEvent["newBufferPosition"]): void;
+    selectAtCursorLine(editor: TextEditor): void;
     isVisible(): boolean;
 }

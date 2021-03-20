@@ -1,3 +1,19 @@
+# [2.3.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.2.1...v2.3.0) (2021-03-20)
+
+
+### Bug Fixes
+
+* disappearing toolbar ([b16461b](https://github.com/atom-ide-community/atom-ide-outline/commit/b16461b6d063cf65c570f3c37a7482b98d43329d))
+* lastCursor and onDidChangeCursorPosition ([3e0c6d0](https://github.com/atom-ide-community/atom-ide-outline/commit/3e0c6d04dfdadd60d4bd1c32d7966ac694ade220))
+* only scroll into the first ([f318046](https://github.com/atom-ide-community/atom-ide-outline/commit/f318046084dc36ac8d9905729d42e9fee2c5c0f4))
+* remove focus once cursor moved in revealCursor ([ff14435](https://github.com/atom-ide-community/atom-ide-outline/commit/ff14435bef3a1354687b8d44a212c5fc174d94df))
+* use getView instead of getElement ([e434758](https://github.com/atom-ide-community/atom-ide-outline/commit/e43475846c9e029747ab183ff26d9869fd810f19))
+
+
+### Features
+
+* add outline toolbar ([ba816a8](https://github.com/atom-ide-community/atom-ide-outline/commit/ba816a88f1ab5efe2a85a2e9431c3edd6d9b0567))
+
 ## [2.2.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.2.0...v2.2.1) (2021-03-20)
 
 

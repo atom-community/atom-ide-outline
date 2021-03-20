@@ -1,7 +1,7 @@
 {
   "name": "atom-ide-outline",
   "main": "./dist/main",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Outline UI compatible with IDE packages",
   "repository": "https://github.com/atom-ide-community/atom-ide-outline",
   "keywords": [
