@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.2.0...v2.2.1) (2021-03-20)
+
+
+### Bug Fixes
+
+* outline getting stuck on "no provider" ([2706ca7](https://github.com/atom-ide-community/atom-ide-outline/commit/2706ca7de5b104afb9c4ab852180f826a264817b))
+
 # [2.2.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.1.0...v2.2.0) (2021-03-18)
 
 

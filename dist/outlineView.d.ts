@@ -2,7 +2,8 @@ import { TextEditor, CursorPositionChangedEvent } from "atom";
 import { OutlineTree } from "atom-ide-base";
 export declare class OutlineView {
     element: HTMLDivElement;
-    private outlineRoot;
+    outlineContent: HTMLDivElement;
+    private outlineList;
     private pointToElementsMap;
     private focusedElms;
     lastEntries: OutlineTree[] | undefined;
@@ -12,7 +13,7 @@ export declare class OutlineView {
     getTitle(): string;
     getIconName(): string;
     setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean): void;
-    clearOutline(): HTMLDivElement;
+    clearContent(): void;
     presentStatus(status: {
         title: string;
         description: string;
