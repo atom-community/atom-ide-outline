@@ -20,6 +20,7 @@ export class OutlineView {
 
   constructor() {
     this.element = document.createElement("div")
+    this.element.classList.add("atom-ide-outline")
 
     this.element.appendChild(makeOutlineToolbar())
 

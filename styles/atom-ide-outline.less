@@ -15,210 +15,218 @@
   font-style: normal;
 }
 
-.outline-content {
-  contain: @contain_except_size;
+.atom-ide-outline {
+  display: flex;
+  flex-direction: column;
 
-  // centers the content
-  height: 100%;
-
-  overflow-y: auto;
-
-  @fold-width: 8px;
-  @padding-h: 10px;
-  @padding-v: 2px;
-
-  // same font as editor
-  .font-common() {
-    font-size: var(--editor-font-size);
-    font-family: var(--editor-font-family);
-    line-height: var(--editor-line-height);
-  }
-
-  --editor-tab-length: 4; // default
-  --level-indent-size: 16px;
-  --indent-level: 0; // initial
-
-  ul {
+  .outline-content {
     contain: @contain_except_size;
-    list-style-type: none;
-    padding: 0;
 
-    .font-common();
+    // centers the content
+    flex-grow: 1;
+    flex-shrink: 1;
 
-    li > span {
+    overflow-y: auto;
+
+    @fold-width: 8px;
+    @padding-h: 10px;
+    @padding-v: 2px;
+
+    // same font as editor
+    .font-common() {
+      font-size: var(--editor-font-size);
+      font-family: var(--editor-font-family);
+      line-height: var(--editor-line-height);
+    }
+
+    --editor-tab-length: 4; // default
+    --level-indent-size: 16px;
+    --indent-level: 0; // initial
+
+    ul {
       contain: @contain_except_size;
-      display: inline-block;
-      width: 100%;
-      padding: @padding-v @padding-h;
-      white-space: nowrap;
+      list-style-type: none;
+      padding: 0;
 
-      padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + @{padding-h} + @{fold-width})";
+      .font-common();
 
-      // highlight on hover
-      &:hover {
+      li > span {
         contain: @contain_except_size;
-        cursor: pointer;
+        display: inline-block;
+        width: 100%;
+        padding: @padding-v @padding-h;
+        white-space: nowrap;
+
+        padding-left: ~"calc(var(--editor-tab-length) * var(--level-indent-size) * var(--indent-level) + @{padding-h} + @{fold-width})";
+
+        // highlight on hover
+        &:hover {
+          contain: @contain_except_size;
+          cursor: pointer;
+          background: @background-color-highlight;
+        }
+      }
+
+      // highlight when the editor cursor is on them
+      li[cursorOn] {
+        contain: @contain_except_size;
         background: @background-color-highlight;
       }
     }
 
-    // highlight when the editor cursor is on them
-    li[cursorOn] {
+    .outline-fold-btn {
       contain: @contain_except_size;
-      background: @background-color-highlight;
-    }
-  }
+      display: inline-block;
+      position: relative;
+      width: @fold-width;
+      margin: 0 0 0 -@fold-width;
+      padding: 0;
+      opacity: 1;
+      border: none;
+      background-color: inherit;
+      text-align: center;
+      text-decoration: none;
+      vertical-align: middle;
+      font-family: "Octicons Regular";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: normal;
+      -webkit-font-smoothing: antialiased;
 
-  .outline-fold-btn {
-    contain: @contain_except_size;
-    display: inline-block;
-    position: relative;
-    width: @fold-width;
-    margin: 0 0 0 -@fold-width;
-    padding: 0;
-    opacity: 1;
-    border: none;
-    background-color: inherit;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    font-family: "Octicons Regular";
-    font-size: 12px;
-    font-style: normal;
-    font-weight: normal;
-    -webkit-font-smoothing: antialiased;
-
-    &.collapsed::before {
-      contain: @contain_except_size;
-      content: "\f078";
-    }
-
-    &.expanded::before {
-      contain: @contain_except_size;
-      content: "\f0a3";
-    }
-  }
-
-  .outline-icon {
-    contain: @contain_except_size;
-    display: inline-block;
-    width: 6ch;
-    font-size: 75%;
-    text-align: center;
-    vertical-align: middle; // align icon with text vertically
-    font-weight: normal;
-  }
-
-  // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
-  // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
-
-  .iconByType(@type) {
-    content: replace(@type, "^(....).*$", '"$1"'); // use the first 4 letter of the type
-  }
-  .iconByType(array) {
-    content: "arr";
-  }
-  .iconByType(constructor) {
-    content: "ctor";
-  }
-  .iconByType(field) {
-    content: "fild";
-  }
-  .iconByType(function) {
-    font-family: "symbol-icons";
-    content: "\e608";
-  }
-  .iconByType(interface) {
-    content: "intf";
-  }
-  .iconByType(module) {
-    content: "mod";
-  }
-  .iconByType(namespace) {
-    font-family: "symbol-icons";
-    content: "\e609";
-  }
-  .iconByType(number) {
-    content: "num";
-  }
-  .iconByType(package) {
-    content: "pkg";
-  }
-  .iconByType(string) {
-    content: "str";
-  }
-  .iconByType(variable) {
-    font-family: "symbol-icons";
-    content: "\e607";
-  }
-
-  .styleByType(@type, @color) {
-    .type-@{type} {
-      color: @color;
-      &::before {
-        .iconByType(@type);
-      }
-      & > span {
-        display: none;
-      }
-    }
-
-    .fold-type-@{type} {
-      contain: @contain_except_size;
-      background-color: darken(@color, 10%);
-
-      &:focus {
+      &.collapsed::before {
         contain: @contain_except_size;
-        opacity: 1;
+        content: "\f078";
+      }
+
+      &.expanded::before {
+        contain: @contain_except_size;
+        content: "\f0a3";
+      }
+    }
+
+    .outline-icon {
+      contain: @contain_except_size;
+      display: inline-block;
+      width: 6ch;
+      font-size: 75%;
+      text-align: center;
+      vertical-align: middle; // align icon with text vertically
+      font-weight: normal;
+    }
+
+    // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
+    // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
+
+    .iconByType(@type) {
+      content: replace(@type, "^(....).*$", '"$1"'); // use the first 4 letter of the type
+    }
+    .iconByType(array) {
+      content: "arr";
+    }
+    .iconByType(constructor) {
+      content: "ctor";
+    }
+    .iconByType(field) {
+      content: "fild";
+    }
+    .iconByType(function) {
+      font-family: "symbol-icons";
+      content: "\e608";
+    }
+    .iconByType(interface) {
+      content: "intf";
+    }
+    .iconByType(module) {
+      content: "mod";
+    }
+    .iconByType(namespace) {
+      font-family: "symbol-icons";
+      content: "\e609";
+    }
+    .iconByType(number) {
+      content: "num";
+    }
+    .iconByType(package) {
+      content: "pkg";
+    }
+    .iconByType(string) {
+      content: "str";
+    }
+    .iconByType(variable) {
+      font-family: "symbol-icons";
+      content: "\e607";
+    }
+
+    .styleByType(@type, @color) {
+      .type-@{type} {
+        color: @color;
+        &::before {
+          .iconByType(@type);
+        }
+        & > span {
+          display: none;
+        }
+      }
+
+      .fold-type-@{type} {
+        contain: @contain_except_size;
+        background-color: darken(@color, 10%);
+
+        &:focus {
+          contain: @contain_except_size;
+          opacity: 1;
+        }
+      }
+    }
+
+    .styleByType("", @syntax-color-value);
+    .styleByType(array, @syntax-color-value);
+    .styleByType(boolean, @syntax-color-value);
+    .styleByType(class, @syntax-color-class);
+    .styleByType(constant, @syntax-color-constant);
+    .styleByType(constructor, @syntax-color-function);
+    .styleByType(enum, @syntax-color-variable);
+    .styleByType(field, @syntax-color-tag);
+    .styleByType(file, @syntax-color-import);
+    .styleByType(function, @syntax-color-function);
+    .styleByType(interface, @syntax-color-class);
+    .styleByType(method, @syntax-color-method);
+    .styleByType(module, @syntax-color-import);
+    .styleByType(namespace, @syntax-color-keyword);
+    .styleByType(number, @syntax-color-value);
+    .styleByType(package, @syntax-color-import);
+    .styleByType(property, @syntax-color-property);
+    .styleByType(string, @syntax-color-value);
+    .styleByType(variable, @syntax-color-variable);
+
+    .large-file-mode {
+      contain: @contain_except_size;
+      list-style-type: none;
+      padding: @padding-v @padding-h;
+      .font-common();
+      color: #71844c;
+    }
+
+    .status {
+      contain: @contain_except_size;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 0 @component-padding;
+
+      h1 {
+        font-size: 1.5rem;
       }
     }
   }
 
-  .styleByType("", @syntax-color-value);
-  .styleByType(array, @syntax-color-value);
-  .styleByType(boolean, @syntax-color-value);
-  .styleByType(class, @syntax-color-class);
-  .styleByType(constant, @syntax-color-constant);
-  .styleByType(constructor, @syntax-color-function);
-  .styleByType(enum, @syntax-color-variable);
-  .styleByType(field, @syntax-color-tag);
-  .styleByType(file, @syntax-color-import);
-  .styleByType(function, @syntax-color-function);
-  .styleByType(interface, @syntax-color-class);
-  .styleByType(method, @syntax-color-method);
-  .styleByType(module, @syntax-color-import);
-  .styleByType(namespace, @syntax-color-keyword);
-  .styleByType(number, @syntax-color-value);
-  .styleByType(package, @syntax-color-import);
-  .styleByType(property, @syntax-color-property);
-  .styleByType(string, @syntax-color-value);
-  .styleByType(variable, @syntax-color-variable);
-
-  .large-file-mode {
-    contain: @contain_except_size;
-    list-style-type: none;
-    padding: @padding-v @padding-h;
-    .font-common();
-    color: #71844c;
-  }
-
-  .status {
-    contain: @contain_except_size;
-    height: 100%;
+  .outline-toolbar {
+    flex-grow: 0;
+    flex-shrink: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding: 0 @component-padding;
-
-    h1 {
-      font-size: 1.5rem;
-    }
+    flex-direction: row;
+    padding: 8px 15px;
   }
-}
-
-.outline-toolbar {
-  display: flex;
-  flex-direction: row;
-  padding: 8px 15px;
 }
