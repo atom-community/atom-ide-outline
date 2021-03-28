@@ -687,13 +687,13 @@
         "affectsGlobalScope": true
       },
       "../node_modules/atom-ide-base/types-packages/uri.d.ts": {
-        "version": "cd97f39f321cbd52142b0b65f5f5660114982c9bf9f0857754cd76bb93b29d9b",
-        "signature": "cd97f39f321cbd52142b0b65f5f5660114982c9bf9f0857754cd76bb93b29d9b",
+        "version": "56e9508f9d3e8c96d3a3f1658371293e8bc04f814da40ab3fde1b41edce4c5dd",
+        "signature": "56e9508f9d3e8c96d3a3f1658371293e8bc04f814da40ab3fde1b41edce4c5dd",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/busy-signal.d.ts": {
-        "version": "34ed532af06d20ed087cbee6c74402480bc042e879958e2d93864f0cf6be695a",
-        "signature": "34ed532af06d20ed087cbee6c74402480bc042e879958e2d93864f0cf6be695a",
+        "version": "5a322435cefe415e1a9d2c73c27e191b4114aefed2b1a49ef1e175708461d2d3",
+        "signature": "5a322435cefe415e1a9d2c73c27e191b4114aefed2b1a49ef1e175708461d2d3",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/atom/linter/config.d.ts": {
@@ -707,8 +707,8 @@
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/code-actions.d.ts": {
-        "version": "7bba939129531cfcd16e881b747340bf25a6807ce7d0beda7903ae7bdd14595a",
-        "signature": "7bba939129531cfcd16e881b747340bf25a6807ce7d0beda7903ae7bdd14595a",
+        "version": "3fa688d7d75a12a6ba2c9b4720c42a8bae33d54f11dc3f6b700debe93bc70e6e",
+        "signature": "3fa688d7d75a12a6ba2c9b4720c42a8bae33d54f11dc3f6b700debe93bc70e6e",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/code-highlight.d.ts": {
@@ -717,18 +717,18 @@
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/datatip.d.ts": {
-        "version": "e2e38d6fce1d46730ea2fcd138d3177e8ee66d4b159dd284efa8ef29ffa10c2e",
-        "signature": "e2e38d6fce1d46730ea2fcd138d3177e8ee66d4b159dd284efa8ef29ffa10c2e",
+        "version": "481cfd5d6497706efc11bdebbdbace30075d5f898cdd41f8970f061cfe40a967",
+        "signature": "481cfd5d6497706efc11bdebbdbace30075d5f898cdd41f8970f061cfe40a967",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/definitions.d.ts": {
-        "version": "06ad0b0dcf9bb18e427d3f9cf0d009320267f52efc331725bc3a767abb9bc742",
-        "signature": "06ad0b0dcf9bb18e427d3f9cf0d009320267f52efc331725bc3a767abb9bc742",
+        "version": "e1306cd9eab6c0b3a5b488e9798b350244bbe7327d4ca845d982e1d6a1826a1a",
+        "signature": "e1306cd9eab6c0b3a5b488e9798b350244bbe7327d4ca845d982e1d6a1826a1a",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/find-references.d.ts": {
-        "version": "36e792868faa6bc6f9d1750481a6fa61f4188681a6eac92ffa90c1f18eeb02bc",
-        "signature": "36e792868faa6bc6f9d1750481a6fa61f4188681a6eac92ffa90c1f18eeb02bc",
+        "version": "e0081090f7862a7c3017f72d44ee8e2a28573b65c9f739006867e69b8ecef980",
+        "signature": "e0081090f7862a7c3017f72d44ee8e2a28573b65c9f739006867e69b8ecef980",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/hyperclick.d.ts": {
@@ -737,43 +737,53 @@
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/outline.d.ts": {
-        "version": "7eb827b1cc718de76ffb938edaf868818aad873cc0142a291113635e17e3b5b6",
-        "signature": "7eb827b1cc718de76ffb938edaf868818aad873cc0142a291113635e17e3b5b6",
+        "version": "9821433ffadcd2a35d5eecbb6b17a55629ef7237c3473fe2e73ee4923f8c64ec",
+        "signature": "9821433ffadcd2a35d5eecbb6b17a55629ef7237c3473fe2e73ee4923f8c64ec",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/sig-help.d.ts": {
-        "version": "e64ebfc79e8d60bc582806bf9bbb261564c11f35e1c61418364df830405481ae",
-        "signature": "e64ebfc79e8d60bc582806bf9bbb261564c11f35e1c61418364df830405481ae",
+        "version": "1fa32cdf99c6edc163d4b24059f066800a7ad0c000c43f660c1cead431de5853",
+        "signature": "1fa32cdf99c6edc163d4b24059f066800a7ad0c000c43f660c1cead431de5853",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/trusted-types/index.d.ts": {
+        "version": "8e21d8ac0b66ff00edcdb504c6b6cb8ff639d30397e4715b362bedc3fb461929",
+        "signature": "8e21d8ac0b66ff00edcdb504c6b6cb8ff639d30397e4715b362bedc3fb461929",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/@types/dompurify/index.d.ts": {
+        "version": "0ac2dd678a83e6c9d0c1ba45e3b913767be22174d9c9a42bf7f4c084a56b5710",
+        "signature": "0ac2dd678a83e6c9d0c1ba45e3b913767be22174d9c9a42bf7f4c084a56b5710",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/markdown-service.d.ts": {
-        "version": "8ed56f7ff308bb0b7847f81abc90355f362a1267eb1772ab7cee46991b765e81",
-        "signature": "8ed56f7ff308bb0b7847f81abc90355f362a1267eb1772ab7cee46991b765e81",
+        "version": "0b5c66f11b459e6a588221ad4974b7a7dcc1ee606a3de28516b9bfd57a5a4d73",
+        "signature": "0b5c66f11b459e6a588221ad4974b7a7dcc1ee606a3de28516b9bfd57a5a4d73",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/text-edit.d.ts": {
-        "version": "98d329ad9fb000e6b45ae60dc0d99ee1d7b7be971292820702156c3e948fcd2d",
-        "signature": "98d329ad9fb000e6b45ae60dc0d99ee1d7b7be971292820702156c3e948fcd2d",
+        "version": "bfe6237b2761c335b61c7fe90fa3e451e582d5ff1109b9225f1e188dd59efd57",
+        "signature": "bfe6237b2761c335b61c7fe90fa3e451e582d5ff1109b9225f1e188dd59efd57",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/code-format.d.ts": {
-        "version": "5888485b281ac21d09ccf57177bec0c79b6cbd298e524c302dae58ac381949c8",
-        "signature": "5888485b281ac21d09ccf57177bec0c79b6cbd298e524c302dae58ac381949c8",
+        "version": "a494399a814393efdcd4066904822d0292e7b999bca3fc91478b0f4bad64967b",
+        "signature": "a494399a814393efdcd4066904822d0292e7b999bca3fc91478b0f4bad64967b",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/refactor.d.ts": {
-        "version": "0b9491fa8828680144c72f72b019b381b20eff451672585b508b1a68b65c8653",
-        "signature": "0b9491fa8828680144c72f72b019b381b20eff451672585b508b1a68b65c8653",
+        "version": "74e89ad35934a9146c55e67657e23447a56f06ee0273eb44ddf0d248e9d67fcd",
+        "signature": "74e89ad35934a9146c55e67657e23447a56f06ee0273eb44ddf0d248e9d67fcd",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/console.d.ts": {
-        "version": "d40068e62fce362e07dcfbacbbefcf25061fa9530e4600519f1547b65faca804",
-        "signature": "d40068e62fce362e07dcfbacbbefcf25061fa9530e4600519f1547b65faca804",
+        "version": "3077b10aeb84262b97adbd643e603ee5db682f2fdb8ea7b61fbc44bf3513462c",
+        "signature": "3077b10aeb84262b97adbd643e603ee5db682f2fdb8ea7b61fbc44bf3513462c",
         "affectsGlobalScope": false
       },
       "../node_modules/atom-ide-base/types-packages/main.d.ts": {
-        "version": "4319b3da30a1420e8c6216197956daf15d060a097c4740d0f4bf0460175765a4",
-        "signature": "4319b3da30a1420e8c6216197956daf15d060a097c4740d0f4bf0460175765a4",
+        "version": "397996b87ee1d1979b610ebff6140f7e3da356cac2b9952f87fe727544e082b2",
+        "signature": "397996b87ee1d1979b610ebff6140f7e3da356cac2b9952f87fe727544e082b2",
         "affectsGlobalScope": false
       },
       "../src/utils.ts": {
@@ -901,9 +911,44 @@
         "signature": "96d14f21b7652903852eef49379d04dbda28c16ed36468f8c9fa08f7c14c9538",
         "affectsGlobalScope": false
       },
+      "../node_modules/@types/prop-types/index.d.ts": {
+        "version": "a7e32dcb90bf0c1b7a1e4ac89b0f7747cbcba25e7beddc1ebf17be1e161842ad",
+        "signature": "a7e32dcb90bf0c1b7a1e4ac89b0f7747cbcba25e7beddc1ebf17be1e161842ad",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/react/global.d.ts": {
+        "version": "ecf78e637f710f340ec08d5d92b3f31b134a46a4fcf2e758690d8c46ce62cba6",
+        "signature": "ecf78e637f710f340ec08d5d92b3f31b134a46a4fcf2e758690d8c46ce62cba6",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/csstype/index.d.ts": {
+        "version": "0a6f28e1d77b99b0ef7da2f0bf50f301ea8a7eb7b4f573e458e725452a477bd2",
+        "signature": "0a6f28e1d77b99b0ef7da2f0bf50f301ea8a7eb7b4f573e458e725452a477bd2",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/scheduler/tracing.d.ts": {
+        "version": "f5a8b384f182b3851cec3596ccc96cb7464f8d3469f48c74bf2befb782a19de5",
+        "signature": "f5a8b384f182b3851cec3596ccc96cb7464f8d3469f48c74bf2befb782a19de5",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/react/index.d.ts": {
+        "version": "5d708266116e778d6a4140fca2ac36f71d99b4c68bc3be63a45ba8bf5ade5348",
+        "signature": "5d708266116e778d6a4140fca2ac36f71d99b4c68bc3be63a45ba8bf5ade5348",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/@types/react-dom/index.d.ts": {
+        "version": "ee7266c6f312a6bf9612691b7fff1dfde32a609d150521c1f20d3f7972bc7586",
+        "signature": "ee7266c6f312a6bf9612691b7fff1dfde32a609d150521c1f20d3f7972bc7586",
+        "affectsGlobalScope": false
+      },
       "../node_modules/@types/resolve/index.d.ts": {
         "version": "8a19491eba2108d5c333c249699f40aff05ad312c04a17504573b27d91f0aede",
         "signature": "8a19491eba2108d5c333c249699f40aff05ad312c04a17504573b27d91f0aede",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/scheduler/index.d.ts": {
+        "version": "3169db033165677f1d414baf0c82ba27801089ca1b66d97af464512a47df31b5",
+        "signature": "3169db033165677f1d414baf0c82ba27801089ca1b66d97af464512a47df31b5",
         "affectsGlobalScope": false
       }
     },
@@ -1188,6 +1233,9 @@
       "../node_modules/@types/atom/src/workspace.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
       ],
+      "../node_modules/@types/dompurify/index.d.ts": [
+        "../node_modules/@types/trusted-types/index.d.ts"
+      ],
       "../node_modules/@types/lodash/common/array.d.ts": [
         "../node_modules/@types/lodash/common/collection.d.ts",
         "../node_modules/@types/lodash/common/common.d.ts",
@@ -1601,6 +1649,15 @@
         "../node_modules/@types/node/stream.d.ts",
         "../node_modules/@types/node/zlib.d.ts"
       ],
+      "../node_modules/@types/react-dom/index.d.ts": [
+        "../node_modules/@types/react/index.d.ts"
+      ],
+      "../node_modules/@types/react/index.d.ts": [
+        "../node_modules/@types/prop-types/index.d.ts",
+        "../node_modules/@types/react/global.d.ts",
+        "../node_modules/@types/scheduler/tracing.d.ts",
+        "../node_modules/csstype/index.d.ts"
+      ],
       "../node_modules/@types/resolve/index.d.ts": [
         "../node_modules/@types/node/index.d.ts"
       ],
@@ -1652,6 +1709,9 @@
         "../node_modules/atom-ide-base/types-packages/sig-help.d.ts",
         "../node_modules/atom-ide-base/types-packages/text-edit.d.ts",
         "../node_modules/atom-ide-base/types-packages/uri.d.ts"
+      ],
+      "../node_modules/atom-ide-base/types-packages/markdown-service.d.ts": [
+        "../node_modules/@types/dompurify/index.d.ts"
       ],
       "../node_modules/atom-ide-base/types-packages/outline.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
@@ -1933,6 +1993,9 @@
       "../node_modules/@types/atom/src/workspace.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
       ],
+      "../node_modules/@types/dompurify/index.d.ts": [
+        "../node_modules/@types/trusted-types/index.d.ts"
+      ],
       "../node_modules/@types/lodash/common/array.d.ts": [
         "../node_modules/@types/lodash/common/collection.d.ts",
         "../node_modules/@types/lodash/common/common.d.ts",
@@ -2346,6 +2409,15 @@
         "../node_modules/@types/node/stream.d.ts",
         "../node_modules/@types/node/zlib.d.ts"
       ],
+      "../node_modules/@types/react-dom/index.d.ts": [
+        "../node_modules/@types/react/index.d.ts"
+      ],
+      "../node_modules/@types/react/index.d.ts": [
+        "../node_modules/@types/prop-types/index.d.ts",
+        "../node_modules/@types/react/global.d.ts",
+        "../node_modules/@types/scheduler/tracing.d.ts",
+        "../node_modules/csstype/index.d.ts"
+      ],
       "../node_modules/@types/resolve/index.d.ts": [
         "../node_modules/@types/node/index.d.ts"
       ],
@@ -2397,6 +2469,9 @@
         "../node_modules/atom-ide-base/types-packages/sig-help.d.ts",
         "../node_modules/atom-ide-base/types-packages/text-edit.d.ts",
         "../node_modules/atom-ide-base/types-packages/uri.d.ts"
+      ],
+      "../node_modules/atom-ide-base/types-packages/markdown-service.d.ts": [
+        "../node_modules/@types/dompurify/index.d.ts"
       ],
       "../node_modules/atom-ide-base/types-packages/outline.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
@@ -2518,6 +2593,7 @@
       "../node_modules/@types/atom/src/workspace-center.d.ts",
       "../node_modules/@types/atom/src/workspace.d.ts",
       "../node_modules/@types/color-name/index.d.ts",
+      "../node_modules/@types/dompurify/index.d.ts",
       "../node_modules/@types/estree/index.d.ts",
       "../node_modules/@types/jasmine/index.d.ts",
       "../node_modules/@types/json-schema/index.d.ts",
@@ -2582,7 +2658,14 @@
       "../node_modules/@types/node/wasi.d.ts",
       "../node_modules/@types/node/worker_threads.d.ts",
       "../node_modules/@types/node/zlib.d.ts",
+      "../node_modules/@types/prop-types/index.d.ts",
+      "../node_modules/@types/react-dom/index.d.ts",
+      "../node_modules/@types/react/global.d.ts",
+      "../node_modules/@types/react/index.d.ts",
       "../node_modules/@types/resolve/index.d.ts",
+      "../node_modules/@types/scheduler/index.d.ts",
+      "../node_modules/@types/scheduler/tracing.d.ts",
+      "../node_modules/@types/trusted-types/index.d.ts",
       "../node_modules/atom-ide-base/commons-atom/ProviderRegistry.d.ts",
       "../node_modules/atom-ide-base/types-packages/busy-signal.d.ts",
       "../node_modules/atom-ide-base/types-packages/code-actions.d.ts",
@@ -2600,6 +2683,7 @@
       "../node_modules/atom-ide-base/types-packages/sig-help.d.ts",
       "../node_modules/atom-ide-base/types-packages/text-edit.d.ts",
       "../node_modules/atom-ide-base/types-packages/uri.d.ts",
+      "../node_modules/csstype/index.d.ts",
       "../node_modules/tslib/tslib.d.ts",
       "../src/config.json",
       "../src/main.ts",
