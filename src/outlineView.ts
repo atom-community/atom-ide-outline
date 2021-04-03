@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { TextEditor, Point } from "atom"
 import { OutlineTree } from "atom-ide-base"
-import { isItemVisible } from "./utils"
+import { isItemVisible } from "atom-ide-base/commons-ui"
 
 export class OutlineView {
   public element: HTMLDivElement
