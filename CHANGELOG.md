@@ -1,3 +1,17 @@
+## [2.3.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.1...v2.3.2) (2021-04-04)
+
+
+### Bug Fixes
+
+* add horizontal scrollbar ([#114](https://github.com/atom-ide-community/atom-ide-outline/issues/114)) [skip release] ([216aac9](https://github.com/atom-ide-community/atom-ide-outline/commit/216aac944b966a5e9d717da958a79c69a7f46e39))
+* always render outline whenever the editor changes ([083a9cb](https://github.com/atom-ide-community/atom-ide-outline/commit/083a9cbbd8f25d5697121a08220ca7e2f19c5792))
+* create onEditorChangedDisposable initially + move code ([66f01f8](https://github.com/atom-ide-community/atom-ide-outline/commit/66f01f804a90079c7bb07ed782816a696a3310c3))
+* directly use isItemVisible ([e6d0227](https://github.com/atom-ide-community/atom-ide-outline/commit/e6d0227e2494909e9d8bee2f1650f9569f437ef8))
+* update deps ([0a8d4a0](https://github.com/atom-ide-community/atom-ide-outline/commit/0a8d4a0fa7b3b847428964a6f0284166babe0760))
+* use isItemVisible from atom-ide-base ([026a513](https://github.com/atom-ide-community/atom-ide-outline/commit/026a5134b8e2d8a00a9de0fa8334799ff2947dbd))
+* use largeness from atom-ide-base ([f7fc87a](https://github.com/atom-ide-community/atom-ide-outline/commit/f7fc87a1dbe9a0d39855dfd2b028f8638d32ffd7))
+* use scrollIntoViewIfNeeded from atom-ide-base ([b4a4187](https://github.com/atom-ide-community/atom-ide-outline/commit/b4a4187238909510584ce1b10cbfa3c966fc4f51))
+
 ## [2.3.1](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.0...v2.3.1) (2021-03-20)
 
 

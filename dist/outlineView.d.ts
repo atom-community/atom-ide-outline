@@ -19,5 +19,4 @@ export declare class OutlineView {
         description: string;
     }): void;
     selectAtCursorLine(editor: TextEditor): void;
-    isVisible(): boolean;
 }
