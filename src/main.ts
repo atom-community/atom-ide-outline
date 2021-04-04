@@ -42,7 +42,12 @@ export function deactivate() {
 export async function consumeOutlineProvider(provider: OutlineProvider) {
   subscriptions.add(/*  providerRegistryEntry */ outlineProviderRegistry.addProvider(provider))
 
-  // Generate (try) an outline after obtaining a provider
+  // NOTE Generate (try) an outline after obtaining a provider for the current active editor
+  // this initial outline is always rendered no matter if it is visible or not,
+  // this is because we can't track if the outline tab becomes visible suddenly later,
+  // or if the editor changes later once outline is visible
+  // so we need to have an outline for the current editor
+  // the following updates rely on the visibility
   await getOutline()
 }
 
@@ -69,14 +74,21 @@ async function editorChanged(editor?: TextEditor) {
   // dispose the old subscriptions
   onDidCompositeDisposable?.dispose?.()
 
-  await getOutline(editor) // initial outline
+  // NOTE initial outline is always rendered no matter if it is visible or not,
+  // this is because we can't track if the outline tab becomes visible suddenly,
+  // so we always need to show the outline for the correct file
+  // the following updates rely on the visibility
+  await getOutline(editor)
 
   const largeness = editorLargeness(editor as TextEditor)
   // How long to wait for the new changes before updating the outline.
   // A high number will increase the responsiveness of the text editor in large files.
   const updateDebounceTime = Math.max(largeness / 4, 300) // 1/4 of the line count
 
-  const doubouncedGetOutline = debounce(getOutline as (textEditor: TextEditor) => Promise<void>, updateDebounceTime)
+  const doubouncedGetOutline = debounce(
+    getOutlintIfVisible as (textEditor: TextEditor) => Promise<void>,
+    updateDebounceTime
+  )
 
   onDidCompositeDisposable!.add(
     // update the outline if editor stops changing
@@ -129,13 +141,17 @@ export async function toggleOutlineView() {
   }
 }
 
-export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
-  if (view === undefined) {
-    view = new OutlineView() // create outline pane
-  }
+function getOutlintIfVisible(editor = atom.workspace.getActiveTextEditor()) {
   // if outline is not visible return
   if (!isItemVisible(view)) {
     return
+  }
+  return getOutline(editor)
+}
+
+export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
+  if (view === undefined) {
+    view = new OutlineView() // create outline pane
   }
   // editor
   if (editor === undefined) {
