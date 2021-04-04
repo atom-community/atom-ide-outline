@@ -27,8 +27,19 @@ export function activate() {
   }
 }
 
+function addCommands() {
+  subscriptions.add(
+    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView),
+    /* revealCursor */ atom.commands.add("atom-workspace", "outline:reveal-cursor", revealCursor)
+  )
+}
+
+function addObservers() {
+  subscriptions.add(atom.workspace.observeActiveTextEditor(editorChanged))
+}
+
 export function deactivate() {
-  onDidCompositeDisposable?.dispose?.()
+  onEditorChangedDisposable.dispose()
   subscriptions.dispose()
   view?.destroy()
   view = undefined
@@ -51,28 +62,15 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
   await getOutline()
 }
 
-function addCommands() {
-  subscriptions.add(
-    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView),
-    /* revealCursor */ atom.commands.add("atom-workspace", "outline:reveal-cursor", revealCursor)
-  )
-}
-
-// disposables returned inside the oberservers
-let onDidCompositeDisposable: CompositeDisposable | null
-
-function addObservers() {
-  onDidCompositeDisposable = new CompositeDisposable()
-  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(editorChanged)
-  subscriptions.add(activeTextEditorObserver)
-}
+// disposables returned inside onEditorChangedDisposable
+const onEditorChangedDisposable = new CompositeDisposable()
 
 async function editorChanged(editor?: TextEditor) {
   if (editor === undefined) {
     return
   }
   // dispose the old subscriptions
-  onDidCompositeDisposable?.dispose?.()
+  onEditorChangedDisposable.dispose()
 
   // NOTE initial outline is always rendered no matter if it is visible or not,
   // this is because we can't track if the outline tab becomes visible suddenly,
@@ -90,7 +88,7 @@ async function editorChanged(editor?: TextEditor) {
     updateDebounceTime
   )
 
-  onDidCompositeDisposable!.add(
+  onEditorChangedDisposable.add(
     // update the outline if editor stops changing
     editor.onDidStopChanging(async () => {
       await doubouncedGetOutline(editor)
