@@ -3,6 +3,7 @@ import { OutlineView } from "./outlineView"
 import { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 import { notifyError, largeness as editorLargeness } from "atom-ide-base/commons-atom"
+import { isItemVisible } from "atom-ide-base/commons-ui"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
@@ -133,7 +134,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
     view = new OutlineView() // create outline pane
   }
   // if outline is not visible return
-  if (!view.isVisible()) {
+  if (!isItemVisible(view)) {
     return
   }
   // editor

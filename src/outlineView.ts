@@ -100,7 +100,7 @@ export class OutlineView {
     }
 
     // skip if not visible
-    if (!this.isVisible()) {
+    if (!isItemVisible(this)) {
       return
     }
 
@@ -139,10 +139,6 @@ export class OutlineView {
         disposable.dispose()
       })
     }
-  }
-
-  isVisible() {
-    return isItemVisible(this)
   }
 }
 
