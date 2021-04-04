@@ -2,7 +2,8 @@ import { CompositeDisposable, TextEditor } from "atom"
 import { OutlineView } from "./outlineView"
 import { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
-import { notifyError } from "./utils"
+import { notifyError, largeness as editorLargeness } from "atom-ide-base/commons-atom"
+import { isItemVisible } from "atom-ide-base/commons-ui"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
@@ -26,8 +27,19 @@ export function activate() {
   }
 }
 
+function addCommands() {
+  subscriptions.add(
+    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView),
+    /* revealCursor */ atom.commands.add("atom-workspace", "outline:reveal-cursor", revealCursor)
+  )
+}
+
+function addObservers() {
+  subscriptions.add(atom.workspace.observeActiveTextEditor(editorChanged))
+}
+
 export function deactivate() {
-  onDidCompositeDisposable?.dispose?.()
+  onEditorChangedDisposable.dispose()
   subscriptions.dispose()
   view?.destroy()
   view = undefined
@@ -41,64 +53,42 @@ export function deactivate() {
 export async function consumeOutlineProvider(provider: OutlineProvider) {
   subscriptions.add(/*  providerRegistryEntry */ outlineProviderRegistry.addProvider(provider))
 
-  // Generate (try) an outline after obtaining a provider
+  // NOTE Generate (try) an outline after obtaining a provider for the current active editor
+  // this initial outline is always rendered no matter if it is visible or not,
+  // this is because we can't track if the outline tab becomes visible suddenly later,
+  // or if the editor changes later once outline is visible
+  // so we need to have an outline for the current editor
+  // the following updates rely on the visibility
   await getOutline()
 }
 
-function addCommands() {
-  subscriptions.add(
-    /* outlineToggle */ atom.commands.add("atom-workspace", "outline:toggle", toggleOutlineView),
-    /* revealCursor */ atom.commands.add("atom-workspace", "outline:reveal-cursor", revealCursor)
-  )
-}
-
-const longLineLength = atom.config.get("linter-ui-default.longLineLength") || 4000
-const largeFileLineCount = atom.config.get("linter-ui-default.largeFileLineCount") / 6 || 3000 // minimum number of lines to trigger large file optimizations
-function lineCountIfLarge(editor: TextEditor) {
-  // @ts-ignore
-  if (editor.largeFileMode) {
-    return 20000
-  }
-  const lineCount = editor.getLineCount()
-  if (lineCount >= largeFileLineCount) {
-    return lineCount
-  } else {
-    const buffer = editor.getBuffer()
-    for (let i = 0, len = lineCount; i < len; i++) {
-      if (buffer.lineLengthForRow(i) > longLineLength) {
-        return longLineLength
-      }
-    }
-    return 0 // small file
-  }
-}
-
-// disposables returned inside the oberservers
-let onDidCompositeDisposable: CompositeDisposable | null
-
-function addObservers() {
-  onDidCompositeDisposable = new CompositeDisposable()
-  const activeTextEditorObserver = atom.workspace.observeActiveTextEditor(editorChanged)
-  subscriptions.add(activeTextEditorObserver)
-}
+// disposables returned inside onEditorChangedDisposable
+const onEditorChangedDisposable = new CompositeDisposable()
 
 async function editorChanged(editor?: TextEditor) {
   if (editor === undefined) {
     return
   }
   // dispose the old subscriptions
-  onDidCompositeDisposable?.dispose?.()
+  onEditorChangedDisposable.dispose()
 
-  await getOutline(editor) // initial outline
+  // NOTE initial outline is always rendered no matter if it is visible or not,
+  // this is because we can't track if the outline tab becomes visible suddenly,
+  // so we always need to show the outline for the correct file
+  // the following updates rely on the visibility
+  await getOutline(editor)
 
-  const lineCount = lineCountIfLarge(editor as TextEditor)
+  const largeness = editorLargeness(editor as TextEditor)
   // How long to wait for the new changes before updating the outline.
   // A high number will increase the responsiveness of the text editor in large files.
-  const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
+  const updateDebounceTime = Math.max(largeness / 4, 300) // 1/4 of the line count
 
-  const doubouncedGetOutline = debounce(getOutline as (textEditor: TextEditor) => Promise<void>, updateDebounceTime)
+  const doubouncedGetOutline = debounce(
+    getOutlintIfVisible as (textEditor: TextEditor) => Promise<void>,
+    updateDebounceTime
+  )
 
-  onDidCompositeDisposable!.add(
+  onEditorChangedDisposable.add(
     // update the outline if editor stops changing
     editor.onDidStopChanging(async () => {
       await doubouncedGetOutline(editor)
@@ -149,13 +139,17 @@ export async function toggleOutlineView() {
   }
 }
 
+function getOutlintIfVisible(editor = atom.workspace.getActiveTextEditor()) {
+  // if outline is not visible return
+  if (!isItemVisible(view)) {
+    return
+  }
+  return getOutline(editor)
+}
+
 export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
   if (view === undefined) {
     view = new OutlineView() // create outline pane
-  }
-  // if outline is not visible return
-  if (!view.isVisible()) {
-    return
   }
   // editor
   if (editor === undefined) {
@@ -176,7 +170,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   // busySignalProvider?.add(busySignalID, { onlyForFile: target })
 
   const outline = await provider.getOutline(editor)
-  view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(lineCountIfLarge(editor as TextEditor)))
+  view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(editorLargeness(editor as TextEditor)))
 
   // busySignalProvider?.remove(busySignalID)
 }

@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { TextEditor, Point } from "atom"
 import { OutlineTree } from "atom-ide-base"
-import { isItemVisible } from "./utils"
+import { isItemVisible, scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui"
 
 export class OutlineView {
   public element: HTMLDivElement
@@ -101,7 +100,7 @@ export class OutlineView {
     }
 
     // skip if not visible
-    if (!this.isVisible()) {
+    if (!isItemVisible(this)) {
       return
     }
 
@@ -127,8 +126,7 @@ export class OutlineView {
 
     if (this.focusedElms !== undefined) {
       for (const elm of this.focusedElms) {
-        // @ts-ignore: chrome-only API
-        ;(elm.scrollIntoViewIfNeeded as (center: boolean) => void)(true)
+        scrollIntoViewIfNeeded(elm, true)
         elm.toggleAttribute("cursorOn", true)
       }
       // remove focus once cursor moved
@@ -141,10 +139,6 @@ export class OutlineView {
         disposable.dispose()
       })
     }
-  }
-
-  isVisible() {
-    return isItemVisible(this)
   }
 }
 
