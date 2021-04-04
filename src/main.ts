@@ -2,7 +2,7 @@ import { CompositeDisposable, TextEditor } from "atom"
 import { OutlineView } from "./outlineView"
 import { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
-import { notifyError } from "./utils"
+import { notifyError, largeness as editorLargeness } from "atom-ide-base/commons-atom"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
@@ -52,27 +52,6 @@ function addCommands() {
   )
 }
 
-const longLineLength = atom.config.get("linter-ui-default.longLineLength") || 4000
-const largeFileLineCount = atom.config.get("linter-ui-default.largeFileLineCount") / 6 || 3000 // minimum number of lines to trigger large file optimizations
-function lineCountIfLarge(editor: TextEditor) {
-  // @ts-ignore
-  if (editor.largeFileMode) {
-    return 20000
-  }
-  const lineCount = editor.getLineCount()
-  if (lineCount >= largeFileLineCount) {
-    return lineCount
-  } else {
-    const buffer = editor.getBuffer()
-    for (let i = 0, len = lineCount; i < len; i++) {
-      if (buffer.lineLengthForRow(i) > longLineLength) {
-        return longLineLength
-      }
-    }
-    return 0 // small file
-  }
-}
-
 // disposables returned inside the oberservers
 let onDidCompositeDisposable: CompositeDisposable | null
 
@@ -91,10 +70,10 @@ async function editorChanged(editor?: TextEditor) {
 
   await getOutline(editor) // initial outline
 
-  const lineCount = lineCountIfLarge(editor as TextEditor)
+  const largeness = editorLargeness(editor as TextEditor)
   // How long to wait for the new changes before updating the outline.
   // A high number will increase the responsiveness of the text editor in large files.
-  const updateDebounceTime = Math.max(lineCount / 5, 300) // 1/5 of the line count
+  const updateDebounceTime = Math.max(largeness / 4, 300) // 1/4 of the line count
 
   const doubouncedGetOutline = debounce(getOutline as (textEditor: TextEditor) => Promise<void>, updateDebounceTime)
 
@@ -176,7 +155,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   // busySignalProvider?.add(busySignalID, { onlyForFile: target })
 
   const outline = await provider.getOutline(editor)
-  view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(lineCountIfLarge(editor as TextEditor)))
+  view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(editorLargeness(editor as TextEditor)))
 
   // busySignalProvider?.remove(busySignalID)
 }
