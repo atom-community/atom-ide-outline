@@ -26,7 +26,10 @@
     flex-grow: 1;
     flex-shrink: 1;
 
-    overflow-y: auto;
+    overflow: auto;
+    & > ul {
+      width: fit-content;
+    }
 
     @fold-width: 8px;
     @padding-h: 10px;
