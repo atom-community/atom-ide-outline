@@ -39,7 +39,7 @@ function addObservers() {
 }
 
 export function deactivate() {
-  onEditorChangedDisposable.dispose()
+  onEditorChangedDisposable?.dispose()
   subscriptions.dispose()
   view?.destroy()
   view = undefined
@@ -63,14 +63,15 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
 }
 
 // disposables returned inside onEditorChangedDisposable
-const onEditorChangedDisposable = new CompositeDisposable()
+let onEditorChangedDisposable: CompositeDisposable | undefined = undefined
 
 async function editorChanged(editor?: TextEditor) {
   if (editor === undefined) {
     return
   }
   // dispose the old subscriptions
-  onEditorChangedDisposable.dispose()
+  onEditorChangedDisposable?.dispose()
+  onEditorChangedDisposable = new CompositeDisposable() // we can't reuse the CompositeDisposable!
 
   // NOTE initial outline is always rendered no matter if it is visible or not,
   // this is because we can't track if the outline tab becomes visible suddenly,
