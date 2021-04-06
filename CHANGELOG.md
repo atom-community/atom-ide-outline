@@ -1,3 +1,10 @@
+## [2.3.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.2...v2.3.3) (2021-04-06)
+
+
+### Bug Fixes
+
+* the outline was cleaned if a background editor was closed ([5f952c2](https://github.com/atom-ide-community/atom-ide-outline/commit/5f952c23389e8d1e6212822ca0f7ca888df8858f))
+
 ## [2.3.2](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.1...v2.3.2) (2021-04-04)
 
 
