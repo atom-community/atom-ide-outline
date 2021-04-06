@@ -9,9 +9,9 @@ Outline UI compatible with IDE packages. Presents symbols of an active text edit
 1. Install `atom-ide-outline` in Atom
 
 2. Install relevant IDE language packages e.g.:
-
 - [atom-typescript](https://atom.io/packages/atom-typescript) for TypeScript
 - [atom-ide-javascript](https://atom.io/packages/atom-ide-javascript) for JavaScript
+- [ide-html](https://atom.io/packages/ide-html) for html
 - [ide-css](https://atom.io/packages/ide-css) for CSS
 - [ide-python](https://atom.io/packages/ide-python) for Python
 - [ide-rust](https://atom.io/packages/ide-rust) for Rust
