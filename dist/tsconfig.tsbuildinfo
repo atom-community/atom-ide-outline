@@ -1,142 +1,142 @@
 {
   "program": {
     "fileInfos": {
-      "../node_modules/typescript/lib/lib.es5.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es5.d.ts": {
         "version": "b3584bc5798ed422ce2516df360ffa9cf2d80b5eae852867db9ba3743145f895",
         "signature": "b3584bc5798ed422ce2516df360ffa9cf2d80b5eae852867db9ba3743145f895",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.d.ts": {
         "version": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
         "signature": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
         "affectsGlobalScope": false
       },
-      "../node_modules/typescript/lib/lib.es2016.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2016.d.ts": {
         "version": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
         "signature": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
         "affectsGlobalScope": false
       },
-      "../node_modules/typescript/lib/lib.es2017.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.d.ts": {
         "version": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
         "signature": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
         "affectsGlobalScope": false
       },
-      "../node_modules/typescript/lib/lib.es2018.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.d.ts": {
         "version": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
         "signature": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
         "affectsGlobalScope": false
       },
-      "../node_modules/typescript/lib/lib.dom.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.dom.d.ts": {
         "version": "feeeb1dd8a80fb76be42b0426e8f3ffa9bdef3c2f3c12c147e7660b1c5ba8b3b",
         "signature": "feeeb1dd8a80fb76be42b0426e8f3ffa9bdef3c2f3c12c147e7660b1c5ba8b3b",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.core.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.core.d.ts": {
         "version": "46ee15e9fefa913333b61eaf6b18885900b139867d89832a515059b62cf16a17",
         "signature": "46ee15e9fefa913333b61eaf6b18885900b139867d89832a515059b62cf16a17",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.collection.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.collection.d.ts": {
         "version": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
         "signature": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.generator.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.generator.d.ts": {
         "version": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
         "signature": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
         "version": "8b2a5df1ce95f78f6b74f1a555ccdb6baab0486b42d8345e0871dd82811f9b9a",
         "signature": "8b2a5df1ce95f78f6b74f1a555ccdb6baab0486b42d8345e0871dd82811f9b9a",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.promise.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.promise.d.ts": {
         "version": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c",
         "signature": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
         "version": "810627a82ac06fb5166da5ada4159c4ec11978dfbb0805fe804c86406dab8357",
         "signature": "810627a82ac06fb5166da5ada4159c4ec11978dfbb0805fe804c86406dab8357",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
         "version": "62d80405c46c3f4c527ee657ae9d43fda65a0bf582292429aea1e69144a522a6",
         "signature": "62d80405c46c3f4c527ee657ae9d43fda65a0bf582292429aea1e69144a522a6",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
         "version": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
         "signature": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
         "version": "9d122b7e8c1a5c72506eea50c0973cba55b92b5532d5cafa8a6ce2c547d57551",
         "signature": "9d122b7e8c1a5c72506eea50c0973cba55b92b5532d5cafa8a6ce2c547d57551",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2016.array.include.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2016.array.include.d.ts": {
         "version": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
         "signature": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2017.object.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.object.d.ts": {
         "version": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
         "signature": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts": {
         "version": "7ce9f0bde3307ca1f944119f6365f2d776d281a393b576a18a2f2893a2d75c98",
         "signature": "7ce9f0bde3307ca1f944119f6365f2d776d281a393b576a18a2f2893a2d75c98",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2017.string.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.string.d.ts": {
         "version": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
         "signature": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2017.intl.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.intl.d.ts": {
         "version": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
         "signature": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts": {
         "version": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
         "signature": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts": {
         "version": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
         "signature": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts": {
         "version": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
         "signature": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2018.intl.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.intl.d.ts": {
         "version": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
         "signature": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2018.promise.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.promise.d.ts": {
         "version": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
         "signature": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2018.regexp.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.regexp.d.ts": {
         "version": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
         "signature": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.es2020.bigint.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2020.bigint.d.ts": {
         "version": "7b5a10e3c897fabece5a51aa85b4111727d7adb53c2734b5d37230ff96802a09",
         "signature": "7b5a10e3c897fabece5a51aa85b4111727d7adb53c2734b5d37230ff96802a09",
         "affectsGlobalScope": true
       },
-      "../node_modules/typescript/lib/lib.esnext.intl.d.ts": {
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.esnext.intl.d.ts": {
         "version": "506b80b9951c9381dc5f11897b31fca5e2a65731d96ddefa19687fbc26b23c6e",
         "signature": "506b80b9951c9381dc5f11897b31fca5e2a65731d96ddefa19687fbc26b23c6e",
         "affectsGlobalScope": true
@@ -696,17 +696,12 @@
         "signature": "5a322435cefe415e1a9d2c73c27e191b4114aefed2b1a49ef1e175708461d2d3",
         "affectsGlobalScope": false
       },
-      "../node_modules/atom-ide-base/node_modules/@types/atom/index.d.ts": {
-        "version": "00ef4a4324556eab6e45809e757354899d1ded0f5b2134465ee10e450f9c8d61",
-        "signature": "00ef4a4324556eab6e45809e757354899d1ded0f5b2134465ee10e450f9c8d61",
-        "affectsGlobalScope": true
-      },
-      "../node_modules/atom-ide-base/node_modules/@types/atom/linter/config.d.ts": {
+      "../node_modules/@types/atom/linter/config.d.ts": {
         "version": "e149341309d7f08a73ade2b661a2f127ba560b7ea1780e85acfe3cdcb3d92be0",
         "signature": "e149341309d7f08a73ade2b661a2f127ba560b7ea1780e85acfe3cdcb3d92be0",
         "affectsGlobalScope": false
       },
-      "../node_modules/atom-ide-base/node_modules/@types/atom/linter/index.d.ts": {
+      "../node_modules/@types/atom/linter/index.d.ts": {
         "version": "4f873a462f3653de5ac9ac1dc5a8e3c124efb25990972db81b8abee3ebae3f0a",
         "signature": "4f873a462f3653de5ac9ac1dc5a8e3c124efb25990972db81b8abee3ebae3f0a",
         "affectsGlobalScope": false
@@ -981,6 +976,11 @@
         "signature": "3e5be602d3906c48186e0455e866bfead2fcae1fcf4c19c91ed936771d49db52",
         "affectsGlobalScope": false
       },
+      "../node_modules/@types/color-name/index.d.ts": {
+        "version": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e",
+        "signature": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e",
+        "affectsGlobalScope": false
+      },
       "../node_modules/@types/estree/index.d.ts": {
         "version": "89ccbe04e737ce613f5f04990271cfa84901446350b8551b0555ddf19319723b",
         "signature": "89ccbe04e737ce613f5f04990271cfa84901446350b8551b0555ddf19319723b",
@@ -992,8 +992,8 @@
         "affectsGlobalScope": true
       },
       "../node_modules/@types/json-schema/index.d.ts": {
-        "version": "3a1e165b22a1cb8df82c44c9a09502fd2b33f160cd277de2cd3a055d8e5c6b27",
-        "signature": "3a1e165b22a1cb8df82c44c9a09502fd2b33f160cd277de2cd3a055d8e5c6b27",
+        "version": "ecdf947a5111318568ba99f2a87b8498382d8871207f1bc6271ff3b9536a2448",
+        "signature": "ecdf947a5111318568ba99f2a87b8498382d8871207f1bc6271ff3b9536a2448",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/json5/index.d.ts": {
@@ -1171,6 +1171,14 @@
         "../node_modules/@types/atom/src/workspace.d.ts",
         "../node_modules/@types/node/index.d.ts"
       ],
+      "../node_modules/@types/atom/linter/config.d.ts": [
+        "../node_modules/@types/atom/index.d.ts",
+        "../node_modules/@types/atom/src/config-schema.d.ts"
+      ],
+      "../node_modules/@types/atom/linter/index.d.ts": [
+        "../node_modules/@types/atom/index.d.ts",
+        "../node_modules/@types/atom/linter/config.d.ts"
+      ],
       "../node_modules/@types/atom/src/atom-environment.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
       ],
@@ -1186,7 +1194,7 @@
       ],
       "../node_modules/@types/atom/src/config-schema.d.ts": [
         "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/atom-ide-base/node_modules/@types/atom/linter/config.d.ts"
+        "../node_modules/@types/atom/linter/config.d.ts"
       ],
       "../node_modules/@types/atom/src/config.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
@@ -1768,71 +1776,12 @@
       "../node_modules/atom-ide-base/commons-ui/items.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
       ],
-      "../node_modules/atom-ide-base/node_modules/@types/atom/index.d.ts": [
-        "../node_modules/@types/atom/dependencies/event-kit/index.d.ts",
-        "../node_modules/@types/atom/dependencies/first-mate/index.d.ts",
-        "../node_modules/@types/atom/dependencies/pathwatcher/index.d.ts",
-        "../node_modules/@types/atom/dependencies/text-buffer/index.d.ts",
-        "../node_modules/@types/atom/src/atom-environment.d.ts",
-        "../node_modules/@types/atom/src/buffered-node-process.d.ts",
-        "../node_modules/@types/atom/src/buffered-process.d.ts",
-        "../node_modules/@types/atom/src/clipboard.d.ts",
-        "../node_modules/@types/atom/src/color.d.ts",
-        "../node_modules/@types/atom/src/command-registry.d.ts",
-        "../node_modules/@types/atom/src/config-schema.d.ts",
-        "../node_modules/@types/atom/src/config.d.ts",
-        "../node_modules/@types/atom/src/context-menu-manager.d.ts",
-        "../node_modules/@types/atom/src/cursor.d.ts",
-        "../node_modules/@types/atom/src/decoration.d.ts",
-        "../node_modules/@types/atom/src/deserializer-manager.d.ts",
-        "../node_modules/@types/atom/src/dock.d.ts",
-        "../node_modules/@types/atom/src/get-window-load-settings.d.ts",
-        "../node_modules/@types/atom/src/git-repository.d.ts",
-        "../node_modules/@types/atom/src/grammar-registry.d.ts",
-        "../node_modules/@types/atom/src/gutter.d.ts",
-        "../node_modules/@types/atom/src/history-manager.d.ts",
-        "../node_modules/@types/atom/src/keymap-extensions.d.ts",
-        "../node_modules/@types/atom/src/layer-decoration.d.ts",
-        "../node_modules/@types/atom/src/menu-manager.d.ts",
-        "../node_modules/@types/atom/src/notification-manager.d.ts",
-        "../node_modules/@types/atom/src/notification.d.ts",
-        "../node_modules/@types/atom/src/other-types.d.ts",
-        "../node_modules/@types/atom/src/package-manager.d.ts",
-        "../node_modules/@types/atom/src/package.d.ts",
-        "../node_modules/@types/atom/src/pane.d.ts",
-        "../node_modules/@types/atom/src/panel.d.ts",
-        "../node_modules/@types/atom/src/path-watcher.d.ts",
-        "../node_modules/@types/atom/src/project.d.ts",
-        "../node_modules/@types/atom/src/scope-descriptor.d.ts",
-        "../node_modules/@types/atom/src/selection.d.ts",
-        "../node_modules/@types/atom/src/style-manager.d.ts",
-        "../node_modules/@types/atom/src/task.d.ts",
-        "../node_modules/@types/atom/src/text-editor-component.d.ts",
-        "../node_modules/@types/atom/src/text-editor-element.d.ts",
-        "../node_modules/@types/atom/src/text-editor-registry.d.ts",
-        "../node_modules/@types/atom/src/text-editor.d.ts",
-        "../node_modules/@types/atom/src/theme-manager.d.ts",
-        "../node_modules/@types/atom/src/tooltip-manager.d.ts",
-        "../node_modules/@types/atom/src/tooltip.d.ts",
-        "../node_modules/@types/atom/src/view-registry.d.ts",
-        "../node_modules/@types/atom/src/workspace-center.d.ts",
-        "../node_modules/@types/atom/src/workspace.d.ts",
-        "../node_modules/@types/node/index.d.ts"
-      ],
-      "../node_modules/atom-ide-base/node_modules/@types/atom/linter/config.d.ts": [
-        "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/@types/atom/src/config-schema.d.ts"
-      ],
-      "../node_modules/atom-ide-base/node_modules/@types/atom/linter/index.d.ts": [
-        "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/atom-ide-base/node_modules/@types/atom/linter/config.d.ts"
-      ],
       "../node_modules/atom-ide-base/types-packages/busy-signal.d.ts": [
         "../node_modules/atom-ide-base/types-packages/uri.d.ts"
       ],
       "../node_modules/atom-ide-base/types-packages/code-actions.d.ts": [
         "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/atom-ide-base/node_modules/@types/atom/linter/index.d.ts"
+        "../node_modules/@types/atom/linter/index.d.ts"
       ],
       "../node_modules/atom-ide-base/types-packages/code-format.d.ts": [
         "../node_modules/@types/atom/index.d.ts",
@@ -2025,6 +1974,14 @@
         "../node_modules/@types/atom/src/workspace.d.ts",
         "../node_modules/@types/node/index.d.ts"
       ],
+      "../node_modules/@types/atom/linter/config.d.ts": [
+        "../node_modules/@types/atom/index.d.ts",
+        "../node_modules/@types/atom/src/config-schema.d.ts"
+      ],
+      "../node_modules/@types/atom/linter/index.d.ts": [
+        "../node_modules/@types/atom/index.d.ts",
+        "../node_modules/@types/atom/linter/config.d.ts"
+      ],
       "../node_modules/@types/atom/src/atom-environment.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
       ],
@@ -2040,7 +1997,7 @@
       ],
       "../node_modules/@types/atom/src/config-schema.d.ts": [
         "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/atom-ide-base/node_modules/@types/atom/linter/config.d.ts"
+        "../node_modules/@types/atom/linter/config.d.ts"
       ],
       "../node_modules/@types/atom/src/config.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
@@ -2622,71 +2579,12 @@
       "../node_modules/atom-ide-base/commons-ui/items.d.ts": [
         "../node_modules/@types/atom/index.d.ts"
       ],
-      "../node_modules/atom-ide-base/node_modules/@types/atom/index.d.ts": [
-        "../node_modules/@types/atom/dependencies/event-kit/index.d.ts",
-        "../node_modules/@types/atom/dependencies/first-mate/index.d.ts",
-        "../node_modules/@types/atom/dependencies/pathwatcher/index.d.ts",
-        "../node_modules/@types/atom/dependencies/text-buffer/index.d.ts",
-        "../node_modules/@types/atom/src/atom-environment.d.ts",
-        "../node_modules/@types/atom/src/buffered-node-process.d.ts",
-        "../node_modules/@types/atom/src/buffered-process.d.ts",
-        "../node_modules/@types/atom/src/clipboard.d.ts",
-        "../node_modules/@types/atom/src/color.d.ts",
-        "../node_modules/@types/atom/src/command-registry.d.ts",
-        "../node_modules/@types/atom/src/config-schema.d.ts",
-        "../node_modules/@types/atom/src/config.d.ts",
-        "../node_modules/@types/atom/src/context-menu-manager.d.ts",
-        "../node_modules/@types/atom/src/cursor.d.ts",
-        "../node_modules/@types/atom/src/decoration.d.ts",
-        "../node_modules/@types/atom/src/deserializer-manager.d.ts",
-        "../node_modules/@types/atom/src/dock.d.ts",
-        "../node_modules/@types/atom/src/get-window-load-settings.d.ts",
-        "../node_modules/@types/atom/src/git-repository.d.ts",
-        "../node_modules/@types/atom/src/grammar-registry.d.ts",
-        "../node_modules/@types/atom/src/gutter.d.ts",
-        "../node_modules/@types/atom/src/history-manager.d.ts",
-        "../node_modules/@types/atom/src/keymap-extensions.d.ts",
-        "../node_modules/@types/atom/src/layer-decoration.d.ts",
-        "../node_modules/@types/atom/src/menu-manager.d.ts",
-        "../node_modules/@types/atom/src/notification-manager.d.ts",
-        "../node_modules/@types/atom/src/notification.d.ts",
-        "../node_modules/@types/atom/src/other-types.d.ts",
-        "../node_modules/@types/atom/src/package-manager.d.ts",
-        "../node_modules/@types/atom/src/package.d.ts",
-        "../node_modules/@types/atom/src/pane.d.ts",
-        "../node_modules/@types/atom/src/panel.d.ts",
-        "../node_modules/@types/atom/src/path-watcher.d.ts",
-        "../node_modules/@types/atom/src/project.d.ts",
-        "../node_modules/@types/atom/src/scope-descriptor.d.ts",
-        "../node_modules/@types/atom/src/selection.d.ts",
-        "../node_modules/@types/atom/src/style-manager.d.ts",
-        "../node_modules/@types/atom/src/task.d.ts",
-        "../node_modules/@types/atom/src/text-editor-component.d.ts",
-        "../node_modules/@types/atom/src/text-editor-element.d.ts",
-        "../node_modules/@types/atom/src/text-editor-registry.d.ts",
-        "../node_modules/@types/atom/src/text-editor.d.ts",
-        "../node_modules/@types/atom/src/theme-manager.d.ts",
-        "../node_modules/@types/atom/src/tooltip-manager.d.ts",
-        "../node_modules/@types/atom/src/tooltip.d.ts",
-        "../node_modules/@types/atom/src/view-registry.d.ts",
-        "../node_modules/@types/atom/src/workspace-center.d.ts",
-        "../node_modules/@types/atom/src/workspace.d.ts",
-        "../node_modules/@types/node/index.d.ts"
-      ],
-      "../node_modules/atom-ide-base/node_modules/@types/atom/linter/config.d.ts": [
-        "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/@types/atom/src/config-schema.d.ts"
-      ],
-      "../node_modules/atom-ide-base/node_modules/@types/atom/linter/index.d.ts": [
-        "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/atom-ide-base/node_modules/@types/atom/linter/config.d.ts"
-      ],
       "../node_modules/atom-ide-base/types-packages/busy-signal.d.ts": [
         "../node_modules/atom-ide-base/types-packages/uri.d.ts"
       ],
       "../node_modules/atom-ide-base/types-packages/code-actions.d.ts": [
         "../node_modules/@types/atom/index.d.ts",
-        "../node_modules/atom-ide-base/node_modules/@types/atom/linter/index.d.ts"
+        "../node_modules/@types/atom/linter/index.d.ts"
       ],
       "../node_modules/atom-ide-base/types-packages/code-format.d.ts": [
         "../node_modules/@types/atom/index.d.ts",
@@ -2756,6 +2654,34 @@
       ]
     },
     "semanticDiagnosticsPerFile": [
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.dom.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2016.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.intl.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.object.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.string.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.intl.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.promise.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es2020.bigint.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.es5.d.ts",
+      "../node_modules/.pnpm/typescript@4.2.4/node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../node_modules/@types/atom/dependencies/event-kit/index.d.ts",
       "../node_modules/@types/atom/dependencies/first-mate/index.d.ts",
       "../node_modules/@types/atom/dependencies/first-mate/src/first-mate.d.ts",
@@ -2774,6 +2700,8 @@
       "../node_modules/@types/atom/dependencies/text-buffer/src/range.d.ts",
       "../node_modules/@types/atom/dependencies/text-buffer/src/text-buffer.d.ts",
       "../node_modules/@types/atom/index.d.ts",
+      "../node_modules/@types/atom/linter/config.d.ts",
+      "../node_modules/@types/atom/linter/index.d.ts",
       "../node_modules/@types/atom/src/atom-environment.d.ts",
       "../node_modules/@types/atom/src/buffered-node-process.d.ts",
       "../node_modules/@types/atom/src/buffered-process.d.ts",
@@ -2818,6 +2746,7 @@
       "../node_modules/@types/atom/src/view-registry.d.ts",
       "../node_modules/@types/atom/src/workspace-center.d.ts",
       "../node_modules/@types/atom/src/workspace.d.ts",
+      "../node_modules/@types/color-name/index.d.ts",
       "../node_modules/@types/dompurify/index.d.ts",
       "../node_modules/@types/estree/index.d.ts",
       "../node_modules/@types/jasmine/index.d.ts",
@@ -2906,9 +2835,6 @@
       "../node_modules/atom-ide-base/commons-ui/index.d.ts",
       "../node_modules/atom-ide-base/commons-ui/items.d.ts",
       "../node_modules/atom-ide-base/commons-ui/scrollIntoView.d.ts",
-      "../node_modules/atom-ide-base/node_modules/@types/atom/index.d.ts",
-      "../node_modules/atom-ide-base/node_modules/@types/atom/linter/config.d.ts",
-      "../node_modules/atom-ide-base/node_modules/@types/atom/linter/index.d.ts",
       "../node_modules/atom-ide-base/types-packages/busy-signal.d.ts",
       "../node_modules/atom-ide-base/types-packages/code-actions.d.ts",
       "../node_modules/atom-ide-base/types-packages/code-format.d.ts",
@@ -2927,39 +2853,11 @@
       "../node_modules/atom-ide-base/types-packages/uri.d.ts",
       "../node_modules/csstype/index.d.ts",
       "../node_modules/tslib/tslib.d.ts",
-      "../node_modules/typescript/lib/lib.dom.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.collection.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.core.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.generator.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.iterable.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.promise.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.proxy.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.reflect.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.symbol.d.ts",
-      "../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "../node_modules/typescript/lib/lib.es2016.array.include.d.ts",
-      "../node_modules/typescript/lib/lib.es2016.d.ts",
-      "../node_modules/typescript/lib/lib.es2017.d.ts",
-      "../node_modules/typescript/lib/lib.es2017.intl.d.ts",
-      "../node_modules/typescript/lib/lib.es2017.object.d.ts",
-      "../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
-      "../node_modules/typescript/lib/lib.es2017.string.d.ts",
-      "../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
-      "../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
-      "../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
-      "../node_modules/typescript/lib/lib.es2018.d.ts",
-      "../node_modules/typescript/lib/lib.es2018.intl.d.ts",
-      "../node_modules/typescript/lib/lib.es2018.promise.d.ts",
-      "../node_modules/typescript/lib/lib.es2018.regexp.d.ts",
-      "../node_modules/typescript/lib/lib.es2020.bigint.d.ts",
-      "../node_modules/typescript/lib/lib.es5.d.ts",
-      "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../src/config.json",
       "../src/main.ts",
       "../src/outlineView.ts",
       "../src/statuses.ts"
     ]
   },
-  "version": "4.2.3"
+  "version": "4.2.4"
 }
