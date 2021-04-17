@@ -165,11 +165,8 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
     return setStatus("noProvider")
   }
 
-  // const target = editor.getPath()
-
-  // const busySignalID = `Outline: ${target}`
-  // // @ts-ignore
-  // busySignalProvider?.add(busySignalID, { onlyForFile: target })
+  // const busySignalID = `Outline: ${editor.getPath()}`
+  // busySignalProvider?.add(busySignalID)
 
   const outline = await provider.getOutline(editor)
   view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(editorLargeness(editor as TextEditor)))
