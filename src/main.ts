@@ -35,7 +35,8 @@ function addCommands() {
 }
 
 function addObservers() {
-  subscriptions.add(atom.workspace.observeActiveTextEditor(editorChanged))
+  // if the active text editor changed (switched to another editor), then call editorChanged function
+  subscriptions.add(atom.workspace.onDidChangeActiveTextEditor(editorChanged))
 }
 
 export function deactivate() {
