@@ -1,3 +1,10 @@
+## [2.3.4](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.3...v2.3.4) (2021-04-17)
+
+
+### Bug Fixes
+
+* setOutline was called two times on each change ([91869e8](https://github.com/atom-ide-community/atom-ide-outline/commit/91869e8c3e54048fdce26154738f80b4ab501002))
+
 ## [2.3.3](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.2...v2.3.3) (2021-04-06)
 
 
