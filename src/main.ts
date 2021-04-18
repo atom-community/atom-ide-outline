@@ -52,7 +52,7 @@ export function deactivate() {
 //   subscriptions.add(busySignalProvider)
 // }
 
-export function consumeOutlineProvider(provider: OutlineProvider) {
+export async function consumeOutlineProvider(provider: OutlineProvider) {
   subscriptions.add(/*  providerRegistryEntry */ outlineProviderRegistry.addProvider(provider))
 
   // NOTE Generate (try) an outline after obtaining a provider for the current active editor
@@ -61,13 +61,13 @@ export function consumeOutlineProvider(provider: OutlineProvider) {
   // or if the editor changes later once outline is visible
   // so we need to have an outline for the current editor
   // the following updates rely on the visibility
-  getOutline()
+  await getOutline()
 }
 
 // disposables returned inside onEditorChangedDisposable
 let onEditorChangedDisposable: CompositeDisposable | undefined = undefined
 
-function editorChanged(editor?: TextEditor) {
+async function editorChanged(editor?: TextEditor) {
   if (editor === undefined) {
     return
   }
@@ -79,7 +79,7 @@ function editorChanged(editor?: TextEditor) {
   // this is because we can't track if the outline tab becomes visible suddenly,
   // so we always need to show the outline for the correct file
   // the following updates rely on the visibility
-  getOutline(editor)
+  await getOutline(editor)
 
   const largeness = editorLargeness(editor as TextEditor)
   // How long to wait for the new changes before updating the outline.
@@ -154,7 +154,7 @@ export function getOutline(editor = atom.workspace.getActiveTextEditor()) {
   if (view === undefined) {
     view = new OutlineView() // create outline pane
   }
-  view.setOutline(editor)
+  return view.setOutline(editor)
 }
 
 export { default as config } from "./config.json"

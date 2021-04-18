@@ -5,6 +5,17 @@ import { statuses } from "./statuses"
 import { outlineProviderRegistry } from "./main"
 import { largeness as editorLargeness } from "atom-ide-base/commons-atom"
 
+// exported for spec
+export function getProviderForEditor(editor: TextEditor) {
+  if (process.env.NODE_ENV !== "test") {
+    return outlineProviderRegistry.getProviderForEditor(editor)
+  } else {
+    // create a mock outline
+    // eslint-disable-next-line
+    return require("../spec/outline-view-spec").createMockProvider()
+  }
+}
+
 export class OutlineView {
   public element: HTMLDivElement
 
@@ -52,34 +63,43 @@ export class OutlineView {
   }
 
   public setOutline(editor: TextEditor | undefined) {
-    if (this.isRendering) {
-      // return if setOutline is already called and not finished yet.
-      return
-    }
-    this.isRendering = true
-    // const busySignalID = `Outline: ${editor.getPath()}`
-    // busySignalProvider?.add(busySignalID)
+    return new Promise<void>((resolve) => {
+      if (this.isRendering) {
+        // return if setOutline is already called and not finished yet.
+        resolve()
+        return
+      }
+      this.isRendering = true
+      // const busySignalID = `Outline: ${editor.getPath()}`
+      // busySignalProvider?.add(busySignalID)
 
-    // editor
-    if (editor === undefined) {
-      return this.setStatus("noEditor")
-    }
+      // editor
+      if (editor === undefined) {
+        this.setStatus("noEditor")
+        resolve()
+        return
+      }
 
-    // provider
-    const provider = outlineProviderRegistry.getProviderForEditor(editor)
+      // provider
+      const provider = getProviderForEditor(editor)
 
-    if (!provider) {
-      return this.setStatus("noProvider")
-    }
+      if (!provider) {
+        this.setStatus("noProvider")
+        resolve()
+        return
+      }
 
-    if (this.setOutlineTimeout) {
-      clearTimeout(this.setOutlineTimeout)
-    }
-    this.setOutlineTimeout = setTimeout(async () => {
-      const outline = await provider.getOutline(editor)
-      this._setOutline(outline?.outlineTrees ?? [], editor, Boolean(editorLargeness(editor as TextEditor)))
-      // busySignalProvider?.remove(busySignalID)
-    }, 50) // 50ms internal debounce to prevent multiple calls
+      if (this.setOutlineTimeout) {
+        clearTimeout(this.setOutlineTimeout)
+      }
+      this.setOutlineTimeout = setTimeout(async () => {
+        const outline = await provider.getOutline(editor)
+        this._setOutline(outline?.outlineTrees ?? [], editor, Boolean(editorLargeness(editor as TextEditor)))
+        // busySignalProvider?.remove(busySignalID)
+        this.isRendering = false
+        resolve()
+      }, 50) // 50ms internal debounce to prevent multiple calls
+    })
   }
 
   private _setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
@@ -107,8 +127,6 @@ export class OutlineView {
 
     this.outlineList = createOutlineList(outlineTree, editor, isLarge, this.pointToElementsMap)
     this.outlineContent.appendChild(this.outlineList)
-
-    this.isRendering = false
   }
 
   private clearContent() {
