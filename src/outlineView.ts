@@ -1,6 +1,9 @@
 import { TextEditor, Point } from "atom"
 import { OutlineTree } from "atom-ide-base"
 import { isItemVisible, scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui"
+import { statuses } from "./statuses"
+import { outlineProviderRegistry } from "./main"
+import { largeness as editorLargeness } from "atom-ide-base/commons-atom"
 
 export class OutlineView {
   public element: HTMLDivElement
@@ -16,6 +19,9 @@ export class OutlineView {
   private focusedElms: HTMLElement[] | undefined
   /** cache of last rendered list used to avoid rerendering */
   lastEntries: OutlineTree[] | undefined
+
+  private setOutlineTimeout: NodeJS.Timeout | undefined
+  private isRendering: boolean = false
 
   constructor() {
     this.element = document.createElement("div")
@@ -45,7 +51,38 @@ export class OutlineView {
     return "list-unordered"
   }
 
-  setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
+  setOutline(editor: TextEditor | undefined) {
+    if (this.isRendering) {
+      // return if setOutline is already called and not finished yet.
+      return
+    }
+    this.isRendering = true
+    // const busySignalID = `Outline: ${editor.getPath()}`
+    // busySignalProvider?.add(busySignalID)
+
+    // editor
+    if (editor === undefined) {
+      return this.setStatus("noEditor")
+    }
+
+    // provider
+    const provider = outlineProviderRegistry.getProviderForEditor(editor)
+
+    if (!provider) {
+      return this.setStatus("noProvider")
+    }
+
+    if (this.setOutlineTimeout) {
+      clearTimeout(this.setOutlineTimeout)
+    }
+    this.setOutlineTimeout = setTimeout(async () => {
+      const outline = await provider.getOutline(editor)
+      this._setOutline(outline?.outlineTrees ?? [], editor, Boolean(editorLargeness(editor as TextEditor)))
+      // busySignalProvider?.remove(busySignalID)
+    }, 50) // 50ms internal debounce to prevent multiple calls
+  }
+
+  private _setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     // skip rendering if it is the same
     // TIME 0.2-1.2ms // the check itself takes ~0.2-0.5ms, so it is better than rerendering
     if (this.lastEntries !== undefined && hasEqualContent(outlineTree, this.lastEntries)) {
@@ -70,6 +107,8 @@ export class OutlineView {
 
     this.outlineList = createOutlineList(outlineTree, editor, isLarge, this.pointToElementsMap)
     this.outlineContent.appendChild(this.outlineList)
+
+    this.isRendering = false
   }
 
   clearContent() {
@@ -78,6 +117,11 @@ export class OutlineView {
       this.outlineList.dataset.editorRootScope = ""
     }
     this.lastEntries = undefined
+  }
+
+  setStatus(id: "noEditor" | "noProvider") {
+    this.presentStatus(statuses[id])
+    this.isRendering = false
   }
 
   presentStatus(status: { title: string; description: string }) {
