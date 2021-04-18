@@ -23,7 +23,7 @@ export class OutlineView {
   private setOutlineTimeout: NodeJS.Timeout | undefined
   private isRendering: boolean = false
 
-  constructor() {
+  public constructor() {
     this.element = document.createElement("div")
     this.element.classList.add("atom-ide-outline")
 
@@ -35,23 +35,23 @@ export class OutlineView {
     this.outlineContent.classList.add("outline-content")
   }
 
-  destroy() {
+  public destroy() {
     this.element.remove()
   }
 
-  getElement() {
+  public getElement() {
     return this.element
   }
 
-  getTitle() {
+  public getTitle() {
     return "Outline"
   }
 
-  getIconName() {
+  public getIconName() {
     return "list-unordered"
   }
 
-  setOutline(editor: TextEditor | undefined) {
+  public setOutline(editor: TextEditor | undefined) {
     if (this.isRendering) {
       // return if setOutline is already called and not finished yet.
       return
@@ -111,7 +111,7 @@ export class OutlineView {
     this.isRendering = false
   }
 
-  clearContent() {
+  private clearContent() {
     this.outlineContent.innerHTML = ""
     if (this.outlineList !== undefined) {
       this.outlineList.dataset.editorRootScope = ""
@@ -119,12 +119,12 @@ export class OutlineView {
     this.lastEntries = undefined
   }
 
-  setStatus(id: "noEditor" | "noProvider") {
+  public setStatus(id: "noEditor" | "noProvider") {
     this.presentStatus(statuses[id])
     this.isRendering = false
   }
 
-  presentStatus(status: { title: string; description: string }) {
+  private presentStatus(status: { title: string; description: string }) {
     this.clearContent()
 
     const statusElement = status && generateStatusElement(status)
@@ -135,7 +135,7 @@ export class OutlineView {
   }
 
   // callback for scrolling and highlighting the element that the cursor is on
-  selectAtCursorLine(editor: TextEditor) {
+  public selectAtCursorLine(editor: TextEditor) {
     const cursor = editor.getLastCursor()
 
     // no cursor
