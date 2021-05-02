@@ -1,6 +1,6 @@
 describe("Benchmark", () => {
   // This number doesn't match what timecope gives, but shows the trend
-  it("Activation Benchmark", async function () {
+  it("Activation Benchmark", function () {
     jasmine.attachToDOM(atom.views.getView(atom.workspace))
     atom.packages.triggerDeferredActivationHooks()
     // Activate activation hook
