@@ -28,6 +28,7 @@
     "bump": "ncu -u",
     "prepare": "npm run build"
   },
+  "prettier": "prettier-config-atomic",
   "atomTestRunner": "./spec/runner",
   "dependencies": {
     "atom-ide-base": "^2.6.0",
@@ -35,21 +36,21 @@
   },
   "devDependencies": {
     "@types/atom": "latest",
-    "@types/node": "^14.14.37",
-    "@types/lodash": "^4.14.168",
-    "typescript": "^4.2.4",
-    "tslib": "^2.2.0",
     "@types/jasmine": "^3.6.9",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^14.14.37",
     "atom-jasmine3-test-runner": "^5.2.2",
-    "prettier": "^2.2.1",
+    "build-commit": "latest",
+    "cross-env": "latest",
     "eslint": "7.24.0",
     "eslint-config-atomic": "^1.14.0",
+    "npm-check-updates": "latest",
+    "prettier-config-atomic": "^2.0.3",
     "rollup": "^2.45.1",
     "rollup-plugin-atomic": "^2.3.0",
     "shx": "latest",
-    "cross-env": "latest",
-    "npm-check-updates": "latest",
-    "build-commit": "latest"
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
   },
   "activationHooks": [
     "core:loaded-shell-environment"

@@ -5,16 +5,16 @@ import { isItemVisible, scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui"
 export class OutlineView {
   public element: HTMLDivElement
 
-  /** contains the content of the outline which is either the status element or the list element */
+  /** Contains the content of the outline which is either the status element or the list element */
   public outlineContent: HTMLDivElement
-  /** the actual outline list element */
+  /** The actual outline list element */
   private outlineList: HTMLUListElement | undefined = undefined
 
-  /** cache for reveal corsur */
+  /** Cache for reveal corsur */
   private pointToElementsMap = new Map<number, Array<HTMLLIElement>>() // TODO Point to element
-  /** cache for focused elements */
+  /** Cache for focused elements */
   private focusedElms: HTMLElement[] | undefined
-  /** cache of last rendered list used to avoid rerendering */
+  /** Cache of last rendered list used to avoid rerendering */
   lastEntries: OutlineTree[] | undefined
 
   constructor() {
@@ -142,7 +142,7 @@ export class OutlineView {
   }
 }
 
-/** create the main outline list */
+/** Create the main outline list */
 function createOutlineList(
   outlineTree: OutlineTree[],
   editor: TextEditor,
@@ -168,9 +168,7 @@ function createOutlineList(
   return outlineList
 }
 
-/** Compares the content of the two given {OutlineTree[]}
- *  It only compares the content that affects rendering
- */
+/** Compares the content of the two given {OutlineTree[]} It only compares the content that affects rendering */
 function hasEqualContent(ot1: OutlineTree[], ot2: OutlineTree[]) {
   // simple compare
   if (ot1 === ot2) {
@@ -301,7 +299,9 @@ function addOutlineEntries(
   }
 }
 
-/** Adds onClick to the outline entries.
+/**
+ * Adds onClick to the outline entries.
+ *
  * @attention The assumption about the type of Elements are added using `as HTML...`. After editing code, make sure that the types are correct
  */
 function addEntriesOnClick(
@@ -329,7 +329,7 @@ function addEntriesOnClick(
   }
 }
 
-/** update start position => elements map used in `selectAtCursorLine` */
+/** Update start position => elements map used in `selectAtCursorLine` */
 function addToPointToElementsMap(
   pointToElementsMap: Map<number, Array<HTMLLIElement>>,
   pointStartPositionRow: number,
