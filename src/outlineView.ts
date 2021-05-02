@@ -37,6 +37,8 @@ export class OutlineView {
     return this.element
   }
 
+  // needed for Atom
+  /* eslint-disable class-methods-use-this */
   getTitle() {
     return "Outline"
   }
@@ -44,6 +46,7 @@ export class OutlineView {
   getIconName() {
     return "list-unordered"
   }
+  /* eslint-enable class-methods-use-this */
 
   setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     // skip rendering if it is the same
