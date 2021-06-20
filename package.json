@@ -36,17 +36,17 @@
   },
   "devDependencies": {
     "@types/atom": "latest",
-    "@types/jasmine": "^3.6.10",
-    "@types/lodash": "^4.14.168",
-    "@types/node": "^15.0.1",
-    "atom-jasmine3-test-runner": "^5.2.3",
+    "@types/jasmine": "^3.7.7",
+    "@types/lodash": "^4.14.170",
+    "@types/node": "^15.12.4",
+    "atom-jasmine3-test-runner": "^5.2.6",
     "build-commit": "latest",
     "cross-env": "latest",
-    "eslint-config-atomic": "^1.14.2",
-    "prettier-config-atomic": "^2.0.3",
-    "rollup-plugin-atomic": "^2.3.0",
+    "eslint-config-atomic": "^1.16.1",
+    "prettier-config-atomic": "^2.0.5",
+    "rollup-plugin-atomic": "^2.3.2",
     "shx": "latest",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.4"
   },
   "activationHooks": [
     "core:loaded-shell-environment"
