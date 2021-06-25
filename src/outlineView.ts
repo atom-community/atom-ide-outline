@@ -19,7 +19,7 @@ export class OutlineView {
   /** Cache of last rendered list used to avoid rerendering */
   lastEntries: OutlineTree[] | undefined
 
-  private treeFilterer = new TreeFilterer< "representativeName" | "plainText", "children">()
+  private treeFilterer = new TreeFilterer<"representativeName" | "plainText", "children">()
   private searchBarEditor: TextEditor | undefined
   private searchBarEditorDisposable: Disposable | undefined
 
@@ -56,8 +56,8 @@ export class OutlineView {
   /* eslint-enable class-methods-use-this */
 
   /**
-   * The main function of {OutlineView} which renders the content in the outline
-   * or only update the event listeners if the outline tree hasn't changed
+   * The main function of {OutlineView} which renders the content in the outline or only update the event listeners if
+   * the outline tree hasn't changed
    */
   setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     // skip rendering if it is the same
@@ -103,9 +103,12 @@ export class OutlineView {
   updateSearchBar(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     this.searchBarEditorDisposable?.dispose()
 
+    // detect if representativeName exists on an entry of the tree, if it doesn't, then we use plainText
     const firstOutlineTree = outlineTree?.[0]
     const dataKey = firstOutlineTree?.representativeName !== undefined ? "representativeName" : "plainText"
-    this.treeFilterer.setCandidates(outlineTree as Tree< "representativeName" | "plainText", "children">[], dataKey, "children")
+
+    // @ts-ignore we check if representitiveName is undefined, and if it is, we will use plainText instead
+    this.treeFilterer.setCandidates(outlineTree, dataKey, "children")
 
     this.searchBarEditorDisposable = this.searchBarEditor?.onDidStopChanging(() =>
       this.filterOutlineTree(editor, isLarge)
