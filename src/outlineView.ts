@@ -1,6 +1,8 @@
-import { TextEditor, Point } from "atom"
+import { TextEditor, Point, Disposable } from "atom"
 import { OutlineTree } from "atom-ide-base"
 import { isItemVisible, scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui"
+import { TreeFilterer } from "zadeh"
+import type { Tree } from "zadeh"
 
 export class OutlineView {
   public element: HTMLDivElement
@@ -17,11 +19,16 @@ export class OutlineView {
   /** Cache of last rendered list used to avoid rerendering */
   lastEntries: OutlineTree[] | undefined
 
+  private treeFilterer = new TreeFilterer< "representativeName" | "plainText", "children">()
+  private searchBarEditor: TextEditor | undefined
+  private searchBarEditorDisposable: Disposable | undefined
+
   constructor() {
     this.element = document.createElement("div")
     this.element.classList.add("atom-ide-outline")
 
     this.element.appendChild(makeOutlineToolbar())
+    this.element.appendChild(this.createSearchBar())
 
     this.outlineContent = document.createElement("div")
     this.element.appendChild(this.outlineContent)
@@ -48,6 +55,10 @@ export class OutlineView {
   }
   /* eslint-enable class-methods-use-this */
 
+  /**
+   * The main function of {OutlineView} which renders the content in the outline
+   * or only update the event listeners if the outline tree hasn't changed
+   */
   setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     // skip rendering if it is the same
     // TIME 0.2-1.2ms // the check itself takes ~0.2-0.5ms, so it is better than rerendering
@@ -65,11 +76,17 @@ export class OutlineView {
       this.lastEntries = outlineTree
     }
 
+    this.createOutlineList(outlineTree, editor, isLarge)
+  }
+
+  /** The function to render the content in the outline */
+  createOutlineList(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     this.clearContent()
 
     if (isLarge) {
       this.outlineContent.appendChild(createLargeFileElement())
     }
+    this.updateSearchBar(outlineTree, editor, isLarge)
 
     this.outlineList = createOutlineList(outlineTree, editor, isLarge, this.pointToElementsMap)
     this.outlineContent.appendChild(this.outlineList)
@@ -81,6 +98,62 @@ export class OutlineView {
       this.outlineList.dataset.editorRootScope = ""
     }
     this.lastEntries = undefined
+  }
+
+  updateSearchBar(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
+    this.searchBarEditorDisposable?.dispose()
+
+    const firstOutlineTree = outlineTree?.[0]
+    const dataKey = firstOutlineTree?.representativeName !== undefined ? "representativeName" : "plainText"
+    this.treeFilterer.setCandidates(outlineTree as Tree< "representativeName" | "plainText", "children">[], dataKey, "children")
+
+    this.searchBarEditorDisposable = this.searchBarEditor?.onDidStopChanging(() =>
+      this.filterOutlineTree(editor, isLarge)
+    )
+  }
+
+  createSearchBar() {
+    this.searchBarEditor = new TextEditor({ mini: true, placeholderText: "Filter" })
+
+    const searchBar = document.createElement("div")
+    // searchBar.classList.add("outline-toolbar")
+
+    searchBar.appendChild(atom.views.getView(this.searchBarEditor))
+
+    return searchBar
+  }
+
+  renderLastOutlienList() {
+    if (this.outlineList !== undefined) {
+      this.clearContent()
+      this.outlineContent.appendChild(this.outlineList)
+    }
+  }
+
+  filterOutlineTree(editor: TextEditor, isLarge: boolean) {
+    const text = this.searchBarEditor?.getText()
+    let query: string
+    if (text === undefined) {
+      this.renderLastOutlienList()
+      return
+    } else {
+      query = text.trim()
+      if (query.length === 0) {
+        this.renderLastOutlienList()
+        return
+      }
+    }
+    let filteredTree = this.treeFilterer.filter(query)
+    // TODO why returns duplicates?
+    filteredTree = [...new Set(filteredTree)]
+    const filteredOutlineList = createOutlineList(
+      (filteredTree as unknown) as OutlineTree[],
+      editor,
+      isLarge,
+      this.pointToElementsMap
+    )
+    this.clearContent()
+    this.outlineContent.appendChild(filteredOutlineList)
   }
 
   presentStatus(status: { title: string; description: string }) {

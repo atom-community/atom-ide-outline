@@ -32,7 +32,8 @@
   "atomTestRunner": "./spec/runner",
   "dependencies": {
     "atom-ide-base": "^2.6.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "zadeh": "^3.0.0-beta.3"
   },
   "devDependencies": {
     "@types/atom": "latest",

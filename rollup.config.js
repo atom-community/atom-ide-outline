@@ -13,7 +13,7 @@ const RollupConfig = [
       },
     ],
     // loaded externally
-    external: ["atom"],
+    external: ["atom", "zadeh"],
     plugins,
   },
 ]
