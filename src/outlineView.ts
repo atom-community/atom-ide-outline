@@ -2,7 +2,7 @@ import { TextEditor, Point, Disposable } from "atom"
 import { OutlineTree } from "atom-ide-base"
 import { isItemVisible, scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui"
 import { TreeFilterer } from "zadeh"
-import type { Tree } from "zadeh"
+import { unique } from "./utils"
 
 export class OutlineView {
   public element: HTMLDivElement
@@ -146,9 +146,8 @@ export class OutlineView {
         return
       }
     }
-    let filteredTree = this.treeFilterer.filter(query)
-    // TODO why returns duplicates?
-    filteredTree = [...new Set(filteredTree)]
+    // TODO why returns duplicates? ~0-0.2s
+    const filteredTree = unique(this.treeFilterer.filter(query))
     const filteredOutlineList = createOutlineList(
       (filteredTree as unknown) as OutlineTree[],
       editor,
