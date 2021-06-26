@@ -1,6 +1,7 @@
 import { TextEditor, Point, Disposable } from "atom"
-import { OutlineTree } from "atom-ide-base"
-import { isItemVisible, scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui"
+import type { OutlineTree } from "atom-ide-base"
+import { scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui/scrollIntoView"
+import { isItemVisible } from "atom-ide-base/commons-ui/items"
 import { TreeFilterer } from "zadeh"
 import { unique } from "./utils"
 
