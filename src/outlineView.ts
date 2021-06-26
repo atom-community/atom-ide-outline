@@ -2,7 +2,7 @@ import { TextEditor, Point, Disposable } from "atom"
 import type { OutlineTree } from "atom-ide-base"
 import { scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui/scrollIntoView"
 import { isItemVisible } from "atom-ide-base/commons-ui/items"
-import { TreeFilterer } from "zadeh"
+import { TreeFilterer, Tree } from "zadeh"
 import { unique } from "./utils"
 import { setStatus } from "./main"
 
@@ -40,9 +40,9 @@ export class OutlineView {
   }
 
   reset() {
-    this.searchBarEditor?.setText("")
     this.searchBarEditorDisposable?.dispose()
     this.selectCursorDisposable?.dispose()
+    this.searchBarEditor?.setText("")
   }
 
   destroy() {
@@ -159,8 +159,26 @@ export class OutlineView {
       this.renderLastOutlienList()
       return
     }
+    let filterResults: Tree<"representativeName" | "plainText", "children">[]
+    try {
+      filterResults = this.treeFilterer.filter(query, { maxResults: 20, usePathScoring: false })
+    } catch (err) {
+      const error = err as Error
+      error.message = `Filtering failed for unkown reasons.\n${error.message}`
+      console.error(error)
+      this.reset()
+      // Retry:
+      // @ts-ignore internal api
+      const candidates = this.treeFilterer.candidates as Tree<"representativeName" | "plainText", "children">[]
+      this.treeFilterer = new TreeFilterer(candidates)
+      this.updateSearchBar(candidates as unknown as OutlineTree[], editor, isLarge)
+      this.searchBarEditor?.setText(query)
+      this.filterOutlineTree(editor, isLarge)
+      return
+    }
+
     // TODO why returns duplicates? ~0-0.2s
-    const filteredTree = unique(this.treeFilterer.filter(query, { maxResults: 20, usePathScoring: false }))
+    const filteredTree = unique(filterResults)
     if (filteredTree.length === 0) {
       return setStatus("noResult")
     }
