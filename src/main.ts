@@ -180,7 +180,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   // busySignalProvider?.remove(busySignalID)
 }
 
-export function setStatus(id: "noEditor" | "noProvider") {
+export function setStatus(id: "noEditor" | "noProvider" | "noResult") {
   view?.presentStatus(statuses[id])
 }
 
