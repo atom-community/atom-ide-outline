@@ -144,6 +144,11 @@ export class OutlineView {
   }
 
   filterOutlineTree(editor: TextEditor, isLarge: boolean) {
+    // @ts-ignore
+    if (!(editor.isAlive() as boolean) || !isItemVisible(editor)) {
+      return
+    }
+
     const text = this.searchBarEditor?.getText()
     if (typeof text !== "string") {
       this.renderLastOutlienList()
