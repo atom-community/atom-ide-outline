@@ -129,7 +129,7 @@ export class OutlineView {
     this.searchBarEditor = new TextEditor({ mini: true, placeholderText: "Filter" })
 
     const searchBar = document.createElement("div")
-    // searchBar.classList.add("outline-toolbar")
+    searchBar.classList.add("outline-searchbar")
 
     searchBar.appendChild(atom.views.getView(this.searchBarEditor))
 
