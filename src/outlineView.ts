@@ -161,7 +161,7 @@ export class OutlineView {
     }
     let filterResults: Tree<"representativeName" | "plainText", "children">[]
     try {
-      filterResults = this.treeFilterer.filter(query, { maxResults: 20, usePathScoring: false })
+      filterResults = this.treeFilterer.filter(query, { maxResults: 100, usePathScoring: false })
     } catch (err) {
       const error = err as Error
       error.message = `Filtering failed for unkown reasons.\n${error.message}`
