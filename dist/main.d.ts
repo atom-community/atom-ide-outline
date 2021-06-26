@@ -1,5 +1,5 @@
 import { TextEditor } from "atom";
-import { OutlineProvider } from "atom-ide-base";
+import type { OutlineProvider } from "atom-ide-base";
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry";
 export { statuses } from "./statuses";
 export { consumeCallHierarchyProvider } from "./call-hierarchy/main";

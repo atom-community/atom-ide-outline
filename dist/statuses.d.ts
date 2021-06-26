@@ -7,4 +7,8 @@ export declare const statuses: {
         title: string;
         description: string;
     };
+    noResult: {
+        title: string;
+        description: string;
+    };
 };
