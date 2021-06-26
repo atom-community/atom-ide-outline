@@ -153,7 +153,7 @@ export class OutlineView {
       return
     }
     // TODO why returns duplicates? ~0-0.2s
-    const filteredTree = unique(this.treeFilterer.filter(query))
+    const filteredTree = unique(this.treeFilterer.filter(query, { maxResults: 20, usePathScoring: false }))
     if (filteredTree.length === 0) {
       return setStatus("noResult")
     }
