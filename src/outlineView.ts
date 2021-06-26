@@ -140,16 +140,14 @@ export class OutlineView {
 
   filterOutlineTree(editor: TextEditor, isLarge: boolean) {
     const text = this.searchBarEditor?.getText()
-    let query: string
-    if (text === undefined) {
+    if (typeof text !== "string") {
       this.renderLastOutlienList()
       return
-    } else {
-      query = text.trim()
-      if (query.length === 0) {
-        this.renderLastOutlienList()
-        return
-      }
+    }
+    const query = text.trim()
+    if (query.length === 0) {
+      this.renderLastOutlienList()
+      return
     }
     // TODO why returns duplicates? ~0-0.2s
     const filteredTree = unique(this.treeFilterer.filter(query))
