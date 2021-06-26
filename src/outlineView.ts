@@ -22,7 +22,7 @@ export class OutlineView {
   lastEntries: OutlineTree[] | undefined
 
   private treeFilterer = new TreeFilterer<"representativeName" | "plainText", "children">()
-  private searchBarEditor: TextEditor | undefined
+  public searchBarEditor: TextEditor | undefined
   private searchBarEditorDisposable: Disposable | undefined
 
   constructor() {
