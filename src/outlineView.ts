@@ -4,6 +4,7 @@ import { scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui/scrollIntoView"
 import { isItemVisible } from "atom-ide-base/commons-ui/items"
 import { TreeFilterer } from "zadeh"
 import { unique } from "./utils"
+import { setStatus } from "./main"
 
 export class OutlineView {
   public element: HTMLDivElement
@@ -150,6 +151,9 @@ export class OutlineView {
     }
     // TODO why returns duplicates? ~0-0.2s
     const filteredTree = unique(this.treeFilterer.filter(query))
+    if (filteredTree.length === 0) {
+      return setStatus("noResult")
+    }
     const filteredOutlineList = createOutlineList(
       filteredTree as unknown as OutlineTree[],
       editor,
