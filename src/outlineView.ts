@@ -26,6 +26,7 @@ export class OutlineView {
   private treeFilterer = new TreeFilterer<"representativeName" | "plainText", "children">()
   public searchBarEditor: TextEditor | undefined
   private searchBarEditorDisposable: Disposable | undefined
+  private selectCursorDisposable: Disposable | undefined
 
   constructor() {
     this.element = document.createElement("div")
@@ -41,6 +42,8 @@ export class OutlineView {
   }
 
   destroy() {
+    this.searchBarEditorDisposable?.dispose()
+    this.selectCursorDisposable?.dispose()
     this.element.remove()
   }
 
@@ -207,13 +210,13 @@ export class OutlineView {
         elm.toggleAttribute("cursorOn", true)
       }
       // remove focus once cursor moved
-      const disposable = editor.onDidChangeCursorPosition(() => {
+      this.selectCursorDisposable = editor.onDidChangeCursorPosition(() => {
         if (this.focusedElms !== undefined) {
           for (const elm of this.focusedElms) {
             elm.toggleAttribute("cursorOn", false)
           }
         }
-        disposable.dispose()
+        this.selectCursorDisposable?.dispose()
       })
     }
   }
