@@ -19,9 +19,9 @@ export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 export function activate() {
   addCommands()
   addObservers()
-  if (atom.config.get("atom-ide-outline.initialDisplay")) {
+  if (atom.config.get("atom-ide-outline.initialDisplay") as boolean) {
     // initially show outline pane
-    toggleOutlineView().catch((e) => {
+    toggleOutlineView().catch((e: Error) => {
       notifyError(e)
     })
   }
@@ -121,7 +121,7 @@ export async function toggleOutlineView() {
   }
   const outlinePane = atom.workspace.paneForItem(view)
   if (outlinePane) {
-    outlinePane.destroyItem(view)
+    await outlinePane.destroyItem(view)
     return
   }
 
@@ -137,7 +137,7 @@ export async function toggleOutlineView() {
   try {
     await editorChanged(atom.workspace.getActiveTextEditor())
   } catch (e) {
-    notifyError(e)
+    notifyError(e as Error)
   }
 }
 
