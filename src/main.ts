@@ -1,9 +1,9 @@
 import { CompositeDisposable, TextEditor } from "atom"
 import { OutlineView } from "./outlineView"
-import { OutlineProvider } from "atom-ide-base"
+import type { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 import { notifyError, largeness as editorLargeness } from "atom-ide-base/commons-atom"
-import { isItemVisible } from "atom-ide-base/commons-ui"
+import { isItemVisible } from "atom-ide-base/commons-ui/items"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
