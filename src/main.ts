@@ -1,9 +1,9 @@
 import { CompositeDisposable, TextEditor } from "atom"
 import { OutlineView } from "./outlineView"
-import { OutlineProvider } from "atom-ide-base"
+import type { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 import { notifyError, largeness as editorLargeness } from "atom-ide-base/commons-atom"
-import { isItemVisible } from "atom-ide-base/commons-ui"
+import { isItemVisible } from "atom-ide-base/commons-ui/items"
 
 export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
@@ -19,9 +19,9 @@ export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 export function activate() {
   addCommands()
   addObservers()
-  if (atom.config.get("atom-ide-outline.initialDisplay")) {
+  if (atom.config.get("atom-ide-outline.initialDisplay") as boolean) {
     // initially show outline pane
-    toggleOutlineView().catch((e) => {
+    toggleOutlineView().catch((e: Error) => {
       notifyError(e)
     })
   }
@@ -121,7 +121,7 @@ export async function toggleOutlineView() {
   }
   const outlinePane = atom.workspace.paneForItem(view)
   if (outlinePane) {
-    outlinePane.destroyItem(view)
+    await outlinePane.destroyItem(view)
     return
   }
 
@@ -137,7 +137,7 @@ export async function toggleOutlineView() {
   try {
     await editorChanged(atom.workspace.getActiveTextEditor())
   } catch (e) {
-    notifyError(e)
+    notifyError(e as Error)
   }
 }
 
@@ -152,6 +152,8 @@ function getOutlintIfVisible(editor = atom.workspace.getActiveTextEditor()) {
 export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
   if (view === undefined) {
     view = new OutlineView() // create outline pane
+  } else {
+    view.reset()
   }
   // editor
   if (editor === undefined) {
@@ -174,7 +176,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   // busySignalProvider?.remove(busySignalID)
 }
 
-export function setStatus(id: "noEditor" | "noProvider") {
+export function setStatus(id: "noEditor" | "noProvider" | "noResult") {
   view?.presentStatus(statuses[id])
 }
 
