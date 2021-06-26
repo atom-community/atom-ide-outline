@@ -39,9 +39,13 @@ export class OutlineView {
     this.outlineContent.classList.add("outline-content")
   }
 
-  destroy() {
+  reset() {
+    this.searchBarEditor?.setText("")
     this.searchBarEditorDisposable?.dispose()
     this.selectCursorDisposable?.dispose()
+  }
+
+  destroy() {
     this.element.remove()
   }
 

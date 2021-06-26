@@ -153,7 +153,7 @@ export async function getOutline(editor = atom.workspace.getActiveTextEditor()) 
   if (view === undefined) {
     view = new OutlineView() // create outline pane
   } else {
-    view.searchBarEditor?.setText("")
+    view.reset()
   }
   // editor
   if (editor === undefined) {
