@@ -229,6 +229,26 @@ export class OutlineView {
     const cursorPoint = cursor.getBufferRow()
     this.focusedElms = this.pointToElementsMap.get(cursorPoint)
 
+    // search in between the points
+    if (this.focusedElms === undefined) {
+      const points = this.pointToElementsMap.keys()
+      let previousPoint: number = 0
+      for (const point of points) {
+        // find the first point which has a larger point
+        if (point >= cursorPoint) {
+          const previousElms = this.pointToElementsMap.get(previousPoint)!
+          previousElms[previousElms.length - 1].classList.add("after-border")
+          const currentElms = this.pointToElementsMap.get(point)!
+          this.focusedElms = [...currentElms, ...previousElms] // in reverse so the previous elms are scrolled into in the end
+          break
+        } else {
+          // update previous point for the next iteration
+          previousPoint = point
+        }
+      }
+    }
+
+    // add cursorOn and scrollInto
     if (this.focusedElms !== undefined) {
       for (const elm of this.focusedElms) {
         scrollIntoViewIfNeeded(elm, true)
@@ -244,6 +264,8 @@ export class OutlineView {
         this.selectCursorDisposable?.dispose()
       })
     }
+    // focus on the editor after finding
+    atom.views.getView(editor).focus()
   }
 }
 
