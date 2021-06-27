@@ -1,10 +1,16 @@
+## [3.1.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v3.0.0...v3.1.0) (2021-6-27)
+
+- feat: support revealing the cursors that are between the symbols
+
+![reveal cursor](./images/between.png)
+
 ## [3.0.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.4...v3.0.0) (2021-6-26)
 
 The outline now includes a search-bar to search through the symbols. :tada:
 
 This is powered by [Zadeh](https://github.com/atom-community/zadeh), the native library written in C++ for this purpose.
 
-![filterer](./filter.png)
+![filterer](./images/filter.png)
 
 
 ## [2.3.4](https://github.com/atom-ide-community/atom-ide-outline/compare/v2.3.3...v2.3.4) (2021-04-17)

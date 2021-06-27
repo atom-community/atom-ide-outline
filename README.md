@@ -2,8 +2,15 @@
 
 Outline UI compatible with IDE packages. Presents symbols of an active text editor in a tree view, with "jump to symbol" navigation (on click).
 
-![An open outline panel](./preview.png)
-![filterer](./filter.png)
+![An open outline panel](./images/preview.png)
+
+Fuzzy search in the outline tree powered by [Zadeh](https://github.com/atom-community/zadeh)
+
+![filterer](./images/filter.png)
+
+Reveal the current cursor in the outline
+
+![reveal cursor](./images/between.png)
 
 ## Getting started
 
