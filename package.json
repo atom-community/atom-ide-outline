@@ -31,7 +31,7 @@
   "prettier": "prettier-config-atomic",
   "atomTestRunner": "./spec/runner",
   "dependencies": {
-    "atom-ide-base": "^2.6.0",
+    "atom-ide-base": "^3.3.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
