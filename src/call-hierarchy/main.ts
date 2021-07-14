@@ -60,17 +60,16 @@ function showOrHideCallHierarchyTab({shouldHide, shouldShow}: {shouldHide: boole
     }
   }
   if (shouldShow) {
-    const rightDock = atom.workspace.getRightDock()
     if (!pane) {
       // add item if it does not exist
+      const rightDock = atom.workspace.getRightDock()
       pane = rightDock.getActivePane()
       pane.addItem(item)
     }
     item.activate()
     pane.activateItem(item)
-    // What if it's not rightDock?
-    // TODO: This is not necessary except for rightDock
-    rightDock.show()
+    // @ts-ignore
+    atom.workspace.getPaneContainers().find(v=>v.getPanes().includes(pane))?.show?.()
   }
 }
 
