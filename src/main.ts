@@ -11,7 +11,6 @@ import debounce from "lodash/debounce"
 
 export { consumeCallHierarchyProvider } from "./call-hierarchy/main"
 import * as CallHierarchy from "./call-hierarchy/main"
-// export const {consumeCallHierarchyProvider, toggleCallHierarchyTab} = CallHierarchy
 
 const subscriptions = new CompositeDisposable()
 
