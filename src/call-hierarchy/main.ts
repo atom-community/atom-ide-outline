@@ -1,5 +1,5 @@
 import { CompositeDisposable } from "atom"
-import type { Disposable } from "atom"
+import type { Disposable, Pane } from "atom"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 import type { CallHierarchyProvider } from "atom-ide-base"
 
@@ -7,13 +7,10 @@ import { CallHierarchyView } from "./call-hierarchy-view"
 
 const callHierarchyProviderRegistry = new ProviderRegistry<CallHierarchyProvider>()
 const subscriptions = new CompositeDisposable()
-let item: CallHierarchyView
+let item: CallHierarchyView | undefined
 
 export function activate() {
   subscriptions.add(
-    (item = new CallHierarchyView({
-      providerRegistry: callHierarchyProviderRegistry,
-    })),
     atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchyTab),
     atom.commands.add("atom-workspace", "call-hierarchy:show", showCallHierarchyTab)
   )
@@ -24,53 +21,77 @@ export function activate() {
 
 export function deactivate() {
   subscriptions.dispose()
-  atom.workspace.paneForItem(item)?.destroyItem(item)
+  deleteCallHierarchyTab()
 }
 
 export function consumeCallHierarchyProvider(provider: CallHierarchyProvider): Disposable {
   const providerDisposer = callHierarchyProviderRegistry.addProvider(provider)
   subscriptions.add(providerDisposer)
-  item.showCallHierarchy()
+  item?.showCallHierarchy()
   return providerDisposer
 }
 
-/** Show the call-hierarchy tab */
-function showCallHierarchyTab() {
-  showOrHideCallHierarchyTab({shouldHide: false, shouldShow: true})
-}
-
-/** Show or hide the call-hierarchy tab */
+/** toggle the call-hierarchy tab */
 function toggleCallHierarchyTab() {
-  showOrHideCallHierarchyTab({shouldHide: true, shouldShow: true})
+  const {state, targetPane} = getCallHierarchyTabState()
+  if (state=='hidden') {
+    displayCallHierarchyTab({targetPane})
+  } else if (state=='noItem') {
+    createCallHierarchyTab({targetPane})
+  } else {
+    destroyCallHierarchyTab({targetPane})
+  }
 }
 
-/** Show or hide the call-hierarchy tab with using option */
-function showOrHideCallHierarchyTab({shouldHide, shouldShow}: {shouldHide: boolean, shouldShow: boolean}) {
-  let pane = atom.workspace.paneForItem(item)
-  if (shouldHide) {
-    if (
-      pane &&
-      pane.getActiveItem() === item &&
-      // @ts-ignore (getVisiblePanes is not includes typedef)
-      atom.workspace.getVisiblePanes().includes(pane)
-    ) {
-      // destroy if item is visible
-      pane.destroyItem(item)
-      return
-    }
+/** show the call-hierarchy tab if it was shown */
+function showCallHierarchyTab() {
+  const {state, targetPane} = getCallHierarchyTabState()
+  if (state=='hidden') {
+    displayCallHierarchyTab({targetPane})
+  } else if (state=='noItem') {
+    createCallHierarchyTab({targetPane})
   }
-  if (shouldShow) {
-    if (!pane) {
-      // add item if it does not exist
-      const rightDock = atom.workspace.getRightDock()
-      pane = rightDock.getActivePane()
-      pane.addItem(item)
-    }
-    item.activate()
-    pane.activateItem(item)
-    // @ts-ignore
-    atom.workspace.getPaneContainers().find(v=>v.getPanes().includes(pane))?.show?.()
+}
+
+/** delete the call-hierarchy tab if it was shown */
+function deleteCallHierarchyTab() {
+  const targetPane = item && atom.workspace.paneForItem(item)
+  if (targetPane) {
+    destroyCallHierarchyTab({targetPane})
   }
+}
+
+/** display the hidden call-hierarchy tab at target pane */
+function displayCallHierarchyTab({targetPane}: {targetPane: Pane}) {
+  item && targetPane.activateItem(item)
+  const dock = atom.workspace.getPaneContainers().find(v=>v.getPanes().includes(targetPane))
+  dock && 'show' in dock && dock.show()
+}
+
+/** create the new call-hierarchy tab at target pane */
+function createCallHierarchyTab({targetPane}: {targetPane: Pane}) {
+  item = new CallHierarchyView({
+    providerRegistry: callHierarchyProviderRegistry,
+  })
+  targetPane.addItem(item)
+  targetPane.activateItem(item)
+  atom.workspace.getRightDock().show()
+}
+
+/** destroy the call-hierarchy tab from target pane */
+function destroyCallHierarchyTab({targetPane}: {targetPane: Pane}) {
+  item && targetPane.destroyItem(item)
+}
+
+/** get the state of the call hierarchy tab */
+function getCallHierarchyTabState() {
+  const pane = item && atom.workspace.paneForItem(item)
+  return pane
+    // @ts-ignore (getVisiblePanes is not includes typedef)
+    ?pane.getActiveItem() === item &&atom.workspace.getVisiblePanes().includes(pane)
+      ?{state: 'visible', targetPane: pane} as const
+      :{state: 'hidden', targetPane: pane} as const
+    :{state: 'noItem', targetPane: atom.workspace.getRightDock().getActivePane()} as const
 }
 
 export const config = {

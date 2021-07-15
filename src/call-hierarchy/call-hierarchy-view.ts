@@ -1,22 +1,22 @@
 import { CompositeDisposable } from "atom"
 import { statuses } from "./statuses"
 import { getIcon } from "../utils"
-import type { Disposable, Point, Range, TextEditor } from "atom"
+import type { Disposable, DisposableLike, Point, Range, TextEditor } from "atom"
 import type { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 import type { CallHierarchy, CallHierarchyProvider, CallHierarchyType } from "atom-ide-base"
 
 type statusKey = keyof typeof statuses
 
 /** HTMLElement for the call-hierarchy tab */
-export class CallHierarchyView extends HTMLElement {
+export class CallHierarchyView extends HTMLElement implements DisposableLike {
   #subscriptions = new CompositeDisposable()
   #editorSubscriptions: Disposable | undefined
   #providerRegistry: ProviderRegistry<CallHierarchyProvider>
   #outputElement: HTMLDivElement
   #currentType!: CallHierarchyType
   #debounceWaitTime = 300
-  #isActivated = false
   #status: statusKey | "valid" | undefined
+  disposed = false
   getTitle = () => "Call Hierarchy"
   getIconName = () => "link"
   static getStatus(data: CallHierarchy<CallHierarchyType> | statusKey | null | undefined): statusKey | "valid" {
@@ -43,10 +43,6 @@ export class CallHierarchyView extends HTMLElement {
     this.#outputElement = this.appendChild(document.createElement("div"))
     this.#currentType = "incoming"
     this.setAttribute("current-type", "incoming")
-  }
-  /** Called when the call-hierarchy tab is opened */
-  activate() {
-    this.#isActivated = true
     // show call hierarchy when cursor position changes
     this.#subscriptions.add(
       atom.workspace.observeActiveTextEditor((editor) => {
@@ -71,7 +67,7 @@ export class CallHierarchyView extends HTMLElement {
   }
   /** Show call hierarchy for {editor} and {point} */
   async showCallHierarchy(editor?: TextEditor, point?: Point) {
-    if (!this.#isActivated) {
+    if (this.disposed) {
       return
     }
     const targetEditor = editor || atom.workspace.getActiveTextEditor()
@@ -114,14 +110,11 @@ export class CallHierarchyView extends HTMLElement {
     this.#outputElement.appendChild(item)
   }
   /** Called when the call-hierarchy tab is hidden */
-  destroy() {
-    this.#isActivated = false
-    this.#editorSubscriptions?.dispose()
-    this.#subscriptions.dispose()
-  }
-  /** Called when the package is activated */
   dispose() {
     this.innerHTML = ""
+    this.#editorSubscriptions?.dispose()
+    this.#subscriptions.dispose()
+    this.disposed = true
   }
 }
 customElements.define("atom-ide-call-hierarchy-view", CallHierarchyView)

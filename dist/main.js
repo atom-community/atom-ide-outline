@@ -35270,7 +35270,7 @@ const statuses = {
     },
 };
 
-var _CallHierarchyView_subscriptions, _CallHierarchyView_editorSubscriptions, _CallHierarchyView_providerRegistry, _CallHierarchyView_outputElement, _CallHierarchyView_currentType, _CallHierarchyView_debounceWaitTime, _CallHierarchyView_isActivated, _CallHierarchyView_status, _CallHierarchyView_toggleCurrentType, _CallHierarchyView_updateCallHierarchyView, _CallHierarchyViewItem_callHierarchy, _CallHierarchyViewItem_dblclickWaitTime, _CallHierarchyViewItem_showDocument;
+var _CallHierarchyView_subscriptions, _CallHierarchyView_editorSubscriptions, _CallHierarchyView_providerRegistry, _CallHierarchyView_outputElement, _CallHierarchyView_currentType, _CallHierarchyView_debounceWaitTime, _CallHierarchyView_status, _CallHierarchyView_toggleCurrentType, _CallHierarchyView_updateCallHierarchyView, _CallHierarchyViewItem_callHierarchy, _CallHierarchyViewItem_dblclickWaitTime, _CallHierarchyViewItem_showDocument;
 class CallHierarchyView extends HTMLElement {
     constructor({ providerRegistry }) {
         super();
@@ -35280,8 +35280,8 @@ class CallHierarchyView extends HTMLElement {
         _CallHierarchyView_outputElement.set(this, void 0);
         _CallHierarchyView_currentType.set(this, void 0);
         _CallHierarchyView_debounceWaitTime.set(this, 300);
-        _CallHierarchyView_isActivated.set(this, false);
         _CallHierarchyView_status.set(this, void 0);
+        this.disposed = false;
         this.getTitle = () => "Call Hierarchy";
         this.getIconName = () => "link";
         _CallHierarchyView_toggleCurrentType.set(this, () => {
@@ -35316,18 +35316,6 @@ class CallHierarchyView extends HTMLElement {
         __classPrivateFieldSet(this, _CallHierarchyView_outputElement, this.appendChild(document.createElement("div")), "f");
         __classPrivateFieldSet(this, _CallHierarchyView_currentType, "incoming", "f");
         this.setAttribute("current-type", "incoming");
-    }
-    static getStatus(data) {
-        if (typeof data === "string") {
-            return data;
-        }
-        if (data == null || data.data.length === 0) {
-            return "noResult";
-        }
-        return "valid";
-    }
-    activate() {
-        __classPrivateFieldSet(this, _CallHierarchyView_isActivated, true, "f");
         __classPrivateFieldGet(this, _CallHierarchyView_subscriptions, "f").add(atom.workspace.observeActiveTextEditor((editor) => {
             var _a;
             (_a = __classPrivateFieldGet(this, _CallHierarchyView_editorSubscriptions, "f")) === null || _a === void 0 ? void 0 : _a.dispose();
@@ -35341,8 +35329,17 @@ class CallHierarchyView extends HTMLElement {
             this.showCallHierarchy(editor);
         }));
     }
+    static getStatus(data) {
+        if (typeof data === "string") {
+            return data;
+        }
+        if (data == null || data.data.length === 0) {
+            return "noResult";
+        }
+        return "valid";
+    }
     async showCallHierarchy(editor, point) {
-        if (!__classPrivateFieldGet(this, _CallHierarchyView_isActivated, "f")) {
+        if (this.disposed) {
             return;
         }
         const targetEditor = editor || atom.workspace.getActiveTextEditor();
@@ -35360,17 +35357,15 @@ class CallHierarchyView extends HTMLElement {
             ? provider.getIncomingCallHierarchy(targetEditor, targetPoint)
             : provider.getOutgoingCallHierarchy(targetEditor, targetPoint)));
     }
-    destroy() {
+    dispose() {
         var _a;
-        __classPrivateFieldSet(this, _CallHierarchyView_isActivated, false, "f");
+        this.innerHTML = "";
         (_a = __classPrivateFieldGet(this, _CallHierarchyView_editorSubscriptions, "f")) === null || _a === void 0 ? void 0 : _a.dispose();
         __classPrivateFieldGet(this, _CallHierarchyView_subscriptions, "f").dispose();
-    }
-    dispose() {
-        this.innerHTML = "";
+        this.disposed = true;
     }
 }
-_CallHierarchyView_subscriptions = new WeakMap(), _CallHierarchyView_editorSubscriptions = new WeakMap(), _CallHierarchyView_providerRegistry = new WeakMap(), _CallHierarchyView_outputElement = new WeakMap(), _CallHierarchyView_currentType = new WeakMap(), _CallHierarchyView_debounceWaitTime = new WeakMap(), _CallHierarchyView_isActivated = new WeakMap(), _CallHierarchyView_status = new WeakMap(), _CallHierarchyView_toggleCurrentType = new WeakMap(), _CallHierarchyView_updateCallHierarchyView = new WeakMap();
+_CallHierarchyView_subscriptions = new WeakMap(), _CallHierarchyView_editorSubscriptions = new WeakMap(), _CallHierarchyView_providerRegistry = new WeakMap(), _CallHierarchyView_outputElement = new WeakMap(), _CallHierarchyView_currentType = new WeakMap(), _CallHierarchyView_debounceWaitTime = new WeakMap(), _CallHierarchyView_status = new WeakMap(), _CallHierarchyView_toggleCurrentType = new WeakMap(), _CallHierarchyView_updateCallHierarchyView = new WeakMap();
 customElements.define("atom-ide-call-hierarchy-view", CallHierarchyView);
 class CallHierarchyViewItem extends HTMLElement {
     constructor(callHierarchy) {
@@ -35486,51 +35481,71 @@ const callHierarchyProviderRegistry = new ProviderRegistry_2();
 const subscriptions$1 = new require$$0$1.CompositeDisposable();
 let item;
 function activate$1() {
-    subscriptions$1.add((item = new CallHierarchyView({
-        providerRegistry: callHierarchyProviderRegistry,
-    })), atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchyTab), atom.commands.add("atom-workspace", "call-hierarchy:show", showCallHierarchyTab));
+    subscriptions$1.add(atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchyTab), atom.commands.add("atom-workspace", "call-hierarchy:show", showCallHierarchyTab));
     if (atom.config.get("atom-ide-outline.initialCallHierarchyDisplay")) {
         toggleCallHierarchyTab();
     }
 }
 function deactivate$1() {
-    var _a;
     subscriptions$1.dispose();
-    (_a = atom.workspace.paneForItem(item)) === null || _a === void 0 ? void 0 : _a.destroyItem(item);
+    deleteCallHierarchyTab();
 }
 function consumeCallHierarchyProvider(provider) {
     const providerDisposer = callHierarchyProviderRegistry.addProvider(provider);
     subscriptions$1.add(providerDisposer);
-    item.showCallHierarchy();
+    item === null || item === void 0 ? void 0 : item.showCallHierarchy();
     return providerDisposer;
 }
-function showCallHierarchyTab() {
-    showOrHideCallHierarchyTab({ shouldHide: false, shouldShow: true });
-}
 function toggleCallHierarchyTab() {
-    showOrHideCallHierarchyTab({ shouldHide: true, shouldShow: true });
+    const { state, targetPane } = getCallHierarchyTabState();
+    if (state == 'hidden') {
+        displayCallHierarchyTab({ targetPane });
+    }
+    else if (state == 'noItem') {
+        createCallHierarchyTab({ targetPane });
+    }
+    else {
+        destroyCallHierarchyTab({ targetPane });
+    }
 }
-function showOrHideCallHierarchyTab({ shouldHide, shouldShow }) {
-    var _a, _b;
-    let pane = atom.workspace.paneForItem(item);
-    if (shouldHide) {
-        if (pane &&
-            pane.getActiveItem() === item &&
-            atom.workspace.getVisiblePanes().includes(pane)) {
-            pane.destroyItem(item);
-            return;
-        }
+function showCallHierarchyTab() {
+    const { state, targetPane } = getCallHierarchyTabState();
+    if (state == 'hidden') {
+        displayCallHierarchyTab({ targetPane });
     }
-    if (shouldShow) {
-        if (!pane) {
-            const rightDock = atom.workspace.getRightDock();
-            pane = rightDock.getActivePane();
-            pane.addItem(item);
-        }
-        item.activate();
-        pane.activateItem(item);
-        (_b = (_a = atom.workspace.getPaneContainers().find(v => v.getPanes().includes(pane))) === null || _a === void 0 ? void 0 : _a.show) === null || _b === void 0 ? void 0 : _b.call(_a);
+    else if (state == 'noItem') {
+        createCallHierarchyTab({ targetPane });
     }
+}
+function deleteCallHierarchyTab() {
+    const targetPane = item && atom.workspace.paneForItem(item);
+    if (targetPane) {
+        destroyCallHierarchyTab({ targetPane });
+    }
+}
+function displayCallHierarchyTab({ targetPane }) {
+    item && targetPane.activateItem(item);
+    const dock = atom.workspace.getPaneContainers().find(v => v.getPanes().includes(targetPane));
+    dock && 'show' in dock && dock.show();
+}
+function createCallHierarchyTab({ targetPane }) {
+    item = new CallHierarchyView({
+        providerRegistry: callHierarchyProviderRegistry,
+    });
+    targetPane.addItem(item);
+    targetPane.activateItem(item);
+    atom.workspace.getRightDock().show();
+}
+function destroyCallHierarchyTab({ targetPane }) {
+    item && targetPane.destroyItem(item);
+}
+function getCallHierarchyTabState() {
+    const pane = item && atom.workspace.paneForItem(item);
+    return pane
+        ? pane.getActiveItem() === item && atom.workspace.getVisiblePanes().includes(pane)
+            ? { state: 'visible', targetPane: pane }
+            : { state: 'hidden', targetPane: pane }
+        : { state: 'noItem', targetPane: atom.workspace.getRightDock().getActivePane() };
 }
 const config$1 = {
     initialCallHierarchyDisplay: {
