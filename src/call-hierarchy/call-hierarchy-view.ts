@@ -1,14 +1,14 @@
 import { CompositeDisposable } from "atom"
 import { statuses } from "./statuses"
 import { getIcon } from "../utils"
-import type { Disposable, DisposableLike, Point, Range, TextEditor } from "atom"
+import type { Disposable, Point, Range, TextEditor } from "atom"
 import type { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 import type { CallHierarchy, CallHierarchyProvider, CallHierarchyType } from "atom-ide-base"
 
 type statusKey = keyof typeof statuses
 
 /** HTMLElement for the call-hierarchy tab */
-export class CallHierarchyView extends HTMLElement implements DisposableLike {
+export class CallHierarchyView extends HTMLElement {
   #subscriptions = new CompositeDisposable()
   #editorSubscriptions: Disposable | undefined
   #providerRegistry: ProviderRegistry<CallHierarchyProvider>
@@ -16,7 +16,7 @@ export class CallHierarchyView extends HTMLElement implements DisposableLike {
   #currentType!: CallHierarchyType
   #debounceWaitTime = 300
   #status: statusKey | "valid" | undefined
-  disposed = false
+  destroyed = false
   getTitle = () => "Call Hierarchy"
   getIconName = () => "link"
   static getStatus(data: CallHierarchy<CallHierarchyType> | statusKey | null | undefined): statusKey | "valid" {
@@ -67,7 +67,7 @@ export class CallHierarchyView extends HTMLElement implements DisposableLike {
   }
   /** Show call hierarchy for {editor} and {point} */
   async showCallHierarchy(editor?: TextEditor, point?: Point) {
-    if (this.disposed) {
+    if (this.destroyed) {
       return
     }
     const targetEditor = editor || atom.workspace.getActiveTextEditor()
@@ -109,12 +109,12 @@ export class CallHierarchyView extends HTMLElement implements DisposableLike {
     const item = new CallHierarchyViewStatusItem(statuses[currentStatus])
     this.#outputElement.appendChild(item)
   }
-  /** Called when the call-hierarchy tab is hidden */
-  dispose() {
+  /** Called when the call-hierarchy tab is closed */
+  destroy() {
     this.innerHTML = ""
     this.#editorSubscriptions?.dispose()
     this.#subscriptions.dispose()
-    this.disposed = true
+    this.destroyed = true
   }
 }
 customElements.define("atom-ide-call-hierarchy-view", CallHierarchyView)

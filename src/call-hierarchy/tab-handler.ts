@@ -2,19 +2,16 @@ import type { Pane } from "atom";
 
 /** Handles the operation of opening and closing tabs. */
 export class TabHandler<T extends object> {
+  /** It is possible that the tab does not exist even if the item is not undefined, as the tab may be closed manually. */
   item: T | undefined;
-  #onOpen: () => T;
-  #onClose: (item: T) => void;
+  #createItem: () => T;
   constructor(
-    { onOpen, onClose }: {
+    { createItem }: {
       /** Function called when creating a tab. Should return the pane item you want to add to the tab. */
-      onOpen: () => T;
-      /** Function called when a tab is destroyed. A pane item is passed as an argument. */
-      onClose: (item: T) => void
+      createItem: () => T;
     },
   ) {
-    this.#onOpen = onOpen;
-    this.#onClose = onClose;
+    this.#createItem = createItem;
   }
   /** Returns the dock where the tab should be created. */
   #getDockOfDefaultLocation() {
@@ -70,7 +67,7 @@ export class TabHandler<T extends object> {
   }
   /** Create the new tab at target pane. */
   #create({ targetPane }: { targetPane: Pane }) {
-    this.item = this.#onOpen();
+    this.item = this.#createItem();
     targetPane.addItem(this.item);
     targetPane.activateItem(this.item);
     this.#getDockOfDefaultLocation().show();
@@ -78,7 +75,6 @@ export class TabHandler<T extends object> {
   /** Destroy the tab from target pane. */
   #destroy({ targetPane }: { targetPane: Pane }) {
     if (this.item) {
-      this.#onClose(this.item);
       targetPane.destroyItem(this.item);
     }
   }

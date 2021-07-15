@@ -6,17 +6,10 @@ import type { CallHierarchyProvider } from "atom-ide-base"
 import { CallHierarchyView } from "./call-hierarchy-view"
 import { TabHandler } from './tab-handler'
 
-const callHierarchyProviderRegistry = new ProviderRegistry<CallHierarchyProvider>()
+const providerRegistry = new ProviderRegistry<CallHierarchyProvider>()
 const subscriptions = new CompositeDisposable()
-const callHierarchyTab = new TabHandler<CallHierarchyView>({
-  onOpen() {
-    return new CallHierarchyView({
-      providerRegistry: callHierarchyProviderRegistry,
-    })
-  },
-  onClose(item) {
-    item.dispose()
-  }
+const callHierarchyTab = new TabHandler({
+  createItem: () => new CallHierarchyView({ providerRegistry })
 })
 
 export function activate() {
@@ -35,7 +28,7 @@ export function deactivate() {
 }
 
 export function consumeCallHierarchyProvider(provider: CallHierarchyProvider): Disposable {
-  const providerDisposer = callHierarchyProviderRegistry.addProvider(provider)
+  const providerDisposer = providerRegistry.addProvider(provider)
   subscriptions.add(providerDisposer)
   callHierarchyTab.item?.showCallHierarchy()
   return providerDisposer
