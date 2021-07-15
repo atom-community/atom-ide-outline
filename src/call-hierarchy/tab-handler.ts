@@ -16,6 +16,11 @@ export class TabHandler<T extends object> {
     this.#onOpen = onOpen;
     this.#onClose = onClose;
   }
+  /** Returns the dock where the tab should be created. */
+  #getDockOfDefaultLocation() {
+    // If want to change the location of the new tab, change the code here.
+    return atom.workspace.getRightDock()
+  }
   /**
    * Toggle the tab.
    * If the tab exists, it will be deleted.
@@ -68,7 +73,7 @@ export class TabHandler<T extends object> {
     this.item = this.#onOpen();
     targetPane.addItem(this.item);
     targetPane.activateItem(this.item);
-    atom.workspace.getRightDock().show();
+    this.#getDockOfDefaultLocation().show();
   }
   /** Destroy the tab from target pane. */
   #destroy({ targetPane }: { targetPane: Pane }) {
@@ -93,7 +98,7 @@ export class TabHandler<T extends object> {
     } else {
       return {
         state: "noItem",
-        targetPane: atom.workspace.getRightDock().getActivePane(),
+        targetPane: this.#getDockOfDefaultLocation().getActivePane(),
       } as const;
     }
   }

@@ -35477,7 +35477,7 @@ function escapeHTML(str) {
     }[match]));
 }
 
-var _TabHandler_instances, _TabHandler_onOpen, _TabHandler_onClose, _TabHandler_display, _TabHandler_create, _TabHandler_destroy, _TabHandler_getState;
+var _TabHandler_instances, _TabHandler_onOpen, _TabHandler_onClose, _TabHandler_getDockOfDefaultLocation, _TabHandler_display, _TabHandler_create, _TabHandler_destroy, _TabHandler_getState;
 class TabHandler {
     constructor({ onOpen, onClose }) {
         _TabHandler_instances.add(this);
@@ -35514,7 +35514,9 @@ class TabHandler {
         }
     }
 }
-_TabHandler_onOpen = new WeakMap(), _TabHandler_onClose = new WeakMap(), _TabHandler_instances = new WeakSet(), _TabHandler_display = function _TabHandler_display({ targetPane }) {
+_TabHandler_onOpen = new WeakMap(), _TabHandler_onClose = new WeakMap(), _TabHandler_instances = new WeakSet(), _TabHandler_getDockOfDefaultLocation = function _TabHandler_getDockOfDefaultLocation() {
+    return atom.workspace.getRightDock();
+}, _TabHandler_display = function _TabHandler_display({ targetPane }) {
     this.item && targetPane.activateItem(this.item);
     const dock = atom.workspace.getPaneContainers().find((v) => v.getPanes().includes(targetPane));
     dock && "show" in dock && dock.show();
@@ -35522,7 +35524,7 @@ _TabHandler_onOpen = new WeakMap(), _TabHandler_onClose = new WeakMap(), _TabHan
     this.item = __classPrivateFieldGet(this, _TabHandler_onOpen, "f").call(this);
     targetPane.addItem(this.item);
     targetPane.activateItem(this.item);
-    atom.workspace.getRightDock().show();
+    __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_getDockOfDefaultLocation).call(this).show();
 }, _TabHandler_destroy = function _TabHandler_destroy({ targetPane }) {
     if (this.item) {
         __classPrivateFieldGet(this, _TabHandler_onClose, "f").call(this, this.item);
@@ -35542,7 +35544,7 @@ _TabHandler_onOpen = new WeakMap(), _TabHandler_onClose = new WeakMap(), _TabHan
     else {
         return {
             state: "noItem",
-            targetPane: atom.workspace.getRightDock().getActivePane(),
+            targetPane: __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_getDockOfDefaultLocation).call(this).getActivePane(),
         };
     }
 };
