@@ -35477,75 +35477,104 @@ function escapeHTML(str) {
     }[match]));
 }
 
+var _TabHandler_instances, _TabHandler_onOpen, _TabHandler_onClose, _TabHandler_display, _TabHandler_create, _TabHandler_destroy, _TabHandler_getState;
+class TabHandler {
+    constructor({ onOpen, onClose }) {
+        _TabHandler_instances.add(this);
+        _TabHandler_onOpen.set(this, void 0);
+        _TabHandler_onClose.set(this, void 0);
+        __classPrivateFieldSet(this, _TabHandler_onOpen, onOpen, "f");
+        __classPrivateFieldSet(this, _TabHandler_onClose, onClose, "f");
+    }
+    toggle() {
+        const { state, targetPane } = __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_getState).call(this);
+        if (state == "hidden") {
+            __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_display).call(this, { targetPane });
+        }
+        else if (state == "noItem") {
+            __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_create).call(this, { targetPane });
+        }
+        else {
+            __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_destroy).call(this, { targetPane });
+        }
+    }
+    show() {
+        const { state, targetPane } = __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_getState).call(this);
+        if (state == "hidden") {
+            __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_display).call(this, { targetPane });
+        }
+        else if (state == "noItem") {
+            __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_create).call(this, { targetPane });
+        }
+    }
+    delete() {
+        const targetPane = this.item && atom.workspace.paneForItem(this.item);
+        if (targetPane) {
+            __classPrivateFieldGet(this, _TabHandler_instances, "m", _TabHandler_destroy).call(this, { targetPane });
+        }
+    }
+}
+_TabHandler_onOpen = new WeakMap(), _TabHandler_onClose = new WeakMap(), _TabHandler_instances = new WeakSet(), _TabHandler_display = function _TabHandler_display({ targetPane }) {
+    this.item && targetPane.activateItem(this.item);
+    const dock = atom.workspace.getPaneContainers().find((v) => v.getPanes().includes(targetPane));
+    dock && "show" in dock && dock.show();
+}, _TabHandler_create = function _TabHandler_create({ targetPane }) {
+    this.item = __classPrivateFieldGet(this, _TabHandler_onOpen, "f").call(this);
+    targetPane.addItem(this.item);
+    targetPane.activateItem(this.item);
+    atom.workspace.getRightDock().show();
+}, _TabHandler_destroy = function _TabHandler_destroy({ targetPane }) {
+    if (this.item) {
+        __classPrivateFieldGet(this, _TabHandler_onClose, "f").call(this, this.item);
+        targetPane.destroyItem(this.item);
+    }
+}, _TabHandler_getState = function _TabHandler_getState() {
+    const pane = this.item && atom.workspace.paneForItem(this.item);
+    if (pane) {
+        if (pane.getActiveItem() === this.item &&
+            atom.workspace.getVisiblePanes().includes(pane)) {
+            return { state: "visible", targetPane: pane };
+        }
+        else {
+            return { state: "hidden", targetPane: pane };
+        }
+    }
+    else {
+        return {
+            state: "noItem",
+            targetPane: atom.workspace.getRightDock().getActivePane(),
+        };
+    }
+};
+
 const callHierarchyProviderRegistry = new ProviderRegistry_2();
 const subscriptions$1 = new require$$0$1.CompositeDisposable();
-let item;
+const callHierarchyTab = new TabHandler({
+    onOpen() {
+        return new CallHierarchyView({
+            providerRegistry: callHierarchyProviderRegistry,
+        });
+    },
+    onClose(item) {
+        item.dispose();
+    }
+});
 function activate$1() {
-    subscriptions$1.add(atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchyTab), atom.commands.add("atom-workspace", "call-hierarchy:show", showCallHierarchyTab));
+    subscriptions$1.add(atom.commands.add("atom-workspace", "call-hierarchy:toggle", () => callHierarchyTab.toggle()), atom.commands.add("atom-workspace", "call-hierarchy:show", () => callHierarchyTab.show()));
     if (atom.config.get("atom-ide-outline.initialCallHierarchyDisplay")) {
-        toggleCallHierarchyTab();
+        callHierarchyTab.toggle();
     }
 }
 function deactivate$1() {
     subscriptions$1.dispose();
-    deleteCallHierarchyTab();
+    callHierarchyTab.delete();
 }
 function consumeCallHierarchyProvider(provider) {
+    var _a;
     const providerDisposer = callHierarchyProviderRegistry.addProvider(provider);
     subscriptions$1.add(providerDisposer);
-    item === null || item === void 0 ? void 0 : item.showCallHierarchy();
+    (_a = callHierarchyTab.item) === null || _a === void 0 ? void 0 : _a.showCallHierarchy();
     return providerDisposer;
-}
-function toggleCallHierarchyTab() {
-    const { state, targetPane } = getCallHierarchyTabState();
-    if (state == 'hidden') {
-        displayCallHierarchyTab({ targetPane });
-    }
-    else if (state == 'noItem') {
-        createCallHierarchyTab({ targetPane });
-    }
-    else {
-        destroyCallHierarchyTab({ targetPane });
-    }
-}
-function showCallHierarchyTab() {
-    const { state, targetPane } = getCallHierarchyTabState();
-    if (state == 'hidden') {
-        displayCallHierarchyTab({ targetPane });
-    }
-    else if (state == 'noItem') {
-        createCallHierarchyTab({ targetPane });
-    }
-}
-function deleteCallHierarchyTab() {
-    const targetPane = item && atom.workspace.paneForItem(item);
-    if (targetPane) {
-        destroyCallHierarchyTab({ targetPane });
-    }
-}
-function displayCallHierarchyTab({ targetPane }) {
-    item && targetPane.activateItem(item);
-    const dock = atom.workspace.getPaneContainers().find(v => v.getPanes().includes(targetPane));
-    dock && 'show' in dock && dock.show();
-}
-function createCallHierarchyTab({ targetPane }) {
-    item = new CallHierarchyView({
-        providerRegistry: callHierarchyProviderRegistry,
-    });
-    targetPane.addItem(item);
-    targetPane.activateItem(item);
-    atom.workspace.getRightDock().show();
-}
-function destroyCallHierarchyTab({ targetPane }) {
-    item && targetPane.destroyItem(item);
-}
-function getCallHierarchyTabState() {
-    const pane = item && atom.workspace.paneForItem(item);
-    return pane
-        ? pane.getActiveItem() === item && atom.workspace.getVisiblePanes().includes(pane)
-            ? { state: 'visible', targetPane: pane }
-            : { state: 'hidden', targetPane: pane }
-        : { state: 'noItem', targetPane: atom.workspace.getRightDock().getActivePane() };
 }
 const config$1 = {
     initialCallHierarchyDisplay: {
