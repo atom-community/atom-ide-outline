@@ -67,7 +67,7 @@
     },
     "call-hierarchy": {
       "versions": {
-        "0.0.0": "consumeCallHierarchyProvider"
+        "0.1.0": "consumeCallHierarchyProvider"
       }
     },
     "busy-signal": {
