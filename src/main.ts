@@ -188,5 +188,5 @@ export function setStatus(id: "noEditor" | "noProvider" | "noResult") {
 import { default as outlineCongig } from "./config.json"
 export const config = {
   ...outlineCongig,
-  ...CallHierarchy.config
+  ...CallHierarchy.config,
 }

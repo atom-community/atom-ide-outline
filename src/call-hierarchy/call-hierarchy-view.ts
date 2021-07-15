@@ -29,9 +29,7 @@ export class CallHierarchyView extends HTMLElement {
     return "valid"
   }
   /** Called when the package is activated */
-  constructor(
-    { providerRegistry }: { providerRegistry: ProviderRegistry<CallHierarchyProvider> }
-  ) {
+  constructor({ providerRegistry }: { providerRegistry: ProviderRegistry<CallHierarchyProvider> }) {
     super()
     this.#providerRegistry = providerRegistry
     const headerElement = this.appendChild(document.createElement("div"))
@@ -243,12 +241,16 @@ class CallHierarchyViewStatusItem extends HTMLElement {
 customElements.define("atom-ide-call-hierarchy-status-item", CallHierarchyViewStatusItem)
 
 function escapeHTML(str: string): string {
-  return str.replace(/[&'`"<>]/g, (match) => ({
-    '&': '&amp;',
-    "'": '&#x27;',
-    '`': '&#x60;',
-    '"': '&quot;',
-    '<': '&lt;',
-    '>': '&gt;',
-  }[match] as string))
+  return str.replace(
+    /[&'`"<>]/g,
+    (match) =>
+      ({
+        "&": "&amp;",
+        "'": "&#x27;",
+        "`": "&#x60;",
+        '"': "&quot;",
+        "<": "&lt;",
+        ">": "&gt;",
+      }[match] as string)
+  )
 }
