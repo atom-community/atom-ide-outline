@@ -3,10 +3,8 @@ import type { OutlineTree } from "atom-ide-base"
 import { scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui/scrollIntoView"
 import { isItemVisible } from "atom-ide-base/commons-ui/items"
 import { TreeFilterer, Tree } from "zadeh"
-import { unique } from "./utils"
+import { unique, getIcon } from "./utils"
 import { setStatus } from "./main"
-
-import { getIcon } from "./utils"
 
 export class OutlineView {
   public element: HTMLDivElement
