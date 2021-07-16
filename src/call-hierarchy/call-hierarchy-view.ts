@@ -1,4 +1,5 @@
 import { CompositeDisposable } from "atom"
+import debounce from "lodash/debounce"
 import { statuses } from "./statuses"
 import { getIcon } from "../utils"
 import type { Disposable, Point, Range, TextEditor } from "atom"
@@ -42,16 +43,12 @@ export class CallHierarchyView extends HTMLElement {
     this.#currentType = "incoming"
     this.setAttribute("current-type", "incoming")
     // show call hierarchy when cursor position changes
+    const debouncedShowCallHierarchy = debounce(this.showCallHierarchy.bind(this), this.#debounceWaitTime)
     this.#subscriptions.add(
       atom.workspace.observeActiveTextEditor((editor) => {
         this.#editorSubscriptions?.dispose()
-        let debounceTimeout: number | undefined
         this.#editorSubscriptions = editor?.onDidChangeCursorPosition((event) => {
-          // TODO: use loadash/debounse
-          window.clearTimeout(debounceTimeout)
-          debounceTimeout = window.setTimeout(() => {
-            this.showCallHierarchy(editor, event.newBufferPosition)
-          }, this.#debounceWaitTime)
+          debouncedShowCallHierarchy(editor, event.newBufferPosition)
         })
         this.showCallHierarchy(editor)
       })

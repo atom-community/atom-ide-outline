@@ -35316,15 +35316,12 @@ class CallHierarchyView extends HTMLElement {
         __classPrivateFieldSet(this, _CallHierarchyView_outputElement, this.appendChild(document.createElement("div")), "f");
         __classPrivateFieldSet(this, _CallHierarchyView_currentType, "incoming", "f");
         this.setAttribute("current-type", "incoming");
+        const debouncedShowCallHierarchy = debounce_1(this.showCallHierarchy.bind(this), __classPrivateFieldGet(this, _CallHierarchyView_debounceWaitTime, "f"));
         __classPrivateFieldGet(this, _CallHierarchyView_subscriptions, "f").add(atom.workspace.observeActiveTextEditor((editor) => {
             var _a;
             (_a = __classPrivateFieldGet(this, _CallHierarchyView_editorSubscriptions, "f")) === null || _a === void 0 ? void 0 : _a.dispose();
-            let debounceTimeout;
             __classPrivateFieldSet(this, _CallHierarchyView_editorSubscriptions, editor === null || editor === void 0 ? void 0 : editor.onDidChangeCursorPosition((event) => {
-                window.clearTimeout(debounceTimeout);
-                debounceTimeout = window.setTimeout(() => {
-                    this.showCallHierarchy(editor, event.newBufferPosition);
-                }, __classPrivateFieldGet(this, _CallHierarchyView_debounceWaitTime, "f"));
+                debouncedShowCallHierarchy(editor, event.newBufferPosition);
             }), "f");
             this.showCallHierarchy(editor);
         }));
@@ -35468,12 +35465,12 @@ class CallHierarchyViewStatusItem extends HTMLElement {
 customElements.define("atom-ide-call-hierarchy-status-item", CallHierarchyViewStatusItem);
 function escapeHTML(str) {
     return str.replace(/[&'`"<>]/g, (match) => ({
-        '&': '&amp;',
-        "'": '&#x27;',
-        '`': '&#x60;',
-        '"': '&quot;',
-        '<': '&lt;',
-        '>': '&gt;',
+        "&": "&amp;",
+        "'": "&#x27;",
+        "`": "&#x60;",
+        '"': "&quot;",
+        "<": "&lt;",
+        ">": "&gt;",
     }[match]));
 }
 
@@ -35692,7 +35689,7 @@ function setStatus(id) {
 }
 const config = {
     ...outlineCongig,
-    ...config$1
+    ...config$1,
 };
 
 exports.activate = activate;
