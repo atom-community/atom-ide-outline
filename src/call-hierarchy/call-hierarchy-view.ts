@@ -112,7 +112,7 @@ export class CallHierarchyView extends HTMLElement {
     this.destroyed = true
   }
 }
-customElements.define("atom-ide-call-hierarchy-view", CallHierarchyView)
+customElements.define("atom-ide-outline-call-hierarchy-view", CallHierarchyView)
 
 /** HTMLElement for the call-hierarchy item */
 class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
@@ -223,7 +223,7 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
     }
   }
 }
-customElements.define("atom-ide-call-hierarchy-item", CallHierarchyViewItem)
+customElements.define("atom-ide-outline-call-hierarchy-item", CallHierarchyViewItem)
 
 /** Create a message when there is nothing to display. */
 class CallHierarchyViewStatusItem extends HTMLElement {
