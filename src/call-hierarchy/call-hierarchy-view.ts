@@ -126,7 +126,7 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
     super()
     this.#callHierarchy = callHierarchy
     if (CallHierarchyViewItem.isEmpty(this.#callHierarchy)) {
-      this.innerHTML = `<div class="call-hierarchy-no-data">No result was found.</span>`
+      this.innerHTML = `<div class="call-hierarchy-no-data">No result was found.</div>`
       return
     }
     this.append(
@@ -148,7 +148,7 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
         let isDblclick = false
         itemEl.querySelector(":scope>div")?.addEventListener(
           "click",
-          async (e) => {
+          (e) => {
             e.stopPropagation()
             if (isDblclick && this.#callHierarchy) {
               // double-click to jump to the document
@@ -235,7 +235,7 @@ class CallHierarchyViewStatusItem extends HTMLElement {
     `
   }
 }
-customElements.define("atom-ide-call-hierarchy-status-item", CallHierarchyViewStatusItem)
+customElements.define("atom-ide-outline-call-hierarchy-status-item", CallHierarchyViewStatusItem)
 
 function escapeHTML(str: string): string {
   return str.replace(
