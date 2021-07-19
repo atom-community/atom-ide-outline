@@ -24,7 +24,7 @@ export class CallHierarchyView extends HTMLElement {
     if (typeof data === "string") {
       return data
     }
-    if (data == null || data.data.length === 0) {
+    if (!data || data.data.length === 0) {
       return "noResult"
     }
     return "valid"
@@ -65,15 +65,15 @@ export class CallHierarchyView extends HTMLElement {
     if (this.destroyed) {
       return
     }
-    const targetEditor = editor || atom.workspace.getActiveTextEditor()
+    const targetEditor = editor ?? atom.workspace.getActiveTextEditor()
     if (!targetEditor) {
-      this.#updateCallHierarchyView("noEditor")
+      await this.#updateCallHierarchyView("noEditor")
       return
     }
-    const targetPoint = point || targetEditor.getCursorBufferPosition()
+    const targetPoint = point ?? targetEditor.getCursorBufferPosition()
     const provider = this.#providerRegistry.getProviderForEditor(targetEditor)
     if (!provider) {
-      this.#updateCallHierarchyView("noProvider")
+      await this.#updateCallHierarchyView("noProvider")
       return
     }
     await this.#updateCallHierarchyView(
@@ -239,7 +239,7 @@ customElements.define("atom-ide-outline-call-hierarchy-status-item", CallHierarc
 
 function escapeHTML(str: string): string {
   return str.replace(
-    /[&'`"<>]/g,
+    /["&'<>`]/g,
     (match) =>
       ({
         "&": "&amp;",
