@@ -18,7 +18,7 @@ export function activate() {
     atom.commands.add("atom-workspace", "call-hierarchy:show", () => callHierarchyTab.show())
   )
   if (atom.config.get("atom-ide-outline.initialCallHierarchyDisplay")) {
-    callHierarchyTab.toggle()
+    callHierarchyTab.show()
   }
 }
 

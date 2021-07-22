@@ -1,25 +1,43 @@
+// Define the Pane item used for CallHierarchy
+
 import { CompositeDisposable } from "atom"
-import debounce from "lodash/debounce"
-import statuses from "./statuses.json"
-import { getIcon } from "../utils"
 import type { Disposable, Point, Range, TextEditor } from "atom"
 import type { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 import type { CallHierarchy, CallHierarchyProvider, CallHierarchyType } from "atom-ide-base"
+import debounce from "lodash/debounce"
+import statuses from "./statuses.json"
+import { getIcon } from "../utils"
 
 type statusKey = keyof typeof statuses
 
 /** HTMLElement for the call-hierarchy tab */
 export class CallHierarchyView extends HTMLElement {
   #subscriptions = new CompositeDisposable()
+  /** Subscription to observe editor cursor movement */
   #editorSubscriptions: Disposable | undefined
   #providerRegistry: ProviderRegistry<CallHierarchyProvider>
+  /** Element for outputting results */
   #outputElement: HTMLDivElement
-  #currentType!: CallHierarchyType
+  /** Whether to display incoming or outgoing */
+  #currentType: CallHierarchyType
+  /** Time to debounce the timing of display updates */
   #debounceWaitTime = 300
+  /**
+   * Status of currently displayed content
+   *
+   * - Valid: there is data obtained from the provider
+   * - NoEditor: editor not found
+   * - NoProvider: provider not found
+   * - NoResult: provider returns null or empty array (cursor is above something other than function)
+   */
   #status: statusKey | "valid" | undefined
+  /** Whether the tab has already been closed */
   destroyed = false
+  /** Needed for Atom */
   getTitle = () => "Call Hierarchy"
+  /** Needed for Atom */
   getIconName = () => "link"
+  /** Determine the type of data to display */
   static getStatus(data: CallHierarchy<CallHierarchyType> | statusKey | null | undefined): statusKey | "valid" {
     if (typeof data === "string") {
       return data
@@ -29,7 +47,7 @@ export class CallHierarchyView extends HTMLElement {
     }
     return "valid"
   }
-  /** Called when the package is activated */
+  /** Called when the call-hierarchy tab is opened */
   constructor({ providerRegistry }: { providerRegistry: ProviderRegistry<CallHierarchyProvider> }) {
     super()
     this.#providerRegistry = providerRegistry
@@ -67,15 +85,18 @@ export class CallHierarchyView extends HTMLElement {
     }
     const targetEditor = editor ?? atom.workspace.getActiveTextEditor()
     if (!targetEditor) {
+      // display a message for when there is no editor
       await this.#updateCallHierarchyView("noEditor")
       return
     }
     const targetPoint = point ?? targetEditor.getCursorBufferPosition()
     const provider = this.#providerRegistry.getProviderForEditor(targetEditor)
     if (!provider) {
+      // display a message for when there is no provider
       await this.#updateCallHierarchyView("noProvider")
       return
     }
+    // update display with new data
     await this.#updateCallHierarchyView(
       await (this.#currentType === "incoming"
         ? provider.getIncomingCallHierarchy(targetEditor, targetPoint)
@@ -87,9 +108,9 @@ export class CallHierarchyView extends HTMLElement {
     const prevStatus = this.#status
     const currentStatus = (this.#status = CallHierarchyView.getStatus(newData))
     if (currentStatus === "valid") {
-      // update display
+      // update display when there is new data
       this.#outputElement.innerHTML = ""
-      // `callHierarchy` must be `CallHierarchy<T>` because status is valid
+      // type of `newData` must be `CallHierarchy` because status is valid
       const item = new CallHierarchyViewItem(newData as CallHierarchy<CallHierarchyType>)
       this.#outputElement.appendChild(item)
       // unfold the first hierarchy
@@ -97,9 +118,10 @@ export class CallHierarchyView extends HTMLElement {
       return
     }
     if (prevStatus === currentStatus) {
+      // Do not update if the displayed content does not change
       return
     }
-    // update display
+    // update display with new status message when status is noEditor, noProvider or noResult
     this.#outputElement.innerHTML = ""
     const item = new CallHierarchyViewStatusItem(statuses[currentStatus])
     this.#outputElement.appendChild(item)
@@ -118,7 +140,7 @@ customElements.define("atom-ide-outline-call-hierarchy-view", CallHierarchyView)
 class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
   #callHierarchy: CallHierarchy<T> | undefined
   #dblclickWaitTime = 300
-  /** Whether {callHierarchy} data is empty */
+  /** Whether {callHierarchy} data is undefined or empty array */
   static isEmpty(callHierarchy: CallHierarchy<CallHierarchyType> | undefined): callHierarchy is undefined {
     return !callHierarchy || callHierarchy.data.length == 0
   }
@@ -145,6 +167,7 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
         itemEl
           .querySelector(":scope>div>div")
           ?.insertAdjacentElement("afterbegin", getIcon(item.icon ?? undefined, undefined))
+        // click to fold or unfold child items
         let isDblclick = false
         itemEl.querySelector(":scope>div")?.addEventListener(
           "click",
