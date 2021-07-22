@@ -171,7 +171,7 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
   async toggleItemAt(i: number) {
     const itemEl = this.querySelectorAll<HTMLLIElement>(":scope>div")[i]
     const titleEl = itemEl.querySelector<HTMLDivElement>(":scope>div")
-    const childEl = itemEl.querySelector<CallHierarchyViewItem<T>>("atom-ide-call-hierarchy-item")
+    const childEl = itemEl.querySelector<CallHierarchyViewItem<T>>("atom-ide-outline-call-hierarchy-item")
     if (childEl) {
       if (childEl.style.display !== "none") {
         // hide if visible

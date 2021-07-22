@@ -1,6 +1,6 @@
 @import "ui-variables";
 
-atom-ide-call-hierarchy-view {
+atom-ide-outline-call-hierarchy-view {
   background: @base-background-color;
   > div:first-child {
     display: flex;
@@ -27,13 +27,13 @@ atom-ide-call-hierarchy-view {
   > div:last-child {
     height: calc(~"100% - 36px");
     overflow-x: auto;
-    > atom-ide-call-hierarchy-item {
+    > atom-ide-outline-call-hierarchy-item {
       font-size: 1.4em;
     }
   }
 }
 
-atom-ide-call-hierarchy-item {
+atom-ide-outline-call-hierarchy-item {
   display: block;
   line-height: 1.5em;
   user-select: none;
@@ -47,7 +47,7 @@ atom-ide-call-hierarchy-item {
       background: @background-color-highlight;
     }
   }
-  atom-ide-call-hierarchy-item {
+  atom-ide-outline-call-hierarchy-item {
     border-left: 1px solid @background-color-highlight;
     margin-left: 1.2em;
   }
@@ -69,7 +69,7 @@ atom-ide-call-hierarchy-item {
     font-weight: bold;
   }
 }
-atom-ide-call-hierarchy-status-item {
+atom-ide-outline-call-hierarchy-status-item {
   height: 100%;
   display: flex;
   flex-direction: column;
