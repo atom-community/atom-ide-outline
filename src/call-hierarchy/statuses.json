@@ -9,6 +9,6 @@
   },
   "noResult": {
     "title": "No result was found.",
-    "description": "The Call Hierarchy could not found the text you entered in the filter bar."
+    "description": "Move the cursor over the function name."
   }
 }
