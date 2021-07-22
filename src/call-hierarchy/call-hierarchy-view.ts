@@ -1,6 +1,6 @@
 import { CompositeDisposable } from "atom"
 import debounce from "lodash/debounce"
-import { statuses } from "./statuses"
+import statuses from "./statuses.json"
 import { getIcon } from "../utils"
 import type { Disposable, Point, Range, TextEditor } from "atom"
 import type { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
