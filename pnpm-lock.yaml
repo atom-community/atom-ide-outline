@@ -1,42 +1,43 @@
 lockfileVersion: 5.3
 
-specifiers:
-  '@types/atom': latest
-  '@types/jasmine': ^3.7.7
-  '@types/lodash': ^4.14.170
-  '@types/node': ^15.12.4
-  atom-ide-base: ^3.1.1
-  atom-jasmine3-test-runner: ^5.2.6
-  build-commit: latest
-  cross-env: latest
-  eslint-config-atomic: ^1.16.1
-  fast-equals: ^2.0.3
-  lodash: ^4.17.21
-  prettier-config-atomic: ^2.0.5
-  rollup-plugin-atomic: ^2.3.2
-  shx: latest
-  typescript: ^4.3.4
-  zadeh: ^3.0.0-beta.4
+importers:
 
-dependencies:
-  atom-ide-base: 3.1.1
-  fast-equals: 2.0.3
-  lodash: 4.17.21
-  zadeh: 3.0.0-beta.4
-
-devDependencies:
-  '@types/atom': 1.40.10
-  '@types/jasmine': 3.7.7
-  '@types/lodash': 4.14.170
-  '@types/node': 15.12.4
-  atom-jasmine3-test-runner: 5.2.6
-  build-commit: 0.1.4
-  cross-env: 7.0.3
-  eslint-config-atomic: 1.16.1
-  prettier-config-atomic: 2.0.5
-  rollup-plugin-atomic: 2.3.2_@types+node@15.12.4
-  shx: 0.3.3
-  typescript: 4.3.4
+  .:
+    specifiers:
+      '@types/atom': latest
+      '@types/jasmine': ^3.7.7
+      '@types/lodash': ^4.14.170
+      '@types/node': ^16.0.0
+      atom-ide-base: ^3.1.1
+      atom-jasmine3-test-runner: ^5.2.6
+      build-commit: latest
+      cross-env: latest
+      eslint-config-atomic: ^1.16.1
+      fast-equals: ^2.0.3
+      lodash: ^4.17.21
+      prettier-config-atomic: ^2.0.5
+      rollup-plugin-atomic: ^2.3.2
+      shx: latest
+      typescript: ^4.3.4
+      zadeh: ^3.0.0-beta.4
+    dependencies:
+      atom-ide-base: 3.1.1
+      fast-equals: 2.0.3
+      lodash: 4.17.21
+      zadeh: 3.0.0-beta.4
+    devDependencies:
+      '@types/atom': 1.40.11
+      '@types/jasmine': 3.7.7
+      '@types/lodash': 4.14.170
+      '@types/node': 16.4.1
+      atom-jasmine3-test-runner: 5.2.6
+      build-commit: 0.1.4
+      cross-env: 7.0.3
+      eslint-config-atomic: 1.16.1
+      prettier-config-atomic: 2.0.5
+      rollup-plugin-atomic: 2.3.2_@types+node@16.4.1
+      shx: 0.3.3
+      typescript: 4.3.4
 
 packages:
 
@@ -428,6 +429,12 @@ packages:
     dependencies:
       '@types/node': 15.12.4
 
+  /@types/atom/1.40.11:
+    resolution: {integrity: sha512-TsPltugw2wKtR5p6ICv73t9kxdx59fTfdcD8Xe/0EEjF5vHBz99Z7Kj/rPRpyM/4ZcY1GrkQh8hgOw/OJRCs0g==}
+    dependencies:
+      '@types/node': 16.4.1
+    dev: true
+
   /@types/dompurify/2.2.2:
     resolution: {integrity: sha512-8nNWfAa8/oZjH3OLY5Wsxu9ueo0NwVUotIi353g0P2+N5BuTLJyAVOnF4xBUY0NyFUGJHY05o1pO2bqLto+lmA==}
     dependencies:
@@ -466,6 +473,10 @@ packages:
 
   /@types/node/15.12.4:
     resolution: {integrity: sha512-zrNj1+yqYF4WskCMOHwN+w9iuD12+dGm0rQ35HLl9/Ouuq52cEtd0CH9qMgrdNmi5ejC1/V7vKEXYubB+65DkA==}
+
+  /@types/node/16.4.1:
+    resolution: {integrity: sha512-UW7cbLqf/Wu5XH2RKKY1cHwUNLicIDRLMraYKz+HHAerJ0ZffUEk+fMnd8qU2JaS6cAy0r8tsaf7yqHASf/Y0Q==}
+    dev: true
 
   /@types/prop-types/15.7.3:
     resolution: {integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==}
@@ -3015,7 +3026,7 @@ packages:
       assemblyscript: 0.18.4
     dev: true
 
-  /rollup-plugin-atomic/2.3.2_@types+node@15.12.4:
+  /rollup-plugin-atomic/2.3.2_@types+node@16.4.1:
     resolution: {integrity: sha512-+KRCClmhGHwb/9cFfLCwHUFLe4VYXdhUXNyhoC5T5NTSlPepx9DY4P5vjW0c1yjElDR8Nv4huKnxgF1HIYcbkQ==}
     dependencies:
       '@rollup/plugin-babel': 5.3.0_bf9059d1c3757172c6095e41c3537203
@@ -3033,7 +3044,7 @@ packages:
       rollup-plugin-coffee-script: 2.0.0_coffeescript@1.12.7
       rollup-plugin-css-only: 3.1.0_rollup@2.45.1
       rollup-plugin-execute: 1.1.1
-      rollup-plugin-sourcemaps: 0.6.3_d7b2eeeef5b8b5bfb40f6b2d98ad9b54
+      rollup-plugin-sourcemaps: 0.6.3_@types+node@16.4.1+rollup@2.45.1
       rollup-plugin-terser: 7.0.2_rollup@2.45.1
       rollup-plugin-visualizer: 5.5.0_rollup@2.45.1
       tslib: 2.2.0
@@ -3096,7 +3107,7 @@ packages:
       resolve: 1.20.0
     dev: true
 
-  /rollup-plugin-sourcemaps/0.6.3_d7b2eeeef5b8b5bfb40f6b2d98ad9b54:
+  /rollup-plugin-sourcemaps/0.6.3_@types+node@16.4.1+rollup@2.45.1:
     resolution: {integrity: sha512-paFu+nT1xvuO1tPFYXGe+XnQvg4Hjqv/eIhG8i5EspfYYPBKL57X7iVbfv55aNVASg3dzWvES9dmWsL2KhfByw==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -3107,7 +3118,7 @@ packages:
         optional: true
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.45.1
-      '@types/node': 15.12.4
+      '@types/node': 16.4.1
       rollup: 2.45.1
       source-map-resolve: 0.6.0
     dev: true
