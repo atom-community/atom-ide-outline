@@ -10,30 +10,5 @@ export declare function consumeOutlineProvider(provider: OutlineProvider): Promi
 export declare function revealCursor(): void;
 export declare function toggleOutlineView(): Promise<void>;
 export declare function getOutline(editor?: TextEditor | undefined): Promise<void>;
-export declare function setStatus(id: "noEditor" | "noProvider"): void;
-export declare const config: {
-    initialCallHierarchyDisplay: {
-        title: string;
-        description: string;
-        type: string;
-        default: boolean;
-    };
-    initialDisplay: {
-        title: string;
-        description: string;
-        type: string;
-        default: boolean;
-    };
-    sortEntries: {
-        title: string;
-        description: string;
-        type: string;
-        default: boolean;
-    };
-    foldInitially: {
-        title: string;
-        description: string;
-        type: string;
-        default: boolean;
-    };
-};
+export declare function setStatus(id: "noEditor" | "noProvider" | "noResult"): void;
+export { default as config } from "./config.json";

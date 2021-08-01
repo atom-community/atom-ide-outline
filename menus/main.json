@@ -3,7 +3,7 @@
     "atom-text-editor": [
       {
         "label": "Show Call Hierarchy",
-        "command": "call-hierarchy:show"
+        "command": "outline:toggle-call-hierarchy"
       }
     ]
   }

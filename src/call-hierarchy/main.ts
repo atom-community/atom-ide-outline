@@ -14,12 +14,9 @@ const callHierarchyTab = new TabHandler({
 
 export function activate() {
   subscriptions.add(
-    atom.commands.add("atom-workspace", "call-hierarchy:toggle", () => callHierarchyTab.toggle()),
-    atom.commands.add("atom-workspace", "call-hierarchy:show", () => callHierarchyTab.show())
+    atom.commands.add("atom-workspace", "outline:toggle-call-hierarchy", () => callHierarchyTab.toggle()),
+    atom.commands.add("atom-workspace", "outline:show-call-hierarchy", () => callHierarchyTab.show())
   )
-  if (atom.config.get("atom-ide-outline.initialCallHierarchyDisplay")) {
-    callHierarchyTab.show()
-  }
 }
 
 export function deactivate() {
@@ -32,13 +29,4 @@ export function consumeCallHierarchyProvider(provider: CallHierarchyProvider): D
   subscriptions.add(providerDisposer)
   callHierarchyTab.item?.showCallHierarchy()
   return providerDisposer
-}
-
-export const config = {
-  initialCallHierarchyDisplay: {
-    title: "Initial Call Hierarchy Display",
-    description: "Show call hierarchy initially aftern atom loads",
-    type: "boolean",
-    default: true,
-  },
 }

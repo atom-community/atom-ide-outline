@@ -32,21 +32,21 @@ describe("Call Hierarchy", () => {
       .findCommands({
         target: workspaceElement,
       })
-      .some((command) => command.name === "call-hierarchy:toggle")
+      .some((command) => command.name === "outline:toggle-call-hierarchy")
 
     expect(toggleCommand).toBe(true)
   })
 
   it("adds/removes call hierarchy view from workspace when toggled", () => {
-    atom.commands.dispatch(workspaceElement, "call-hierarchy:show")
+    atom.commands.dispatch(workspaceElement, "outline:show-call-hierarchy")
 
     expect(workspaceElement.querySelector("atom-ide-outline-call-hierarchy-view")).toBeVisible()
 
-    atom.commands.dispatch(workspaceElement, "call-hierarchy:toggle")
+    atom.commands.dispatch(workspaceElement, "outline:toggle-call-hierarchy")
 
     expect(workspaceElement.querySelector("atom-ide-outline-call-hierarchy-view")).not.toExist()
 
-    atom.commands.dispatch(workspaceElement, "call-hierarchy:toggle")
+    atom.commands.dispatch(workspaceElement, "outline:toggle-call-hierarchy")
 
     expect(workspaceElement.querySelector("atom-ide-outline-call-hierarchy-view")).toBeVisible()
   })

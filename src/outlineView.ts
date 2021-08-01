@@ -338,6 +338,16 @@ function makeOutlineToolbar() {
   )
 
   toolbar.appendChild(revealCursorButton)
+
+  const showCallHierarchyButton = document.createElement("button")
+  showCallHierarchyButton.innerHTML = "Show Call Hierarchy"
+  showCallHierarchyButton.className = "btn outline-btn"
+
+  showCallHierarchyButton.addEventListener("click", () =>
+    atom.commands.dispatch(atom.views.getView(atom.workspace), "outline:show-call-hierarchy")
+  )
+
+  toolbar.appendChild(showCallHierarchyButton)
   return toolbar
 }
 

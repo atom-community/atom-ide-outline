@@ -185,8 +185,4 @@ export function setStatus(id: "noEditor" | "noProvider" | "noResult") {
   view?.presentStatus(statuses[id])
 }
 
-import { default as outlineCongig } from "./config.json"
-export const config = {
-  ...outlineCongig,
-  ...CallHierarchy.config,
-}
+export { default as config } from "./config.json"
