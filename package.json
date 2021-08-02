@@ -48,13 +48,8 @@
     "prettier-config-atomic": "^2.0.5",
     "rollup-plugin-atomic": "^2.3.2",
     "shx": "latest",
-<<<<<<< HEAD
-    "solid-js": "^1.0.2",
     "tslib": "^2.3.0",
     "typescript": "^4.3.5"
-=======
-    "typescript": "^4.3.4"
->>>>>>> 261083a... fix: update dependencies
   },
   "activationHooks": [
     "core:loaded-shell-environment"
