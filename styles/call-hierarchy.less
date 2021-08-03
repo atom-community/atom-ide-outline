@@ -46,6 +46,15 @@ atom-ide-outline-call-hierarchy-item {
     &:hover {
       background: @background-color-highlight;
     }
+    &::before {
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+    > div {
+      white-space: nowrap;
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
   }
   atom-ide-outline-call-hierarchy-item {
     border-left: 1px solid @background-color-highlight;
