@@ -60,10 +60,8 @@ atom-ide-outline-call-hierarchy-item {
     border-left: 1px solid @background-color-highlight;
     margin-left: 1.2em;
   }
-  .call-hierarchy-no-data {
-    padding-left: 1.4em;
-    cursor: default;
-    font-size: 80%;
+  > .call-hierarchy-no-data > .icon::before {
+    color: mix(@base-background-color, @text-color-subtle);
   }
   .detail {
     font-size: 80%;

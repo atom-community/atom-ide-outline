@@ -13,7 +13,7 @@ type statusKey = keyof typeof statuses
 /** HTMLElement for the call-hierarchy tab */
 export class CallHierarchyView extends HTMLElement {
   #subscriptions = new CompositeDisposable()
-  
+
   /** Subscription to observe editor cursor movement */
   #editorSubscriptions: Disposable | undefined
 
@@ -152,35 +152,32 @@ customElements.define("atom-ide-outline-call-hierarchy-view", CallHierarchyView)
 
 /** HTMLElement for the call-hierarchy item */
 class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
-
   #callHierarchy: CallHierarchy<T> | undefined
+  #childCallHierarchies: Promise<CallHierarchy<T> | undefined>[]
 
   #dblclickWaitTime = 300
 
   /** Whether {callHierarchy} data is undefined or empty array */
   static isEmpty(callHierarchy: CallHierarchy<CallHierarchyType> | undefined): callHierarchy is undefined {
-    return !callHierarchy || callHierarchy.data.length == 0
+    return !callHierarchy || callHierarchy.data.length === 0
   }
 
-  constructor(callHierarchy: CallHierarchy<T> | undefined) {
+  constructor(callHierarchy: CallHierarchy<T>) {
     super()
     this.#callHierarchy = callHierarchy
-    if (CallHierarchyViewItem.isEmpty(this.#callHierarchy)) {
-      this.innerHTML = `<div class="call-hierarchy-no-data">No result was found.</div>`
-      return
-    }
+    this.#childCallHierarchies = this.#callHierarchy.data.map((_item, i) => callHierarchy.itemAt(i))
     this.append(
       ...this.#callHierarchy.data.map((item, i) => {
         const itemEl = document.createElement("div")
         itemEl.setAttribute("title", item.path)
         itemEl.innerHTML = `
-        <div class="icon icon-chevron-right">
-          <div>
-            <span>${escapeHTML(item.name)}</span>
-            <span class="detail">${escapeHTML(item.detail ? ` - ${item.detail}` : "")}</span>
-            ${item.tags.map((str) => `<span class="tag-${escapeHTML(str)}">${escapeHTML(str)}</span>`).join("")}
+          <div class="icon icon-chevron-right">
+            <div>
+              <span>${escapeHTML(item.name)}</span>
+              <span class="detail">${escapeHTML(item.detail ? ` - ${item.detail}` : "")}</span>
+              ${item.tags.map((str) => `<span class="tag-${escapeHTML(str)}">${escapeHTML(str)}</span>`).join("")}
+            </div>
           </div>
-        </div>
         `
         itemEl
           .querySelector(":scope>div>div")
@@ -204,11 +201,17 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
           },
           false
         )
+        // disable toggle button if there is no child element
+        this.#childCallHierarchies[i].then((childCallHierarchy) => {
+          if (CallHierarchyViewItem.isEmpty(childCallHierarchy)) {
+            itemEl.classList.add("call-hierarchy-no-data")
+          }
+        })
         return itemEl
       })
     )
   }
-  
+
   /** Toggle the display of the {i}-th item */
   async toggleItemAt(i: number) {
     const itemEl = this.querySelectorAll<HTMLLIElement>(":scope>div")[i]
@@ -225,9 +228,12 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
         titleEl?.classList.replace("icon-chevron-right", "icon-chevron-down")
       }
     } else {
-      // create element if there is no data
-      itemEl.appendChild(new CallHierarchyViewItem(await this.#callHierarchy?.itemAt(i)))
-      titleEl?.classList.replace("icon-chevron-right", "icon-chevron-down")
+      const childCallHierarchy = await this.#childCallHierarchies[i]
+      if (!CallHierarchyViewItem.isEmpty(childCallHierarchy)) {
+        // create element if there is no data
+        itemEl.appendChild(new CallHierarchyViewItem(childCallHierarchy))
+        titleEl?.classList.replace("icon-chevron-right", "icon-chevron-down")
+      }
     }
   }
 
