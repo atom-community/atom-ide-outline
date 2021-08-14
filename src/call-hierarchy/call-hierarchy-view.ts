@@ -201,10 +201,10 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
           },
           false
         )
-        // disable toggle button if there is no child element
+        // enable toggle button if child element can be displayed
         this.#childCallHierarchies[i].then((childCallHierarchy) => {
-          if (CallHierarchyViewItem.isEmpty(childCallHierarchy)) {
-            itemEl.classList.add("call-hierarchy-no-data")
+          if (!CallHierarchyViewItem.isEmpty(childCallHierarchy)) {
+            itemEl.classList.add("call-hierarchy-exist-child-data")
           }
         })
         return itemEl
