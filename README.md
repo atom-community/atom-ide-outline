@@ -14,6 +14,8 @@ Reveal the current cursor in the outline
 
 Show function call hierarchy (alt-c)
 
+Double-click the function name to go to the definition.
+
 ![call hierarchy](./images/call-hierarchy.png)
 
 ## Getting started
