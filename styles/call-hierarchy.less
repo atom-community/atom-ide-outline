@@ -1,11 +1,11 @@
 @import "ui-variables";
+@import "./atom-ide-outline.less";
 
 atom-ide-outline-call-hierarchy-view {
   > div:first-child {
+    .font-common();
     display: flex;
-    line-height: 36px;
     height: 36px;
-    font-size: 1.4em;
     cursor: pointer;
     &:first-child > div {
       flex-grow: 1;
@@ -27,7 +27,7 @@ atom-ide-outline-call-hierarchy-view {
     height: calc(~"100% - 36px");
     overflow-x: auto;
     > atom-ide-outline-call-hierarchy-item {
-      font-size: 1.4em;
+      .font-common();
     }
   }
 }
