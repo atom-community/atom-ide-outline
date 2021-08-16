@@ -62,7 +62,9 @@ export function consumeOutlineProvider(provider: OutlineProvider): Disposable {
   // or if the editor changes later once outline is visible
   // so we need to have an outline for the current editor
   // the following updates rely on the visibility
-  getOutline()
+  getOutline().catch((err) => {
+    throw err 
+  })
   return prividerDisposable
 }
 
