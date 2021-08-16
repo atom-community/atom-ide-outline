@@ -1,3 +1,20 @@
+# [3.2.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v3.1.0...v3.2.0) (2021-08-16)
+
+
+### Bug Fixes
+
+* add padding for call hierarchy ([4ef8c4c](https://github.com/atom-ide-community/atom-ide-outline/commit/4ef8c4c7e8917244e7084a7655ec6ad66ffae57d))
+* catch promise failures in the service ([a2fd212](https://github.com/atom-ide-community/atom-ide-outline/commit/a2fd212424431becd375730a0e207539e3d4e249))
+* proider returns disposable ([226f0a2](https://github.com/atom-ide-community/atom-ide-outline/commit/226f0a256752bf93b0a8425f5c8ab98b52cf4629))
+* use the default color for call hierarchy ([5d83626](https://github.com/atom-ide-community/atom-ide-outline/commit/5d836263aebb32270489ef269a46a532db1041bc))
+* use the same fold width for call hierarchy ([9b4ad8d](https://github.com/atom-ide-community/atom-ide-outline/commit/9b4ad8ddfbafd02d8c4d0f88e4bb7e0879baeef2))
+* use the same text style as the outline for call hierarchy ([bba136a](https://github.com/atom-ide-community/atom-ide-outline/commit/bba136ab63d9cf7b2fb5c0a819f69b9e1ba9d5d3))
+
+
+### Features
+
+* add call hierarcy ([f145155](https://github.com/atom-ide-community/atom-ide-outline/commit/f14515558a97b6f150d3b52631272decb8ec066e))
+
 ## [3.1.0](https://github.com/atom-ide-community/atom-ide-outline/compare/v3.0.0...v3.1.0) (2021-6-27)
 
 - feat: support revealing the cursors that are between the symbols
