@@ -12,6 +12,12 @@ Reveal the current cursor in the outline
 
 ![reveal cursor](./images/between.png)
 
+Show function call hierarchy (alt-c)
+
+Double-click the function name to go to the definition.
+
+![call hierarchy](./images/call-hierarchy.png)
+
 ## Getting started
 
 1. Install `atom-ide-outline` in Atom

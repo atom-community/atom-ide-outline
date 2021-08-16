@@ -3,7 +3,7 @@ import type { OutlineTree } from "atom-ide-base"
 import { scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui/scrollIntoView"
 import { isItemVisible } from "atom-ide-base/commons-ui/items"
 import { TreeFilterer, Tree } from "zadeh"
-import { unique } from "./utils"
+import { unique, getIcon } from "./utils"
 import { setStatus } from "./main"
 
 export class OutlineView {
@@ -338,6 +338,16 @@ function makeOutlineToolbar() {
   )
 
   toolbar.appendChild(revealCursorButton)
+
+  const showCallHierarchyButton = document.createElement("button")
+  showCallHierarchyButton.innerHTML = "Show Call Hierarchy"
+  showCallHierarchyButton.className = "btn outline-btn"
+
+  showCallHierarchyButton.addEventListener("click", () =>
+    atom.commands.dispatch(atom.views.getView(atom.workspace), "outline:show-call-hierarchy")
+  )
+
+  toolbar.appendChild(showCallHierarchyButton)
   return toolbar
 }
 
@@ -487,40 +497,6 @@ function onClickEntry(itemStartPosition: Point, editor: TextEditor) {
   })
   // HACK
   clicked = true
-}
-
-function getIcon(iconType: string | undefined, kindTypeGiven: string | undefined) {
-  let kindType = kindTypeGiven
-  // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
-  // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
-
-  const iconElement = document.createElement("span")
-  iconElement.classList.add("outline-icon")
-
-  // if iconType given instead
-  if (kindType === undefined && iconType !== undefined) {
-    kindType = iconType
-  }
-
-  let type: string = "🞇"
-  if (typeof kindType === "string" && kindType.length > 0) {
-    let kindClass: string
-    // hasKind
-    if (kindType.indexOf("type-") === 0) {
-      // supplied with type-...
-      kindClass = `${kindType}`
-      type = kindType.replace("type-", "")
-    } else {
-      // supplied without type-
-      kindClass = `type-${kindType}`
-      type = kindType
-    }
-    iconElement.classList.add(kindClass)
-  }
-
-  iconElement.innerHTML = `<span>${type.substring(0, 3)}</span>`
-
-  return iconElement
 }
 
 function createFoldButton(childrenList: HTMLUListElement, foldInitially: boolean) {

@@ -9,6 +9,9 @@ export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
 import debounce from "lodash/debounce"
 
+export { consumeCallHierarchyProvider } from "./call-hierarchy/main"
+import * as CallHierarchy from "./call-hierarchy/main"
+
 const subscriptions = new CompositeDisposable()
 
 let view: OutlineView | undefined
@@ -17,6 +20,7 @@ export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 // let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
 
 export function activate() {
+  CallHierarchy.activate()
   addCommands()
   addObservers()
   if (atom.config.get("atom-ide-outline.initialDisplay") as boolean) {
@@ -40,6 +44,7 @@ function addObservers() {
 }
 
 export function deactivate() {
+  CallHierarchy.deactivate()
   onEditorChangedDisposable?.dispose()
   subscriptions.dispose()
   view?.destroy()

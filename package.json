@@ -31,7 +31,7 @@
   "prettier": "prettier-config-atomic",
   "atomTestRunner": "./spec/runner",
   "dependencies": {
-    "atom-ide-base": "^3.1.1",
+    "atom-ide-base": "^3.3.0",
     "fast-equals": "^2.0.3",
     "lodash": "^4.17.21",
     "zadeh": "^3.0.0-beta.4"
@@ -48,6 +48,7 @@
     "prettier-config-atomic": "^2.0.5",
     "rollup-plugin-atomic": "^2.3.2",
     "shx": "latest",
+    "tslib": "^2.3.1",
     "typescript": "^4.3.4"
   },
   "activationHooks": [
@@ -57,6 +58,11 @@
     "outline-view": {
       "versions": {
         "0.1.0": "consumeOutlineProvider"
+      }
+    },
+    "call-hierarchy": {
+      "versions": {
+        "0.1.0": "consumeCallHierarchyProvider"
       }
     },
     "busy-signal": {
