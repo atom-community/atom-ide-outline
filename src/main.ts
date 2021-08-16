@@ -71,6 +71,15 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
 // disposables returned inside onEditorChangedDisposable
 let onEditorChangedDisposable: CompositeDisposable | undefined = undefined
 
+/**
+ * How long to wait for the new changes before updating the outline. A high number will increase the responsiveness of
+ * the text editor in large files.
+ */
+function getDebounceTime(editor: TextEditor) {
+  const largeness = editorLargeness(editor)
+  return Math.max(largeness / 4, 300) // 1/4 of the line count
+}
+
 async function editorChanged(editor?: TextEditor) {
   if (editor === undefined) {
     return
@@ -85,10 +94,7 @@ async function editorChanged(editor?: TextEditor) {
   // the following updates rely on the visibility
   await getOutline(editor)
 
-  const largeness = editorLargeness(editor as TextEditor)
-  // How long to wait for the new changes before updating the outline.
-  // A high number will increase the responsiveness of the text editor in large files.
-  const updateDebounceTime = Math.max(largeness / 4, 300) // 1/4 of the line count
+  const updateDebounceTime = getDebounceTime(editor)
 
   const doubouncedGetOutline = debounce(
     getOutlintIfVisible as (textEditor: TextEditor) => Promise<void>,
