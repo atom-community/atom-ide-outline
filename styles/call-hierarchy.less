@@ -2,6 +2,8 @@
 @import "./atom-ide-outline.less";
 
 atom-ide-outline-call-hierarchy-view {
+  padding: @padding-v;
+
   > div:first-child {
     .font-common();
     display: flex;
@@ -10,7 +12,7 @@ atom-ide-outline-call-hierarchy-view {
     &:first-child > div {
       flex-grow: 1;
       text-align: center;
-      padding: 0;
+      padding: @padding-v + 2px;
       border-bottom: 2px solid @background-color-highlight;
       overflow: hidden;
     }
@@ -24,6 +26,7 @@ atom-ide-outline-call-hierarchy-view {
     background: @background-color-highlight;
   }
   > div:last-child {
+    padding: @padding-v @padding-h;
     height: calc(~"100% - 36px");
     overflow-x: auto;
     > atom-ide-outline-call-hierarchy-item {
@@ -54,6 +57,7 @@ atom-ide-outline-call-hierarchy-item {
       white-space: nowrap;
       flex-grow: 1;
       flex-shrink: 0;
+      padding: @padding-v 0;
     }
   }
   > .call-hierarchy-exist-child-data > .icon::before {
