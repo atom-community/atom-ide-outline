@@ -68,7 +68,7 @@ export function consumeOutlineProvider(provider: OutlineProvider): Disposable {
   // so we need to have an outline for the current editor
   // the following updates rely on the visibility
   getOutline().catch((err) => {
-    throw err 
+    throw err
   })
   return prividerDisposable
 }
